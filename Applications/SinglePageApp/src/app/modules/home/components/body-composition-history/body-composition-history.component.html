@@ -1,0 +1,12 @@
+<nz-card nzTitle="Body Composition History">
+  <nz-table nzTemplateMode [nzShowPagination]="false" nzTableLayout="fixed">
+    <tbody>
+      <tr>
+        <td width="80px"><strong>Weight</strong></td>
+        <td>
+          <div echarts [options]="chartOptions" [merge]="updateChartOptions" class="echart"></div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

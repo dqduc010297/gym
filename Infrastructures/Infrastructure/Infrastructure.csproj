@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\EntityFramework\AspNetCore.EntityFramework\AspNetCore.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\UnitOfWork\AspNetCore.UnitOfWork.EntityFramework\AspNetCore.UnitOfWork.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\Domains\ApplicationDomain\ApplicationDomain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
+</Project>

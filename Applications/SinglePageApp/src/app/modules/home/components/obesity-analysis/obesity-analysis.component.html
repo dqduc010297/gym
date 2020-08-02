@@ -1,0 +1,39 @@
+<nz-card nzTitle="Obesity Analysis">
+  <nz-table nzTemplateMode [nzShowPagination]="false">
+    <tbody>
+      <tr>
+        <td><strong>BMI </strong></td>
+        <td>(kg/m2)</td>
+        <td>31.3</td>
+        <td>( 18.5 ~ 25 )</td>
+      </tr>
+      <tr>
+        <td><strong>PBF</strong></td>
+        <td>(%)</td>
+        <td>32.8</td>
+        <td>( 10 ~ 20 )</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <nz-table nzTemplateMode [nzShowPagination]="false">
+    <thead>
+      <tr>
+        <th colspan="4">Evaluation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>BMI </strong></td>
+        <td colspan="3">
+          <nz-checkbox-group [(ngModel)]="checkOptionsOne"></nz-checkbox-group>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>PBF</strong></td>
+        <td colspan="3">
+          <nz-checkbox-group [(ngModel)]="checkOptionsOne"></nz-checkbox-group>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

@@ -1,0 +1,48 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null" nzTheme="light">
+    <div class="sidebar-logo">
+      <a href="/home">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1></h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu nzOpen nzTitle="Báo giá" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/quotation/reception-forms']" routerLinkActive="router-link-active">Phiếu tiếp nhận</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header d-flex justify-content-between">
+        <div>
+          <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+          </span>
+        </div>
+        <div>
+          <a nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
+            <nz-avatar nzIcon="user" style="margin-right: 6px;"></nz-avatar>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item (click)="logout()">Logout</li>
+              <li nz-menu-item>2nd menu item</li>
+              <li nz-menu-item>3rd menu item</li>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
