@@ -1,3 +1,23 @@
+<!-- <form class="form-row d-flex justify-content-between" nz-form nzLayout="'vertical'">
+  <nz-form-item>
+    <nz-form-label>Tested date</nz-form-label>
+    <nz-form-control>
+      <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+   <p>Score</p>
+  </nz-form-item>
+</form> -->
+
+<div class="d-flex justify-content-between">
+  <div>
+    <p>Tested date:</p>
+    <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+  </div>
+  <nz-statistic [nzValue]="72" [nzSuffix]="'/ 100'"></nz-statistic>
+</div>
+
 <nz-card nzTitle="Muscle-Fat Analysis">
   <nz-table nzTemplateMode [nzShowPagination]="false">
     <tbody>

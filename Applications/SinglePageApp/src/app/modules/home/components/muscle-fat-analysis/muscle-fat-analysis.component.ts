@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./muscle-fat-analysis.component.scss']
 })
 export class MuscleFatAnalysisComponent implements OnInit {
-
+  date: any;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  onChange(result: Date): void {
+    console.log('onChange: ', result);
+  }
 }

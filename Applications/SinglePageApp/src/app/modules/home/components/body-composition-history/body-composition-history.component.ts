@@ -20,16 +20,12 @@ export class BodyCompositionHistoryComponent implements OnInit {
         trigger: 'axis',
       },
       grid: {
-        left: '3%',
+        left: '4%',
         right: '4%',
         bottom: '3%',
-        containLabel: true
+        top: '0%',
+        height: '60'
       },
-      // toolbox: {
-      //   feature: {
-      //     saveAsImage: {}
-      //   }
-      // },
       xAxis: {
         type: 'category',
         boundaryGap: false,
@@ -44,14 +40,13 @@ export class BodyCompositionHistoryComponent implements OnInit {
           '11/07/2020',
           '15/07/2020',
           '22/07/2020',
-          '29/07/2020',
         ]
       },
       yAxis: {
         type: 'value',
         show: false,
-        min: 80,
-        max: 100
+        min: 88,
+        max: 96
       },
       series: [
         {
@@ -62,7 +57,7 @@ export class BodyCompositionHistoryComponent implements OnInit {
             show: true,
             position: 'top'
           },
-          data: [92.7, 91.6, 91.7, 90.7, 93.3, 93.2, 90.1, 90.4, 90.1, 90]
+          data: [92.7, 91.6, 91.7, 90.7, 93.3, 93.2, 90.1, 90.4, 90.1]
         },
       ]
     };
