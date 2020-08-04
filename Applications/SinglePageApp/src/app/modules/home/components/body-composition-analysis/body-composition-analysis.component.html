@@ -1,3 +1,13 @@
+<div class="d-flex justify-content-between" style="margin-bottom: 8px;">
+  <div>
+    <strong>Tested date:</strong>
+    <nz-date-picker style="margin-left: 10px;" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+  </div>
+  <div>
+    <h5>Score: 72/100</h5>
+  </div>
+</div>
+
 <nz-card nzTitle="Body Composition Analysis">
   <nz-table nzTemplateMode [nzShowPagination]="false">
     <tbody>
@@ -24,12 +34,6 @@
         <td>(kg)</td>
         <td>27.5</td>
         <td>( 7.5 ~ 15.3 )</td>
-      </tr>
-      <tr>
-        <td><strong>Weight</strong></td>
-        <td>(kg)</td>
-        <td>90.1</td>
-        <td>( 54.1 ~ 73.1 )</td>
       </tr>
     </tbody>
   </nz-table>

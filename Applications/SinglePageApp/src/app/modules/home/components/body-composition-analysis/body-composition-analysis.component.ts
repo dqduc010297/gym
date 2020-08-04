@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./body-composition-analysis.component.scss']
 })
 export class BodyCompositionAnalysisComponent implements OnInit {
-
+  date: any;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  onChange(result: Date): void {
+    console.log('onChange: ', result);
+  }
 }
