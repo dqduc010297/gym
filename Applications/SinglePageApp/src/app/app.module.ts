@@ -15,7 +15,8 @@ import { httpInterceptorProviders } from './interceptors';
 import { LayoutComponent } from './layout/layout.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { SharedModule } from './share.module';
-
+import { CalendarModule } from './modules/calendar/calendar.module';
+import { GoalModule } from './modules/goal/goal.module';
 registerLocaleData(vi);
 
 @NgModule({
@@ -31,6 +32,8 @@ registerLocaleData(vi);
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule.forRoot(),
+    CalendarModule,
+    GoalModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },

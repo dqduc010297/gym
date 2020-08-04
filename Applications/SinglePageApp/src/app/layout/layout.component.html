@@ -8,12 +8,13 @@
       </a>
     </div>
     <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Báo giá" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['/quotation/reception-forms']" routerLinkActive="router-link-active">Phiếu tiếp nhận</a>
-          </li>
-        </ul>
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/calendar']" routerLinkActive="router-link-active">Calendar</a>
+      </li>
+    </ul>
+    <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/goal']" routerLinkActive="router-link-active">Goal</a>
       </li>
     </ul>
   </nz-sider>
