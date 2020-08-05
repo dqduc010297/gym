@@ -8,6 +8,44 @@ import { Component, OnInit } from '@angular/core';
 export class GoalComponent implements OnInit {
   chartOptions: any;
   updateChartOptions: any;
+  dataSet = [
+    {
+      exercise: 'Plank',
+      set: 4,
+      rep: 12,
+      restTime: 10,
+      remarks: '',
+    },
+    {
+      exercise: 'Moutain Climber',
+      set: 4,
+      rep: 20,
+      restTime: 10,
+      remarks: '',
+    },
+    {
+      exercise: 'Flyingjacks',
+      set: 4,
+      rep: 20,
+      restTime: 10,
+      remarks: '',
+    },
+    {
+      exercise: 'Jumping Jacks',
+      set: 4,
+      rep: 20,
+      restTime: 10,
+      remarks: '',
+    },
+    {
+      exercise: 'Burpees',
+      set: 4,
+      rep: 20,
+      restTime: 10,
+      remarks: '',
+    },
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
@@ -31,8 +69,8 @@ export class GoalComponent implements OnInit {
         boundaryGap: false,
         show: false,
         data: [
-          '22/02/2020',
-          '26/02/2020',
+          '11/07/2020',
+          '22/07/2020',
         ]
       },
       yAxis: {
