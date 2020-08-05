@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
 
-export interface Mock {
+export interface IMock {
   doMock(param?: any): Observable<any>;
 }

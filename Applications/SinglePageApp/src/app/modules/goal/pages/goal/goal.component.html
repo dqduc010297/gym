@@ -7,122 +7,85 @@
       </div>
       <div style="height: 80vh; overflow-y: auto;overflow-x: hidden; padding: 6px; margin-top: 8px;">
         <nz-timeline>
-          <nz-timeline-item nzColor="green">
-            <p class="timeline-title"><strong>Giảm 1.5kg mỡ, Tăng 1kg cơ, Giảm 1.0 kg</strong></p>
-            <p>Ngày bắt đầu: 04/07/2020</p>
-            <p>Ngày kết thúc: 04/08/2020</p>
-          </nz-timeline-item>
-          <nz-timeline-item nzColor="green">Solve initial network problems 2015-09-01</nz-timeline-item>
-          <nz-timeline-item nzColor="red">
-            <p>Solve initial network problems 1</p>
-            <p>Solve initial network problems 2</p>
-            <p>Solve initial network problems 3 2015-09-01</p>
-          </nz-timeline-item>
-          <nz-timeline-item>
-            <p>Technical testing 1</p>
-            <p>Technical testing 2</p>
-            <p>Technical testing 3 2015-09-01</p>
-          </nz-timeline-item>
-          <nz-timeline-item nzColor="gray">
-            <p>Technical testing 1</p>
-            <p>Technical testing 2</p>
-            <p>Technical testing 3 2015-09-01</p>
-          </nz-timeline-item>
-          <nz-timeline-item nzColor="gray">
-            <p>Technical testing 1</p>
-            <p>Technical testing 2</p>
-            <p>Technical testing 3 2015-09-01</p>
-          </nz-timeline-item>
-          <nz-timeline-item nzColor="green">Create a services site 2015-09-01</nz-timeline-item>
-          <nz-timeline-item nzColor="green">Solve initial network problems 2015-09-01</nz-timeline-item>
-          <nz-timeline-item nzColor="red">
-            <p>Solve initial network problems 1</p>
-            <p>Solve initial network problems 2</p>
-            <p>Solve initial network problems 3 2015-09-01</p>
-          </nz-timeline-item>
-          <nz-timeline-item>
-            <p>Technical testing 1</p>
-            <p>Technical testing 2</p>
-            <p>Technical testing 3 2015-09-01</p>
-          </nz-timeline-item>
-          <nz-timeline-item nzColor="gray">
-            <p>Technical testing 1</p>
-            <p>Technical testing 2</p>
-            <p>Technical testing 3 2015-09-01</p>
-          </nz-timeline-item>
-          <nz-timeline-item nzColor="gray">
-            <p>Technical testing 1</p>
-            <p>Technical testing 2</p>
-            <p>Technical testing 3 2015-09-01</p>
+          <nz-timeline-item *ngFor="let goalOverview of goalOverviews"
+            [nzColor]="!goalOverview.isFinished ? 'blue' : goalOverview.isSuccessful ? 'green' : 'red'">
+            <p class="timeline-title"><strong>{{goalOverview.description}}</strong></p>
+            <p>Ngày bắt đầu: {{goalOverview.startDate | date: 'dd/MM/yyyy'}}</p>
+            <p>Ngày kết thúc: {{goalOverview.endDate | date: 'dd/MM/yyyy'}}</p>
           </nz-timeline-item>
         </nz-timeline>
       </div>
 
     </div>
     <div class="col-md-10">
-      <div style="height: 80vh; overflow-y: auto;overflow-x: hidden; padding: 6px; margin-top: 8px;">
-        <nz-result nzStatus="success" nzTitle="Chúc mừng bạn đã hoàn thành mục tiêu!">
+      <div style="height: 83vh; overflow-y: auto;overflow-x: hidden; padding: 6px; margin-top: 8px;">
+        <nz-result nzStatus="success" nzTitle="Chúc mừng bạn đã hoàn thành mục tiêu!" nzSubTitle="
+        Giảm 1.5kg mỡ, Tăng 1kg cơ, Giảm 1.0 kg">
           <div nz-result-content>
-            <div class="row">
-              <div class="col-4">
-                <nz-table nzTemplateMode [nzShowPagination]="false" nzTableLayout="fixed">
-                  <tbody>
-                    <tr>
-                      <td width="80px"><strong>Weight</strong></td>
-                      <td colspan="2">
-                        <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions"
-                          class="echart">
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td width="80px"><strong>SMM</strong></td>
-                      <td colspan="2">
-                        <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions"
-                          class="echart">
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td width="80px"><strong>PBF</strong></td>
-                      <td colspan="2">
-                        <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions"
-                          class="echart">
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td width="80px"></td>
-                      <td>11/07/2020</td>
-                      <td style="text-align: right;">22/07/2020</td>
-                    </tr>
-                  </tbody>
-                </nz-table>
+            <nz-card>
+              <div class="row">
+                <div class="col-4">
+                  <nz-table nzTemplateMode [nzShowPagination]="false" nzTableLayout="fixed">
+                    <tbody>
+                      <tr>
+                        <td width="80px"><strong>Weight</strong></td>
+                        <td colspan="2">
+                          <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions"
+                            class="echart">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="80px"><strong>SMM</strong></td>
+                        <td colspan="2">
+                          <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions"
+                            class="echart">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="80px"><strong>PBF</strong></td>
+                        <td colspan="2">
+                          <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions"
+                            class="echart">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="80px"></td>
+                        <td>11/07/2020</td>
+                        <td style="text-align: right;">22/07/2020</td>
+                      </tr>
+                    </tbody>
+                  </nz-table>
+                </div>
+                <div class="col-4">
+                  <nz-card style="width:220px; margin: auto;" [nzCover]="coverTemplate">
+                    <nz-card-meta nzTitle="22/02/2020">
+                    </nz-card-meta>
+                  </nz-card>
+                  <ng-template #coverTemplate>
+                    <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+                  </ng-template>
+                </div>
+                <div class="col-4">
+                  <nz-card style="width:220px; margin: auto;" [nzCover]="coverTemplate">
+                    <nz-card-meta nzTitle="26/02/2020">
+                    </nz-card-meta>
+                  </nz-card>
+                  <ng-template #coverTemplate>
+                    <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+                  </ng-template>
+                </div>
               </div>
-              <div class="col-4">
-                <nz-card style="width:240px; margin: auto;" [nzCover]="coverTemplate">
-                  <nz-card-meta nzTitle="22/02/2020">
-                  </nz-card-meta>
-                </nz-card>
-                <ng-template #coverTemplate>
-                  <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-                </ng-template>
-              </div>
-              <div class="col-4">
-                <nz-card nzHoverable style="width:240px; margin: auto;" [nzCover]="coverTemplate">
-                  <nz-card-meta nzTitle="26/02/2020">
-                  </nz-card-meta>
-                </nz-card>
-                <ng-template #coverTemplate>
-                  <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-                </ng-template>
-              </div>
-            </div>
+            </nz-card>
+
             <nz-card nzTitle="Chương trình tập">
-              <nz-table #exercise nzBordered [nzData]="dataSet" nzShowPagination="true" nzPaginationPosition="top">
+              <nz-table #workOut nzBordered [nzData]="workOuts" nzShowPagination="true" nzPaginationPosition="top"
+                nzPageSize="2">
                 <thead>
                   <tr>
-                    <th style="width: 150px;">Ngày</th>
+                    <th style="width: 100px;">Ngày</th>
                     <th>Bài tập</th>
                     <th style="width: 100px;">Số hiệp</th>
                     <th style="width: 100px;">Lần/ hiệp</th>
@@ -131,87 +94,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let data of exercise.data, let i=index">
-                    <td *ngIf="i == 0" [attr.rowspan]="exercise.data.length">03/08/2020</td>
-                    <td>{{data.exercise}}</td>
-                    <td>{{data.set}}</td>
-                    <td>{{data.rep}}</td>
-                    <td>{{data.restTime}}</td>
-                    <td>{{data.remarks}}</td>
-                  </tr>
-                  <tr *ngFor="let data of exercise.data, let i=index">
-                    <td *ngIf="i == 0" [attr.rowspan]="exercise.data.length">03/08/2020</td>
-                    <td>{{data.exercise}}</td>
-                    <td>{{data.set}}</td>
-                    <td>{{data.rep}}</td>
-                    <td>{{data.restTime}}</td>
-                    <td>{{data.remarks}}</td>
-                  </tr>
-                  <tr *ngFor="let data of exercise.data, let i=index">
-                    <td *ngIf="i == 0" [attr.rowspan]="exercise.data.length">03/08/2020</td>
-                    <td>{{data.exercise}}</td>
-                    <td>{{data.set}}</td>
-                    <td>{{data.rep}}</td>
-                    <td>{{data.restTime}}</td>
-                    <td>{{data.remarks}}</td>
-                  </tr>
-                  <tr *ngFor="let data of exercise.data, let i=index">
-                    <td *ngIf="i == 0" [attr.rowspan]="exercise.data.length">03/08/2020</td>
-                    <td>{{data.exercise}}</td>
-                    <td>{{data.set}}</td>
-                    <td>{{data.rep}}</td>
-                    <td>{{data.restTime}}</td>
-                    <td>{{data.remarks}}</td>
-                  </tr>
-                  <tr *ngFor="let data of exercise.data, let i=index">
-                    <td *ngIf="i == 0" [attr.rowspan]="exercise.data.length">03/08/2020</td>
-                    <td>{{data.exercise}}</td>
-                    <td>{{data.set}}</td>
-                    <td>{{data.rep}}</td>
-                    <td>{{data.restTime}}</td>
-                    <td>{{data.remarks}}</td>
-                  </tr>
-                  <tr *ngFor="let data of exercise.data, let i=index">
-                    <td *ngIf="i == 0" [attr.rowspan]="exercise.data.length">03/08/2020</td>
-                    <td>{{data.exercise}}</td>
-                    <td>{{data.set}}</td>
-                    <td>{{data.rep}}</td>
-                    <td>{{data.restTime}}</td>
-                    <td>{{data.remarks}}</td>
-                  </tr>
-                  <tr *ngFor="let data of exercise.data, let i=index">
-                    <td *ngIf="i == 0" [attr.rowspan]="exercise.data.length">03/08/2020</td>
-                    <td>{{data.exercise}}</td>
-                    <td>{{data.set}}</td>
-                    <td>{{data.rep}}</td>
-                    <td>{{data.restTime}}</td>
-                    <td>{{data.remarks}}</td>
-                  </tr>
-                  <tr *ngFor="let data of exercise.data, let i=index">
-                    <td *ngIf="i == 0" [attr.rowspan]="exercise.data.length">03/08/2020</td>
-                    <td>{{data.exercise}}</td>
-                    <td>{{data.set}}</td>
-                    <td>{{data.rep}}</td>
-                    <td>{{data.restTime}}</td>
-                    <td>{{data.remarks}}</td>
-                  </tr>
-                  <tr *ngFor="let data of exercise.data, let i=index">
-                    <td *ngIf="i == 0" [attr.rowspan]="exercise.data.length">03/08/2020</td>
-                    <td>{{data.exercise}}</td>
-                    <td>{{data.set}}</td>
-                    <td>{{data.rep}}</td>
-                    <td>{{data.restTime}}</td>
-                    <td>{{data.remarks}}</td>
-                  </tr>
+                  <ng-container *ngFor="let data of workOut.data">
+                    <tr *ngFor="let exercise of data.exercises; let i =index">
+                      <td [attr.rowspan]="data.exercises.length" *ngIf="i ==0">{{data.date | date: 'dd/MM/yyyy'}}</td>
+                      <td>{{exercise.name}}</td>
+                      <td>{{exercise.rep}}</td>
+                      <td>{{exercise.set}}</td>
+                      <td>{{exercise.restTime}}</td>
+                      <td>{{exercise.remarks}}</td>
+                    </tr>
+                  </ng-container>
                 </tbody>
               </nz-table>
             </nz-card>
 
             <nz-card nzTitle="Chế độ ăn">
-              <nz-table #nutrition nzBordered [nzData]="dataSet">
+              <nz-table #nutrition nzBordered [nzData]="nutritions" nzPaginationPosition="top" nzPageSize="4">
                 <thead>
                   <tr>
-                    <th style="width: 150px;">Ngày</th>
+                    <th style="width: 100px;">Ngày</th>
                     <th>Sáng</th>
                     <th>Phụ 1</th>
                     <th>Trưa</th>
@@ -221,13 +122,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>03/08/2020</td>
-                    <td><img src="assets/images/nutritions/pho.jpg" /></td>
-                    <td><img src="assets/images/nutritions/guava.jpg" /></td>
-                    <td><img src="assets/images/nutritions/lunch.jpg" /></td>
-                    <td><img src="assets/images/nutritions/banana.jpg" /></td>
-                    <td><img src="assets/images/nutritions/dinner.jpg" /></td>
+                  <tr *ngFor="let data of nutrition.data">
+                    <td>{{data.date | date: 'dd/MM/yyyy'}}</td>
+                    <td><img src="{{data.breakfast}}" /></td>
+                    <td><img src="{{data.extra1}}" /></td>
+                    <td><img src="{{data.lunch}}" /></td>
+                    <td><img src="{{data.extra2}}" /></td>
+                    <td><img src="{{data.dinner}}" /></td>
                     <td></td>
                   </tr>
                 </tbody>

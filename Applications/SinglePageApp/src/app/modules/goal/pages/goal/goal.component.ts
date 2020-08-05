@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Nutrition } from '../../models/nutrition';
+import { WorkOut, Exercise } from '../../models/exercise';
+import { GoalOverviewMock } from 'src/app/mocks/goal-overview.mock';
+import { GoalOverview } from '../../models/goal';
 
 @Component({
   selector: 'app-goal',
@@ -8,47 +12,74 @@ import { Component, OnInit } from '@angular/core';
 export class GoalComponent implements OnInit {
   chartOptions: any;
   updateChartOptions: any;
-  dataSet = [
-    {
-      exercise: 'Plank',
-      set: 4,
-      rep: 12,
-      restTime: 10,
-      remarks: '',
-    },
-    {
-      exercise: 'Moutain Climber',
-      set: 4,
-      rep: 20,
-      restTime: 10,
-      remarks: '',
-    },
-    {
-      exercise: 'Flyingjacks',
-      set: 4,
-      rep: 20,
-      restTime: 10,
-      remarks: '',
-    },
-    {
-      exercise: 'Jumping Jacks',
-      set: 4,
-      rep: 20,
-      restTime: 10,
-      remarks: '',
-    },
-    {
-      exercise: 'Burpees',
-      set: 4,
-      rep: 20,
-      restTime: 10,
-      remarks: '',
-    },
-  ];
 
-  constructor() { }
+  nutritions: Nutrition[] = [];
+  workOuts: WorkOut[] = [];
+  goalOverviews: GoalOverview[] = [];
+
+  constructor(
+    private goalOverviewMock: GoalOverviewMock
+  ) { }
 
   ngOnInit(): void {
+    for (let i = 0; i < 11; i++) {
+      this.nutritions.push({
+        date: new Date(`07/${i + 11}/2020`),
+        breakfast: 'assets/images/nutritions/pho.jpg',
+        lunch: 'assets/images/nutritions/lunch.jpg',
+        dinner: 'assets/images/nutritions/dinner.jpg',
+        extra1: 'assets/images/nutritions/guava.jpg',
+        extra2: 'assets/images/nutritions/banana.jpg'
+      });
+
+      this.workOuts.push({
+        date: new Date(`07/${i + 11}/2020`),
+        exercises: [
+          {
+            name: 'Plank',
+            set: 4,
+            rep: 12,
+            restTime: 10,
+            remarks: '',
+          },
+          {
+            name: 'Moutain Climber',
+            set: 4,
+            rep: 20,
+            restTime: 10,
+            remarks: '',
+          },
+          {
+            name: 'Flyingjacks',
+            set: 4,
+            rep: 20,
+            restTime: 10,
+            remarks: '',
+          },
+          {
+            name: 'Jumping Jacks',
+            set: 4,
+            rep: 20,
+            restTime: 10,
+            remarks: '',
+          },
+          {
+            name: 'Burpees',
+            set: 4,
+            rep: 20,
+            restTime: 10,
+            remarks: '',
+          },
+        ]
+      });
+    }
+
+    this.goalOverviewMock.doMock().subscribe(
+      result => {
+        this.goalOverviews = result;
+        console.log(this.goalOverviews);
+      }
+    );
     this.initChartOption();
   }
 
