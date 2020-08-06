@@ -24,42 +24,56 @@
           <div nz-result-content>
             <nz-card>
               <div class="row">
-                <div class="col-4">
-                  <nz-table nzTemplateMode [nzShowPagination]="false" nzTableLayout="fixed">
+                <div class="col-6">
+                  <!-- <nz-table nzTemplateMode [nzShowPagination]="false" nzTableLayout="fixed">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Bắt đầu</th>
+                        <th>Mục tiêu</th>
+                        <th>Kết quả</th>
+                        <th>Đánh giá</th>
+                      </tr>
+                    </thead>
                     <tbody>
                       <tr>
-                        <td width="80px"><strong>Weight</strong></td>
-                        <td colspan="2">
-                          <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions"
-                            class="echart">
-                          </div>
+                        <td>
+                          <span *ngIf="goal.inbodyGoal.weight.isDecreased">Giảm </span>
+                          <span *ngIf="!goal.inbodyGoal.weight.isDecreased">Tăng </span>
+                          cân
                         </td>
+                        <td>90.1</td>
+                        <td>90.1</td>
+                        <td>90.1</td>
+                        <td><i nz-icon nzType="arrow-down"></i>1.0</td>
                       </tr>
                       <tr>
-                        <td width="80px"><strong>SMM</strong></td>
-                        <td colspan="2">
-                          <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions"
-                            class="echart">
-                          </div>
+                        <td>
+                          <span *ngIf="goal.inbodyGoal.smm.isDecreased">Giảm </span>
+                          <span *ngIf="!goal.inbodyGoal.smm.isDecreased">Tăng </span>
+                          cơ
                         </td>
+                        <td>90.1</td>
+                        <td>90.1</td>
+                        <td>90.1</td>
+                        <td><i nz-icon nzType="arrow-down"></i>1.0</td>
                       </tr>
                       <tr>
-                        <td width="80px"><strong>PBF</strong></td>
-                        <td colspan="2">
-                          <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions"
-                            class="echart">
-                          </div>
+                        <td>
+                          <span *ngIf="goal.inbodyGoal.bfm.isDecreased">Giảm </span>
+                          <span *ngIf="!goal.inbodyGoal.bfm.isDecreased">Tăng </span>
+                          mỡ
                         </td>
-                      </tr>
-                      <tr>
-                        <td width="80px"></td>
-                        <td>11/07/2020</td>
-                        <td style="text-align: right;">22/07/2020</td>
+                        <td>90.1</td>
+                        <td>90.1</td>
+                        <td>90.1</td>
+                        <td><i nz-icon nzType="arrow-down"></i>1.0</td>
                       </tr>
                     </tbody>
-                  </nz-table>
+                  </nz-table> -->
+              <app-inbody-goal [inbodyGoal]="goal.inbodyGoal"></app-inbody-goal>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                   <nz-card style="width:220px; margin: auto;" [nzCover]="coverTemplate">
                     <nz-card-meta nzTitle="22/02/2020">
                     </nz-card-meta>
@@ -68,7 +82,7 @@
                     <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
                   </ng-template>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                   <nz-card style="width:220px; margin: auto;" [nzCover]="coverTemplate">
                     <nz-card-meta nzTitle="26/02/2020">
                     </nz-card-meta>

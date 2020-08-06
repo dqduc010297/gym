@@ -3,18 +3,24 @@
     [nzTrigger]="null" nzTheme="light">
     <div class="sidebar-logo">
       <a href="/home">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <img src="assets/images/logo.png" alt="logo">
         <h1></h1>
       </a>
     </div>
     <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item nzMatchRouter>
-        <a [routerLink]="['/calendar']" routerLinkActive="router-link-active">Calendar</a>
+      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right" [nzTitle]="isCollapsed ? 'Calendar' : ''">
+        <i nz-icon nzType="calendar" nzTheme="outline"></i>
+        <a [routerLink]="['/calendar']" routerLinkActive="router-link-active">
+          <span *ngIf="!isCollapsed">Calendar</span>
+        </a>
       </li>
     </ul>
     <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item nzMatchRouter>
-        <a [routerLink]="['/goal']" routerLinkActive="router-link-active">Goal</a>
+      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right" [nzTitle]="isCollapsed ? 'Goal' : ''">
+        <i nz-icon nzType="trophy" nzTheme="outline"></i>
+        <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
+          <span *ngIf="!isCollapsed">Goal</span>
+        </a>
       </li>
     </ul>
   </nz-sider>

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Nutrition } from '../../models/nutrition';
 import { WorkOut, Exercise } from '../../models/exercise';
 import { GoalOverviewMock } from 'src/app/mocks/goal-overview.mock';
-import { GoalOverview } from '../../models/goal';
+import { GoalOverview, Goal } from '../../models/goal';
+import { GoalMock } from 'src/app/mocks/goal.mock';
 
 @Component({
   selector: 'app-goal',
@@ -16,9 +17,11 @@ export class GoalComponent implements OnInit {
   nutritions: Nutrition[] = [];
   workOuts: WorkOut[] = [];
   goalOverviews: GoalOverview[] = [];
+  goal: Goal = new Goal();
 
   constructor(
-    private goalOverviewMock: GoalOverviewMock
+    private goalOverviewMock: GoalOverviewMock,
+    private goalMock: GoalMock,
   ) { }
 
   ngOnInit(): void {
@@ -78,6 +81,12 @@ export class GoalComponent implements OnInit {
       result => {
         this.goalOverviews = result;
         console.log(this.goalOverviews);
+      }
+    );
+    this.goalMock.doMock(1).subscribe(
+      result => {
+        this.goal = result;
+        console.log(this.goal);
       }
     );
     this.initChartOption();
