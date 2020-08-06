@@ -1,58 +1,19 @@
 <nz-table nzTemplateMode [nzShowPagination]="false" nzTableLayout="fixed">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Bắt đầu</th>
-            <th>Mục tiêu</th>
-            <th>Kết quả</th>
-            <th>Đánh giá</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="border-right: 0.5px solid #e6e6e6;">
-                <span *ngIf="inbodyGoal.weight.isDecreased">Giảm </span>
-                <span *ngIf="!inbodyGoal.weight.isDecreased">Tăng </span>
-                cân
-            </td>
-            <td>{{inbodyGoal.weight.start}}</td>
-            <td>{{inbodyGoal.weight.expected}}</td>
-            <td>{{inbodyGoal.weight.result}}</td>
-            <td>
-                <i nz-icon *ngIf="weightDiff < 0" nzType="arrow-down"
-                    [style.color]="weightResult ? 'green' : 'red'"></i>
-                <i nz-icon *ngIf="weightDiff > 0" nzType="arrow-up" [style.color]="weightResult ? 'green' : 'red'"></i>
-                {{ weightCalculation | number}}
-            </td>
-        </tr>
-        <tr>
-            <td style="border-right: 0.5px solid #e6e6e6;">
-                <span *ngIf="inbodyGoal.smm.isDecreased">Giảm </span>
-                <span *ngIf="!inbodyGoal.smm.isDecreased">Tăng </span>
-                cơ
-            </td>
-            <td>{{inbodyGoal.smm.start}}</td>
-            <td>{{inbodyGoal.smm.expected}}</td>
-            <td>{{inbodyGoal.smm.result}}</td>
-            <td>
-                <i nz-icon *ngIf="smmDiff < 0" nzType="arrow-down" [style.color]="smmResult ? 'green' : 'red'"></i>
-                <i nz-icon *ngIf="smmDiff > 0" nzType="arrow-up" [style.color]="smmResult ? 'green' : 'red'"></i>
-                {{ smmCalculation | number}}
-            </td>
-        </tr>
-        <tr>
-            <td style="border-right: 0.5px solid #e6e6e6;">
-                <span *ngIf="inbodyGoal.bfm.isDecreased">Giảm </span>
-                <span *ngIf="!inbodyGoal.bfm.isDecreased">Tăng </span>
-                mỡ
-            </td>
-            <td>{{inbodyGoal.bfm.start}}</td>
-            <td>{{inbodyGoal.bfm.expected}}</td>
-            <td>{{inbodyGoal.bfm.result}}</td>
-            <td>
-                <i nz-icon nzType="arrow-down"></i>
-                1.0
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Bắt đầu</th>
+      <th>Mục tiêu</th>
+      <th>Kết quả</th>
+      <th style="width: 50px;"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr app-inbody-goal-item [item]="inbodyGoal.weight" itemName="cân">
+    </tr>
+    <tr app-inbody-goal-item [item]="inbodyGoal.smm" itemName="cơ">
+    </tr>
+    <tr app-inbody-goal-item [item]="inbodyGoal.bfm" itemName="mỡ">
+    </tr>
+  </tbody>
 </nz-table>

@@ -1,0 +1,7 @@
+<nz-card style="width:220px; margin: auto;" [nzCover]="coverTemplate">
+  <nz-card-meta [nzTitle]="date | date: 'dd/MM/yyyy' ">
+  </nz-card-meta>
+</nz-card>
+<ng-template #coverTemplate>
+  <img src="{{imageUrl}}" />
+</ng-template>

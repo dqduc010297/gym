@@ -1,0 +1,25 @@
+<td style="border-right: 0.5px solid #e6e6e6;">
+  <span *ngIf="item.isDecreased">Giảm </span>
+  <span *ngIf="!item.isDecreased">Tăng </span>
+  {{itemName}} (kg)
+</td>
+<td>{{item.start}}</td>
+<td>
+  <i nz-icon *ngIf="item.isDecreased" nzType="arrow-down"></i>
+  <i nz-icon *ngIf="!item.isDecreased" nzType="arrow-up"></i>
+  {{item.expected}}
+</td>
+<td>{{item.result}} (
+  <i nz-icon *ngIf="diff < 0" nzType="arrow-down"
+    [style.color]="!result ? 'red' : (result && calculation >= item.expected) ? 'green' : ''"></i>
+  <i nz-icon *ngIf="diff > 0" nzType="arrow-up"
+    [style.color]="!result ? 'red' : (result && calculation >= item.expected) ? 'green' : ''"></i>
+  {{ calculation | number}}
+  )
+</td>
+<td>
+  <i nz-icon nzType="check-circle" nzTheme="outline" *ngIf="result && calculation >= item.expected"
+    [style.color]="'green'"></i>
+  <i nz-icon nzType="close-circle" nzTheme="outline" *ngIf="!(result && calculation >= item.expected)"
+    [style.color]="'red'"></i>
+</td>

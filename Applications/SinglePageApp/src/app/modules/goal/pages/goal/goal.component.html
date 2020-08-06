@@ -1,21 +1,7 @@
 <nz-card>
   <div class="row">
     <div class="col-md-2">
-      <div class="d-flex justify-content-between">
-        <nz-date-picker></nz-date-picker>
-        <button nz-button nzType="default">New</button>
-      </div>
-      <div style="height: 80vh; overflow-y: auto;overflow-x: hidden; padding: 6px; margin-top: 8px;">
-        <nz-timeline>
-          <nz-timeline-item *ngFor="let goalOverview of goalOverviews"
-            [nzColor]="!goalOverview.isFinished ? 'blue' : goalOverview.isSuccessful ? 'green' : 'red'">
-            <p class="timeline-title"><strong>{{goalOverview.description}}</strong></p>
-            <p>Ngày bắt đầu: {{goalOverview.startDate | date: 'dd/MM/yyyy'}}</p>
-            <p>Ngày kết thúc: {{goalOverview.endDate | date: 'dd/MM/yyyy'}}</p>
-          </nz-timeline-item>
-        </nz-timeline>
-      </div>
-
+      <app-goal-timeline [goalOverviews]="goalOverviews"></app-goal-timeline>
     </div>
     <div class="col-md-10">
       <div style="height: 83vh; overflow-y: auto;overflow-x: hidden; padding: 6px; margin-top: 8px;">
@@ -25,131 +11,19 @@
             <nz-card>
               <div class="row">
                 <div class="col-6">
-                  <!-- <nz-table nzTemplateMode [nzShowPagination]="false" nzTableLayout="fixed">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>Bắt đầu</th>
-                        <th>Mục tiêu</th>
-                        <th>Kết quả</th>
-                        <th>Đánh giá</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span *ngIf="goal.inbodyGoal.weight.isDecreased">Giảm </span>
-                          <span *ngIf="!goal.inbodyGoal.weight.isDecreased">Tăng </span>
-                          cân
-                        </td>
-                        <td>90.1</td>
-                        <td>90.1</td>
-                        <td>90.1</td>
-                        <td><i nz-icon nzType="arrow-down"></i>1.0</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span *ngIf="goal.inbodyGoal.smm.isDecreased">Giảm </span>
-                          <span *ngIf="!goal.inbodyGoal.smm.isDecreased">Tăng </span>
-                          cơ
-                        </td>
-                        <td>90.1</td>
-                        <td>90.1</td>
-                        <td>90.1</td>
-                        <td><i nz-icon nzType="arrow-down"></i>1.0</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span *ngIf="goal.inbodyGoal.bfm.isDecreased">Giảm </span>
-                          <span *ngIf="!goal.inbodyGoal.bfm.isDecreased">Tăng </span>
-                          mỡ
-                        </td>
-                        <td>90.1</td>
-                        <td>90.1</td>
-                        <td>90.1</td>
-                        <td><i nz-icon nzType="arrow-down"></i>1.0</td>
-                      </tr>
-                    </tbody>
-                  </nz-table> -->
-              <app-inbody-goal [inbodyGoal]="goal.inbodyGoal"></app-inbody-goal>
+                  <app-inbody-goal [inbodyGoal]="goal.inbodyGoal"></app-inbody-goal>
                 </div>
                 <div class="col-3">
-                  <nz-card style="width:220px; margin: auto;" [nzCover]="coverTemplate">
-                    <nz-card-meta nzTitle="22/02/2020">
-                    </nz-card-meta>
-                  </nz-card>
-                  <ng-template #coverTemplate>
-                    <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-                  </ng-template>
+                  <app-inbody-image [date]="goal.startDate" [imageUrl]="goal.startDateImage"></app-inbody-image>
                 </div>
                 <div class="col-3">
-                  <nz-card style="width:220px; margin: auto;" [nzCover]="coverTemplate">
-                    <nz-card-meta nzTitle="26/02/2020">
-                    </nz-card-meta>
-                  </nz-card>
-                  <ng-template #coverTemplate>
-                    <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-                  </ng-template>
+                  <app-inbody-image [date]="goal.endDate" [imageUrl]="goal.endDateImage"></app-inbody-image>
                 </div>
               </div>
             </nz-card>
-
-            <nz-card nzTitle="Chương trình tập">
-              <nz-table #workOut nzBordered [nzData]="workOuts" nzShowPagination="true" nzPaginationPosition="top"
-                nzPageSize="2">
-                <thead>
-                  <tr>
-                    <th style="width: 100px;">Ngày</th>
-                    <th>Bài tập</th>
-                    <th style="width: 100px;">Số hiệp</th>
-                    <th style="width: 100px;">Lần/ hiệp</th>
-                    <th style="width: 150px;">Thời gian nghỉ(s)</th>
-                    <th>Ghi chú</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <ng-container *ngFor="let data of workOut.data">
-                    <tr *ngFor="let exercise of data.exercises; let i =index">
-                      <td [attr.rowspan]="data.exercises.length" *ngIf="i ==0">{{data.date | date: 'dd/MM/yyyy'}}</td>
-                      <td>{{exercise.name}}</td>
-                      <td>{{exercise.rep}}</td>
-                      <td>{{exercise.set}}</td>
-                      <td>{{exercise.restTime}}</td>
-                      <td>{{exercise.remarks}}</td>
-                    </tr>
-                  </ng-container>
-                </tbody>
-              </nz-table>
-            </nz-card>
-
-            <nz-card nzTitle="Chế độ ăn">
-              <nz-table #nutrition nzBordered [nzData]="nutritions" nzPaginationPosition="top" nzPageSize="4">
-                <thead>
-                  <tr>
-                    <th style="width: 100px;">Ngày</th>
-                    <th>Sáng</th>
-                    <th>Phụ 1</th>
-                    <th>Trưa</th>
-                    <th>Phụ 2</th>
-                    <th>Tối</th>
-                    <th>Ghi chú</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let data of nutrition.data">
-                    <td>{{data.date | date: 'dd/MM/yyyy'}}</td>
-                    <td><img src="{{data.breakfast}}" /></td>
-                    <td><img src="{{data.extra1}}" /></td>
-                    <td><img src="{{data.lunch}}" /></td>
-                    <td><img src="{{data.extra2}}" /></td>
-                    <td><img src="{{data.dinner}}" /></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </nz-table>
-            </nz-card>
+            <app-workout [workOuts]="goal.workOuts"></app-workout>
+            <app-nutrition [nutritions]="goal.nutritions"></app-nutrition>
           </div>
-
         </nz-result>
       </div>
     </div>
