@@ -17,6 +17,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { SharedModule } from './share.module';
 import { CalendarModule } from './modules/calendar/calendar.module';
 import { GoalModule } from './modules/goal/goal.module';
+import { UploaderComponent } from './components/uploader/uploader.component';
+
 registerLocaleData(vi);
 
 @NgModule({

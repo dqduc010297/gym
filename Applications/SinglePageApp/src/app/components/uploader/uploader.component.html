@@ -1,0 +1,20 @@
+<!-- <div class="upload-btn-wrapper">
+  <button class="btn">
+    <div style="margin-bottom: 10px;">
+      <i nz-icon nzType="plus" nzTheme="outline" *ngIf="!isUploading"></i>
+      <i nz-icon [nzType]="'loading'" *ngIf="isUploading"></i>
+    </div>
+    <span *ngIf="!isUploading && !isUploaded"> Chọn hình để upload</span>
+  </button>
+  <input type="file" accept="image/*" (change)="onUpload($event.target.files)" />
+  <nz-spin nzSimple></nz-spin>
+  <img *ngIf="isUploaded" src="https://www.dropbox.com/s/lq6ru4ue1imi4d0/9820200855.jpg?dl=1" />
+</div> -->
+<nz-card style="width: 200px;" [nzCover]="coverTemplate" [nzActions]="[uploadFile]">
+</nz-card>
+<ng-template #coverTemplate>
+  <img  src="{{uploadedUrl}}" />
+</ng-template>
+<ng-template #uploadFile>
+  <input type="file" accept="image/*" (change)="onUpload($event.target.files)" />
+</ng-template>

@@ -16,5 +16,6 @@ namespace ApplicationDomain.Identity.Entities
 		public DateTime DateJoined { set; get; }
 		public string AvatarURL { set; get; }
 		public UserStatus Status { set; get; }
+		public string DropboxToken { set; get; }
 	}
 }

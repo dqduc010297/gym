@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntModule } from './ng-zorro-antd.module';
+import { UploaderComponent } from './components/uploader/uploader.component';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { NgZorroAntModule } from './ng-zorro-antd.module';
     NgZorroAntModule,
   ],
   declarations: [
+    UploaderComponent,
   ],
   providers: [
 
@@ -19,6 +21,7 @@ import { NgZorroAntModule } from './ng-zorro-antd.module';
     CommonModule,
     FormsModule,
     NgZorroAntModule,
+    UploaderComponent,
   ],
   entryComponents: [
   ]

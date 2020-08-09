@@ -11,6 +11,7 @@ using FluentValidation.AspNetCore;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
@@ -124,6 +125,12 @@ namespace WebApplication
 
             services.AddAutoMapper(typeof(ApplicationDomain.AssemplyMarker));
 
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
             // Add Jwt Bearer
             // IMPORTANCE: AddJwtBearerAuthentication should be added after services.AddIdentity, to replaced Authentication config in Identity
             services.AddJwtBearerAuthentication(options =>

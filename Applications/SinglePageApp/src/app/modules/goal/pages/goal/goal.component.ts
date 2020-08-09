@@ -4,6 +4,11 @@ import { WorkOut, Exercise } from '../../models/exercise';
 import { GoalOverviewMock } from 'src/app/mocks/goal-overview.mock';
 import { GoalOverview, Goal } from '../../models/goal';
 import { GoalMock } from 'src/app/mocks/goal.mock';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { Observable, Observer } from 'rxjs';
+import { FileService } from 'src/app/services/core/file.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-goal',
@@ -19,64 +24,17 @@ export class GoalComponent implements OnInit {
   goalOverviews: GoalOverview[] = [];
   goal: Goal = new Goal();
 
+  loading = false;
+  avatarUrl?: string;
+
   constructor(
     private goalOverviewMock: GoalOverviewMock,
     private goalMock: GoalMock,
+    private msg: NzMessageService,
+    private fileService: FileService
   ) { }
 
   ngOnInit(): void {
-    for (let i = 0; i < 11; i++) {
-      this.nutritions.push({
-        date: new Date(`07/${i + 11}/2020`),
-        breakfast: 'assets/images/nutritions/pho.jpg',
-        lunch: 'assets/images/nutritions/lunch.jpg',
-        dinner: 'assets/images/nutritions/dinner.jpg',
-        extra1: 'assets/images/nutritions/guava.jpg',
-        extra2: 'assets/images/nutritions/banana.jpg'
-      });
-
-      this.workOuts.push({
-        date: new Date(`07/${i + 11}/2020`),
-        exercises: [
-          {
-            name: 'Plank',
-            set: 4,
-            rep: 12,
-            restTime: 10,
-            remarks: '',
-          },
-          {
-            name: 'Moutain Climber',
-            set: 4,
-            rep: 20,
-            restTime: 10,
-            remarks: '',
-          },
-          {
-            name: 'Flyingjacks',
-            set: 4,
-            rep: 20,
-            restTime: 10,
-            remarks: '',
-          },
-          {
-            name: 'Jumping Jacks',
-            set: 4,
-            rep: 20,
-            restTime: 10,
-            remarks: '',
-          },
-          {
-            name: 'Burpees',
-            set: 4,
-            rep: 20,
-            restTime: 10,
-            remarks: '',
-          },
-        ]
-      });
-    }
-
     this.goalOverviewMock.doMock().subscribe(
       result => {
         this.goalOverviews = result;
@@ -132,5 +90,19 @@ export class GoalComponent implements OnInit {
         },
       ]
     };
+  }
+
+  onUpload(files: any) {
+    if (files.length !== 1) {
+      return;
+    }
+    this.fileService.upload((files[0] as File)).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        console.log(Math.round(100 * event.loaded / event.total));
+      }
+      else if (event.type === HttpEventType.Response) {
+        console.log('Upload success');
+      }
+    });
   }
 }

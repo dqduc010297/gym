@@ -28,7 +28,7 @@ export class AuthInterceptor implements HttpInterceptor {
         //   return next.handle(req);
         // }
 
-        if (!req.headers.has('Content-Type')) {
+        if (!req.headers.has('Content-Type') && !req.url.includes('file')) {
             req = req.clone({
                 headers: req.headers.set('Content-Type', 'application/json')
             });
