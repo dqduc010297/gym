@@ -16,93 +16,36 @@ import { HttpEventType } from '@angular/common/http';
   styleUrls: ['./goal.component.scss']
 })
 export class GoalComponent implements OnInit {
-  chartOptions: any;
-  updateChartOptions: any;
-
-  nutritions: Nutrition[] = [];
-  workOuts: WorkOut[] = [];
   goalOverviews: GoalOverview[] = [];
   goal: Goal = new Goal();
 
-  loading = false;
-  avatarUrl?: string;
+  goalIdSelected: number;
 
   constructor(
     private goalOverviewMock: GoalOverviewMock,
     private goalMock: GoalMock,
-    private msg: NzMessageService,
-    private fileService: FileService
   ) { }
 
   ngOnInit(): void {
     this.goalOverviewMock.doMock().subscribe(
       result => {
         this.goalOverviews = result;
-        console.log(this.goalOverviews);
+        if (this.goalOverviews) {
+          this.loadGoal(this.goalOverviews[0].id);
+        }
       }
     );
-    this.goalMock.doMock(1).subscribe(
+  }
+
+  loadGoal(id: number) {
+    this.goalMock.doMock(id).subscribe(
       result => {
         this.goal = result;
-        console.log(this.goal);
       }
     );
-    this.initChartOption();
   }
 
-  initChartOption() {
-    this.chartOptions = {
-      tooltip: {
-        trigger: 'axis',
-      },
-      grid: {
-        left: '6%',
-        right: '6%',
-        bottom: '3%',
-        top: '0%',
-        height: '60'
-      },
-      xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        show: false,
-        data: [
-          '11/07/2020',
-          '22/07/2020',
-        ]
-      },
-      yAxis: {
-        type: 'value',
-        show: false,
-        min: 88,
-        max: 96
-      },
-      series: [
-        {
-          name: 'Weight',
-          type: 'line',
-          symbolSize: 6,
-          label: {
-            show: true,
-            position: 'top'
-          },
-          data: [92.7, 90.1]
-        },
-      ]
-    };
-  }
-
-  onUpload(files: any) {
-    if (files.length !== 1) {
-      return;
-    }
-    this.fileService.upload((files[0] as File)).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-        console.log(Math.round(100 * event.loaded / event.total));
-      }
-      else if (event.type === HttpEventType.Response) {
-        console.log('Upload success');
-      }
-    });
+  goalOverviewSelected(event) {
+    this.loadGoal(event);
   }
 }

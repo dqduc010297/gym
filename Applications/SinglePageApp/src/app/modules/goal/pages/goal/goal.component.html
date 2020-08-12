@@ -1,7 +1,7 @@
 <nz-card>
   <div class="row">
     <div class="col-md-2">
-      <app-goal-timeline [goalOverviews]="goalOverviews"></app-goal-timeline>
+      <app-goal-timeline (goalSelected)="goalOverviewSelected($event)" [goalOverviews]="goalOverviews"></app-goal-timeline>
     </div>
     <div class="col-md-10">
       <div style="height: 83vh; overflow-y: auto;overflow-x: hidden; padding: 6px; margin-top: 8px;">
@@ -14,10 +14,10 @@
                   <app-inbody-goal [inbodyGoal]="goal.inbodyGoal"></app-inbody-goal>
                 </div>
                 <div class="col-3">
-                  <app-uploader></app-uploader>
+                  <app-uploader [enable]="true" [description]="'11/03/2020'"></app-uploader>
                 </div>
                 <div class="col-3">
-                  <app-inbody-image [date]="goal.endDate" [imageUrl]="goal.endDateImage"></app-inbody-image>
+                  <app-uploader [enable]="true" [description]="'11/03/2020'"></app-uploader>
                 </div>
               </div>
             </nz-card>

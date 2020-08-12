@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FileService } from 'src/app/services/core/file.service';
 import { HttpEventType } from '@angular/common/http';
 
@@ -10,12 +10,18 @@ import { HttpEventType } from '@angular/common/http';
 export class UploaderComponent implements OnInit {
   isUploading = false;
   isUploaded = false;
-  uploadedUrl: string;
+
+  @Input() uploadedUrl: string;
+  @Input() description: string;
+  @Input() enable: boolean;
   @Output() returnUrl: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private fileService: FileService) { }
 
   ngOnInit(): void {
+    if (!this.uploadedUrl) {
+      this.uploadedUrl = 'assets/images/nutritions/oblique.svg';
+    }
   }
 
   onUpload(files: any) {

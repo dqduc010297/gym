@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GoalOverview } from '../../models/goal';
 
 @Component({
@@ -8,9 +8,17 @@ import { GoalOverview } from '../../models/goal';
 })
 export class GoalTimelineComponent implements OnInit {
   @Input() goalOverviews: GoalOverview[] = [];
+  @Output() goalSelected: EventEmitter<number> = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  selected(id: number) {
+    this.goalSelected.emit(
+      id
+    );
   }
 
 }

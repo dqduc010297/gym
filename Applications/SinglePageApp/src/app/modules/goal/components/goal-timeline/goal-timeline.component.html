@@ -6,9 +6,11 @@
   <nz-timeline>
     <nz-timeline-item *ngFor="let goalOverview of goalOverviews"
       [nzColor]="!goalOverview.isFinished ? 'blue' : goalOverview.isSuccessful ? 'green' : 'red'">
-      <p class="timeline-title"><strong>{{goalOverview.description}}</strong></p>
-      <p>Ngày bắt đầu: {{goalOverview.startDate | date: 'dd/MM/yyyy'}}</p>
-      <p>Ngày kết thúc: {{goalOverview.endDate | date: 'dd/MM/yyyy'}}</p>
+      <div (click)="selected(goalOverview.id)">
+        <p class="timeline-title"><strong>{{goalOverview.description}}</strong></p>
+        <p>Ngày bắt đầu: {{goalOverview.startDate | date: 'dd/MM/yyyy'}}</p>
+        <p>Ngày kết thúc: {{goalOverview.endDate | date: 'dd/MM/yyyy'}}</p>
+      </div>
     </nz-timeline-item>
   </nz-timeline>
 </div>
