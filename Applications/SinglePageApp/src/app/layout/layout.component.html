@@ -1,5 +1,5 @@
 <nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+  <nz-sider class="menu-sidebar d-none d-md-block" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null" nzTheme="light">
     <div class="sidebar-logo">
       <a href="/home">
@@ -28,9 +28,9 @@
     <nz-header>
       <div class="app-header d-flex justify-content-between">
         <div>
-          <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <!-- <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
             <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
-          </span>
+          </span> -->
         </div>
         <div>
           <a nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
@@ -45,6 +45,22 @@
           </nz-dropdown-menu>
         </div>
       </div>
+    </nz-header>
+    <nz-header class="d-sm-block d-md-none">
+      <ul nz-menu nzMode="horizontal" class="d-flex justify-content-between">
+        <li nz-menu-item nzMatchRouter>
+          <i nz-icon nzType="calendar" nzTheme="outline"></i>
+          <a [routerLink]="['/calendar']" routerLinkActive="router-link-active">
+            Calendar
+          </a>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+          <i nz-icon nzType="trophy" nzTheme="outline"></i>
+          <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
+            Goal
+          </a>
+        </li>
+      </ul>
     </nz-header>
     <nz-content>
       <div class="inner-content">
