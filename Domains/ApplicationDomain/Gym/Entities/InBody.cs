@@ -15,7 +15,6 @@ namespace ApplicationDomain.Gym.Entities
         public float BodyFatMass { set; get; }
         public float Weight { set; get; }
         public float SkeletalMuscleMass { set; get; }
-        public float PBF { set; get; }
         public int Score { set; get; }
         public float WaistHipRatio { set; get; }
         public int VisceralFatLevel { set; get; }
