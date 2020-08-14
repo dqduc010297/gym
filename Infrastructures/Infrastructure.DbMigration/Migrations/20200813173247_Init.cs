@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.DbMigration.Migrations
 {
-    public partial class test : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,7 +49,8 @@ namespace Infrastructure.DbMigration.Migrations
                     Gender = table.Column<int>(nullable: false),
                     DateJoined = table.Column<DateTime>(nullable: false),
                     AvatarURL = table.Column<string>(nullable: true),
-                    Status = table.Column<int>(nullable: false)
+                    Status = table.Column<int>(nullable: false),
+                    DropboxToken = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -162,6 +163,40 @@ namespace Infrastructure.DbMigration.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "InBody",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    CreatedByUserId = table.Column<int>(nullable: false),
+                    UpdatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    UpdatedByUserId = table.Column<int>(nullable: false),
+                    RowVersion = table.Column<byte[]>(nullable: true),
+                    TestedDate = table.Column<DateTime>(nullable: false),
+                    BodyWater = table.Column<float>(nullable: false),
+                    Protein = table.Column<float>(nullable: false),
+                    Mineral = table.Column<float>(nullable: false),
+                    BodyFatMass = table.Column<float>(nullable: false),
+                    Weight = table.Column<float>(nullable: false),
+                    SkeletalMuscleMass = table.Column<float>(nullable: false),
+                    Score = table.Column<int>(nullable: false),
+                    WaistHipRatio = table.Column<float>(nullable: false),
+                    VisceralFatLevel = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InBody", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InBody_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -200,6 +235,11 @@ namespace Infrastructure.DbMigration.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InBody_UserId",
+                table: "InBody",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -218,6 +258,9 @@ namespace Infrastructure.DbMigration.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "InBody");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

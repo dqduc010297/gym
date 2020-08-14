@@ -1,10 +1,14 @@
 ﻿using ApplicationDomain.Common;
+using ApplicationDomain.Gym.Entities;
 using ApplicationDomain.Identity.Entities;
+using ExcelDataReader;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Infrastructure.SeedData
@@ -55,6 +59,7 @@ namespace Infrastructure.SeedData
         {
             await SeedRoleDataAsync(dbContext);
             await SeedUserDataAsync(dbContext);
+            await SeedInbodyDataAsync(dbContext);
         }
         private static async Task SeedRoleDataAsync(ApplicationDbContext dbContext)
         {
@@ -536,6 +541,45 @@ namespace Infrastructure.SeedData
                     }
                 }
                 Console.WriteLine("Finish seed user info");
+            }
+        }
+
+        private static async Task SeedInbodyDataAsync(ApplicationDbContext dbContext)
+        {
+            if (!await dbContext.Set<InBody>().AnyAsync())
+            {
+                Console.WriteLine("Start to seed inbody info");
+
+                List<InBody> inbodys = new List<InBody>();
+                using (var stream = File.Open(@"C:\Users\ducdo\source\repos\Gym\Infrastructures\Infrastructure.SeedData\Data\Inbody.xlsx", FileMode.Open, FileAccess.Read))
+                {
+                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+                    {
+                        do
+                        {
+                            reader.Read();
+                            while (reader.Read()) //Each ROW
+                            {
+                                InBody inBody = new InBody();
+                                inBody.TestedDate = (DateTime)reader.GetValue(0);
+                                inBody.BodyWater = Convert.ToSingle((double)reader.GetValue(1));
+                                inBody.Protein = Convert.ToSingle((double)reader.GetValue(2));
+                                inBody.Mineral = Convert.ToSingle((double)reader.GetValue(3));
+                                inBody.BodyFatMass = Convert.ToSingle((double)reader.GetValue(4));
+                                inBody.Weight = Convert.ToSingle((double)reader.GetValue(5));
+                                inBody.SkeletalMuscleMass = Convert.ToSingle((double)reader.GetValue(6));
+                                inBody.Score = Convert.ToInt32((double)reader.GetValue(7));
+                                inBody.WaistHipRatio = Convert.ToSingle((double)reader.GetValue(1));
+                                inBody.VisceralFatLevel = Convert.ToInt32((double)reader.GetValue(9));
+                                inBody.UserId = Convert.ToInt32((double)reader.GetValue(10));
+                            }
+                        } while (reader.NextResult()); //Move to NEXT SHEET
+
+                    }
+                    await dbContext.AddRangeAsync(inbodys);
+                    await dbContext.SaveChangesAsync();
+                    Console.WriteLine("Finised to seed inbody info");
+                }
             }
         }
     }

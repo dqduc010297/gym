@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.DbMigration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200809075922_AddDropboxTokenToUser")]
-    partial class AddDropboxTokenToUser
+    [Migration("20200813173247_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,51 @@ namespace Infrastructure.DbMigration.Migrations
                 .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ApplicationDomain.Gym.Entities.InBody", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("BodyFatMass");
+
+                    b.Property<float>("BodyWater");
+
+                    b.Property<int>("CreatedByUserId");
+
+                    b.Property<DateTimeOffset>("CreatedDate");
+
+                    b.Property<float>("Mineral");
+
+                    b.Property<float>("Protein");
+
+                    b.Property<byte[]>("RowVersion");
+
+                    b.Property<int>("Score");
+
+                    b.Property<float>("SkeletalMuscleMass");
+
+                    b.Property<DateTime>("TestedDate");
+
+                    b.Property<int>("UpdatedByUserId");
+
+                    b.Property<DateTimeOffset>("UpdatedDate");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("VisceralFatLevel");
+
+                    b.Property<float>("WaistHipRatio");
+
+                    b.Property<float>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("InBody");
+                });
 
             modelBuilder.Entity("ApplicationDomain.Identity.Entities.Role", b =>
                 {
@@ -195,6 +240,14 @@ namespace Infrastructure.DbMigration.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ApplicationDomain.Gym.Entities.InBody", b =>
+                {
+                    b.HasOne("ApplicationDomain.Identity.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
