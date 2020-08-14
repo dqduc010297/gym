@@ -29,7 +29,7 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<float>("BodyWater");
 
-                    b.Property<int>("CreatedByUserId");
+                    b.Property<string>("CreatedByUser");
 
                     b.Property<DateTimeOffset>("CreatedDate");
 
@@ -45,7 +45,7 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<DateTime>("TestedDate");
 
-                    b.Property<int>("UpdatedByUserId");
+                    b.Property<string>("UpdatedByUser");
 
                     b.Property<DateTimeOffset>("UpdatedDate");
 

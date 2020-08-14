@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.DbMigration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200813173247_Init")]
-    partial class Init
+    [Migration("20200814075953_InitDatabase")]
+    partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,7 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<float>("BodyWater");
 
-                    b.Property<int>("CreatedByUserId");
+                    b.Property<string>("CreatedByUser");
 
                     b.Property<DateTimeOffset>("CreatedDate");
 
@@ -47,7 +47,7 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<DateTime>("TestedDate");
 
-                    b.Property<int>("UpdatedByUserId");
+                    b.Property<string>("UpdatedByUser");
 
                     b.Property<DateTimeOffset>("UpdatedDate");
 

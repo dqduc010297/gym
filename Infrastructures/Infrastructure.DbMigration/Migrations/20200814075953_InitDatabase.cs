@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.DbMigration.Migrations
 {
-    public partial class Init : Migration
+    public partial class InitDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -170,9 +170,9 @@ namespace Infrastructure.DbMigration.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreatedDate = table.Column<DateTimeOffset>(nullable: false),
-                    CreatedByUserId = table.Column<int>(nullable: false),
+                    CreatedByUser = table.Column<string>(nullable: true),
                     UpdatedDate = table.Column<DateTimeOffset>(nullable: false),
-                    UpdatedByUserId = table.Column<int>(nullable: false),
+                    UpdatedByUser = table.Column<string>(nullable: true),
                     RowVersion = table.Column<byte[]>(nullable: true),
                     TestedDate = table.Column<DateTime>(nullable: false),
                     BodyWater = table.Column<float>(nullable: false),

@@ -92,7 +92,7 @@ namespace Infrastructure.SeedData
         }
         private static async Task SeedUserDataAsync(ApplicationDbContext dbContext)
         {
-            if (!await dbContext.Set<User>().AnyAsync())
+            if (!await dbContext.Set<User>().AnyAsync() && await dbContext.Set<Role>().AnyAsync())
             {
                 Console.WriteLine("Start to seed user info");
                 var userManagement = _serviceProvider.GetService<UserManager<User>>();
@@ -546,12 +546,12 @@ namespace Infrastructure.SeedData
 
         private static async Task SeedInbodyDataAsync(ApplicationDbContext dbContext)
         {
-            if (!await dbContext.Set<InBody>().AnyAsync())
+            if (!await dbContext.Set<InBody>().AnyAsync() && await dbContext.Set<User>().AnyAsync())
             {
                 Console.WriteLine("Start to seed inbody info");
 
                 List<InBody> inbodys = new List<InBody>();
-                using (var stream = File.Open(@"C:\Users\ducdo\source\repos\Gym\Infrastructures\Infrastructure.SeedData\Data\Inbody.xlsx", FileMode.Open, FileAccess.Read))
+                using (var stream = File.Open(String.Format(@"{0}\Data\Inbody.xlsx", Environment.CurrentDirectory), FileMode.Open, FileAccess.Read))
                 {
                     using (var reader = ExcelReaderFactory.CreateReader(stream))
                     {
@@ -572,6 +572,7 @@ namespace Infrastructure.SeedData
                                 inBody.WaistHipRatio = Convert.ToSingle((double)reader.GetValue(1));
                                 inBody.VisceralFatLevel = Convert.ToInt32((double)reader.GetValue(9));
                                 inBody.UserId = Convert.ToInt32((double)reader.GetValue(10));
+                                inbodys.Add(inBody);
                             }
                         } while (reader.NextResult()); //Move to NEXT SHEET
 

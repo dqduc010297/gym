@@ -20,6 +20,9 @@ namespace Infrastructure.EntityConfigurations
                 .IsConcurrencyToken()
                 .ValueGeneratedOnAddOrUpdate();
             OnConfigure(typeBuilder);
+
+            typeBuilder.Property(p => p.CreatedDate).HasDefaultValue(DateTime.Now);
+            typeBuilder.Property(p => p.UpdatedDate).HasDefaultValue(DateTime.Now);
         }
 
     }

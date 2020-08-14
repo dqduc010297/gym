@@ -1,9 +1,6 @@
 ﻿using ApplicationDomain.Gym.Entities;
 using AspNetCore.EntityFramework;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infrastructure.EntityConfigurations.Gym
 {
