@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.DbMigration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200814075953_InitDatabase")]
-    partial class InitDatabase
+    [Migration("20200815034628_AddEvaluationToInbody")]
+    partial class AddEvaluationToInbody
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,15 +27,19 @@ namespace Infrastructure.DbMigration.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BMIEvaluation");
+
                     b.Property<float>("BodyFatMass");
 
                     b.Property<float>("BodyWater");
 
-                    b.Property<string>("CreatedByUser");
+                    b.Property<int>("CreatedByUserId");
 
                     b.Property<DateTimeOffset>("CreatedDate");
 
                     b.Property<float>("Mineral");
+
+                    b.Property<int>("PBFEvaluation");
 
                     b.Property<float>("Protein");
 
@@ -47,7 +51,7 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<DateTime>("TestedDate");
 
-                    b.Property<string>("UpdatedByUser");
+                    b.Property<int>("UpdatedByUserId");
 
                     b.Property<DateTimeOffset>("UpdatedDate");
 

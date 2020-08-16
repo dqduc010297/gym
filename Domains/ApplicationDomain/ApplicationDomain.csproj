@@ -33,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Gym\Model\" />
     <Folder Include="Identity\IRepositories\" />
   </ItemGroup>
 

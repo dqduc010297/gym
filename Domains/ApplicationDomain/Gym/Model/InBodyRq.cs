@@ -1,14 +1,12 @@
-﻿using ApplicationDomain.Common;
-using ApplicationDomain.Entities;
-using ApplicationDomain.Identity.Entities;
+﻿using ApplicationDomain.Gym.Entities;
+using AutoMapper;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ApplicationDomain.Gym.Entities
+namespace ApplicationDomain.Gym.Model
 {
-    public class InBody : EntityBase<int>
+    public class InBodyRq
     {
+        public int Id { set; get; }
         public DateTime TestedDate { set; get; }
         public float BodyWater { set; get; }
         public float Protein { set; get; }
@@ -17,11 +15,16 @@ namespace ApplicationDomain.Gym.Entities
         public float Weight { set; get; }
         public float SkeletalMuscleMass { set; get; }
         public int Score { set; get; }
-        public Evaluation BMIEvaluation { set; get; }
-        public Evaluation PBFEvaluation { set; get; }
         public float WaistHipRatio { set; get; }
         public int VisceralFatLevel { set; get; }
         public int UserId { set; get; }
-        public User User { set; get; }
+    }
+
+    public class InBodyRqMapper: Profile
+    {
+        public InBodyRqMapper()
+        {
+            CreateMap<InBodyRq, InBody>();
+        }
     }
 }

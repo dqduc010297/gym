@@ -17,22 +17,5 @@ namespace ApplicationDomain.Entities
         public int UpdatedByUserId { get; set; } // use to query/join
 
         public byte[] RowVersion { get; set; }
-
-
-        public EntityBase<TKeyType> CreateBy(UserIdentity<int> issuer)
-        {
-            var now = DateTimeOffset.UtcNow;
-            CreatedByUserId = issuer.Id;
-            CreatedDate = now;
-            return this;
-        }
-
-        public EntityBase<TKeyType> UpdateBy(UserIdentity<int> issuer)
-        {
-            var now = DateTimeOffset.UtcNow;
-            UpdatedByUserId = issuer.Id;
-            UpdatedDate = now;
-            return this;
-        }
     }
 }

@@ -1,38 +1,28 @@
-<div class="d-flex justify-content-between" style="margin-bottom: 8px;">
-  <div>
-    <strong>Tested date:</strong>
-    <nz-date-picker style="margin-left: 10px;" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
-  </div>
-  <div>
-    <h5>Score: 72/100</h5>
-  </div>
-</div>
-
 <nz-card nzTitle="Body Composition Analysis">
   <nz-table nzTemplateMode [nzShowPagination]="false">
     <tbody>
       <tr>
         <td><strong>Total Body Water</strong></td>
         <td>(L)</td>
-        <td>45.8</td>
+        <td>{{bodyCompositionAnalysis.bodyWater}}</td>
         <td>( 35.7 ~43.7 )</td>
       </tr>
       <tr>
         <td><strong>Protein</strong></td>
         <td>(kg)</td>
-        <td>12.5</td>
+        <td>{{bodyCompositionAnalysis.protein}}</td>
         <td>( 9.7 ~ 11.7 )</td>
       </tr>
       <tr>
         <td><strong>Mineral</strong></td>
         <td>(kg)</td>
-        <td>4.25</td>
+        <td>{{bodyCompositionAnalysis.mineral}}</td>
         <td>( 3.37 ~ 4.04 )</td>
       </tr>
       <tr>
         <td><strong>Body Fat Mass</strong></td>
         <td>(kg)</td>
-        <td>27.5</td>
+        <td>{{bodyCompositionAnalysis.bodyFatMass}}</td>
         <td>( 7.5 ~ 15.3 )</td>
       </tr>
     </tbody>

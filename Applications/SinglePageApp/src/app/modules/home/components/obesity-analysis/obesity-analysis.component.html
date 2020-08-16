@@ -4,13 +4,13 @@
       <tr>
         <td><strong>BMI </strong></td>
         <td>(kg/m2)</td>
-        <td>31.3</td>
+        <td>{{obesityAnalysis.bmi | number: '0.0-1'}}</td>
         <td>( 18.5 ~ 25 )</td>
       </tr>
       <tr>
         <td><strong>PBF</strong></td>
         <td>(%)</td>
-        <td>32.8</td>
+        <td>{{obesityAnalysis.pbf * 100 | number: '0.0-1'}}</td>
         <td>( 10 ~ 20 )</td>
       </tr>
     </tbody>
@@ -25,13 +25,13 @@
       <tr>
         <td><strong>BMI </strong></td>
         <td colspan="3">
-          <nz-checkbox-group [(ngModel)]="checkOptionsOne"></nz-checkbox-group>
+          <nz-checkbox-group [(ngModel)]="obesityAnalysis.bmiEvaluation"></nz-checkbox-group>
         </td>
       </tr>
       <tr>
         <td><strong>PBF</strong></td>
         <td colspan="3">
-          <nz-checkbox-group [(ngModel)]="checkOptionsOne"></nz-checkbox-group>
+          <nz-checkbox-group></nz-checkbox-group>
         </td>
       </tr>
     </tbody>

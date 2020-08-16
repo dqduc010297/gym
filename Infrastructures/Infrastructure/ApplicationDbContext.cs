@@ -14,6 +14,12 @@ namespace Infrastructure
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, int>
     {
+        protected IHttpContextAccessor _httpContextAccessor { get; }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IHttpContextAccessor httpContextAccessor)
+            : base(options)
+        {
+            this._httpContextAccessor = httpContextAccessor;
+        }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -54,13 +60,12 @@ namespace Infrastructure
                            .Where(p => p.Entity is EntityBase<int> && (p.State == EntityState.Added || p.State == EntityState.Modified))
                            .Select(p => p.Entity).Cast<EntityBase<int>>())
             {
-                var currentUsername = !string.IsNullOrEmpty(HttpContext.) ? HttpContext.User.Identity.Name : "Anonymous";
-
-                entity.CreatedDate = entity.CreatedDate == entity.UpdatedDate ? DateTime.Now : entity.CreatedDate;
+                entity.CreatedDate = entity.CreatedByUserId == 0 ? DateTime.Now : entity.CreatedDate;
                 entity.UpdatedDate = DateTime.Now;
 
-                entity.CreatedDate = entity.CreatedDate == entity.UpdatedDate ? DateTime.Now : entity.CreatedDate;
-                entity.UpdatedDate = DateTime.Now;
+                var userId = this._httpContextAccessor?.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value ?? "-1";
+                entity.CreatedByUserId = entity.CreatedByUserId == 0 ? int.Parse(userId) :entity.CreatedByUserId;
+                entity.UpdatedByUserId = int.Parse(userId);
             }
         }
     }

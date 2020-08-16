@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { BodyCompositionAnalysis } from 'src/app/models/inbody/body-composition-analysis';
 
 @Component({
   selector: 'app-body-composition-analysis',
@@ -6,12 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./body-composition-analysis.component.scss']
 })
 export class BodyCompositionAnalysisComponent implements OnInit {
-  date: any;
+  @Input() bodyCompositionAnalysis: BodyCompositionAnalysis = new BodyCompositionAnalysis();
   constructor() { }
 
   ngOnInit(): void {
-  }
-  onChange(result: Date): void {
-    console.log('onChange: ', result);
   }
 }

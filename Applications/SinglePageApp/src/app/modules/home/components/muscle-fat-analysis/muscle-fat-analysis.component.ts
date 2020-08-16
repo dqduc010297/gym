@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MuscleFatAnalysis } from 'src/app/models/inbody/muscle-fat-analysis';
 
 @Component({
   selector: 'app-muscle-fat-analysis',
@@ -6,12 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./muscle-fat-analysis.component.scss']
 })
 export class MuscleFatAnalysisComponent implements OnInit {
-  date: any;
+  @Input() muscleFatAnalysis: MuscleFatAnalysis;
   constructor() { }
 
   ngOnInit(): void {
-  }
-  onChange(result: Date): void {
-    console.log('onChange: ', result);
   }
 }
