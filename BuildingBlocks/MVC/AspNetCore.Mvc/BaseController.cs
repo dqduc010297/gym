@@ -17,9 +17,9 @@ namespace AspNetCore.Mvc
     public abstract class BaseController : ControllerBase
     {
         [ApiExplorerSettings(IgnoreApi = true)]
-        public virtual string GetCurrentUserId()
+        public virtual int GetCurrentUserId()
         {
-            return this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return int.Parse(this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
         [ApiExplorerSettings(IgnoreApi = true)]
         public virtual T GetCurrentUserId<T>()

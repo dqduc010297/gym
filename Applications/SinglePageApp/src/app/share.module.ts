@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntModule } from './ng-zorro-antd.module';
 import { UploaderComponent } from './components/uploader/uploader.component';
@@ -15,7 +15,7 @@ import { UploaderComponent } from './components/uploader/uploader.component';
     UploaderComponent,
   ],
   providers: [
-
+    DatePipe
   ],
   exports: [
     CommonModule,

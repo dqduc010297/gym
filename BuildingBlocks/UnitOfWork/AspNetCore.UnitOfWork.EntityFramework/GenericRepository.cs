@@ -95,5 +95,10 @@ namespace AspNetCore.UnitOfWork.EntityFramework
                 });
             }
         }
+
+        public IQueryable GetEntitiesQueryableAsync()
+        {
+            return dbSet;
+        }
     }
 }

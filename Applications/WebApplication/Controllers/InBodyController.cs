@@ -22,8 +22,16 @@ namespace WebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMyInBodyByTestedDate(DateTime? testedDate)
         {
-            return Ok(await this._inBodyService.GetMyInbodyByTestedDate(int.Parse(this.GetCurrentUserId()) ,testedDate));
+            return Ok(await this._inBodyService.GetMyInbodyByTestedDate(this.GetCurrentUserId() ,testedDate));
         }
+
+        [Route("testeddates")]
+        [HttpGet]
+        public async Task<IActionResult> GetTestedDate()
+        {
+            return Ok(await this._inBodyService.GetTestedDate(this.GetCurrentUserId()));
+        }
+
         [Route("")]
         [HttpPost]
         public async Task<IActionResult> CreateNewInBody()

@@ -17,9 +17,7 @@ export class LoaderInterceptor implements HttpInterceptor {
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
         const loaderService = this.injector.get(LoaderService);
-        
         loaderService.show();
-
         return next.handle(req).pipe(
             delay(2000),
             finalize(() => { loaderService.hide(); }),

@@ -10,6 +10,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApplicationDomain.Gym.Services
@@ -19,7 +21,7 @@ namespace ApplicationDomain.Gym.Services
         private IInBodyRepository _inBodyRepository;
         private readonly UserManager<User> _userManager;
         public InBodyService(
-            IInBodyRepository inBodyRepository, 
+            IInBodyRepository inBodyRepository,
             UserManager<User> userManager,
             IMapper mapper,
             IUnitOfWork uow) : base(mapper, uow)
@@ -35,7 +37,8 @@ namespace ApplicationDomain.Gym.Services
                          .MapQueryTo<MyInBodyRs>(this._mapper)
                          .FirstOrDefaultAsync();
                 return myInBody;
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -46,13 +49,21 @@ namespace ApplicationDomain.Gym.Services
             this._inBodyRepository.Create(inBody);
             await _uow.SaveChangesAsync();
         }
-
         public async Task UpdateInBody(InBodyRq rq)
         {
             var inBody = await this._inBodyRepository.GetEntityByIdAsync(rq.Id);
             _mapper.Map(rq, inBody);
             this._inBodyRepository.Update(inBody);
             await _uow.SaveChangesAsync();
+        }
+        public async Task<List<DateTime>> GetTestedDate(int userId)
+        {
+            return await this._inBodyRepository
+                    .GetEntitiesQueryableAsync()
+                    .Cast<InBody>()
+                    .Where(p => p.UserId == userId)
+                    .Select(p => p.TestedDate)
+                    .ToListAsync();
         }
     }
 }
