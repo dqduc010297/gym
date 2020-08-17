@@ -11,8 +11,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginUrl = AuthenticationUrl.LoginUrl;
   loginUser: LoginUser = new LoginUser();
+
   constructor(
     private authService: AuthService,
     public loaderService: LoaderService,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InBodyService } from 'src/app/services/inbody/inbody.service';
 import { InBodyDetail } from 'src/app/models/inbody/inbody-detail';
+import { LoaderService } from 'src/app/services/core/loader.service';
 
 @Component({
   selector: 'app-home',
@@ -11,17 +12,26 @@ export class HomeComponent implements OnInit {
   inBodyDetail: InBodyDetail = new InBodyDetail();
 
   constructor(
-    private inBodyService: InBodyService
+    private inBodyService: InBodyService,
+    public loaderService: LoaderService,
   ) { }
 
   listOfData: number[] = [1];
 
   ngOnInit(): void {
-    this.loadData();
+    this.loadLatestMyInBody();
   }
 
-  loadData() {
-    this.inBodyService.getInBody().subscribe(
+  loadLatestMyInBody() {
+    this.inBodyService.getLatestInBody().subscribe(
+      result => {
+        this.inBodyDetail = result;
+      }
+    );
+  }
+
+  loadMyInBody() {
+    this.inBodyService.getLatestInBody().subscribe(
       result => {
         this.inBodyDetail = result;
       }
@@ -29,6 +39,10 @@ export class HomeComponent implements OnInit {
   }
 
   onChange(result: Date): void {
-    console.log('onChange: ', result);
+    this.inBodyService.getInBody(result).subscribe(
+      result => {
+        console.log(result);
+      }
+    );
   }
 }

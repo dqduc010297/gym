@@ -1,30 +1,33 @@
-<div class="row">
-  <div class="col-md-4">
-    <div class="d-flex justify-content-between" style="margin-bottom: 8px;">
-      <div>
-        <strong>Tested date:</strong>
-        <nz-date-picker style="margin-left: 10px;" [(ngModel)]="inBodyDetail.testedDate"
-          (ngModelChange)="onChange($event)" nzFormat="dd/MM/yyyy">
-        </nz-date-picker>
+<nz-spin nzTip="Loading..." [nzSize]="'large'" [nzSpinning]="loaderService.showLoader">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="d-flex justify-content-between" style="margin-bottom: 8px;">
+        <div>
+          <strong>Tested date:</strong>
+          <nz-date-picker style="margin-left: 10px;" [(ngModel)]="inBodyDetail.testedDate"
+            (ngModelChange)="onChange($event)" nzFormat="dd/MM/yyyy">
+          </nz-date-picker>
+        </div>
+        <div>
+          <h5>Score: {{inBodyDetail.score}}/100</h5>
+        </div>
       </div>
-      <div>
-        <h5>Score: {{inBodyDetail.score}}/100</h5>
-      </div>
+      <app-body-composition-analysis [bodyCompositionAnalysis]="inBodyDetail.bodyCompositionAnalysis">
+      </app-body-composition-analysis>
     </div>
-    <app-body-composition-analysis [bodyCompositionAnalysis]="inBodyDetail.bodyCompositionAnalysis"></app-body-composition-analysis>
+    <div class="col-md-4">
+      <app-muscle-fat-analysis [muscleFatAnalysis]="inBodyDetail.muscleFatAnalysis"></app-muscle-fat-analysis>
+    </div>
+    <div class="col-md-4">
+      <app-obesity-analysis [obesityAnalysis]="inBodyDetail.obesityAnalysis"></app-obesity-analysis>
+    </div>
   </div>
-  <div class="col-md-4">
-    <app-muscle-fat-analysis [muscleFatAnalysis]="inBodyDetail.muscleFatAnalysis"></app-muscle-fat-analysis>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-4 col-sm-12">
+      <app-inbody-info></app-inbody-info>
+    </div>
+    <div class="col-md-8 col-sm-12">
+      <app-body-composition-history></app-body-composition-history>
+    </div>
   </div>
-  <div class="col-md-4">
-    <app-obesity-analysis [obesityAnalysis]="inBodyDetail.obesityAnalysis"></app-obesity-analysis>
-  </div>
-</div>
-<div class="row" style="margin-top: 10px;">
-  <div class="col-md-4 col-sm-12">
-    <app-inbody-info></app-inbody-info>
-  </div>
-  <div class="col-md-8 col-sm-12">
-    <app-body-composition-history></app-body-composition-history>
-  </div>
-</div>
+</nz-spin>

@@ -4,21 +4,29 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LoaderService {
-  loadingAPI: string[] = [];
+  showLoader = false;
   constructor() { }
 
-  addLoadingAPI(serviceName: string) {
-    this.loadingAPI.push(serviceName);
+  // addLoadingAPI(serviceName: string) {
+  //   this.loadingAPI.push(serviceName);
+  // }
+
+  // removeloadingAPI(serviceName: string) {
+  //   const index = this.loadingAPI.indexOf(serviceName);
+  //   if (index > -1) {
+  //     this.loadingAPI.splice(index, 1);
+  //   }
+  // }
+
+  // showLoader(api: string): boolean {
+  //   return api === this.allPage || this.loadingAPI.indexOf(api) > -1;
+  // }
+
+  show() {
+    this.showLoader = true;
   }
 
-  removeloadingAPI(serviceName: string) {
-    const index = this.loadingAPI.indexOf(serviceName);
-    if (index > -1) {
-      this.loadingAPI.splice(index, 1);
-    }
-  }
-
-  showLoader(api: string): boolean {
-    return this.loadingAPI.indexOf(api) > -1;
+  hide() {
+    this.showLoader = false;
   }
 }
