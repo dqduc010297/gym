@@ -15,7 +15,6 @@ export class InBodyService {
   }
 
   getInBody(testedDate: Date): Observable<InBodyDetail> {
-    console.log(testedDate);
     const params = new HttpParams().set('testedDate', this.datePipe.transform(testedDate, 'yyyy-MM-dd'));
     return this.http.get<InBodyDetail>(`${environment.apiUrl}/inbody`, { params });
   }

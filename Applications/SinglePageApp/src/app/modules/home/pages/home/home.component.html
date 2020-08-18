@@ -1,11 +1,10 @@
-<!-- <nz-spin nzTip="Loading..." [nzSize]="'large'" [nzSpinning]="loaderService.showLoader"> -->
 <div class="row">
   <div class="col-md-4">
     <div class="d-flex justify-content-between" style="margin-bottom: 8px;">
       <div>
         <strong>Tested date:</strong>
         <nz-date-picker style="margin-left: 10px;" [(ngModel)]="testedDatePicker" (ngModelChange)="onChange($event)"
-          nzFormat="dd/MM/yyyy" [(nzDisabledDate)]="disabledDate">
+          nzFormat="dd/MM/yyyy" [nzDisabledDate]="disabledDate">
         </nz-date-picker>
       </div>
       <div>

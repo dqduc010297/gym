@@ -4,6 +4,7 @@ import { InBodyDetail } from 'src/app/models/inbody/inbody-detail';
 import { LoaderService } from 'src/app/services/core/loader.service';
 import { TestedDates } from 'src/app/models/inbody/tested-date';
 import { DatePipe } from '@angular/common';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
   inBodyDetail: InBodyDetail = new InBodyDetail();
-  testedDates: Date[] = [];
+  testedDates: string[] = [];
 
   testedDatePicker: Date;
 
@@ -48,7 +49,6 @@ export class HomeComponent implements OnInit {
   }
 
   onChange(testedDate: Date): void {
-    console.log(testedDate);
     this.inBodyService.getInBody(testedDate).subscribe(
       result => {
         this.inBodyDetail = result;
@@ -59,18 +59,18 @@ export class HomeComponent implements OnInit {
   getTestedDate() {
     this.inBodyService.getTestedDates().subscribe(
       result => {
-        this.testedDates = result;
-        this.testedDates.forEach(element => {
-          return this.datePipe.transform(element, 'yyyy-MM-dd');
+        // tslint:disable-next-line: no-shadowed-variable
+        result.forEach(element => {
+          this.testedDates.push(element.toString().substring(0, 10));
         });
-        console.log(this.testedDates);
       }
     );
   }
 
-  disabledDate(current) {
-    console.log(current);
-    console.log(this.testedDates);
+  disabledDate = (current: Date): boolean => {
+    if (this.testedDates) {
+      return this.testedDates.indexOf(this.datePipe.transform(current, 'yyyy-MM-dd')) === -1;
+    }
     return true;
   }
 }

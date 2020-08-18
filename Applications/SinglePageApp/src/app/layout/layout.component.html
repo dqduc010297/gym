@@ -1,71 +1,73 @@
-<nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar d-none d-md-block" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null" nzTheme="light">
-    <div class="sidebar-logo">
-      <a href="/home">
-        <img src="assets/images/logo.png" alt="logo">
-        <h1></h1>
-      </a>
-    </div>
-    <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right" [nzTitle]="isCollapsed ? 'Calendar' : ''">
-        <i nz-icon nzType="calendar" nzTheme="outline"></i>
-        <a [routerLink]="['/calendar']" routerLinkActive="router-link-active">
-          <span *ngIf="!isCollapsed">Calendar</span>
+<nz-spin nzTip="Loading..." [nzSize]="'large'" [nzSpinning]="loaderService.showLoader">
+  <nz-layout class="app-layout">
+    <nz-sider class="menu-sidebar d-none d-md-block" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+      [nzTrigger]="null" nzTheme="light">
+      <div class="sidebar-logo">
+        <a href="/home">
+          <img src="assets/images/logo.png" alt="logo">
+          <h1></h1>
         </a>
-      </li>
-    </ul>
-    <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right" [nzTitle]="isCollapsed ? 'Goal' : ''">
-        <i nz-icon nzType="trophy" nzTheme="outline"></i>
-        <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
-          <span *ngIf="!isCollapsed">Goal</span>
-        </a>
-      </li>
-    </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header d-flex justify-content-between">
-        <div>
-          <!-- <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
-          </span> -->
-        </div>
-        <div>
-          <a nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
-            <nz-avatar nzIcon="user" style="margin-right: 6px;"></nz-avatar>
-          </a>
-          <nz-dropdown-menu #menu="nzDropdownMenu">
-            <ul nz-menu>
-              <li nz-menu-item (click)="logout()">Logout</li>
-              <li nz-menu-item>2nd menu item</li>
-              <li nz-menu-item>3rd menu item</li>
-            </ul>
-          </nz-dropdown-menu>
-        </div>
       </div>
-    </nz-header>
-    <nz-header class="d-sm-block d-md-none">
-      <ul nz-menu nzMode="horizontal" class="d-flex justify-content-between">
-        <li nz-menu-item nzMatchRouter>
+      <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right" [nzTitle]="isCollapsed ? 'Calendar' : ''">
           <i nz-icon nzType="calendar" nzTheme="outline"></i>
           <a [routerLink]="['/calendar']" routerLinkActive="router-link-active">
-            Calendar
-          </a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <i nz-icon nzType="trophy" nzTheme="outline"></i>
-          <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
-            Goal
+            <span *ngIf="!isCollapsed">Calendar</span>
           </a>
         </li>
       </ul>
-    </nz-header>
-    <nz-content>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
+      <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right" [nzTitle]="isCollapsed ? 'Goal' : ''">
+          <i nz-icon nzType="trophy" nzTheme="outline"></i>
+          <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
+            <span *ngIf="!isCollapsed">Goal</span>
+          </a>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout>
+      <nz-header>
+        <div class="app-header d-flex justify-content-between">
+          <div>
+            <!-- <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+              <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+            </span> -->
+          </div>
+          <div>
+            <a nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
+              <nz-avatar nzIcon="user" style="margin-right: 6px;"></nz-avatar>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item (click)="logout()">Logout</li>
+                <li nz-menu-item>2nd menu item</li>
+                <li nz-menu-item>3rd menu item</li>
+              </ul>
+            </nz-dropdown-menu>
+          </div>
+        </div>
+      </nz-header>
+      <nz-header class="d-sm-block d-md-none">
+        <ul nz-menu nzMode="horizontal" class="d-flex justify-content-between">
+          <li nz-menu-item nzMatchRouter>
+            <i nz-icon nzType="calendar" nzTheme="outline"></i>
+            <a [routerLink]="['/calendar']" routerLinkActive="router-link-active">
+              Calendar
+            </a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <i nz-icon nzType="trophy" nzTheme="outline"></i>
+            <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
+              Goal
+            </a>
+          </li>
+        </ul>
+      </nz-header>
+      <nz-content>
+        <div class="inner-content">
+          <router-outlet></router-outlet>
+        </div>
+      </nz-content>
+    </nz-layout>
   </nz-layout>
-</nz-layout>
+</nz-spin>
