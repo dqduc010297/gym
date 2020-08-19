@@ -3,9 +3,16 @@
     <div class="d-flex justify-content-between" style="margin-bottom: 8px;">
       <div>
         <strong>Tested date:</strong>
-        <nz-date-picker style="margin-left: 10px;" [(ngModel)]="testedDatePicker" (ngModelChange)="onChange($event)"
+        <nz-date-picker [nzDateRender]="tplRender" style="margin-left: 10px;" [(ngModel)]="testedDatePicker" (ngModelChange)="onChange($event)"
           nzFormat="dd/MM/yyyy" [nzDisabledDate]="disabledDate">
         </nz-date-picker>
+
+        <ng-template #tplRender let-current>
+          <div class="ant-picker-cell-inner" [class.border]="checkDate(current)">
+            {{ current.getDate() }}
+          </div>
+        </ng-template>
+
       </div>
       <div>
         <h5>Score: {{inBodyDetail.score}}/100</h5>
@@ -26,7 +33,7 @@
     <app-inbody-info></app-inbody-info>
   </div>
   <div class="col-md-8 col-sm-12">
-    <app-body-composition-history></app-body-composition-history>
+    <app-body-composition-history [bodyCompositionHistories]="inBodyDetail.bodyCompositionHistories"></app-body-composition-history>
   </div>
 </div>
 <!-- </nz-spin> -->

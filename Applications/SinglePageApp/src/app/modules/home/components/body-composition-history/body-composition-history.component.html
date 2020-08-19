@@ -4,35 +4,27 @@
       <tr>
         <td width="80px"><strong>Weight</strong></td>
         <td colspan="9">
-          <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions" class="echart">
+          <div style="height:60px;" echarts [options]="chartOptions" [merge]="weightUpdateChartOptions" class="echart">
           </div>
         </td>
       </tr>
       <tr>
         <td width="80px"><strong>SMM</strong></td>
         <td colspan="9">
-          <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions" class="echart">
+          <div style="height:60px;" echarts [options]="chartOptions" [merge]="smmUpdateChartOptions" class="echart">
           </div>
         </td>
       </tr>
       <tr>
         <td width="80px"><strong>PBF</strong></td>
         <td colspan="9">
-          <div style="height:60px;" echarts [options]="chartOptions" [merge]="updateChartOptions" class="echart">
+          <div style="height:60px;" echarts [options]="chartOptions" [merge]="pbfUpdateChartOptions" class="echart">
           </div>
         </td>
       </tr>
       <tr>
         <td width="80px"></td>
-        <td>22/02/2020</td>
-        <td>26/02/2020</td>
-        <td>04/03/2020</td>
-        <td>11/03/2020</td>
-        <td>11/05/2020</td>
-        <td>06/06/2020</td>
-        <td>11/07/2020</td>
-        <td>15/07/2020</td>
-        <td>22/07/2020</td>
+        <td *ngFor="let testedDate of testedDates">{{testedDate}}</td>
       </tr>
     </tbody>
   </nz-table>

@@ -568,6 +568,7 @@ namespace Infrastructure.SeedData
                                 inBody.BodyFatMass = Convert.ToSingle((double)reader.GetValue(4));
                                 inBody.Weight = Convert.ToSingle((double)reader.GetValue(5));
                                 inBody.SkeletalMuscleMass = Convert.ToSingle((double)reader.GetValue(6));
+                                inBody.PercentBodyFat = (float)(inBody.BodyFatMass / inBody.Weight);
                                 inBody.Score = Convert.ToInt32((double)reader.GetValue(7));
                                 inBody.WaistHipRatio = Convert.ToSingle((double)reader.GetValue(1));
                                 inBody.VisceralFatLevel = Convert.ToInt32((double)reader.GetValue(9));

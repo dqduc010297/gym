@@ -14,6 +14,7 @@ namespace ApplicationDomain.Gym.Entities
         public float Protein { set; get; }
         public float Mineral { set; get; }
         public float BodyFatMass { set; get; }
+        public float PercentBodyFat { set; get; }
         public float Weight { set; get; }
         public float SkeletalMuscleMass { set; get; }
         public int Score { set; get; }

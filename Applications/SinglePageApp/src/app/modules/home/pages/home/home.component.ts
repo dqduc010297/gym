@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private inBodyService: InBodyService,
     public loaderService: LoaderService,
-    private datePipe: DatePipe
+    public datePipe: DatePipe
   ) { }
 
   listOfData: number[] = [1];
@@ -72,5 +72,12 @@ export class HomeComponent implements OnInit {
       return this.testedDates.indexOf(this.datePipe.transform(current, 'yyyy-MM-dd')) === -1;
     }
     return true;
+  }
+
+  checkDate(current) {
+    if (this.testedDates) {
+      return this.testedDates.indexOf(this.datePipe.transform(current, 'yyyy-MM-dd')) > -1;
+    }
+    return false;
   }
 }

@@ -33,9 +33,18 @@ namespace ApplicationDomain.Gym.Services
         {
             try
             {
+                // load inbody information
                 var myInBody = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, testedDate)
                          .MapQueryTo<MyInBodyRs>(this._mapper)
                          .FirstOrDefaultAsync();
+
+                // load body history
+                myInBody.BodyCompositionHistories = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, null)
+                    .MapQueryTo<BodyCompositionHistory>(this._mapper)
+                    .Skip(0).Take(9)
+                    .OrderBy(p => p.TestedDate)
+                    .ToListAsync();
+
                 return myInBody;
             }
             catch (Exception ex)

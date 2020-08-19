@@ -9,5 +9,6 @@ namespace ApplicationDomain.Gym.IRepositories
     public interface IInBodyRepository : IGenericRepository<InBody, int>
     {
         IQueryable GetMyInBodyByTestedDate(int userId, DateTime? testedDate);
+        IQueryable GetMyInBodyHistory(int userId);
     }
 }

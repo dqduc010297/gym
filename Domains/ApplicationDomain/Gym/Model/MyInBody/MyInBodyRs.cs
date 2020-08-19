@@ -48,7 +48,7 @@ namespace ApplicationDomain.Gym.Model.MyInBody
                     BMIEvaluation = s.BMIEvaluation,
                     PBFEvaluation = s.PBFEvaluation,
                     BMI = (float)(s.Weight / ((s.User.Height / 100) * (s.User.Height / 100))),
-                    PBF = (float)((s.BodyFatMass) / (s.Weight))
+                    PBF = s.PercentBodyFat
                 }));
         }
     }
