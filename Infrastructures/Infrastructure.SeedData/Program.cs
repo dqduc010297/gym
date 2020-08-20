@@ -57,8 +57,9 @@ namespace Infrastructure.SeedData
         }
         private static async Task SeedDataAsync(ApplicationDbContext dbContext)
         {
-            await SeedRoleDataAsync(dbContext);
-            await SeedUserDataAsync(dbContext);
+            SeedRoleDataAsync(dbContext).Wait();
+            SeedUserDataAsync(dbContext).Wait();
+            SeedInbodyStandardDataAsync(dbContext).Wait();
             await SeedInbodyDataAsync(dbContext);
         }
         private static async Task SeedRoleDataAsync(ApplicationDbContext dbContext)
@@ -543,7 +544,46 @@ namespace Infrastructure.SeedData
                 Console.WriteLine("Finish seed user info");
             }
         }
+        private static async Task SeedInbodyStandardDataAsync(ApplicationDbContext dbContext)
+        {
+            if (!await dbContext.Set<InBodyStandard>().AnyAsync())
+            {
+                Console.WriteLine("Start to seed inbody standard info");
 
+                List<InBodyStandard> inBodyStandards = new List<InBodyStandard>();
+                using (var stream = File.Open(String.Format(@"{0}\Data\InbodyStandard.xlsx", Environment.CurrentDirectory), FileMode.Open, FileAccess.Read))
+                {
+                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+                    {
+                        do
+                        {
+                            reader.Read();
+                            while (reader.Read()) //Each ROW
+                            {
+                                InBodyStandard inBodyStandard = new InBodyStandard();
+                                inBodyStandard.BodyWaterMin = Convert.ToSingle((double)reader.GetValue(0));
+                                inBodyStandard.BodyWaterMax = Convert.ToSingle((double)reader.GetValue(1));
+                                inBodyStandard.ProteinMin = Convert.ToSingle((double)reader.GetValue(2));
+                                inBodyStandard.ProteinMax = Convert.ToSingle((double)reader.GetValue(3));
+                                inBodyStandard.MineralMin = Convert.ToSingle((double)reader.GetValue(4));
+                                inBodyStandard.MineralMax = Convert.ToSingle((double)reader.GetValue(5));
+                                inBodyStandard.BodyFatMassMin = Convert.ToSingle((double)reader.GetValue(6));
+                                inBodyStandard.BodyFatMassMax = Convert.ToSingle((double)reader.GetValue(7));
+                                inBodyStandard.WeightMin = Convert.ToSingle((double)reader.GetValue(8));
+                                inBodyStandard.WeightMax = Convert.ToSingle((double)reader.GetValue(9));
+                                inBodyStandard.SkeletalMuscleMassMin = Convert.ToSingle((double)reader.GetValue(10));
+                                inBodyStandard.SkeletalMuscleMassMax = Convert.ToSingle((double)reader.GetValue(11));
+                                inBodyStandards.Add(inBodyStandard);
+                            }
+                        } while (reader.NextResult()); //Move to NEXT SHEET
+
+                    }
+                    await dbContext.AddRangeAsync(inBodyStandards);
+                    await dbContext.SaveChangesAsync();
+                    Console.WriteLine("Finised to seed inbody standard info");
+                }
+            }
+        }
         private static async Task SeedInbodyDataAsync(ApplicationDbContext dbContext)
         {
             if (!await dbContext.Set<InBody>().AnyAsync() && await dbContext.Set<User>().AnyAsync())
@@ -573,6 +613,7 @@ namespace Infrastructure.SeedData
                                 inBody.WaistHipRatio = Convert.ToSingle((double)reader.GetValue(1));
                                 inBody.VisceralFatLevel = Convert.ToInt32((double)reader.GetValue(9));
                                 inBody.UserId = Convert.ToInt32((double)reader.GetValue(10));
+                                inBody.InBodyStandardId = Convert.ToInt32((double)reader.GetValue(11));
                                 inbodys.Add(inBody);
                             }
                         } while (reader.NextResult()); //Move to NEXT SHEET

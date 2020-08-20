@@ -1,4 +1,5 @@
-﻿using ApplicationDomain.Gym.Entities;
+﻿using ApplicationDomain.Common;
+using ApplicationDomain.Gym.Entities;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -26,20 +27,65 @@ namespace ApplicationDomain.Gym.Model.MyInBody
                 opt => opt.MapFrom(s =>
                 new BodyCompositionAnalysis()
                 {
-                    BodyWater = s.BodyWater,
-                    Protein = s.Protein,
-                    BodyFatMass = s.BodyFatMass,
-                    Mineral = s.Mineral
+                    BodyWater = new TestedResult()
+                    {
+                        Value = s.BodyWater,
+                        Max = s.InBodyStandard.BodyWaterMax,
+                        Min = s.InBodyStandard.BodyWaterMin
+                    },
+                    Protein = new TestedResult()
+                    {
+                        Value = s.Protein,
+                        Max = s.InBodyStandard.ProteinMax,
+                        Min = s.InBodyStandard.ProteinMin
+                    },
+                    BodyFatMass = new TestedResult()
+                    {
+                        Value = s.BodyFatMass,
+                        Max = s.InBodyStandard.BodyFatMassMax,
+                        Min = s.InBodyStandard.BodyFatMassMin
+                    },
+                    Mineral = new TestedResult()
+                    {
+                        Value = s.Mineral,
+                        Max = s.InBodyStandard.MineralMax,
+                        Min = s.InBodyStandard.MineralMin
+                    },
                 }));
             mapper.ForMember(d => d.MuscleFatAnalysis,
                opt => opt.MapFrom(s =>
                new MuscleFatAnalysis()
                {
-                   Weight = s.Weight,
-                   SkeletalMuscleMass = s.SkeletalMuscleMass,
-                   WaistHipRatio = s.WaistHipRatio,
-                   VisceralFatLevel = s.VisceralFatLevel,
-                   BodyFatMass = s.BodyFatMass
+                   Weight = new TestedResult()
+                   {
+                       Value = s.Weight,
+                       Max = s.InBodyStandard.WeightMax,
+                       Min = s.InBodyStandard.WeightMin
+                   },
+                   SkeletalMuscleMass = new TestedResult()
+                   {
+                       Value = s.SkeletalMuscleMass,
+                       Max = s.InBodyStandard.SkeletalMuscleMassMax,
+                       Min = s.InBodyStandard.SkeletalMuscleMassMin
+                   },
+                   WaistHipRatio = new TestedResult()
+                   {
+                       Value = s.WaistHipRatio,
+                       Max = s.User.Gender == Gender.MALE ? (float)0.9 : (float)0.85,
+                       Min = s.User.Gender == Gender.MALE ? (float)0.8 : (float)0.75
+                   },
+                   VisceralFatLevel = new TestedResult()
+                   {
+                       Value = s.VisceralFatLevel,
+                       Max = 10,
+                       Min = 0
+                   },
+                   BodyFatMass = new TestedResult()
+                   {
+                       Value = s.BodyFatMass,
+                       Max = s.InBodyStandard.BodyFatMassMax,
+                       Min = s.InBodyStandard.BodyFatMassMin
+                   },
                }));
             mapper.ForMember(d => d.ObesityAnalysis,
                 opt => opt.MapFrom(s =>

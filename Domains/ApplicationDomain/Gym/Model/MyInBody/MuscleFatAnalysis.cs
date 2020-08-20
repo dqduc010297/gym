@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApplicationDomain.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,10 +7,10 @@ namespace ApplicationDomain.Gym.Model.MyInBody
 {
     public class MuscleFatAnalysis
     {
-        public float Weight { set; get; }
-        public float SkeletalMuscleMass { set; get; }
-        public float WaistHipRatio { set; get; }
-        public int VisceralFatLevel { set; get; }
-        public float BodyFatMass { set; get; }
+        public TestedResult Weight { set; get; }
+        public TestedResult SkeletalMuscleMass { set; get; }
+        public TestedResult WaistHipRatio { set; get; }
+        public TestedResult VisceralFatLevel { set; get; }
+        public TestedResult BodyFatMass { set; get; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ApplicationDomain.Gym.Entities;
+﻿using ApplicationDomain.Common;
+using ApplicationDomain.Gym.Entities;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ namespace ApplicationDomain.Gym.Model.MyInBody
 {
     public class BodyCompositionAnalysis
     {
-        public float BodyWater { set; get; }
-        public float Protein { set; get; }
-        public float Mineral { set; get; }
-        public float BodyFatMass { set; get; }
+        public TestedResult BodyWater { set; get; }
+        public TestedResult Protein { set; get; }
+        public TestedResult Mineral { set; get; }
+        public TestedResult BodyFatMass { set; get; }
     }
 }

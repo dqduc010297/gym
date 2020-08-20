@@ -3,21 +3,21 @@
     <tbody>
       <tr>
         <td width="80px"><strong>Weight</strong></td>
-        <td colspan="9">
+        <td [attr.colspan]="testedDates.length">
           <div style="height:60px;" echarts [options]="chartOptions" [merge]="weightUpdateChartOptions" class="echart">
           </div>
         </td>
       </tr>
       <tr>
         <td width="80px"><strong>SMM</strong></td>
-        <td colspan="9">
+        <td [attr.colspan]="testedDates.length">
           <div style="height:60px;" echarts [options]="chartOptions" [merge]="smmUpdateChartOptions" class="echart">
           </div>
         </td>
       </tr>
       <tr>
         <td width="80px"><strong>PBF</strong></td>
-        <td colspan="9">
+        <td [attr.colspan]="testedDates.length">
           <div style="height:60px;" echarts [options]="chartOptions" [merge]="pbfUpdateChartOptions" class="echart">
           </div>
         </td>

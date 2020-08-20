@@ -6,8 +6,8 @@ namespace ApplicationDomain.Common
 {
     public enum Evaluation
     {
-        Normal,
         Under,
+        Normal,
         SlightlyOver,
         Over
     }

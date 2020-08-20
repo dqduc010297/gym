@@ -110,8 +110,8 @@ export class BodyCompositionHistoryComponent implements OnInit, OnChanges {
       yAxis: {
         type: 'value',
         show: false,
-        min: Math.min(...this.bodyCompositionHistories.map(p => p.skeletalMuscleMass)) - 5,
-        max: Math.max(...this.bodyCompositionHistories.map(p => p.skeletalMuscleMass)) + 5,
+        min: Math.min(...this.bodyCompositionHistories.map(p => p.skeletalMuscleMass)) - 2,
+        max: Math.max(...this.bodyCompositionHistories.map(p => p.skeletalMuscleMass)) + 2,
       },
       series: [
         {
@@ -139,8 +139,8 @@ export class BodyCompositionHistoryComponent implements OnInit, OnChanges {
       yAxis: {
         type: 'value',
         show: false,
-        min: Math.min(...this.bodyCompositionHistories.map(p => p.percentBodyFat)) - 5,
-        max: Math.max(...this.bodyCompositionHistories.map(p => p.percentBodyFat)) + 5,
+        min: Math.min(...this.bodyCompositionHistories.map(p => p.percentBodyFat)) - 2,
+        max: Math.max(...this.bodyCompositionHistories.map(p => p.percentBodyFat)) + 2,
       },
       series: [
         {

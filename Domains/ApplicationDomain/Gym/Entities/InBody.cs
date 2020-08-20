@@ -24,5 +24,7 @@ namespace ApplicationDomain.Gym.Entities
         public int VisceralFatLevel { set; get; }
         public int UserId { set; get; }
         public User User { set; get; }
+        public int InBodyStandardId { set; get; }
+        public InBodyStandard InBodyStandard { set; get; }
     }
 }
