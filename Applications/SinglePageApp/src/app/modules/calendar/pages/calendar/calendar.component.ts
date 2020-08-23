@@ -18,6 +18,5 @@ export class CalendarComponent implements OnInit {
   }
 
   selectChange(select: Date): void {
-    console.log(`Select value: ${select}`);
   }
 }

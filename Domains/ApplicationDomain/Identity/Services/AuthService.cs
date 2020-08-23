@@ -56,6 +56,7 @@ namespace ApplicationDomain.Identity.Services
             // load base information
             loginProfile.UserName = user.UserName;
             loginProfile.AvatarURL = user.AvatarURL ?? "";
+            loginProfile.Height = user.Height;
 
             // generate token
             var roles = await _userManager.GetRolesAsync(user);

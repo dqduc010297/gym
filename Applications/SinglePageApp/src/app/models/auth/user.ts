@@ -3,4 +3,5 @@ export class User {
     avatarUrl: string;
     token?: string;
     permission: string[] = [];
+    height: number;
 }

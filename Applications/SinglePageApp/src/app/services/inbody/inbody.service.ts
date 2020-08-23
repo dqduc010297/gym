@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { InBodyDetail } from 'src/app/models/inbody/inbody-detail';
 import { DatePipe } from '@angular/common';
-import { TestedDates } from 'src/app/models/inbody/tested-date';
+import { BodyCompositionHistory } from 'src/app/models/inbody/body-composition-history';
 
 @Injectable({ providedIn: 'root' })
 export class InBodyService {
@@ -12,6 +12,10 @@ export class InBodyService {
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe) {
+  }
+
+  getBodyCompositionHistories(): Observable<BodyCompositionHistory[]> {
+    return this.http.get<BodyCompositionHistory[]>(`${environment.apiUrl}/inbody/bodycompositionHistory`);
   }
 
   getInBody(testedDate: Date): Observable<InBodyDetail> {

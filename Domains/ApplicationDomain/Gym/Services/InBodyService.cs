@@ -39,7 +39,7 @@ namespace ApplicationDomain.Gym.Services
                          .FirstOrDefaultAsync();
 
                 // load body history
-                myInBody.BodyCompositionHistories = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, null)
+                myInBody.BodyCompositionHistories = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, testedDate)
                     .MapQueryTo<BodyCompositionHistory>(this._mapper)
                     .Skip(0).Take(9)
                     .OrderBy(p => p.TestedDate)
@@ -72,6 +72,14 @@ namespace ApplicationDomain.Gym.Services
                     .Cast<InBody>()
                     .Where(p => p.UserId == userId)
                     .Select(p => p.TestedDate)
+                    .ToListAsync();
+        }
+        public async Task<List<BodyCompositionHistory>> GetBodyCompositionHistories(int userId)
+        {
+            return await this._inBodyRepository.GetMyInBodyByTestedDate(userId, null)
+                    .MapQueryTo<BodyCompositionHistory>(this._mapper)
+                    .Skip(0).Take(6)
+                    .OrderBy(p => p.TestedDate)
                     .ToListAsync();
         }
     }

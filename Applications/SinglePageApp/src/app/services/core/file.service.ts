@@ -14,7 +14,6 @@ export class FileService {
   upload(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('uploadFile', file, file.name);
-    console.log(formData);
     return this.http.post(`${environment.apiUrl}/file/upload`, formData, { reportProgress: true, observe: 'events' });
   }
 }

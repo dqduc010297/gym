@@ -19,7 +19,7 @@ namespace ApplicationDomain.Gym.Model.MyInBody
         public BodyCompositionHistoryMapper()
         {
             var mapper = CreateMap<InBody, BodyCompositionHistory>();
-            mapper.ForMember(d => d.PercentBodyFat, opt => opt.MapFrom(s => (float)Math.Round(s.PercentBodyFat * 100, 1)));
+            mapper.ForMember(d => d.PercentBodyFat, opt => opt.MapFrom(s => s.PercentBodyFat));
         }
     }
 }

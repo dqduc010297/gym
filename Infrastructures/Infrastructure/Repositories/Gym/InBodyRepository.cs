@@ -19,7 +19,7 @@ namespace Infrastructure.Repositories.Gym
         {
             var query = this.dbSet
                 .Include(p => p.User)
-                .Where(p => p.UserId == userId && (testedDate == null || p.TestedDate == testedDate))
+                .Where(p => p.UserId == userId && (testedDate == null || p.TestedDate <= testedDate))
                 .OrderByDescending(p => p.Id);
             return query;
         }

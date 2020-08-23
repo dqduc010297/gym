@@ -110,11 +110,15 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<DateTimeOffset>("UpdatedDate");
 
+                    b.Property<int>("UserId");
+
                     b.Property<float>("WeightMax");
 
                     b.Property<float>("WeightMin");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("InBodyStandard");
                 });
@@ -170,7 +174,7 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<int>("Gender");
 
-                    b.Property<float>("Height");
+                    b.Property<int>("Height");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -300,12 +304,20 @@ namespace Infrastructure.DbMigration.Migrations
                     b.HasOne("ApplicationDomain.Gym.Entities.InBodyStandard", "InBodyStandard")
                         .WithMany()
                         .HasForeignKey("InBodyStandardId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("ApplicationDomain.Identity.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ApplicationDomain.Gym.Entities.InBodyStandard", b =>
+                {
+                    b.HasOne("ApplicationDomain.Identity.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

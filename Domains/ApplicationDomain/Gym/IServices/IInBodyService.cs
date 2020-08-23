@@ -12,5 +12,6 @@ namespace ApplicationDomain.Gym.IServices
         Task AddNewInBoy(InBodyRq rq);
         Task UpdateInBody(InBodyRq rq);
         Task<List<DateTime>> GetTestedDate(int userId);
+        Task<List<BodyCompositionHistory>> GetBodyCompositionHistories(int userId);
     }
 }

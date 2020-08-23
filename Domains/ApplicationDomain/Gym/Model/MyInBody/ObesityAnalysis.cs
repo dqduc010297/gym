@@ -7,8 +7,8 @@ namespace ApplicationDomain.Gym.Model.MyInBody
 {
     public class ObesityAnalysis
     {
-        public float BMI { set; get; }
-        public float PBF { set; get; }
+        public TestedResult BMI { set; get; }
+        public TestedResult PBF { set; get; }
         public Evaluation BMIEvaluation { set; get; }
         public Evaluation PBFEvaluation { set; get; }
     }

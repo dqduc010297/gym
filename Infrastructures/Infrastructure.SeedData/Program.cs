@@ -66,7 +66,7 @@ namespace Infrastructure.SeedData
         {
             if (!await dbContext.Set<Role>().AnyAsync())
             {
-                Console.WriteLine("Start to seed user info");
+                Console.WriteLine("Start to seed role info");
                 var roleManagement = _serviceProvider.GetService<RoleManager<Role>>();
                 await roleManagement.CreateAsync(new Role
                 {
@@ -88,7 +88,7 @@ namespace Infrastructure.SeedData
                 {
                     Name = RoleName.MEMBER.ToString(),
                 });
-                Console.WriteLine("Finish seed user info");
+                Console.WriteLine("Finish seed role info");
             }
         }
         private static async Task SeedUserDataAsync(ApplicationDbContext dbContext)
@@ -573,6 +573,7 @@ namespace Infrastructure.SeedData
                                 inBodyStandard.WeightMax = Convert.ToSingle((double)reader.GetValue(9));
                                 inBodyStandard.SkeletalMuscleMassMin = Convert.ToSingle((double)reader.GetValue(10));
                                 inBodyStandard.SkeletalMuscleMassMax = Convert.ToSingle((double)reader.GetValue(11));
+                                inBodyStandard.UserId = Convert.ToInt32((double)reader.GetValue(12));
                                 inBodyStandards.Add(inBodyStandard);
                             }
                         } while (reader.NextResult()); //Move to NEXT SHEET
@@ -610,7 +611,7 @@ namespace Infrastructure.SeedData
                                 inBody.SkeletalMuscleMass = Convert.ToSingle((double)reader.GetValue(6));
                                 inBody.PercentBodyFat = (float)(inBody.BodyFatMass / inBody.Weight);
                                 inBody.Score = Convert.ToInt32((double)reader.GetValue(7));
-                                inBody.WaistHipRatio = Convert.ToSingle((double)reader.GetValue(1));
+                                inBody.WaistHipRatio = Convert.ToSingle((double)reader.GetValue(8));
                                 inBody.VisceralFatLevel = Convert.ToInt32((double)reader.GetValue(9));
                                 inBody.UserId = Convert.ToInt32((double)reader.GetValue(10));
                                 inBody.InBodyStandardId = Convert.ToInt32((double)reader.GetValue(11));

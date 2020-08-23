@@ -25,14 +25,12 @@ export class UploaderComponent implements OnInit {
   }
 
   onUpload(files: any) {
-    console.log(files);
     if (files.length !== 1) {
       return;
     }
     this.isUploading = true;
     this.fileService.upload((files[0] as File)).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
-        console.log(Math.round(100 * event.loaded / event.total));
       }
       else if (event.type === HttpEventType.Response) {
         this.isUploading = false;

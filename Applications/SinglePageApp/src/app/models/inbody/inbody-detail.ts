@@ -7,6 +7,7 @@ export class InBodyDetail {
   testedDate: Date;
   weight: number;
   score: number;
+  height: number;
 
   bodyCompositionAnalysis: BodyCompositionAnalysis = new BodyCompositionAnalysis();
   muscleFatAnalysis: MuscleFatAnalysis = new MuscleFatAnalysis();

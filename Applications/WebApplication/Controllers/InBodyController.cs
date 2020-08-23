@@ -74,5 +74,12 @@ namespace WebApplication.Controllers
             });
             return Ok("Inbody");
         }
+
+        [Route("bodycompositionHistory")]
+        [HttpGet]
+        public async Task<IActionResult> GetBodyCompositionHistories()
+        {
+            return Ok(await this._inBodyService.GetBodyCompositionHistories(this.GetCurrentUserId()));
+        }
     }
 }

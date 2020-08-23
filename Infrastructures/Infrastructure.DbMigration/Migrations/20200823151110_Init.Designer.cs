@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.DbMigration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200815034628_AddEvaluationToInbody")]
-    partial class AddEvaluationToInbody
+    [Migration("20200823151110_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,9 +37,13 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<DateTimeOffset>("CreatedDate");
 
+                    b.Property<int>("InBodyStandardId");
+
                     b.Property<float>("Mineral");
 
                     b.Property<int>("PBFEvaluation");
+
+                    b.Property<float>("PercentBodyFat");
 
                     b.Property<float>("Protein");
 
@@ -65,9 +69,60 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("InBodyStandardId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("InBody");
+                });
+
+            modelBuilder.Entity("ApplicationDomain.Gym.Entities.InBodyStandard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("BodyFatMassMax");
+
+                    b.Property<float>("BodyFatMassMin");
+
+                    b.Property<float>("BodyWaterMax");
+
+                    b.Property<float>("BodyWaterMin");
+
+                    b.Property<int>("CreatedByUserId");
+
+                    b.Property<DateTimeOffset>("CreatedDate");
+
+                    b.Property<float>("MineralMax");
+
+                    b.Property<float>("MineralMin");
+
+                    b.Property<float>("ProteinMax");
+
+                    b.Property<float>("ProteinMin");
+
+                    b.Property<byte[]>("RowVersion");
+
+                    b.Property<float>("SkeletalMuscleMassMax");
+
+                    b.Property<float>("SkeletalMuscleMassMin");
+
+                    b.Property<int>("UpdatedByUserId");
+
+                    b.Property<DateTimeOffset>("UpdatedDate");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<float>("WeightMax");
+
+                    b.Property<float>("WeightMin");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("InBodyStandard");
                 });
 
             modelBuilder.Entity("ApplicationDomain.Identity.Entities.Role", b =>
@@ -121,7 +176,7 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<int>("Gender");
 
-                    b.Property<float>("Height");
+                    b.Property<int>("Height");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -248,10 +303,23 @@ namespace Infrastructure.DbMigration.Migrations
 
             modelBuilder.Entity("ApplicationDomain.Gym.Entities.InBody", b =>
                 {
+                    b.HasOne("ApplicationDomain.Gym.Entities.InBodyStandard", "InBodyStandard")
+                        .WithMany()
+                        .HasForeignKey("InBodyStandardId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("ApplicationDomain.Identity.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ApplicationDomain.Gym.Entities.InBodyStandard", b =>
+                {
+                    b.HasOne("ApplicationDomain.Identity.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

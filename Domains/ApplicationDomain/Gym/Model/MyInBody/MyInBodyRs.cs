@@ -15,6 +15,7 @@ namespace ApplicationDomain.Gym.Model.MyInBody
         public int Score { set; get; }
         public DateTime TestedDate { set; get; }
         public float Weight { set; get; }
+        public float Height { set; get; }
         public IEnumerable<BodyCompositionHistory> BodyCompositionHistories { set; get; }
     }
 
@@ -23,6 +24,7 @@ namespace ApplicationDomain.Gym.Model.MyInBody
         public MyInBodyRsMapper()
         {
             var mapper = CreateMap<InBody, MyInBodyRs>();
+            mapper.ForMember(d => d.Height, opt => opt.MapFrom(s => s.User.Height));
             mapper.ForMember(d => d.BodyCompositionAnalysis,
                 opt => opt.MapFrom(s =>
                 new BodyCompositionAnalysis()
@@ -93,8 +95,18 @@ namespace ApplicationDomain.Gym.Model.MyInBody
                 {
                     BMIEvaluation = s.BMIEvaluation,
                     PBFEvaluation = s.PBFEvaluation,
-                    BMI = (float)(s.Weight / ((s.User.Height / 100) * (s.User.Height / 100))),
-                    PBF = s.PercentBodyFat
+                    BMI = new TestedResult()
+                    {
+                        Value = (float)(s.Weight / ((s.User.Height / 100) * (s.User.Height / 100))),
+                        Min = (float)18.5,
+                        Max = (float)20
+                    },
+                    PBF = new TestedResult()
+                    {
+                        Value = s.PercentBodyFat,
+                        Min = (float)10,
+                        Max = (float)20
+                    }
                 }));
         }
     }

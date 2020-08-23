@@ -5,5 +5,6 @@
         public string UserName { set; get; }
         public string AvatarURL { set; get; }
         public string Token { set; get; }
+        public int Height { set; get; }
     }
 }

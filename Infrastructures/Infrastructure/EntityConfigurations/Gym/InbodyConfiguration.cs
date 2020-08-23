@@ -12,7 +12,7 @@ namespace Infrastructure.EntityConfigurations.Gym
             builder.Property(p => p.Id).ValueGeneratedOnAdd();
 
             builder.HasOne(p => p.User).WithMany().OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade);
-            builder.HasOne(p => p.InBodyStandard).WithMany().OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade);
+            builder.HasOne(p => p.InBodyStandard).WithMany().OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Restrict);
         }
     }
 }

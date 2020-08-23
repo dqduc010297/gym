@@ -1,3 +1,5 @@
+import { TestedResult } from './tested-result';
+
 export enum Evaluation {
   Normal,
   Under,
@@ -8,6 +10,6 @@ export enum Evaluation {
 export class ObesityAnalysis{
   bmiEvaluation: Evaluation;
   pbfEvaluation: Evaluation;
-  bmi: number;
-  pbf: number;
+  bmi: TestedResult = new TestedResult();
+  pbf: TestedResult = new TestedResult();
 }

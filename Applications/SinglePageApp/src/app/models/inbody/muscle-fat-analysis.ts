@@ -1,7 +1,9 @@
+import { TestedResult } from './tested-result';
+
 export class MuscleFatAnalysis {
-  weight: number;
-  skeletalMuscleMass: number;
-  waistHipRatio: number;
-  visceralFatLevel: number;
-  bodyFatMass: number;
+  weight: TestedResult = new TestedResult();
+  skeletalMuscleMass: TestedResult = new TestedResult();
+  waistHipRatio: TestedResult = new TestedResult();
+  visceralFatLevel: TestedResult = new TestedResult();
+  bodyFatMass: TestedResult = new TestedResult();
 }

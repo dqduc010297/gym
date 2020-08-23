@@ -1,4 +1,5 @@
 ﻿using ApplicationDomain.Entities;
+using ApplicationDomain.Identity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,5 +20,7 @@ namespace ApplicationDomain.Gym.Entities
         public float WeightMin { set; get; }
         public float SkeletalMuscleMassMax { set; get; }
         public float SkeletalMuscleMassMin { set; get; }
+        public int UserId { set; get; }
+        public User User { set; get; }
     }
 }

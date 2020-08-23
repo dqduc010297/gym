@@ -10,6 +10,7 @@ const routes: Routes = [
       { path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
       { path: 'calendar', loadChildren: () => import('./modules/calendar/calendar.module').then(m => m.CalendarModule) },
       { path: 'goal', loadChildren: () => import('./modules/goal/goal.module').then(m => m.GoalModule) },
+      { path: 'inbody', loadChildren: () => import('./modules/inbody/inbody.module').then(m => m.InbodyModule) },
     ]
   },
   { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },

@@ -44,7 +44,7 @@ namespace Infrastructure.DbMigration.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Fullname = table.Column<string>(nullable: true),
-                    Height = table.Column<float>(nullable: false),
+                    Height = table.Column<int>(nullable: false),
                     YearOfBirth = table.Column<int>(nullable: false),
                     Gender = table.Column<int>(nullable: false),
                     DateJoined = table.Column<DateTime>(nullable: false),
@@ -164,6 +164,42 @@ namespace Infrastructure.DbMigration.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "InBodyStandard",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    CreatedByUserId = table.Column<int>(nullable: false),
+                    UpdatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    UpdatedByUserId = table.Column<int>(nullable: false),
+                    RowVersion = table.Column<byte[]>(nullable: true),
+                    BodyWaterMax = table.Column<float>(nullable: false),
+                    BodyWaterMin = table.Column<float>(nullable: false),
+                    ProteinMax = table.Column<float>(nullable: false),
+                    ProteinMin = table.Column<float>(nullable: false),
+                    MineralMax = table.Column<float>(nullable: false),
+                    MineralMin = table.Column<float>(nullable: false),
+                    BodyFatMassMax = table.Column<float>(nullable: false),
+                    BodyFatMassMin = table.Column<float>(nullable: false),
+                    WeightMax = table.Column<float>(nullable: false),
+                    WeightMin = table.Column<float>(nullable: false),
+                    SkeletalMuscleMassMax = table.Column<float>(nullable: false),
+                    SkeletalMuscleMassMin = table.Column<float>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InBodyStandard", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InBodyStandard_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "InBody",
                 columns: table => new
                 {
@@ -179,16 +215,26 @@ namespace Infrastructure.DbMigration.Migrations
                     Protein = table.Column<float>(nullable: false),
                     Mineral = table.Column<float>(nullable: false),
                     BodyFatMass = table.Column<float>(nullable: false),
+                    PercentBodyFat = table.Column<float>(nullable: false),
                     Weight = table.Column<float>(nullable: false),
                     SkeletalMuscleMass = table.Column<float>(nullable: false),
                     Score = table.Column<int>(nullable: false),
+                    BMIEvaluation = table.Column<int>(nullable: false),
+                    PBFEvaluation = table.Column<int>(nullable: false),
                     WaistHipRatio = table.Column<float>(nullable: false),
                     VisceralFatLevel = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    InBodyStandardId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_InBody", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InBody_InBodyStandard_InBodyStandardId",
+                        column: x => x.InBodyStandardId,
+                        principalTable: "InBodyStandard",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_InBody_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -237,8 +283,18 @@ namespace Infrastructure.DbMigration.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_InBody_InBodyStandardId",
+                table: "InBody",
+                column: "InBodyStandardId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_InBody_UserId",
                 table: "InBody",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InBodyStandard_UserId",
+                table: "InBodyStandard",
                 column: "UserId");
         }
 
@@ -264,6 +320,9 @@ namespace Infrastructure.DbMigration.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "InBodyStandard");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
