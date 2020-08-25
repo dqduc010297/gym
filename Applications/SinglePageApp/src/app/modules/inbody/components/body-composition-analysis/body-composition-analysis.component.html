@@ -1,32 +1,10 @@
 <nz-card nzTitle="Body Composition Analysis">
   <nz-table nzTemplateMode [nzShowPagination]="false">
     <tbody>
-      <tr>
-        <td><strong>Total Body Water</strong></td>
-        <td>(L)</td>
-        <td class="{{bodyCompositionAnalysis.bodyWater.testedEvaluation}}">{{bodyCompositionAnalysis.bodyWater.value}}
-        </td>
-        <td>( {{bodyCompositionAnalysis.bodyWater.min}} ~ {{bodyCompositionAnalysis.bodyWater.max}} )</td>
-      </tr>
-      <tr>
-        <td><strong>Protein</strong></td>
-        <td>(kg)</td>
-        <td class="{{bodyCompositionAnalysis.protein.testedEvaluation}}">{{bodyCompositionAnalysis.protein.value}}</td>
-        <td>( {{bodyCompositionAnalysis.protein.min}} ~ {{bodyCompositionAnalysis.protein.max}} )</td>
-      </tr>
-      <tr>
-        <td><strong>Mineral</strong></td>
-        <td>(kg)</td>
-        <td class="{{bodyCompositionAnalysis.mineral.testedEvaluation}}">{{bodyCompositionAnalysis.mineral.value}}</td>
-        <td>( {{bodyCompositionAnalysis.mineral.min}} ~ {{bodyCompositionAnalysis.mineral.max}} )</td>
-      </tr>
-      <tr>
-        <td><strong>Body Fat Mass</strong></td>
-        <td>(kg)</td>
-        <td class="{{bodyCompositionAnalysis.bodyFatMass.testedEvaluation}}">
-          {{bodyCompositionAnalysis.bodyFatMass.value}}</td>
-        <td>( {{bodyCompositionAnalysis.bodyFatMass.min}} ~ {{bodyCompositionAnalysis.bodyFatMass.max}} )</td>
-      </tr>
+      <tr app-tested-item name="Total Body Water" unit="L" [testedResult]="bodyCompositionAnalysis.bodyWater"></tr>
+      <tr app-tested-item name="Protein" unit="kg" [testedResult]="bodyCompositionAnalysis.protein"></tr>
+      <tr app-tested-item name="Mineral" unit="kg" [testedResult]="bodyCompositionAnalysis.mineral"></tr>
+      <tr app-tested-item name="Body Fat Mass" unit="kg" [testedResult]="bodyCompositionAnalysis.bodyFatMass"></tr>
     </tbody>
   </nz-table>
 </nz-card>

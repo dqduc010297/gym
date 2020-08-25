@@ -130,38 +130,44 @@ export class SmmHistoryComponent implements OnInit, OnChanges {
   }
 
   private calculateSMMStandardMax(height: number, k: number) {
-    return k * 25 * (height / 100) * (height / 100);
+    return k * 25 * height * height;
   }
 
   private calculateSMMStandardMin(height: number, k: number) {
-    return k * 18.5 * (height / 100) * (height / 100);
+    return k * 18.5 * height * height;
   }
 
   private generateSMMStandard() {
     const age = this.authService.currentUserValue.age;
     const gender = this.authService.currentUserValue.gender;
     const height = this.authService.currentUserValue.height;
-    if (gender == Gender.MALE) {
+    if (gender === Gender.MALE) {
+      // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < MenSMMLevel.length; i++) {
         if (age < MenSMMLevel[i].maxAge) {
           const standard = MenSMMLevel[i];
-          this.smmStandardUnder = Array.from(Array(this.smm.length), (_, i) => this.calculateSMMStandardMin(height, standard.min));
+          this.smmStandardUnder = Array.from(Array(this.smm.length), (_) => this.calculateSMMStandardMin(height, standard.min));
           this.smmStandardNormal = Array.from(
-            Array(this.smm.length), (_, i) => (this.calculateSMMStandardMax(height, standard.max) - this.calculateSMMStandardMin(height, standard.min)));
+            Array(this.smm.length), () =>
+            (this.calculateSMMStandardMax(height, standard.max) - this.calculateSMMStandardMin(height, standard.min)));
           this.smmStandardOver = Array.from(
-            Array(this.smm.length), (_, i) => (this.calculateSMMStandardMax(height, 1) - this.calculateSMMStandardMin(height, standard.max)));
+            Array(this.smm.length), () =>
+            (this.calculateSMMStandardMax(height, 1) - this.calculateSMMStandardMin(height, standard.max)));
           return;
         }
       }
     } else {
+      // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < WomenSMMLevel.length; i++) {
         if (age < WomenSMMLevel[i].maxAge) {
           const standard = WomenSMMLevel[i];
-          this.smmStandardUnder = Array.from(Array(this.smm.length), (_, i) => this.calculateSMMStandardMin(height, standard.min));
+          this.smmStandardUnder = Array.from(Array(this.smm.length), () => this.calculateSMMStandardMin(height, standard.min));
           this.smmStandardNormal = Array.from(
-            Array(this.smm.length), (_, i) => (this.calculateSMMStandardMax(height, standard.max) - this.calculateSMMStandardMin(height, standard.min)));
+            Array(this.smm.length), () =>
+            (this.calculateSMMStandardMax(height, standard.max) - this.calculateSMMStandardMin(height, standard.min)));
           this.smmStandardOver = Array.from(
-            Array(this.smm.length), (_, i) => (this.calculateSMMStandardMax(height, 1) - this.calculateSMMStandardMin(height, standard.max)));
+            Array(this.smm.length), () =>
+            (this.calculateSMMStandardMax(height, 1) - this.calculateSMMStandardMin(height, standard.max)));
           return;
         }
       }

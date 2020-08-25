@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ColorLevel } from 'src/app/const/bmi';
 
 @Component({
   selector: 'app-weighing',
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class WeighingComponent implements OnInit, OnChanges {
   chartOptions: any;
   updateChartOptions: any;
-  height = this.authService.currentUserValue.height / 100;
+  height = this.authService.currentUserValue.height;
   @Input() weight: number;
 
   constructor(
@@ -42,11 +43,11 @@ export class WeighingComponent implements OnInit, OnChanges {
         axisLine: {
           lineStyle: {
             color: [
-              [(18.5 * this.height * this.height) / maxWeight, '#87b1d7'],
-              [(25 * this.height * this.height) / maxWeight, '#3dd365'],
-              [(30 * this.height * this.height) / maxWeight, '#eee133'],
-              [(35 * this.height * this.height) / maxWeight, '#fd802e'],
-              [1, '#f95353']
+              [(18.5 * this.height * this.height) / maxWeight, ColorLevel.Under],
+              [(25 * this.height * this.height) / maxWeight, ColorLevel.Normal],
+              [(30 * this.height * this.height) / maxWeight, ColorLevel.SlightlyOver],
+              [(35 * this.height * this.height) / maxWeight, ColorLevel.Over],
+              [1, ColorLevel.ExtremelyOver]
             ],
             width: 24
           }
@@ -77,11 +78,11 @@ export class WeighingComponent implements OnInit, OnChanges {
         axisLine: {
           lineStyle: {
             color: [
-              [(18.5 * this.height * this.height) / maxWeight, '#87b1d7'],
-              [(25 * this.height * this.height) / maxWeight, '#3dd365'],
-              [(30 * this.height * this.height) / maxWeight, '#eee133'],
-              [(35 * this.height * this.height) / maxWeight, '#fd802e'],
-              [1, '#f95353']
+              [(18.5 * this.height * this.height) / maxWeight, ColorLevel.Under],
+              [(25 * this.height * this.height) / maxWeight, ColorLevel.Normal],
+              [(30 * this.height * this.height) / maxWeight, ColorLevel.SlightlyOver],
+              [(35 * this.height * this.height) / maxWeight, ColorLevel.Over],
+              [1, ColorLevel.ExtremelyOver]
             ],
             width: 24
           }

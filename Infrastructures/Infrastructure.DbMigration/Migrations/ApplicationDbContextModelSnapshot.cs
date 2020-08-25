@@ -174,7 +174,7 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<int>("Gender");
 
-                    b.Property<int>("Height");
+                    b.Property<float>("Height");
 
                     b.Property<bool>("LockoutEnabled");
 

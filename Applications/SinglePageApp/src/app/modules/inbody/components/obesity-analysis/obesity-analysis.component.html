@@ -1,18 +1,8 @@
 <nz-card nzTitle="Obesity Analysis">
   <nz-table nzTemplateMode [nzShowPagination]="false">
     <tbody>
-      <tr>
-        <td><strong>BMI </strong></td>
-        <td>(kg/m2)</td>
-        <td class="{{obesityAnalysis.bmi.testedEvaluation}}">{{obesityAnalysis.bmi.value | number: '0.0-1'}}</td>
-        <td>( 18.5 ~ 25 )</td>
-      </tr>
-      <tr>
-        <td><strong>PBF</strong></td>
-        <td>(%)</td>
-        <td class="{{obesityAnalysis.bmi.testedEvaluation}}">{{obesityAnalysis.pbf.value * 100 | number: '0.0-1'}}</td>
-        <td>( 10 ~ 20 )</td>
-      </tr>
+      <tr app-tested-item name="BMI" unit="kg/m2" [testedResult]="obesityAnalysis.bmi"></tr>
+      <tr app-tested-item name="PBF" unit="%" [testedResult]="obesityAnalysis.pbf"></tr>
     </tbody>
   </nz-table>
   <nz-table nzTemplateMode [nzShowPagination]="false">

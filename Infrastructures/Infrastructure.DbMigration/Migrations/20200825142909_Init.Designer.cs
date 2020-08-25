@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.DbMigration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200823151110_Init")]
+    [Migration("20200825142909_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -176,7 +176,7 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<int>("Gender");
 
-                    b.Property<int>("Height");
+                    b.Property<float>("Height");
 
                     b.Property<bool>("LockoutEnabled");
 

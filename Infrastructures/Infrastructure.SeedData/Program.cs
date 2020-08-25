@@ -510,7 +510,7 @@ namespace Infrastructure.SeedData
                         Email = $"{i + 1}@gmail.com",
                         PhoneNumber = phoneNumbers[i],
                         YearOfBirth = 1990 + (i % 15),
-                        Height = 140 + (i % 40),
+                        Height = (float)((140 + (i % 40)) * 1.0 / 100),
                         Gender = i % 2 == 0 ? Gender.MALE : Gender.FEMALE,
                         DateJoined = new DateTime(2019, 8, 1),
                         Status = UserStatus.ACTIVATE
@@ -530,7 +530,7 @@ namespace Infrastructure.SeedData
                         Email = $"{i + 1}@gmail.com",
                         PhoneNumber = phoneNumbers[i],
                         YearOfBirth = 1990 + (i % 6),
-                        Height = 130 + (i % 40),
+                        Height = (float)((130 + (i % 40)) * 1.0 / 100),
                         Gender = i % 2 == 0 ? Gender.MALE : Gender.FEMALE,
                         DateJoined = new DateTime(2019, 8, 1),
                         Status = UserStatus.ACTIVATE

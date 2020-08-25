@@ -1,38 +1,11 @@
 <nz-card nzTitle="Muscle-Fat Analysis">
   <nz-table nzTemplateMode [nzShowPagination]="false">
     <tbody>
-      <tr>
-        <td><strong>SMM</strong></td>
-        <td>(kg)</td>
-        <td class="{{muscleFatAnalysis.skeletalMuscleMass.testedEvaluation}}">
-          {{muscleFatAnalysis.skeletalMuscleMass.value}}</td>
-        <td>( {{muscleFatAnalysis.skeletalMuscleMass.min}} ~ {{muscleFatAnalysis.skeletalMuscleMass.max}} )</td>
-      </tr>
-      <tr>
-        <td><strong>Body Fat Mass</strong></td>
-        <td>(kg)</td>
-        <td class="{{muscleFatAnalysis.bodyFatMass.testedEvaluation}}">{{muscleFatAnalysis.bodyFatMass.value}}</td>
-        <td>( {{muscleFatAnalysis.bodyFatMass.min}} ~ {{muscleFatAnalysis.bodyFatMass.max}} )</td>
-      </tr>
-      <tr>
-        <td><strong>Weight</strong></td>
-        <td>(kg)</td>
-        <td class="{{muscleFatAnalysis.weight.testedEvaluation}}">{{muscleFatAnalysis.weight.value}}</td>
-        <td>( {{muscleFatAnalysis.weight.min}} ~ {{muscleFatAnalysis.weight.max}} )</td>
-      </tr>
-      <tr>
-        <td><strong>Waist-Hip Ratio</strong></td>
-        <td>-</td>
-        <td class="{{muscleFatAnalysis.waistHipRatio.testedEvaluation}}">{{muscleFatAnalysis.waistHipRatio.value}}</td>
-        <td>( {{muscleFatAnalysis.waistHipRatio.min}} ~ {{muscleFatAnalysis.waistHipRatio.max}} )</td>
-      </tr>
-      <tr>
-        <td><strong>Visceral Fat Level</strong></td>
-        <td>-</td>
-        <td class="{{muscleFatAnalysis.visceralFatLevel.testedEvaluation}}">{{muscleFatAnalysis.visceralFatLevel.value}}
-        </td>
-        <td>( {{muscleFatAnalysis.visceralFatLevel.min}} ~ {{muscleFatAnalysis.visceralFatLevel.max}} )</td>
-      </tr>
+      <tr app-tested-item name="SMM" unit="kg" [testedResult]="muscleFatAnalysis.skeletalMuscleMass"></tr>
+      <tr app-tested-item name="Body Fat Mass" unit="kg" [testedResult]="muscleFatAnalysis.bodyFatMass"></tr>
+      <tr app-tested-item name="Weight" unit="kg" [testedResult]="muscleFatAnalysis.weight"></tr>
+      <tr app-tested-item name="Waist-Hip Ratio" unit="-" [testedResult]="muscleFatAnalysis.waistHipRatio"></tr>
+      <tr app-tested-item name="Visceral Fat Level" unit="-" [testedResult]="muscleFatAnalysis.visceralFatLevel"></tr>
     </tbody>
   </nz-table>
 </nz-card>

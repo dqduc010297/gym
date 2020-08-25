@@ -7,7 +7,7 @@ namespace ApplicationDomain.Identity.Models
         public string UserName { set; get; }
         public string AvatarURL { set; get; }
         public string Token { set; get; }
-        public int Height { set; get; }
+        public float Height { set; get; }
         public int Age { set; get; }
         public Gender Gender { set; get; }
     }

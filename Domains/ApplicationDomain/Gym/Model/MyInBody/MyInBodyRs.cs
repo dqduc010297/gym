@@ -97,15 +97,15 @@ namespace ApplicationDomain.Gym.Model.MyInBody
                     PBFEvaluation = s.PBFEvaluation,
                     BMI = new TestedResult()
                     {
-                        Value = (float)(s.Weight / ((s.User.Height / 100) * (s.User.Height / 100))),
+                        Value = (float)Math.Round((s.Weight / (s.User.Height * s.User.Height)), 1),
                         Min = (float)18.5,
-                        Max = (float)20
+                        Max = (float)20.0
                     },
                     PBF = new TestedResult()
                     {
-                        Value = s.PercentBodyFat,
-                        Min = (float)10,
-                        Max = (float)20
+                        Value = (float)Math.Round(s.PercentBodyFat * 100, 1),
+                        Min = (float)10.0,
+                        Max = (float)20.0
                     }
                 }));
         }

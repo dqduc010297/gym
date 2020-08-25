@@ -44,7 +44,7 @@ namespace Infrastructure.DbMigration.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Fullname = table.Column<string>(nullable: true),
-                    Height = table.Column<int>(nullable: false),
+                    Height = table.Column<float>(nullable: false),
                     YearOfBirth = table.Column<int>(nullable: false),
                     Gender = table.Column<int>(nullable: false),
                     DateJoined = table.Column<DateTime>(nullable: false),

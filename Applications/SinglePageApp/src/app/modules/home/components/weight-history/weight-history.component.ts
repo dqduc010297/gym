@@ -11,7 +11,7 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
   @Input() weights: number[] = [];
   @Input() testedDates: string[] = [];
 
-  height: number;
+  height = this.authService.currentUserValue.height;
 
   weightChartOptions: any;
   weightUpdateChartOptions: any;
@@ -27,7 +27,6 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.height = this.authService.currentUserValue.height;
     this.initChart();
   }
 
@@ -151,9 +150,9 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
   }
 
   private generateWeightStandard(k: number): number[] {
-    let weightStandard = Math.round((BMILevel[k] * (this.height / 100) * (this.height / 100)) / 10) * 10;
+    let weightStandard = Math.round((BMILevel[k] * this.height * this.height) / 10) * 10;
     if (k > 0) {
-      weightStandard -= Math.round((BMILevel[k - 1] * (this.height / 100) * (this.height / 100)) / 10) * 10;
+      weightStandard -= Math.round((BMILevel[k - 1] * this.height * this.height) / 10) * 10;
     }
     return Array.from(Array(this.weights.length), (_, i) => weightStandard);
   }
