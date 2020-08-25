@@ -78,6 +78,7 @@ namespace ApplicationDomain.Gym.Services
         {
             return await this._inBodyRepository.GetMyInBodyByTestedDate(userId, null)
                     .MapQueryTo<BodyCompositionHistory>(this._mapper)
+                    .OrderByDescending(p => p.TestedDate)
                     .Skip(0).Take(6)
                     .OrderBy(p => p.TestedDate)
                     .ToListAsync();

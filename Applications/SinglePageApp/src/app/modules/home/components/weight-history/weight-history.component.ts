@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { BMILevel } from 'src/app/const/bmi';
+import { BMILevel, ColorLevel } from 'src/app/const/bmi';
 
 @Component({
   selector: 'app-weight-history',
@@ -34,7 +34,7 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
   initChart() {
     this.weightChartOptions = {
       title: {
-        text: 'Weight'
+        text: 'Weight (kg)'
       },
       grid: {
         left: '3%',
@@ -62,7 +62,7 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
           type: 'line',
           stack: 'Weight',
           areaStyle: {
-            color: '#87b1d7',
+            color: ColorLevel.Under,
           },
           lineStyle: {
             width: 0,
@@ -75,7 +75,7 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
           type: 'line',
           stack: 'Weight',
           areaStyle: {
-            color: '#3dd365',
+            color: ColorLevel.Normal,
           },
           lineStyle: {
             width: 0,
@@ -88,7 +88,7 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
           type: 'line',
           stack: 'Weight',
           areaStyle: {
-            color: '#eee133',
+            color: ColorLevel.SlightlyOver,
           },
           lineStyle: {
             width: 0,
@@ -101,7 +101,7 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
           type: 'line',
           stack: 'Weight',
           areaStyle: {
-            color: '#fd802e',
+            color: ColorLevel.Over,
           },
           lineStyle: {
             width: 0,
@@ -110,11 +110,11 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
           data: this.generateWeightStandard(3)
         },
         {
-          name: 'OverOver',
+          name: 'ExtremelyOver',
           type: 'line',
           stack: 'Weight',
           areaStyle: {
-            color: '#f95353',
+            color: ColorLevel.ExtremelyOver,
           },
           lineStyle: {
             width: 0,
@@ -134,8 +134,7 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
             formatter: '{c} kg'
           },
           lineStyle: {
-            color: '#000',
-            width: 1,
+            color: '#c33733',
           }
         },
       ]
@@ -153,7 +152,7 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
         {
           name: 'Weight',
           type: 'line',
-          symbolSize: 6,
+          symbolSize: 10,
           label: {
             show: true,
             position: 'top'

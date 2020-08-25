@@ -9,7 +9,9 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  weights: number[];
+  weights: number[] = [];
+  smm: number[] = [];
+  pbf: number[] = [];
   testedDates: string[] = [];
 
   constructor(
@@ -22,6 +24,8 @@ export class HomeComponent implements OnInit {
       result => {
         this.testedDates = result.map(p => this.datePipe.transform(p.testedDate, 'dd/MM/yyyy'));
         this.weights = result.map(p => p.weight);
+        this.smm = result.map(p => p.skeletalMuscleMass);
+        this.pbf = result.map(p => p.percentBodyFat);
       }
     );
   }

@@ -1,4 +1,6 @@
-﻿namespace ApplicationDomain.Identity.Models
+﻿using ApplicationDomain.Common;
+
+namespace ApplicationDomain.Identity.Models
 {
     public class LoginProfile
     {
@@ -6,5 +8,7 @@
         public string AvatarURL { set; get; }
         public string Token { set; get; }
         public int Height { set; get; }
+        public int Age { set; get; }
+        public Gender Gender { set; get; }
     }
 }

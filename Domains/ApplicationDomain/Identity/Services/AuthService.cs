@@ -57,6 +57,8 @@ namespace ApplicationDomain.Identity.Services
             loginProfile.UserName = user.UserName;
             loginProfile.AvatarURL = user.AvatarURL ?? "";
             loginProfile.Height = user.Height;
+            loginProfile.Age = DateTime.Now.Year - user.YearOfBirth;
+            loginProfile.Gender = user.Gender;
 
             // generate token
             var roles = await _userManager.GetRolesAsync(user);

@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ColorLevel } from 'src/app/const/bmi';
 
 @Component({
   selector: 'app-pbf-history',
   templateUrl: './pbf-history.component.html',
   styleUrls: ['./pbf-history.component.scss']
 })
-export class PbfHistoryComponent implements OnInit {
+export class PbfHistoryComponent implements OnInit, OnChanges {
+  @Input() testedDates: string[] = [];
+  @Input() pbf: number[] = [];
+
   pbfChartOptions: any;
   pbfUpdateChartOptions: any;
 
   constructor() { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.testedDates.currentValue) {
+      this.updatePBFChart();
+    }
+  }
 
   ngOnInit(): void {
     this.initChart();
@@ -18,7 +28,7 @@ export class PbfHistoryComponent implements OnInit {
   initChart() {
     this.pbfChartOptions = {
       title: {
-        text: 'Percent Body Fat'
+        text: 'Percent Body Fat (%)'
       },
       grid: {
         left: '3%',
@@ -30,7 +40,7 @@ export class PbfHistoryComponent implements OnInit {
         {
           type: 'category',
           boundaryGap: false,
-          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+          data: []
         }
       ],
       yAxis: {
@@ -46,9 +56,9 @@ export class PbfHistoryComponent implements OnInit {
         {
           name: 'Under',
           type: 'line',
-          stack: 'Weight',
+          stack: 'PBF',
           areaStyle: {
-            color: '#87b1d7'
+            color: ColorLevel.Under
           },
           lineStyle: {
             width: 0,
@@ -59,22 +69,22 @@ export class PbfHistoryComponent implements OnInit {
         {
           name: 'Normal',
           type: 'line',
-          stack: 'Weight',
+          stack: 'PBF',
           areaStyle: {
-            color: '#3dd365'
+            color: ColorLevel.Normal
           },
           lineStyle: {
             width: 0,
           },
           symbolSize: 0,
-          data: [20, 20, 20, 20, 20, 20, 20]
+          data: [10, 10, 10, 10, 10, 10, 10]
         },
         {
-          name: 'Slightly Over',
+          name: 'Over',
           type: 'line',
-          stack: 'Weight',
+          stack: 'PBF',
           areaStyle: {
-            color: '#f95353'
+            color: ColorLevel.ExtremelyOver
           },
           lineStyle: {
             width: 0,
@@ -82,20 +92,75 @@ export class PbfHistoryComponent implements OnInit {
           symbolSize: 0,
           data: [40, 40, 40, 40, 40, 40, 40]
         },
-        {
-          name: '最高气温',
-          type: 'line',
-          data: [34, 34.5, 35, 35.9, 34.8, 34.6, 35],
-          label: {
-            show: true,
-            backgroundColor: 'white',
-            borderRadius: 50,
-            padding: 6,
-            formatter: '{c}%'
-          }
-        },
       ]
     };
   }
 
+  updatePBFChart() {
+    console.log(this.pbf)
+    this.pbfUpdateChartOptions = {
+      xAxis: [
+        {
+          type: 'category',
+          boundaryGap: false,
+          data: this.testedDates
+        }
+      ],
+      series: [{
+        name: 'Under',
+        type: 'line',
+        stack: 'PBF',
+        areaStyle: {
+          color: ColorLevel.Under
+        },
+        lineStyle: {
+          width: 0,
+        },
+        symbolSize: 0,
+        data: [10, 10, 10, 10, 10, 10, 10]
+      },
+      {
+        name: 'Normal',
+        type: 'line',
+        stack: 'PBF',
+        areaStyle: {
+          color: ColorLevel.Normal
+        },
+        lineStyle: {
+          width: 0,
+        },
+        symbolSize: 0,
+        data: [10, 10, 10, 10, 10, 10, 10]
+      },
+      {
+        name: 'Over',
+        type: 'line',
+        stack: 'PBF',
+        areaStyle: {
+          color: ColorLevel.ExtremelyOver
+        },
+        lineStyle: {
+          width: 0,
+        },
+        symbolSize: 0,
+        data: [40, 40, 40, 40, 40, 40, 40]
+      },
+      {
+        name: 'PBF',
+        type: 'line',
+        data: this.pbf,
+        label: {
+          show: true,
+          backgroundColor: 'white',
+          borderRadius: 50,
+          padding: 6,
+          formatter: '{c}%'
+        },
+        lineStyle:{
+          color: '#a22e2a'
+        }
+      },
+      ]
+    };
+  }
 }
