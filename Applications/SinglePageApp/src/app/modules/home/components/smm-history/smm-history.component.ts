@@ -48,7 +48,6 @@ export class SmmHistoryComponent implements OnInit, OnChanges {
         {
           type: 'category',
           boundaryGap: false,
-          data: []
         }
       ],
       yAxis: {
@@ -122,7 +121,7 @@ export class SmmHistoryComponent implements OnInit, OnChanges {
             padding: 6,
             formatter: '{c} kg'
           },
-          lineStyle:{
+          lineStyle: {
             color: '#a22e2a'
           }
         },
@@ -146,11 +145,11 @@ export class SmmHistoryComponent implements OnInit, OnChanges {
       for (let i = 0; i < MenSMMLevel.length; i++) {
         if (age < MenSMMLevel[i].maxAge) {
           const standard = MenSMMLevel[i];
-          this.smmStandardUnder = Array.from(Array(6), (_, i) => this.calculateSMMStandardMin(height, standard.min));
+          this.smmStandardUnder = Array.from(Array(this.smm.length), (_, i) => this.calculateSMMStandardMin(height, standard.min));
           this.smmStandardNormal = Array.from(
-            Array(6), (_, i) => (this.calculateSMMStandardMax(height, standard.max) - this.calculateSMMStandardMin(height, standard.min)));
+            Array(this.smm.length), (_, i) => (this.calculateSMMStandardMax(height, standard.max) - this.calculateSMMStandardMin(height, standard.min)));
           this.smmStandardOver = Array.from(
-            Array(6), (_, i) => (this.calculateSMMStandardMax(height, 1) - this.calculateSMMStandardMin(height, standard.max)));
+            Array(this.smm.length), (_, i) => (this.calculateSMMStandardMax(height, 1) - this.calculateSMMStandardMin(height, standard.max)));
           return;
         }
       }
@@ -158,11 +157,11 @@ export class SmmHistoryComponent implements OnInit, OnChanges {
       for (let i = 0; i < WomenSMMLevel.length; i++) {
         if (age < WomenSMMLevel[i].maxAge) {
           const standard = WomenSMMLevel[i];
-          this.smmStandardUnder = Array.from(Array(6), (_, i) => this.calculateSMMStandardMin(height, standard.min));
+          this.smmStandardUnder = Array.from(Array(this.smm.length), (_, i) => this.calculateSMMStandardMin(height, standard.min));
           this.smmStandardNormal = Array.from(
-            Array(6), (_, i) => (this.calculateSMMStandardMax(height, standard.max) - this.calculateSMMStandardMin(height, standard.min)));
+            Array(this.smm.length), (_, i) => (this.calculateSMMStandardMax(height, standard.max) - this.calculateSMMStandardMin(height, standard.min)));
           this.smmStandardOver = Array.from(
-            Array(6), (_, i) => (this.calculateSMMStandardMax(height, 1) - this.calculateSMMStandardMin(height, standard.max)));
+            Array(this.smm.length), (_, i) => (this.calculateSMMStandardMax(height, 1) - this.calculateSMMStandardMin(height, standard.max)));
           return;
         }
       }

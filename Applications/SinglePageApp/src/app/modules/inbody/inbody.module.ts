@@ -9,8 +9,9 @@ import { SharedModule } from 'src/app/share.module';
 import { BodyCompositionAnalysisComponent } from './components/body-composition-analysis/body-composition-analysis.component';
 import { MuscleFatAnalysisComponent } from './components/muscle-fat-analysis/muscle-fat-analysis.component';
 import { ObesityAnalysisComponent } from './components/obesity-analysis/obesity-analysis.component';
-import { InbodyInfoComponent } from './components/inbody-info/inbody-info.component';
 import { BodyCompositionHistoryComponent } from './components/body-composition-history/body-composition-history.component';
+import { WeighingComponent } from './components/weighing/weighing.component';
+import { TestedItemComponent } from './components/tested-item/tested-item.component';
 
 
 @NgModule({
@@ -20,8 +21,9 @@ import { BodyCompositionHistoryComponent } from './components/body-composition-h
     BodyCompositionAnalysisComponent,
     MuscleFatAnalysisComponent,
     ObesityAnalysisComponent,
-    InbodyInfoComponent,
+    WeighingComponent,
     BodyCompositionHistoryComponent,
+    TestedItemComponent,
   ],
   imports: [
     InbodyRoutingModule,

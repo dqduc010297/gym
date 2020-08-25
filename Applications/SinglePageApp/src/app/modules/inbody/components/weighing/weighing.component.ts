@@ -1,21 +1,23 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
-  selector: 'app-inbody-info',
-  templateUrl: './inbody-info.component.html',
-  styleUrls: ['./inbody-info.component.scss']
+  selector: 'app-weighing',
+  templateUrl: './weighing.component.html',
+  styleUrls: ['./weighing.component.scss']
 })
-export class InbodyInfoComponent implements OnInit, OnChanges {
+export class WeighingComponent implements OnInit, OnChanges {
   chartOptions: any;
   updateChartOptions: any;
-
-  @Input() height: number;
+  height = this.authService.currentUserValue.height / 100;
   @Input() weight: number;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.height.currentValue && changes.weight.currentValue) {
+    if (changes.weight.currentValue) {
       this.updateWeightChart();
     }
   }
@@ -40,10 +42,10 @@ export class InbodyInfoComponent implements OnInit, OnChanges {
         axisLine: {
           lineStyle: {
             color: [
-              [(18.5 * 1.7 * 1.7) / maxWeight, '#87b1d7'],
-              [(25 * 1.7 * 1.7) / maxWeight, '#3dd365'],
-              [(30 * 1.7 * 1.7) / maxWeight, '#eee133'],
-              [(35 * 1.7 * 1.7) / maxWeight, '#fd802e'],
+              [(18.5 * this.height * this.height) / maxWeight, '#87b1d7'],
+              [(25 * this.height * this.height) / maxWeight, '#3dd365'],
+              [(30 * this.height * this.height) / maxWeight, '#eee133'],
+              [(35 * this.height * this.height) / maxWeight, '#fd802e'],
               [1, '#f95353']
             ],
             width: 24
@@ -65,7 +67,7 @@ export class InbodyInfoComponent implements OnInit, OnChanges {
   }
 
   updateWeightChart() {
-    const maxWeight = Math.round((40 * (this.height / 100) * (this.height / 100) + 20) / 10) * 10;
+    const maxWeight = Math.round((40 * this.height * this.height + 20) / 10) * 10;
     this.updateChartOptions = {
       series: [{
         name: 'Machine Time',
@@ -75,10 +77,10 @@ export class InbodyInfoComponent implements OnInit, OnChanges {
         axisLine: {
           lineStyle: {
             color: [
-              [(18.5 * 1.7 * 1.7) / maxWeight, '#87b1d7'],
-              [(25 * 1.7 * 1.7) / maxWeight, '#3dd365'],
-              [(30 * 1.7 * 1.7) / maxWeight, '#eee133'],
-              [(35 * 1.7 * 1.7) / maxWeight, '#fd802e'],
+              [(18.5 * this.height * this.height) / maxWeight, '#87b1d7'],
+              [(25 * this.height * this.height) / maxWeight, '#3dd365'],
+              [(30 * this.height * this.height) / maxWeight, '#eee133'],
+              [(35 * this.height * this.height) / maxWeight, '#fd802e'],
               [1, '#f95353']
             ],
             width: 24

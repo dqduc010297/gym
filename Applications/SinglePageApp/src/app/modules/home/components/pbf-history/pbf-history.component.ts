@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ColorLevel } from 'src/app/const/bmi';
+import { generate } from 'rxjs';
 
 @Component({
   selector: 'app-pbf-history',
@@ -40,7 +41,6 @@ export class PbfHistoryComponent implements OnInit, OnChanges {
         {
           type: 'category',
           boundaryGap: false,
-          data: []
         }
       ],
       yAxis: {
@@ -51,7 +51,19 @@ export class PbfHistoryComponent implements OnInit, OnChanges {
         splitLine: {
           show: false,
         }
-      },
+      }
+    };
+  }
+
+  updatePBFChart() {
+    this.pbfUpdateChartOptions = {
+      xAxis: [
+        {
+          type: 'category',
+          boundaryGap: false,
+          data: this.testedDates
+        }
+      ],
       series: [
         {
           name: 'Under',
@@ -64,7 +76,7 @@ export class PbfHistoryComponent implements OnInit, OnChanges {
             width: 0,
           },
           symbolSize: 0,
-          data: [10, 10, 10, 10, 10, 10, 10]
+          data: this.generateValue(10),
         },
         {
           name: 'Normal',
@@ -77,7 +89,7 @@ export class PbfHistoryComponent implements OnInit, OnChanges {
             width: 0,
           },
           symbolSize: 0,
-          data: [10, 10, 10, 10, 10, 10, 10]
+          data: this.generateValue(10),
         },
         {
           name: 'Over',
@@ -90,77 +102,28 @@ export class PbfHistoryComponent implements OnInit, OnChanges {
             width: 0,
           },
           symbolSize: 0,
-          data: [40, 40, 40, 40, 40, 40, 40]
+          data: this.generateValue(40),
+        },
+        {
+          name: 'PBF',
+          type: 'line',
+          data: this.pbf,
+          label: {
+            show: true,
+            backgroundColor: 'white',
+            borderRadius: 50,
+            padding: 6,
+            formatter: '{c}%'
+          },
+          lineStyle: {
+            color: '#a22e2a'
+          }
         },
       ]
     };
   }
 
-  updatePBFChart() {
-    console.log(this.pbf)
-    this.pbfUpdateChartOptions = {
-      xAxis: [
-        {
-          type: 'category',
-          boundaryGap: false,
-          data: this.testedDates
-        }
-      ],
-      series: [{
-        name: 'Under',
-        type: 'line',
-        stack: 'PBF',
-        areaStyle: {
-          color: ColorLevel.Under
-        },
-        lineStyle: {
-          width: 0,
-        },
-        symbolSize: 0,
-        data: [10, 10, 10, 10, 10, 10, 10]
-      },
-      {
-        name: 'Normal',
-        type: 'line',
-        stack: 'PBF',
-        areaStyle: {
-          color: ColorLevel.Normal
-        },
-        lineStyle: {
-          width: 0,
-        },
-        symbolSize: 0,
-        data: [10, 10, 10, 10, 10, 10, 10]
-      },
-      {
-        name: 'Over',
-        type: 'line',
-        stack: 'PBF',
-        areaStyle: {
-          color: ColorLevel.ExtremelyOver
-        },
-        lineStyle: {
-          width: 0,
-        },
-        symbolSize: 0,
-        data: [40, 40, 40, 40, 40, 40, 40]
-      },
-      {
-        name: 'PBF',
-        type: 'line',
-        data: this.pbf,
-        label: {
-          show: true,
-          backgroundColor: 'white',
-          borderRadius: 50,
-          padding: 6,
-          formatter: '{c}%'
-        },
-        lineStyle:{
-          color: '#a22e2a'
-        }
-      },
-      ]
-    };
+  generateValue(value: number): number[] {
+    return Array.from(Array(this.pbf.length), (_, i) => value);
   }
 }
