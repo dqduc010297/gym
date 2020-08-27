@@ -31,26 +31,19 @@ namespace ApplicationDomain.Gym.Services
         }
         public async Task<MyInBodyRs> GetMyInbodyByTestedDate(int userId, DateTime? testedDate)
         {
-            try
-            {
-                // load inbody information
-                var myInBody = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, testedDate)
-                         .MapQueryTo<MyInBodyRs>(this._mapper)
-                         .FirstOrDefaultAsync();
+            // load inbody information
+            var myInBody = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, testedDate)
+                     .MapQueryTo<MyInBodyRs>(this._mapper)
+                     .FirstOrDefaultAsync();
 
-                // load body history
-                myInBody.BodyCompositionHistories = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, testedDate)
-                    .MapQueryTo<BodyCompositionHistory>(this._mapper)
-                    .Skip(0).Take(9)
-                    .OrderBy(p => p.TestedDate)
-                    .ToListAsync();
+            // load body history
+            myInBody.BodyCompositionHistories = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, testedDate)
+                .MapQueryTo<BodyCompositionHistory>(this._mapper)
+                .Skip(0).Take(9)
+                .OrderBy(p => p.TestedDate)
+                .ToListAsync();
 
-                return myInBody;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return myInBody;
         }
         public async Task AddNewInBoy(InBodyRq rq)
         {

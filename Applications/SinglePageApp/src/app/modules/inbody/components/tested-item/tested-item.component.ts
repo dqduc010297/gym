@@ -9,8 +9,11 @@ import { TestedResult } from 'src/app/models/inbody/tested-result';
 })
 
 export class TestedItemComponent implements OnInit {
+  @Input() isView = true;
   @Input() name: string;
   @Input() unit: string;
+  @Input() maxDisabled = false;
+  @Input() minDisabled = false;
   @Input() testedResult: TestedResult = new TestedResult();
 
   constructor() { }

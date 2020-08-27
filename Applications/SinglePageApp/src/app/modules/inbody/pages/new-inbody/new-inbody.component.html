@@ -1,13 +1,41 @@
-<nz-table nzTableLayout="fixed">
-    <thead>
+<div class="row">
+  <div class="col-md-8">
+    <nz-table nzTemplateMode nzBordered [nzShowPagination]="false" nzTableLayout="fixed">
+      <thead>
         <tr>
-            <th>Name</th>
-            <th>Unit</th>
-            <th>Value</th>
-            <th>Max</th>
-            <th>Min</th>
+          <th>Name</th>
+          <th>Unit</th>
+          <th>Value</th>
+          <th>Min</th>
+          <th>Max</th>
         </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</nz-table>
+      </thead>
+      <tbody>
+        <tr app-tested-item name="Total Body Water" unit="L"
+          [testedResult]="inBodyDetail.bodyCompositionAnalysis.bodyWater" [isView]="false"></tr>
+        <tr app-tested-item name="Protein" unit="kg" [testedResult]="inBodyDetail.bodyCompositionAnalysis.protein"
+          [isView]="false"></tr>
+        <tr app-tested-item name="Mineral" unit="kg" [testedResult]="inBodyDetail.bodyCompositionAnalysis.mineral"
+          [isView]="false"></tr>
+        <tr app-tested-item name="Body Fat Mass" unit="kg"
+          [testedResult]="inBodyDetail.bodyCompositionAnalysis.bodyFatMass" [isView]="false"></tr>
+        <tr app-tested-item name="SMM" unit="kg" [testedResult]="inBodyDetail.muscleFatAnalysis.skeletalMuscleMass"
+          [isView]="false"></tr>
+        <tr app-tested-item name="Body Fat Mass" unit="kg" [testedResult]="inBodyDetail.muscleFatAnalysis.bodyFatMass"
+          [isView]="false"></tr>
+        <tr app-tested-item name="Weight" unit="kg" [testedResult]="inBodyDetail.muscleFatAnalysis.weight"
+          [isView]="false"></tr>
+        <tr app-tested-item name="Waist-Hip Ratio" unit="-"
+          [testedResult]="inBodyDetail.muscleFatAnalysis.waistHipRatio" [isView]="false" [maxDisabled]="true"
+          [minDisabled]="true"></tr>
+        <tr app-tested-item name="Visceral Fat Level" unit="-"
+          [testedResult]="inBodyDetail.muscleFatAnalysis.visceralFatLevel" [isView]="false" [maxDisabled]="true"
+          [minDisabled]="true"></tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <div class="col-md-4">
+    <app-obesity-analysis [obesityAnalysis]="inBodyDetail.obesityAnalysis"></app-obesity-analysis>
+    <button style="margin-top: 20px;" nz-button nzType="primary" nzBlock (click)="submit()">Submit</button>
+  </div>
+</div>

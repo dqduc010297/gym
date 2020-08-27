@@ -8,6 +8,7 @@ import { BodyCompositionAnalysis } from 'src/app/models/inbody/body-composition-
 })
 export class BodyCompositionAnalysisComponent implements OnInit {
   @Input() bodyCompositionAnalysis: BodyCompositionAnalysis = new BodyCompositionAnalysis();
+  @Input() isView = true;
   constructor() { }
 
   ngOnInit(): void {

@@ -1,5 +1,16 @@
 <td><strong>{{name}}</strong></td>
 <td>({{unit}})</td>
-<td class="{{testedResult.testedEvaluation}}">{{testedResult.value}}
+<td class="{{testedResult.testedEvaluation}}" *ngIf="isView">{{testedResult.value}}</td>
+<td *ngIf="!isView">
+  <nz-input-number [(ngModel)]="testedResult.value" [nzStep]="0.1"></nz-input-number>
 </td>
-<td>( {{testedResult.min}} ~ {{testedResult.max}} )</td>
+<td *ngIf="isView">( {{testedResult.min}} ~ {{testedResult.max}} )</td>
+<td *ngIf="!isView">
+  <nz-input-number [(ngModel)]="testedResult.min" [nzStep]="0.1" [nzDisabled]="minDisabled || testedResult.min != 0">
+  </nz-input-number>
+  <i nz-icon nzType="edit" nzTheme="outline"></i>
+</td>
+<td *ngIf="!isView">
+  <nz-input-number [(ngModel)]="testedResult.max" [nzStep]="0.1" [nzDisabled]="maxDisabled || testedResult.max != 0">
+  </nz-input-number> <i nz-icon nzType="edit" nzTheme="outline"></i>
+</td>
