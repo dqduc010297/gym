@@ -34,22 +34,9 @@ namespace WebApplication.Controllers
 
         [Route("")]
         [HttpPost]
-        public async Task<IActionResult> CreateNewInBody()
+        public async Task<IActionResult> CreateNewInBody([FromBody]InBodyRq inBodyRq)
         {
-            await this._inBodyService.AddNewInBoy(new InBodyRq()
-            {
-                TestedDate = DateTime.Now,
-                BodyWater = (float)44.8,
-                Protein = (float)12.2,
-                Mineral = (float)4.24,
-                BodyFatMass = (float)27.8,
-                Weight = (float)89.0,
-                SkeletalMuscleMass = (float)34.9,
-                Score = 70,
-                WaistHipRatio = (float)0.95,
-                VisceralFatLevel = 11,
-                UserId = 1,
-            });
+            await this._inBodyService.AddNewInBody(inBodyRq);
             return Ok("Inbody");
         }
 
@@ -57,21 +44,7 @@ namespace WebApplication.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateInBody()
         {
-            await this._inBodyService.UpdateInBody(new InBodyRq()
-            {
-                Id = 18,
-                TestedDate = DateTime.Now,
-                BodyWater = (float)44.8,
-                Protein = (float)12.2,
-                Mineral = (float)4.24,
-                BodyFatMass = (float)27.8,
-                Weight = (float)89.0,
-                SkeletalMuscleMass = (float)34.9,
-                Score = 70,
-                WaistHipRatio = (float)0.95,
-                VisceralFatLevel = 10,
-                UserId = 1,
-            });
+            
             return Ok("Inbody");
         }
 

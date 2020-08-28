@@ -6,11 +6,14 @@
 </td>
 <td *ngIf="isView">( {{testedResult.min}} ~ {{testedResult.max}} )</td>
 <td *ngIf="!isView">
-  <nz-input-number [(ngModel)]="testedResult.min" [nzStep]="0.1" [nzDisabled]="minDisabled || testedResult.min != 0">
+  <nz-input-number [(ngModel)]="testedResult.min" [nzStep]="0.1" [nzDisabled]="minDisabled">
   </nz-input-number>
-  <i nz-icon nzType="edit" nzTheme="outline"></i>
+  <i nz-icon nzType="edit" nzTheme="outline" *ngIf="minDisabled" (click)="minDisabled = !minDisabled"></i>
+  <i nz-icon nzType="check-circle" nzTheme="outline" *ngIf="!minDisabled" (click)="minDisabled = !minDisabled"></i>
 </td>
 <td *ngIf="!isView">
-  <nz-input-number [(ngModel)]="testedResult.max" [nzStep]="0.1" [nzDisabled]="maxDisabled || testedResult.max != 0">
-  </nz-input-number> <i nz-icon nzType="edit" nzTheme="outline"></i>
+  <nz-input-number [(ngModel)]="testedResult.max" [nzStep]="0.1" [nzDisabled]="maxDisabled">
+  </nz-input-number>
+  <i nz-icon nzType="edit" nzTheme="outline" *ngIf="maxDisabled" (click)="maxDisabled = !maxDisabled"></i>
+  <i nz-icon nzType="check-circle" nzTheme="outline" *ngIf="!maxDisabled" (click)="maxDisabled = !maxDisabled"></i>
 </td>

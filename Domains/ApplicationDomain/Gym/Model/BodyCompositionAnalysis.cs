@@ -13,5 +13,13 @@ namespace ApplicationDomain.Gym.Model.MyInBody
         public TestedResult Protein { set; get; }
         public TestedResult Mineral { set; get; }
         public TestedResult BodyFatMass { set; get; }
+
+        public BodyCompositionAnalysis()
+        {
+            this.BodyWater = new TestedResult();
+            this.Protein = new TestedResult();
+            this.Mineral = new TestedResult();
+            this.BodyFatMass = new TestedResult();
+        }
     }
 }

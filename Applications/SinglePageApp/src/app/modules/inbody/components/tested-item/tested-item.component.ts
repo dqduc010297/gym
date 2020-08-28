@@ -20,5 +20,4 @@ export class TestedItemComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

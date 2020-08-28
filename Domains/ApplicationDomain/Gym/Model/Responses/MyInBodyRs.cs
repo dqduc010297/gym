@@ -7,8 +7,9 @@ using System.Text;
 
 namespace ApplicationDomain.Gym.Model.MyInBody
 {
-    public class MyInBodyRs: BaseInBodyRs
+    public class MyInBodyRs: BaseInBody
     {
+        public IEnumerable<BodyCompositionHistory> BodyCompositionHistories { set; get; }
     }
 
     public class MyInBodyRsMapper : Profile
@@ -16,7 +17,6 @@ namespace ApplicationDomain.Gym.Model.MyInBody
         public MyInBodyRsMapper()
         {
             var mapper = CreateMap<InBody, MyInBodyRs>();
-            mapper.ForMember(d => d.Height, opt => opt.MapFrom(s => s.User.Height));
             mapper.ForMember(d => d.BodyCompositionAnalysis,
                 opt => opt.MapFrom(s =>
                 new BodyCompositionAnalysis()

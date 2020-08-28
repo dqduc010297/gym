@@ -45,7 +45,7 @@ namespace ApplicationDomain.Gym.Services
 
             return myInBody;
         }
-        public async Task AddNewInBoy(InBodyRq rq)
+        public async Task AddNewInBody(InBodyRq rq)
         {
             InBody inBody = _mapper.Map<InBody>(rq);
             this._inBodyRepository.Create(inBody);
@@ -53,10 +53,10 @@ namespace ApplicationDomain.Gym.Services
         }
         public async Task UpdateInBody(InBodyRq rq)
         {
-            var inBody = await this._inBodyRepository.GetEntityByIdAsync(rq.Id);
-            _mapper.Map(rq, inBody);
-            this._inBodyRepository.Update(inBody);
-            await _uow.SaveChangesAsync();
+            //var inBody = await this._inBodyRepository.GetEntityByIdAsync(rq.Id);
+            //_mapper.Map(rq, inBody);
+            //this._inBodyRepository.Update(inBody);
+            //await _uow.SaveChangesAsync();
         }
         public async Task<List<DateTime>> GetTestedDate(int userId)
         {

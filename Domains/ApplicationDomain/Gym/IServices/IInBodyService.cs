@@ -9,7 +9,7 @@ namespace ApplicationDomain.Gym.IServices
     public interface IInBodyService
     {
         Task<MyInBodyRs> GetMyInbodyByTestedDate(int userId, DateTime? testedDate);
-        Task AddNewInBoy(InBodyRq rq);
+        Task AddNewInBody(InBodyRq rq);
         Task UpdateInBody(InBodyRq rq);
         Task<List<DateTime>> GetTestedDate(int userId);
         Task<List<BodyCompositionHistory>> GetBodyCompositionHistories(int userId);

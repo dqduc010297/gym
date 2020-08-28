@@ -11,5 +11,11 @@ namespace ApplicationDomain.Gym.Model.MyInBody
         public TestedResult PBF { set; get; }
         public Evaluation BMIEvaluation { set; get; }
         public Evaluation PBFEvaluation { set; get; }
+
+        public ObesityAnalysis()
+        {
+            this.BMI = new TestedResult();
+            this.PBF = new TestedResult();
+        }
     }
 }

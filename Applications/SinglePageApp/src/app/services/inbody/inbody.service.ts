@@ -30,4 +30,8 @@ export class InBodyService {
   getTestedDates(): Observable<Date[]> {
     return this.http.get<Date[]>(`${environment.apiUrl}/inbody/testeddates`);
   }
+
+  createInBody(inBodyDetail: InBodyDetail): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/inbody`, inBodyDetail);
+  }
 }

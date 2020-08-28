@@ -7,8 +7,14 @@ using System.Text;
 
 namespace ApplicationDomain.Gym.Model.MyInBody
 {
-    public class InBodyStandardRs: BaseInBodyRs
+    public class InBodyStandardRs: BaseInBody
     {
+        public InBodyStandardRs()
+        {
+            this.BodyCompositionAnalysis = new BodyCompositionAnalysis();
+            this.MuscleFatAnalysis = new MuscleFatAnalysis();
+            this.ObesityAnalysis = new ObesityAnalysis();
+        }
     }
 
     public class InBodyStandardRsMapper : Profile
@@ -16,7 +22,6 @@ namespace ApplicationDomain.Gym.Model.MyInBody
         public InBodyStandardRsMapper()
         {
             var mapper = CreateMap<InBodyStandard, InBodyStandardRs>();
-            mapper.ForMember(d => d.Height, opt => opt.MapFrom(s => s.User.Height));
             mapper.ForMember(d => d.BodyCompositionAnalysis,
                 opt => opt.MapFrom(s =>
                 new BodyCompositionAnalysis()
@@ -81,8 +86,6 @@ namespace ApplicationDomain.Gym.Model.MyInBody
                        Min = s.BodyFatMassMin
                    },
                }));
-            mapper.ForMember(d => d.ObesityAnalysis,
-                opt => opt.MapFrom(s => new ObesityAnalysis()));
         }
     }
 }

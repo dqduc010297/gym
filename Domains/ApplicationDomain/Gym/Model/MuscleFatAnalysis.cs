@@ -12,5 +12,14 @@ namespace ApplicationDomain.Gym.Model.MyInBody
         public TestedResult WaistHipRatio { set; get; }
         public TestedResult VisceralFatLevel { set; get; }
         public TestedResult BodyFatMass { set; get; }
+
+        public MuscleFatAnalysis()
+        {
+            this.Weight = new TestedResult();
+            this.SkeletalMuscleMass = new TestedResult();
+            this.WaistHipRatio = new TestedResult();
+            this.VisceralFatLevel = new TestedResult();
+            this.BodyFatMass = new TestedResult();
+        }
     }
 }

@@ -15,9 +15,8 @@ import { httpInterceptorProviders } from './interceptors';
 import { LayoutComponent } from './layout/layout.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { SharedModule } from './share.module';
-import { CalendarModule } from './modules/calendar/calendar.module';
 import { GoalModule } from './modules/goal/goal.module';
-import { UploaderComponent } from './components/uploader/uploader.component';
+import { TimesheetModule } from './modules/timesheet/timesheet.module';
 
 registerLocaleData(vi);
 
@@ -34,7 +33,7 @@ registerLocaleData(vi);
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule.forRoot(),
-    CalendarModule,
+    TimesheetModule,
     GoalModule,
   ],
   providers: [
