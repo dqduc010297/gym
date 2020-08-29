@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "SinglePageApp": {
+    "ClientApp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/SinglePageApp",
+            "outputPath": "dist/ClientApp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,22 +25,18 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                "output": "/assets/"
-              }
+              "src/assets"
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.css",
-              "src/theme.less",
-              "src/styles.scss",
-              "./node_modules/angular-calendar/css/angular-calendar.css"
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/font-awesome/css/font-awesome.css",
+              "src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/jquery/dist/jquery.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js"
             ]
           },
           "configurations": {
@@ -77,18 +73,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "SinglePageApp:build"
+            "browserTarget": "ClientApp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "SinglePageApp:build:production"
+              "browserTarget": "ClientApp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "SinglePageApp:build"
+            "browserTarget": "ClientApp:build"
           }
         },
         "test": {
@@ -103,6 +99,8 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -125,19 +123,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "SinglePageApp:serve"
+            "devServerTarget": "ClientApp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "SinglePageApp:serve:production"
+              "devServerTarget": "ClientApp:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "SinglePageApp",
+  "defaultProject": "ClientApp",
   "cli": {
-    "analytics": "32f9dd5a-ab1c-443b-b9d4-ac10a4b7d62e"
+    "analytics": "e77ec6f6-eb4a-4476-85e0-6b6e310dbb3f"
   }
 }

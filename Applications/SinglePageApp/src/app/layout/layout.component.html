@@ -27,10 +27,10 @@
       </li>
     </ul>
     <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right" [nzTitle]="isCollapsed ? 'Calendar' : ''">
+      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right" [nzTitle]="isCollapsed ? 'Timesheet' : ''">
         <i nz-icon nzType="calendar" nzTheme="outline"></i>
-        <a [routerLink]="['/calendar']" routerLinkActive="router-link-active">
-          <span *ngIf="!isCollapsed">Calendar</span>
+        <a [routerLink]="['/timesheet']" routerLinkActive="router-link-active">
+          <span *ngIf="!isCollapsed">Timesheet</span>
         </a>
       </li>
     </ul>

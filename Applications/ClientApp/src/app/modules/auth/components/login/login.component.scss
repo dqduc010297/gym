@@ -1,0 +1,23 @@
+div.form {
+    display: block;
+    text-align: center;
+}
+
+.login-form {
+    margin-top: 80px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    width: 300px;
+}
+
+.login-form-forgot {
+    float: right;
+    margin-bottom: 10px;
+}
+
+.login-form-forgot:hover{
+  cursor: pointer;
+}
+

@@ -1,0 +1,10 @@
+<nz-card nzTitle="Body Composition Analysis">
+  <nz-table nzTemplateMode [nzShowPagination]="false">
+    <tbody>
+      <tr app-tested-item name="Total Body Water" unit="L" [testedResult]="bodyCompositionAnalysis.bodyWater"></tr>
+      <tr app-tested-item name="Protein" unit="kg" [testedResult]="bodyCompositionAnalysis.protein"></tr>
+      <tr app-tested-item name="Mineral" unit="kg" [testedResult]="bodyCompositionAnalysis.mineral"></tr>
+      <tr app-tested-item name="Body Fat Mass" unit="kg" [testedResult]="bodyCompositionAnalysis.bodyFatMass"></tr>
+    </tbody>
+  </nz-table>
+</nz-card>
