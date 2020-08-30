@@ -14,7 +14,9 @@ export class InbodyComponent implements OnInit {
   testedDates: string[] = [];
 
   testedDatePicker: Date;
-
+  bsInlineValue = new Date();
+  bsInlineRangeValue: Date[];
+  maxDate = new Date();
   constructor(
     private inBodyService: InBodyService,
     public loaderService: LoaderService,

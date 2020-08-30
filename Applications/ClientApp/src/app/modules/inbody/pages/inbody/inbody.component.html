@@ -1,39 +1,26 @@
 <div class="row">
-  <div class="col-md-4">
-    <div class="d-flex justify-content-between" style="margin-bottom: 8px;">
-      <div>
-        <strong>Tested date:</strong>
-        <nz-date-picker [nzDateRender]="tplRender" style="margin-left: 10px;" [(ngModel)]="testedDatePicker" (ngModelChange)="onChange($event)"
-          nzFormat="dd/MM/yyyy" [nzDisabledDate]="disabledDate">
-        </nz-date-picker>
-
-        <ng-template #tplRender let-current>
-          <div class="ant-picker-cell-inner" [class.border]="checkDate(current)">
-            {{ current.getDate() }}
-          </div>
-        </ng-template>
-
-      </div>
-      <div>
-        <h5>Score: {{inBodyDetail.score}}/100</h5>
-      </div>
-    </div>
+  <div class="col-xl-3 col-lg-6 col-md-6" style="min-width: 340px;">
+    <bs-datepicker-inline style="width: 310px; margin-left: auto; margin-right:auto ;display: block;"
+      [bsValue]="bsInlineValue"></bs-datepicker-inline>
+  </div>
+  <div class="col-xl-3 col-lg-6 col-md-6">
     <app-body-composition-analysis [bodyCompositionAnalysis]="inBodyDetail.bodyCompositionAnalysis">
     </app-body-composition-analysis>
   </div>
-  <div class="col-md-4">
+  <div class="col-xl-3 col-lg-6 col-md-6">
     <app-muscle-fat-analysis [muscleFatAnalysis]="inBodyDetail.muscleFatAnalysis"></app-muscle-fat-analysis>
   </div>
-  <div class="col-md-4">
+  <div class="col-xl-3 col-lg-6 col-md-6">
     <app-obesity-analysis [obesityAnalysis]="inBodyDetail.obesityAnalysis"></app-obesity-analysis>
   </div>
 </div>
-<div class="row" style="margin-top: 10px;">
-  <div class="col-md-4 col-sm-12">
+
+<div class="row">
+  <div class="col-xl-3">
     <app-weighing [weight]="inBodyDetail.weight"></app-weighing>
   </div>
-  <div class="col-md-8 col-sm-12">
-    <app-body-composition-history [bodyCompositionHistories]="inBodyDetail.bodyCompositionHistories"></app-body-composition-history>
+  <div class="col-xl-9">
+    <app-body-composition-history [bodyCompositionHistories]="inBodyDetail.bodyCompositionHistories">
+    </app-body-composition-history>
   </div>
 </div>
-<!-- </nz-spin> -->

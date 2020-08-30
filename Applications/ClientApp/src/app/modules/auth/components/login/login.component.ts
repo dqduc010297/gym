@@ -22,18 +22,17 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    // this.authService.login(this.loginUser)
-    //   .subscribe(
-    //     result => {
-    //       this.router.navigate(['']);
-    //     },
-    //     error => {
-    //       // this.modalService.error({
-    //       //   nzTitle: 'Đăng nhập thất bại',
-    //       //   nzContent: 'Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng đăng nhập lại.'
-    //       // });
-    //     }
-    //   );
-    this.router.navigate(['']);
+    this.authService.login(this.loginUser)
+      .subscribe(
+        result => {
+          this.router.navigate(['']);
+        },
+        error => {
+          // this.modalService.error({
+          //   nzTitle: 'Đăng nhập thất bại',
+          //   nzContent: 'Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng đăng nhập lại.'
+          // });
+        }
+      );
   }
 }

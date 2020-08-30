@@ -1,51 +1,59 @@
-<nz-card nzTitle="Obesity Analysis">
-  <nz-table nzTemplateMode [nzShowPagination]="false">
-    <tbody>
-      <tr app-tested-item name="BMI" unit="kg/m2" [testedResult]="obesityAnalysis.bmi"></tr>
-      <tr app-tested-item name="PBF" unit="%" [testedResult]="obesityAnalysis.pbf"></tr>
-    </tbody>
-  </nz-table>
-  <nz-table nzTemplateMode [nzShowPagination]="false">
-    <thead>
-      <tr>
-        <th colspan="4">Evaluation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>BMI </strong></td>
-        <td colspan="3">
-          <nz-checkbox-wrapper style="width: 100%;">
-            <div class="d-flex justify-content-between">
-              <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Normal]"
-                [ngModel]="obesityAnalysis.bmiEvaluation == evaluation.Normal">{{evaluation[evaluation.Normal]}}</label>
-              <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Under]"
-                [ngModel]="obesityAnalysis.bmiEvaluation == evaluation.Under">{{evaluation[evaluation.Under]}}</label>
-              <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.SlightlyOver]"
-                [ngModel]="obesityAnalysis.bmiEvaluation == evaluation.SlightlyOver">{{evaluation[evaluation.SlightlyOver]}}</label>
-              <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Over]"
-                [ngModel]="obesityAnalysis.bmiEvaluation == evaluation.Over">{{evaluation[evaluation.Over]}}</label>
-            </div>
-          </nz-checkbox-wrapper>
-        </td>
-      </tr>
-      <tr>
-        <td><strong>PBF</strong></td>
-        <td colspan="3">
-          <nz-checkbox-wrapper style="width: 100%;">
-            <div class="d-flex justify-content-between">
-              <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Normal]"
-                [ngModel]="obesityAnalysis.pbfEvaluation == evaluation.Normal">{{evaluation[evaluation.Normal]}}</label>
-              <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Under]"
-                [ngModel]="obesityAnalysis.pbfEvaluation == evaluation.Under">{{evaluation[evaluation.Under]}}</label>
-              <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.SlightlyOver]"
-                [ngModel]="obesityAnalysis.pbfEvaluation == evaluation.SlightlyOver">{{evaluation[evaluation.SlightlyOver]}}</label>
-              <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Over]"
-                [ngModel]="obesityAnalysis.pbfEvaluation == evaluation.Over">{{evaluation[evaluation.Over]}}</label>
-            </div>
-          </nz-checkbox-wrapper>
-        </td>
-      </tr>
-    </tbody>
-  </nz-table>
-</nz-card>
+<div class="card">
+  <div class="card-header">
+    Obesity Analysis
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <tbody>
+        <tr app-tested-item name="BMI" unit="kg/m2" [testedResult]="obesityAnalysis.bmi"></tr>
+        <tr app-tested-item name="PBF" unit="%" [testedResult]="obesityAnalysis.pbf"></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    Obesity Evaluation
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>BMI </td>
+          <td colspan="3">
+            <!-- <nz-checkbox-wrapper style="width: 100%;">
+                <div class="d-flex justify-content-between">
+                  <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Normal]"
+                    [ngModel]="obesityAnalysis.bmiEvaluation == evaluation.Normal">{{evaluation[evaluation.Normal]}}</label>
+                  <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Under]"
+                    [ngModel]="obesityAnalysis.bmiEvaluation == evaluation.Under">{{evaluation[evaluation.Under]}}</label>
+                  <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.SlightlyOver]"
+                    [ngModel]="obesityAnalysis.bmiEvaluation == evaluation.SlightlyOver">{{evaluation[evaluation.SlightlyOver]}}</label>
+                  <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Over]"
+                    [ngModel]="obesityAnalysis.bmiEvaluation == evaluation.Over">{{evaluation[evaluation.Over]}}</label>
+                </div>
+              </nz-checkbox-wrapper> -->
+          </td>
+        </tr>
+        <tr>
+          <td>PBF</td>
+          <td colspan="3">
+            <!-- <nz-checkbox-wrapper style="width: 100%;">
+                <div class="d-flex justify-content-between">
+                  <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Normal]"
+                    [ngModel]="obesityAnalysis.pbfEvaluation == evaluation.Normal">{{evaluation[evaluation.Normal]}}</label>
+                  <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Under]"
+                    [ngModel]="obesityAnalysis.pbfEvaluation == evaluation.Under">{{evaluation[evaluation.Under]}}</label>
+                  <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.SlightlyOver]"
+                    [ngModel]="obesityAnalysis.pbfEvaluation == evaluation.SlightlyOver">{{evaluation[evaluation.SlightlyOver]}}</label>
+                  <label nzDisabled nz-checkbox nzValue="evaluation[evaluation.Over]"
+                    [ngModel]="obesityAnalysis.pbfEvaluation == evaluation.Over">{{evaluation[evaluation.Over]}}</label>
+                </div>
+              </nz-checkbox-wrapper> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

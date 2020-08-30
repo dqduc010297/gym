@@ -12,7 +12,7 @@ import { ObesityAnalysisComponent } from './components/obesity-analysis/obesity-
 import { BodyCompositionHistoryComponent } from './components/body-composition-history/body-composition-history.component';
 import { WeighingComponent } from './components/weighing/weighing.component';
 import { TestedItemComponent } from './components/tested-item/tested-item.component';
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { TestedItemComponent } from './components/tested-item/tested-item.compon
       echarts
     }),
     SharedModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
 })
 export class InbodyModule { }
