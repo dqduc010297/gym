@@ -13,7 +13,7 @@ export class GoalOverview {
 export class Goal extends GoalOverview {
   startDateImage: string;
   endDateImage: string;
-  inbodyGoal: InBodyGoal;
+  inbodyGoal: InBodyGoal = new InBodyGoal();
   workOuts: WorkOut[] = [];
   nutritions: Nutrition[] = [];
 }

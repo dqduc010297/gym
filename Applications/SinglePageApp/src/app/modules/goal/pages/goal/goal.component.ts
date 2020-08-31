@@ -40,6 +40,7 @@ export class GoalComponent implements OnInit {
   loadGoal(id: number) {
     this.goalMock.doMock(id).subscribe(
       result => {
+        console.log(result)
         this.goal = result;
       }
     );

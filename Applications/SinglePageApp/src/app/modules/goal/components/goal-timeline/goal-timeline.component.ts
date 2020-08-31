@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GoalOverview } from '../../models/goal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-goal-timeline',
@@ -10,15 +11,15 @@ export class GoalTimelineComponent implements OnInit {
   @Input() goalOverviews: GoalOverview[] = [];
   @Output() goalSelected: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
   selected(id: number) {
-    this.goalSelected.emit(
-      id
-    );
+    this.router.navigate([`goal/${id}`]);
   }
 
 }
