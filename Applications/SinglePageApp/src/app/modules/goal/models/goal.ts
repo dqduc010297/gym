@@ -19,9 +19,9 @@ export class Goal extends GoalOverview {
 }
 
 export class InBodyGoal {
-  weight: InBodyGoalItem;
-  smm: InBodyGoalItem;
-  bfm: InBodyGoalItem;
+  weight: InBodyGoalItem = new InBodyGoalItem();
+  smm: InBodyGoalItem = new InBodyGoalItem();
+  bfm: InBodyGoalItem = new InBodyGoalItem();
 }
 
 export class InBodyGoalItem {

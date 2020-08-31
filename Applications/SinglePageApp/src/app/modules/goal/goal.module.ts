@@ -10,9 +10,11 @@ import { InbodyGoalComponent } from './components/inbody-goal/inbody-goal.compon
 import { InbodyGoalItemComponent } from './components/inbody-goal-item/inbody-goal-item.component';
 import { WorkoutComponent } from './components/workout/workout.component';
 import { NutritionComponent } from './components/nutrition/nutrition.component';
-import { GoalTimelineComponent } from './components/goal-timeline/goal-timeline.component';
 import { InbodyImageComponent } from './components/inbody-image/inbody-image.component';
 import { GoalDetailComponent } from './pages/goal-detail/goal-detail.component';
+import { GoalMock } from 'src/app/mocks/goal.mock';
+import { GoalTimelineComponent } from './pages/goal-timeline/goal-timeline.component';
+import { GoalResultComponent } from './components/goal-result/goal-result.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { GoalDetailComponent } from './pages/goal-detail/goal-detail.component';
     GoalTimelineComponent,
     InbodyImageComponent,
     GoalDetailComponent,
+    GoalResultComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +35,9 @@ import { GoalDetailComponent } from './pages/goal-detail/goal-detail.component';
     NgxEchartsModule.forRoot({
       echarts
     }),
+  ],
+  providers: [
+    GoalMock,
   ]
 })
 export class GoalModule { }

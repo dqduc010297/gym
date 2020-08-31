@@ -6,7 +6,7 @@ import { Nutrition } from '../modules/goal/models/nutrition';
 import { WorkOut } from '../modules/goal/models/exercise';
 import * as moment from 'moment';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class GoalMock implements IMock {
   doMock(param?: any): Observable<any> {
     const data: Goal[] = [

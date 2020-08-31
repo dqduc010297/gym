@@ -19,17 +19,17 @@ export class GoalDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
       param => {
-        this.loadGoal(param['id']);
+        this.loadGoal(Number(param.id));
       }
     );
 
-  } 
+  }
   loadGoal(id: number) {
     this.goalMock.doMock(id).subscribe(
       result => {
         this.goal = result;
+        console.log(this.goal);
       }
     );
   }
-
 }

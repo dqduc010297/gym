@@ -17,36 +17,17 @@ import { HttpEventType } from '@angular/common/http';
 })
 export class GoalComponent implements OnInit {
   goalOverviews: GoalOverview[] = [];
-  goal: Goal = new Goal();
-
   goalIdSelected: number;
 
   constructor(
     private goalOverviewMock: GoalOverviewMock,
-    private goalMock: GoalMock,
   ) { }
 
   ngOnInit(): void {
     this.goalOverviewMock.doMock().subscribe(
       result => {
         this.goalOverviews = result;
-        if (this.goalOverviews) {
-          this.loadGoal(this.goalOverviews[0].id);
-        }
       }
     );
-  }
-
-  loadGoal(id: number) {
-    this.goalMock.doMock(id).subscribe(
-      result => {
-        console.log(result)
-        this.goal = result;
-      }
-    );
-  }
-
-  goalOverviewSelected(event) {
-    this.loadGoal(event);
   }
 }

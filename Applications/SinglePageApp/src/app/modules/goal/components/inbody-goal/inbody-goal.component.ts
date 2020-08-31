@@ -7,10 +7,11 @@ import { InBodyGoal } from '../../models/goal';
   styleUrls: ['./inbody-goal.component.scss']
 })
 export class InbodyGoalComponent implements OnInit {
-  @Input() inbodyGoal: InBodyGoal;
+  @Input() inbodyGoal: InBodyGoal = new InBodyGoal();
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.inbodyGoal);
   }
 }
