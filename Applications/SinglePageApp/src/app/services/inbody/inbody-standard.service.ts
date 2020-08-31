@@ -6,7 +6,7 @@ import { InBodyDetail } from 'src/app/models/inbody/inbody-detail';
 import { DatePipe } from '@angular/common';
 import { BodyCompositionHistory } from 'src/app/models/inbody/body-composition-history';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class InBodyStandardService {
 
   constructor(

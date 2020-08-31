@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/share.module';
 import { WeightHistoryComponent } from './components/weight-history/weight-history.component';
 import { SmmHistoryComponent } from './components/smm-history/smm-history.component';
 import { PbfHistoryComponent } from './components/pbf-history/pbf-history.component';
+import { InBodyService } from 'src/app/services/inbody/inbody.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,8 @@ import { PbfHistoryComponent } from './components/pbf-history/pbf-history.compon
     }),
     SharedModule.forRoot(),
   ],
-  providers: []
+  providers: [
+    InBodyService
+  ]
 })
 export class HomeModule { }

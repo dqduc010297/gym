@@ -12,6 +12,7 @@ import { WorkoutComponent } from './components/workout/workout.component';
 import { NutritionComponent } from './components/nutrition/nutrition.component';
 import { GoalTimelineComponent } from './components/goal-timeline/goal-timeline.component';
 import { InbodyImageComponent } from './components/inbody-image/inbody-image.component';
+import { GoalDetailComponent } from './pages/goal-detail/goal-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { InbodyImageComponent } from './components/inbody-image/inbody-image.com
     NutritionComponent,
     GoalTimelineComponent,
     InbodyImageComponent,
+    GoalDetailComponent,
   ],
   imports: [
     CommonModule,

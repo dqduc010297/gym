@@ -12,6 +12,8 @@ import { ObesityAnalysisComponent } from './components/obesity-analysis/obesity-
 import { BodyCompositionHistoryComponent } from './components/body-composition-history/body-composition-history.component';
 import { WeighingComponent } from './components/weighing/weighing.component';
 import { TestedItemComponent } from './components/tested-item/tested-item.component';
+import { InBodyService } from 'src/app/services/inbody/inbody.service';
+import { InBodyStandardService } from 'src/app/services/inbody/inbody-standard.service';
 
 
 @NgModule({
@@ -32,5 +34,9 @@ import { TestedItemComponent } from './components/tested-item/tested-item.compon
     }),
     SharedModule.forRoot(),
   ],
+  providers: [
+    InBodyService,
+    InBodyStandardService,
+  ]
 })
 export class InbodyModule { }

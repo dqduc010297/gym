@@ -45,12 +45,6 @@ namespace ApplicationDomain.Gym.Model.MyInBody
                         Max = s.InBodyStandard.MineralMax,
                         Min = s.InBodyStandard.MineralMin
                     },
-                    Weight = new TestedResult()
-                    {
-                        Value = s.Weight,
-                        Max = s.InBodyStandard.WeightMax,
-                        Min = s.InBodyStandard.WeightMin
-                    },
                 }));
             mapper.ForMember(d => d.MuscleFatAnalysis,
                opt => opt.MapFrom(s =>

@@ -17,6 +17,10 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { SharedModule } from './share.module';
 import { GoalModule } from './modules/goal/goal.module';
 import { TimesheetModule } from './modules/timesheet/timesheet.module';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 registerLocaleData(vi);
 
@@ -28,13 +32,14 @@ registerLocaleData(vi);
   imports: [
     BrowserModule,
     AppRoutingModule,
-    IconsProviderModule,
+    // IconsProviderModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SharedModule.forRoot(),
-    TimesheetModule,
-    GoalModule,
+    NzLayoutModule,
+    NzDropDownModule,
+    NzAvatarModule,
+    NzMenuModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },
