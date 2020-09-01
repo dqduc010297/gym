@@ -30,4 +30,20 @@ export class GoalComponent implements OnInit {
       }
     );
   }
+
+  goalOverviewSelected(event) {
+    this.loadGoal(event);
+  }
+
+  onValueChange(value: Date): void {
+    console.log(`Current value: ${value}`);
+  }
+
+  onPanelChange(change: { date: Date; mode: string }): void {
+    console.log(`Current value: ${change.date}`);
+    console.log(`Current mode: ${change.mode}`);
+  }
+  onChange(result: Date): void {
+    console.log('onChange: ', result);
+  }
 }

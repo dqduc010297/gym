@@ -4,6 +4,8 @@ import { AuthService, AuthenticationUrl } from '../../../../services/auth/auth.s
 import { LoginUser } from '../../../../models/auth/login';
 import { LoaderService } from 'src/app/services/core/loader.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { LoginMock } from 'src/app/mocks/login.mock';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -17,24 +19,32 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     public loaderService: LoaderService,
     private router: Router,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private loginMock: LoginMock
   ) { }
 
   ngOnInit(): void {
   }
 
   signIn() {
-    this.authService.login(this.loginUser)
-      .subscribe(
-        result => {
-          this.router.navigate(['']);
-        },
-        error => {
-          this.modalService.error({
-            nzTitle: 'Đăng nhập thất bại',
-            nzContent: 'Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng đăng nhập lại.'
-          });
-        }
-      );
+    // this.authService.login(this.loginUser)
+    //   .subscribe(
+    //     result => {
+    //       this.router.navigate(['']);
+    //     },
+    //     error => {
+    //       this.modalService.error({
+    //         nzTitle: 'Đăng nhập thất bại',
+    //         nzContent: 'Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng đăng nhập lại.'
+    //       });
+    //     }
+    //   );
+    this.loginMock.doMock().subscribe(
+      result => {
+        localStorage.setItem(environment.tokenKey, JSON.stringify(result));
+        this.authService.currentUserSubject.next(result);
+        this.router.navigate(['']);
+      }
+    );
   }
 }

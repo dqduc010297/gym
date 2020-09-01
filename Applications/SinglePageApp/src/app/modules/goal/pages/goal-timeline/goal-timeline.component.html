@@ -1,9 +1,5 @@
-<div style=" background-color: #ffffff;">
-  <div class="d-flex justify-content-between">
-    <nz-date-picker></nz-date-picker>
-    <button nz-button nzType="default">New</button>
-  </div>
-  <div style="height: 80vh; overflow-y: auto;overflow-x: hidden; padding: 6px; margin-top: 8px;">
+<nz-card>
+  <div style="height: 76vh; overflow-y: auto;overflow-x: hidden; padding: 6px; margin-top: 8px;">
     <nz-timeline>
       <nz-timeline-item *ngFor="let goalOverview of goalOverviews"
         [nzColor]="!goalOverview.isFinished ? 'blue' : goalOverview.isSuccessful ? 'green' : 'red'">
@@ -14,5 +10,5 @@
         </div>
       </nz-timeline-item>
     </nz-timeline>
-  </div>
 </div>
+</nz-card>

@@ -1,17 +1,11 @@
-<!-- <nz-result nzStatus="success" nzTitle="Chúc mừng bạn đã hoàn thành mục tiêu!" nzSubTitle="
-        Giảm 1.5kg mỡ, Tăng 1kg cơ, Giảm 1.0 kg">
-        <div nz-result-content>
-          <nz-card>
-            <div class="row">
-              <div class="col-lg-6">
-                <app-inbody-goal [inbodyGoal]="goal.inbodyGoal"></app-inbody-goal>
-              </div>
-              <div class="col-lg-3">
-                <app-uploader [enable]="true" [description]="'11/03/2020'"></app-uploader>
-              </div>
-              <div class="col-lg-3">
-                <app-uploader [enable]="true" [description]="'11/03/2020'"></app-uploader>
-              </div>
+<div style="margin-top: 8px;">
+    <nz-result nzStatus="success" nzTitle="Chúc mừng bạn đã hoàn thành mục tiêu!" nzSubTitle="
+      Giảm 1.5kg mỡ, Tăng 1kg cơ, Giảm 1.0 kg">
+      <div nz-result-content>
+        <nz-card>
+          <div class="row">
+            <div class="col-6">
+              <app-inbody-goal [inbodyGoal]="goal.inbodyGoal"></app-inbody-goal>
             </div>
           </nz-card>
           <app-workout [workOuts]="goal.workOuts"></app-workout>
