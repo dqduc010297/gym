@@ -19,7 +19,7 @@ export class GoalDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
       param => {
-        this.loadGoal(param['id']);
+        this.loadGoal(Number(param.id));
       }
     );
 
