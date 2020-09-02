@@ -3,6 +3,8 @@ import { InBodyDetail } from 'src/app/models/inbody/inbody-detail';
 import { InBodyService } from 'src/app/services/inbody/inbody.service';
 import { LoaderService } from 'src/app/services/core/loader.service';
 import { DatePipe } from '@angular/common';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { MyInBodyRq } from 'src/app/models/inbody/my-inbody-rq';
 
 @Component({
   selector: 'app-inbody',
@@ -12,33 +14,26 @@ import { DatePipe } from '@angular/common';
 export class InbodyComponent implements OnInit {
   inBodyDetail: InBodyDetail = new InBodyDetail();
   testedDates: string[] = [];
-
   testedDatePicker: Date;
+  myInBodyRequest: MyInBodyRq = new MyInBodyRq(this.deviceService);
 
   constructor(
     private inBodyService: InBodyService,
     public loaderService: LoaderService,
-    public datePipe: DatePipe
+    public datePipe: DatePipe,
+    private deviceService: DeviceDetectorService
   ) { }
 
   listOfData: number[] = [1];
 
   ngOnInit(): void {
+    console.log(this.myInBodyRequest);
     this.getTestedDate();
     this.loadLatestMyInBody();
   }
 
   loadLatestMyInBody() {
-    this.inBodyService.getLatestInBody().subscribe(
-      result => {
-        this.inBodyDetail = result;
-        this.testedDatePicker = this.inBodyDetail.testedDate;
-      }
-    );
-  }
-
-  loadMyInBody() {
-    this.inBodyService.getLatestInBody().subscribe(
+    this.inBodyService.getInBody(this.myInBodyRequest).subscribe(
       result => {
         this.inBodyDetail = result;
         this.testedDatePicker = this.inBodyDetail.testedDate;
@@ -47,7 +42,8 @@ export class InbodyComponent implements OnInit {
   }
 
   onChange(testedDate: Date): void {
-    this.inBodyService.getInBody(testedDate).subscribe(
+    this.myInBodyRequest.testedDate = testedDate;
+    this.inBodyService.getInBody(this.myInBodyRequest).subscribe(
       result => {
         this.inBodyDetail = result;
       }

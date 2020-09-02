@@ -1,9 +1,11 @@
-<app-weight-history [weights]="weights" [testedDates]="testedDates"></app-weight-history>
-<div class="row">
-  <div class="col-md-6">
-    <app-smm-history [smm]="smm" [testedDates]="testedDates"></app-smm-history>
+<nz-spin [nzSpinning]="loaderService.showLoader" nzTip="Loading...">
+  <app-weight-history [weights]="weights" [testedDates]="testedDates"></app-weight-history>
+  <div class="row">
+    <div class="col-xl-6 col-lg-12">
+      <app-smm-history [smm]="smm" [testedDates]="testedDates"></app-smm-history>
+    </div>
+    <div class="col-xl-6 col-lg-12">
+      <app-pbf-history [pbf]="pbf" [testedDates]="testedDates"></app-pbf-history>
+    </div>
   </div>
-  <div class="col-md-6">
-    <app-pbf-history [pbf]="pbf" [testedDates]="testedDates"></app-pbf-history>
-  </div>
-</div>
+</nz-spin>

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationDomain.Gym.IServices;
 using ApplicationDomain.Gym.Model;
+using ApplicationDomain.Gym.Model.Requests;
 using AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace WebApplication.Controllers
 {
@@ -20,9 +22,10 @@ namespace WebApplication.Controllers
 
         [Route("")]
         [HttpGet]
-        public async Task<IActionResult> GetMyInBodyByTestedDate(DateTime? testedDate)
+        public async Task<IActionResult> GetMyInBodyByTestedDate(string myInBodyRq)
         {
-            return Ok(await this._inBodyService.GetMyInbodyByTestedDate(this.GetCurrentUserId() ,testedDate));
+            var rq = JsonConvert.DeserializeObject<MyInBodyRq>(myInBodyRq);
+            return Ok(await this._inBodyService.GetMyInbodyByTestedDate(this.GetCurrentUserId() ,rq));
         }
 
         [Route("testeddates")]
@@ -50,9 +53,10 @@ namespace WebApplication.Controllers
 
         [Route("bodycompositionHistory")]
         [HttpGet]
-        public async Task<IActionResult> GetBodyCompositionHistories()
+        public async Task<IActionResult> GetBodyCompositionHistories(string myInBodyRq)
         {
-            return Ok(await this._inBodyService.GetBodyCompositionHistories(this.GetCurrentUserId()));
+            var rq = JsonConvert.DeserializeObject<MyInBodyRq>(myInBodyRq);
+            return Ok(await this._inBodyService.GetBodyCompositionHistories(this.GetCurrentUserId(), rq));
         }
     }
 }

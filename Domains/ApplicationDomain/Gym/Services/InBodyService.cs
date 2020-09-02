@@ -3,6 +3,7 @@ using ApplicationDomain.Gym.IRepositories;
 using ApplicationDomain.Gym.IServices;
 using ApplicationDomain.Gym.Model;
 using ApplicationDomain.Gym.Model.MyInBody;
+using ApplicationDomain.Gym.Model.Requests;
 using ApplicationDomain.Identity.Entities;
 using AspNetCore.DataBinding.AutoMapper;
 using AspNetCore.UnitOfWork;
@@ -29,27 +30,31 @@ namespace ApplicationDomain.Gym.Services
             this._inBodyRepository = inBodyRepository;
             this._userManager = userManager;
         }
-        public async Task<MyInBodyRs> GetMyInbodyByTestedDate(int userId, DateTime? testedDate)
+        public async Task<MyInBodyRs> GetMyInbodyByTestedDate(int userId, MyInBodyRq rq)
         {
             // load inbody information
-            var myInBody = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, testedDate)
+            var myInBody = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, rq.TestedDate)
                      .MapQueryTo<MyInBodyRs>(this._mapper)
                      .FirstOrDefaultAsync();
 
             // load body history
-            myInBody.BodyCompositionHistories = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, testedDate)
-                .MapQueryTo<BodyCompositionHistory>(this._mapper)
-                .Skip(0).Take(9)
-                .OrderBy(p => p.TestedDate)
-                .ToListAsync();
+            myInBody.BodyCompositionHistories = await this.GetBodyCompositionHistories(userId, rq);
 
             return myInBody;
         }
         public async Task AddNewInBody(InBodyRq rq)
         {
-            InBody inBody = _mapper.Map<InBody>(rq);
-            this._inBodyRepository.Create(inBody);
-            await _uow.SaveChangesAsync();
+            try
+            {
+                InBody inBody = _mapper.Map<InBody>(rq);
+                //this._inBodyRepository.Create(inBody);
+                //await _uow.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public async Task UpdateInBody(InBodyRq rq)
         {
@@ -67,14 +72,13 @@ namespace ApplicationDomain.Gym.Services
                     .Select(p => p.TestedDate)
                     .ToListAsync();
         }
-        public async Task<List<BodyCompositionHistory>> GetBodyCompositionHistories(int userId)
+        public async Task<List<BodyCompositionHistory>> GetBodyCompositionHistories(int userId, MyInBodyRq rq)
         {
-            return await this._inBodyRepository.GetMyInBodyByTestedDate(userId, null)
-                    .MapQueryTo<BodyCompositionHistory>(this._mapper)
-                    .OrderByDescending(p => p.TestedDate)
-                    .Skip(0).Take(10)
-                    .OrderBy(p => p.TestedDate)
-                    .ToListAsync();
+            return await this._inBodyRepository.GetMyInBodyByTestedDate(userId, rq.TestedDate)
+                .MapQueryTo<BodyCompositionHistory>(this._mapper)
+                .Skip(rq.Skip).Take(rq.Take)
+                .OrderBy(p => p.TestedDate)
+                .ToListAsync();
         }
     }
 }

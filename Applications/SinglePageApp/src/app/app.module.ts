@@ -19,6 +19,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { WaitingComponent } from './components/waiting/waiting.component';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 registerLocaleData(vi);
 
@@ -39,6 +40,7 @@ registerLocaleData(vi);
     NzMenuModule,
     NzToolTipModule,
     NzIconModule,
+    NzSpinModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { InBodyDetail } from 'src/app/models/inbody/inbody-detail';
 import { DatePipe } from '@angular/common';
 import { BodyCompositionHistory } from 'src/app/models/inbody/body-composition-history';
+import { MyInBodyRq } from 'src/app/models/inbody/my-inbody-rq';
+import { FilterRequest } from 'src/app/models/core/filter.request';
 
 @Injectable()
 export class InBodyService {
@@ -14,17 +16,14 @@ export class InBodyService {
     private datePipe: DatePipe) {
   }
 
-  getBodyCompositionHistories(): Observable<BodyCompositionHistory[]> {
-    return this.http.get<BodyCompositionHistory[]>(`${environment.apiUrl}/inbody/bodycompositionHistory`);
+  getBodyCompositionHistories(inBodyFilter: FilterRequest): Observable<BodyCompositionHistory[]> {
+    const params = new HttpParams().set('myInBodyRq', JSON.stringify(inBodyFilter));
+    return this.http.get<BodyCompositionHistory[]>(`${environment.apiUrl}/inbody/bodycompositionHistory`, { params });
   }
 
-  getInBody(testedDate: Date): Observable<InBodyDetail> {
-    const params = new HttpParams().set('testedDate', this.datePipe.transform(testedDate, 'yyyy-MM-dd'));
+  getInBody(myInBodyRq: MyInBodyRq): Observable<InBodyDetail> {
+    const params = new HttpParams().set('myInBodyRq', JSON.stringify(myInBodyRq));
     return this.http.get<InBodyDetail>(`${environment.apiUrl}/inbody`, { params });
-  }
-
-  getLatestInBody(): Observable<InBodyDetail> {
-    return this.http.get<InBodyDetail>(`${environment.apiUrl}/inbody`);
   }
 
   getTestedDates(): Observable<Date[]> {
