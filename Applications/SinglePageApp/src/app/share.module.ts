@@ -3,6 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntModule } from './ng-zorro-antd.module';
 import { UploaderComponent } from './components/uploader/uploader.component';
+import { WaitingComponent } from './components/waiting/waiting.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { UploaderComponent } from './components/uploader/uploader.component';
   ],
   declarations: [
     UploaderComponent,
+    WaitingComponent
   ],
   providers: [
     DatePipe
@@ -22,6 +24,7 @@ import { UploaderComponent } from './components/uploader/uploader.component';
     FormsModule,
     NgZorroAntModule,
     UploaderComponent,
+    WaitingComponent
   ],
   entryComponents: [
   ]

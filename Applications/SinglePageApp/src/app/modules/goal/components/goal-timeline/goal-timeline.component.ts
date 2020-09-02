@@ -9,7 +9,7 @@ import { GoalOverviewMock } from 'src/app/mocks/goal-overview.mock';
   styleUrls: ['./goal-timeline.component.scss']
 })
 export class GoalTimelineComponent implements OnInit {
-  goalOverviews: GoalOverview[] = [];
+  @Input() goalOverviews: GoalOverview[] = [];
 
   constructor(
     private router: Router,

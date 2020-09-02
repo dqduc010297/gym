@@ -13,8 +13,8 @@ import { NutritionComponent } from './components/nutrition/nutrition.component';
 import { InbodyImageComponent } from './components/inbody-image/inbody-image.component';
 import { GoalDetailComponent } from './pages/goal-detail/goal-detail.component';
 import { GoalMock } from 'src/app/mocks/goal.mock';
-import { GoalTimelineComponent } from './pages/goal-timeline/goal-timeline.component';
 import { GoalResultComponent } from './components/goal-result/goal-result.component';
+import { GoalTimelineComponent } from './components/goal-timeline/goal-timeline.component';
 
 @NgModule({
   declarations: [

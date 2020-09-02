@@ -1,10 +1,10 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-xl-4 col-lg-6">
     <div class="d-flex justify-content-between" style="margin-bottom: 8px;">
       <div>
         <strong>Tested date:</strong>
-        <nz-date-picker [nzDateRender]="tplRender" style="margin-left: 10px;" [(ngModel)]="testedDatePicker" (ngModelChange)="onChange($event)"
-          nzFormat="dd/MM/yyyy" [nzDisabledDate]="disabledDate">
+        <nz-date-picker [nzDateRender]="tplRender" style="margin-left: 10px;" [(ngModel)]="testedDatePicker"
+          (ngModelChange)="onChange($event)" nzFormat="dd/MM/yyyy" [nzDisabledDate]="disabledDate">
         </nz-date-picker>
 
         <ng-template #tplRender let-current>
@@ -21,19 +21,19 @@
     <app-body-composition-analysis [bodyCompositionAnalysis]="inBodyDetail.bodyCompositionAnalysis">
     </app-body-composition-analysis>
   </div>
-  <div class="col-md-4">
+  <div class="col-xl-4 col-lg-6">
     <app-muscle-fat-analysis [muscleFatAnalysis]="inBodyDetail.muscleFatAnalysis"></app-muscle-fat-analysis>
   </div>
-  <div class="col-md-4">
+  <div class="col-xl-4 col-lg-6">
     <app-obesity-analysis [obesityAnalysis]="inBodyDetail.obesityAnalysis"></app-obesity-analysis>
   </div>
-</div>
-<div class="row" style="margin-top: 10px;">
-  <div class="col-md-4 col-sm-12">
+
+
+  <div class="col-xl-4 col-lg-6">
     <app-weighing [weight]="inBodyDetail.weight"></app-weighing>
   </div>
-  <div class="col-md-8 col-sm-12">
-    <app-body-composition-history [bodyCompositionHistories]="inBodyDetail.bodyCompositionHistories"></app-body-composition-history>
+  <div class="col-xl-8 col-lg-12 d-none d-md-block">
+    <app-body-composition-history [bodyCompositionHistories]="inBodyDetail.bodyCompositionHistories">
+    </app-body-composition-history>
   </div>
 </div>
-<!-- </nz-spin> -->

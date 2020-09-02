@@ -1,39 +1,58 @@
 <nz-layout>
   <nz-sider class="menu-sidebar d-none d-md-block" nzCollapsible nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null">
-    <div class="logo"></div>
-    <ul nz-menu nzTheme="light" nzMode="inline">
-      <li nz-menu-item>
-        <i nz-icon nzType="file"></i>
-        <span>nav 1</span>
+    <div class="sidebar-logo">
+      <a href="/home">
+        <img src="assets/images/logo.png" alt="logo">
+        <h1></h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
+        <i nz-icon nzType="home" nzTheme="outline"></i>
+        <a [routerLink]="['/home']" routerLinkActive="router-link-active">
+          <span *ngIf="!isCollapsed">Home</span>
+        </a>
       </li>
-      <li nz-menu-item>
-        <i nz-icon nzType="video-camera"></i>
-        <span>nav 2</span>
+      <li nz-submenu nzTitle="Inbody" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
+            <a [routerLink]="['/inbody/list']" routerLinkActive="router-link-active">
+              <span *ngIf="!isCollapsed">List</span>
+            </a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <i nz-icon nzType="plus" nzTheme="outline"></i>
+            <a [routerLink]="['/inbody/new']" routerLinkActive="router-link-active">
+              <span *ngIf="!isCollapsed">New</span>
+            </a>
+          </li>
+        </ul>
       </li>
-      <li nz-menu-item>
-        <i nz-icon nzType="upload"></i>
-        <span>nav 3</span>
+      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
+        <i nz-icon nzType="calendar" nzTheme="outline"></i>
+        <a [routerLink]="['/timesheet']" routerLinkActive="router-link-active">
+          <span *ngIf="!isCollapsed">Timesheet</span>
+        </a>
       </li>
-      <li nz-menu-item>
-        <i nz-icon nzType="bar-chart"></i>
-        <span>nav 4</span>
+      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
+        <i nz-icon nzType="check-square" nzTheme="outline"></i>
+        <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
+          <span *ngIf="!isCollapsed">Goal</span>
+        </a>
       </li>
-      <li nz-menu-item>
-        <i nz-icon nzType="cloud-o"></i>
-        <span>nav 5</span>
+      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
+        <i nz-icon nzType="trophy" nzTheme="outline"></i>
+        <a [routerLink]="['/reward']" routerLinkActive="router-link-active">
+          <span *ngIf="!isCollapsed">Reward</span>
+        </a>
       </li>
-      <li nz-menu-item>
-        <i nz-icon nzType="appstore-o"></i>
-        <span>nav 6</span>
-      </li>
-      <li nz-menu-item>
-        <i nz-icon nzType="team"></i>
-        <span>nav 7</span>
-      </li>
-      <li nz-menu-item>
-        <i nz-icon nzType="shop"></i>
-        <span>nav 8</span>
+      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
+        <i nz-icon nzType="snippets" nzTheme="outline"></i>
+        <a [routerLink]="['/blog']" routerLinkActive="router-link-active">
+          <span *ngIf="!isCollapsed">Blog</span>
+        </a>
       </li>
     </ul>
   </nz-sider>
@@ -60,17 +79,35 @@
         </nz-header>
       </div>
       <nz-header class="d-sm-block d-md-none">
-        <ul nz-menu nzMode="horizontal" class="d-flex justify-content-between">
+        <ul nz-menu nzMode="horizontal" class="d-flex justify-content-around">
           <li nz-menu-item nzMatchRouter>
-            <i nz-icon nzType="calendar" nzTheme="outline"></i>
-            <a [routerLink]="['/timesheet']" routerLinkActive="router-link-active">
-              Timesheet
+            <a [routerLink]="['/home']" routerLinkActive="router-link-active">
+              <i nz-icon nzType="home" nzTheme="outline"></i>
             </a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <i nz-icon nzType="trophy" nzTheme="outline"></i>
+            <a [routerLink]="['/inbody/list']" routerLinkActive="router-link-active">
+              <i nz-icon nzType="form" nzTheme="outline"></i>
+            </a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/timesheet']" routerLinkActive="router-link-active">
+              <i nz-icon nzType="calendar" nzTheme="outline"></i>
+            </a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
             <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
-              Goal
+              <i nz-icon nzType="check-square" nzTheme="outline"></i>
+            </a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/reward']" routerLinkActive="router-link-active">
+              <i nz-icon nzType="trophy" nzTheme="outline"></i>
+            </a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/blog']" routerLinkActive="router-link-active">
+              <i nz-icon nzType="snippets" nzTheme="outline"></i>
             </a>
           </li>
         </ul>

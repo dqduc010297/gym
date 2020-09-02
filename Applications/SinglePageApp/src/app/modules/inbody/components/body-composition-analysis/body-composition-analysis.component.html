@@ -1,4 +1,4 @@
-<nz-card nzTitle="Body Composition Analysis">
+<nz-card [nzBodyStyle]="{padding:'24px 10px'}" nzTitle="Body Composition Analysis" style="margin-top: 20px;">
   <nz-table nzTemplateMode [nzShowPagination]="false">
     <tbody>
       <tr app-tested-item name="Total Body Water" unit="L" [testedResult]="bodyCompositionAnalysis.bodyWater"></tr>

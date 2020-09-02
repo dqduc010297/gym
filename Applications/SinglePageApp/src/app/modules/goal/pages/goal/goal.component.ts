@@ -32,7 +32,7 @@ export class GoalComponent implements OnInit {
   }
 
   goalOverviewSelected(event) {
-    this.loadGoal(event);
+    // this.loadGoal(event);
   }
 
   onValueChange(value: Date): void {

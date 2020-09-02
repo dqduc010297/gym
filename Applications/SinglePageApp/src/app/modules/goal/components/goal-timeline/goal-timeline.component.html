@@ -1,5 +1,5 @@
-<nz-card>
-  <div style="height: 76vh; overflow-y: auto;overflow-x: hidden; padding: 6px; margin-top: 8px;">
+<nz-card [nzBodyStyle]="{padding:'10px'}">
+  <div style="height: 75vh; overflow-y: auto;overflow-x: hidden; padding: 6px; margin-top: 8px;">
     <nz-timeline>
       <nz-timeline-item *ngFor="let goalOverview of goalOverviews"
         [nzColor]="!goalOverview.isFinished ? 'blue' : goalOverview.isSuccessful ? 'green' : 'red'">
@@ -10,5 +10,5 @@
         </div>
       </nz-timeline-item>
     </nz-timeline>
-</div>
+  </div>
 </nz-card>
