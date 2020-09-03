@@ -14,6 +14,7 @@ import { WeighingComponent } from './components/weighing/weighing.component';
 import { TestedItemComponent } from './components/tested-item/tested-item.component';
 import { InBodyService } from 'src/app/services/inbody/inbody.service';
 import { InBodyStandardService } from 'src/app/services/inbody/inbody-standard.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { InBodyStandardService } from 'src/app/services/inbody/inbody-standard.s
   providers: [
     InBodyService,
     InBodyStandardService,
+    UserService,
   ]
 })
 export class InbodyModule { }
