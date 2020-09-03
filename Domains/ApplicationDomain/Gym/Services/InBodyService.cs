@@ -20,15 +20,16 @@ namespace ApplicationDomain.Gym.Services
     public class InBodyService : ServiceBase, IInBodyService
     {
         private IInBodyRepository _inBodyRepository;
-        private readonly UserManager<User> _userManager;
+        private IInBodyStandardService _inBodyStandardService;
+
         public InBodyService(
-            IInBodyRepository inBodyRepository,
-            UserManager<User> userManager,
+            IInBodyRepository inBodyRepository, 
+            IInBodyStandardService inBodyStandardService,
             IMapper mapper,
             IUnitOfWork uow) : base(mapper, uow)
         {
             this._inBodyRepository = inBodyRepository;
-            this._userManager = userManager;
+            this._inBodyStandardService = inBodyStandardService;
         }
         public async Task<MyInBodyRs> GetMyInbodyByTestedDate(int userId, MyInBodyRq rq)
         {
@@ -42,14 +43,16 @@ namespace ApplicationDomain.Gym.Services
 
             return myInBody;
         }
-        public async Task AddNewInBody(InBodyRq rq)
+        public async Task<string> AddNewInBody(InBodyRq rq)
         {
             try
             {
+                InBodyStandard standard = _mapper.Map<InBodyStandard>(rq);
+                var isDiff = await this._inBodyStandardService.CheckDiff(standard);
                 InBody inBody = _mapper.Map<InBody>(rq);
                 //this._inBodyRepository.Create(inBody);
                 //await _uow.SaveChangesAsync();
-
+                return isDiff.ToString();
             }
             catch (Exception ex)
             {

@@ -25,7 +25,7 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> GetMyInBodyByTestedDate(string myInBodyRq)
         {
             var rq = JsonConvert.DeserializeObject<MyInBodyRq>(myInBodyRq);
-            return Ok(await this._inBodyService.GetMyInbodyByTestedDate(this.GetCurrentUserId() ,rq));
+            return Ok(await this._inBodyService.GetMyInbodyByTestedDate(this.GetCurrentUserId(), rq));
         }
 
         [Route("testeddates")]
@@ -37,17 +37,17 @@ namespace WebApplication.Controllers
 
         [Route("")]
         [HttpPost]
-        public async Task<IActionResult> CreateNewInBody([FromBody]InBodyRq inBodyRq)
+        public async Task<IActionResult> CreateNewInBody([FromBody] InBodyRq inBodyRq)
         {
-            await this._inBodyService.AddNewInBody(inBodyRq);
-            return Ok("Inbody");
+            string result = await this._inBodyService.AddNewInBody(inBodyRq);
+            return Ok(result);
         }
 
         [Route("")]
         [HttpPut]
         public async Task<IActionResult> UpdateInBody()
         {
-            
+
             return Ok("Inbody");
         }
 
