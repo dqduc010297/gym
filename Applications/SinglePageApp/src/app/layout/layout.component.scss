@@ -1,23 +1,17 @@
 .isCollapsed {
-  margin-top: 120px;
+  margin-top: 100px;
 }
 
 .isNotCollapsed {
-  margin-top: 60px;
-}
-
-.logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px;
+  margin-top: 50px;
 }
 
 .sidebar-logo {
   position: relative;
-  height: 64px;
-  padding-left: 24px;
+  height: 48px;
+  padding-left: 12px;
   overflow: hidden;
-  line-height: 64px;
+  line-height: 48px;
   background: #001529;
   transition: all 0.3s;
 }
@@ -58,7 +52,8 @@ nz-sider {
 nz-header {
   background: #fff;
   padding: 0;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  // box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  background-color: #001529;
 }
 
 nz-content {
@@ -73,3 +68,4 @@ nz-content {
 nz-footer {
   text-align: center;
 }
+
