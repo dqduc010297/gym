@@ -1,4 +1,5 @@
-﻿using ApplicationDomain.Gym.Model.MyInBody;
+﻿using ApplicationDomain.Gym.Entities;
+using ApplicationDomain.Gym.Model.MyInBody;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,5 +10,6 @@ namespace ApplicationDomain.Gym.IServices
     public interface IInBodyStandardService
     {
         Task<InBodyStandardRs> GetLatestInBodyStandard(int userId);
+        Task<bool> CheckDiff(InBodyStandard inBodyStandard);
     }
 }

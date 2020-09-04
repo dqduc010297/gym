@@ -9,6 +9,7 @@ namespace ApplicationDomain.Gym.Model.MyInBody
 {
     public class InBodyStandardRs: BaseInBody
     {
+        public int Id { set; get; }
         public InBodyStandardRs()
         {
             this.BodyCompositionAnalysis = new BodyCompositionAnalysis();

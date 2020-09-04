@@ -27,9 +27,31 @@ namespace ApplicationDomain.Gym.Services
             this._inBodyStandardRepository = inBodyStandardRepository;
         }
 
+        public async Task<bool> CheckDiff(InBodyStandard inBodyStandard)
+        {
+            InBodyStandard entity = await this._inBodyStandardRepository.GetEntityByIdAsync(inBodyStandard.Id);
+            if (entity == null)
+            {
+                return true;
+            }
+            if (entity.BodyWaterMax != inBodyStandard.BodyWaterMax && entity.BodyWaterMin != inBodyStandard.BodyWaterMin) 
+                return true;
+            if (entity.ProteinMax != inBodyStandard.ProteinMax && entity.ProteinMin != inBodyStandard.ProteinMin) 
+                return true;
+            if (entity.MineralMax != inBodyStandard.MineralMax && entity.MineralMin != inBodyStandard.MineralMin) 
+                return true;
+            if (entity.BodyFatMassMax != inBodyStandard.BodyFatMassMax && entity.BodyFatMassMin != inBodyStandard.BodyFatMassMin) 
+                return true;
+            if (entity.SkeletalMuscleMassMax != inBodyStandard.SkeletalMuscleMassMax && entity.SkeletalMuscleMassMin != inBodyStandard.SkeletalMuscleMassMin) 
+                return true;
+            if (entity.WeightMax != inBodyStandard.WeightMax && entity.WeightMin != inBodyStandard.WeightMin)
+                return true;
+            return false;
+        }
+
         public async Task<InBodyStandardRs> GetLatestInBodyStandard(int userId)
         {
-            var result =  await this._inBodyStandardRepository.GetLatestInBodyStandard(userId)
+            var result = await this._inBodyStandardRepository.GetLatestInBodyStandard(userId)
                 .MapQueryTo<InBodyStandardRs>(this._mapper)
                 .FirstOrDefaultAsync();
             return result ?? new InBodyStandardRs();
