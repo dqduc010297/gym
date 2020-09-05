@@ -4,10 +4,15 @@ import { ObesityAnalysis } from './obesity-analysis';
 import { BodyCompositionHistory } from './body-composition-history';
 
 export class InBodyDetail {
+  id: number;
+
   testedDate: Date;
   weight: number;
   score: number;
   height: number;
+
+  inBodyStandardId: number;
+  userId: number;
 
   bodyCompositionAnalysis: BodyCompositionAnalysis = new BodyCompositionAnalysis();
   muscleFatAnalysis: MuscleFatAnalysis = new MuscleFatAnalysis();

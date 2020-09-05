@@ -4,8 +4,6 @@ import { InBodyStandardService } from 'src/app/services/inbody/inbody-standard.s
 import { InBodyService } from 'src/app/services/inbody/inbody.service';
 import { LoaderService } from 'src/app/services/core/loader.service';
 import { UserService } from 'src/app/services/user/user.service';
-import { UserSearchByPhoneRequest } from 'src/app/models/user/user-search-by-phone-request';
-import { UserSearchRs } from 'src/app/models/user/user-search-rs';
 
 @Component({
   selector: 'app-new-inbody',
@@ -19,15 +17,9 @@ export class NewInbodyComponent implements OnInit {
     private inBodyStandardService: InBodyStandardService,
     private inBodyService: InBodyService,
     public loaderService: LoaderService,
-    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
-    this.inBodyStandardService.getLatestInBody().subscribe(
-      result => {
-        this.inBodyDetail = result;
-      }
-    );
   }
 
   submit() {
@@ -39,6 +31,10 @@ export class NewInbodyComponent implements OnInit {
   }
 
   selectedUser(event){
-    console.log(event);
+    this.inBodyStandardService.getLatestInBody(event).subscribe(
+      result => {
+        this.inBodyDetail = result;
+      }
+    );
   }
 }

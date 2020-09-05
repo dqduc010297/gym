@@ -14,7 +14,7 @@ export class InBodyStandardService {
     private datePipe: DatePipe) {
   }
 
-  getLatestInBody(): Observable<InBodyDetail> {
-    return this.http.get<InBodyDetail>(`${environment.apiUrl}/inbodystandard/latest`);
+  getLatestInBody(userId: number): Observable<InBodyDetail> {
+    return this.http.get<InBodyDetail>(`${environment.apiUrl}/inbodystandard/latest?userId=${userId}`);
   }
 }

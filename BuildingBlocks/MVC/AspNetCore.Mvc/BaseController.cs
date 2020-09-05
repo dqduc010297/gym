@@ -32,6 +32,11 @@ namespace AspNetCore.Mvc
             return this.User.FindFirst(ClaimTypes.Name).Value;
         }
         [ApiExplorerSettings(IgnoreApi = true)]
+        public virtual string GetCurrentRole()
+        {
+            return this.User.FindFirst(ClaimTypes.Role).Value;
+        }
+        [ApiExplorerSettings(IgnoreApi = true)]
         public virtual UserIdentity<T> GetCurrentIdentity<T>()
         {
             return new UserIdentity<T>

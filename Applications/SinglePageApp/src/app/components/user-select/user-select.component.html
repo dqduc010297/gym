@@ -10,7 +10,7 @@
 
 
 <nz-select [(ngModel)]="selectedUser" (nzScrollToBottom)="loadMore()" nzPlaceHolder="Select users" nzAllowClear
-  [nzDropdownRender]="renderTemplate" (nzOnSearch)="onSearch($event)" nzShowSearch>
+  [nzDropdownRender]="renderTemplate" (nzOnSearch)="onSearch($event)" nzShowSearch (ngModelChange)="selected()">
   <nz-option *ngFor="let o of optionList" [nzValue]="o.id" [nzLabel]="o.phoneNumber" nzCustomContent>
     {{o.phoneNumber}} - {{o.fullname}}
   </nz-option>

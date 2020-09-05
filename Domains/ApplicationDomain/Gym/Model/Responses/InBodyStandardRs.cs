@@ -9,7 +9,6 @@ namespace ApplicationDomain.Gym.Model.MyInBody
 {
     public class InBodyStandardRs: BaseInBody
     {
-        public int Id { set; get; }
         public InBodyStandardRs()
         {
             this.BodyCompositionAnalysis = new BodyCompositionAnalysis();
@@ -23,6 +22,7 @@ namespace ApplicationDomain.Gym.Model.MyInBody
         public InBodyStandardRsMapper()
         {
             var mapper = CreateMap<InBodyStandard, InBodyStandardRs>();
+            mapper.ForMember(d => d.InBodyStandardId, opt => opt.MapFrom(p => p.Id));
             mapper.ForMember(d => d.BodyCompositionAnalysis,
                 opt => opt.MapFrom(s =>
                 new BodyCompositionAnalysis()

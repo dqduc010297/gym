@@ -4,11 +4,11 @@ using System;
 
 namespace ApplicationDomain.Gym.Model
 {
-    public class InBodyRq: BaseInBody
+    public class InBodyRq : BaseInBody
     {
     }
 
-    public class InBodyRqMapper: Profile
+    public class InBodyRqMapper : Profile
     {
         public InBodyRqMapper()
         {
@@ -23,6 +23,7 @@ namespace ApplicationDomain.Gym.Model
             mapper.ForMember(d => d.VisceralFatLevel, opt => opt.MapFrom(s => s.MuscleFatAnalysis.VisceralFatLevel.Value));
 
             var standardMapper = CreateMap<InBodyRq, InBodyStandard>();
+            standardMapper.ForMember(d => d.Id, opt => opt.MapFrom(s => s.InBodyStandardId));
             standardMapper.ForMember(d => d.BodyWaterMax, opt => opt.MapFrom(s => s.BodyCompositionAnalysis.BodyWater.Max));
             standardMapper.ForMember(d => d.BodyWaterMin, opt => opt.MapFrom(s => s.BodyCompositionAnalysis.BodyWater.Min));
             standardMapper.ForMember(d => d.ProteinMax, opt => opt.MapFrom(s => s.BodyCompositionAnalysis.Protein.Max));

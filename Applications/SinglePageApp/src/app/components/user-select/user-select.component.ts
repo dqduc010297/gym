@@ -18,6 +18,7 @@ export class UserSelectComponent implements OnInit {
   optionList: UserSearchRs[] = [];
   userSearch: UserSearchByPhoneRequest = new UserSearchByPhoneRequest();
   isLoading = false;
+  isLoadFull = false;
 
   selectedUser = null;
 
@@ -26,53 +27,7 @@ export class UserSelectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.loadMore();
   }
-
-  // onSearch(value: string) {
-  //   if (value.length === 0) {
-  //     this.optionList = [];
-  //     return;
-  //   }
-  //   if (value.length < 4 || this.optionList.length > 0) {
-  //     return;
-  //   }
-  //   this.isLoading = true;
-  //   this.userSearch.phoneNumber = value;
-  //   this.userService.getMemberSearch(this.userSearch).subscribe(
-  //     result => {
-  //       this.isLoading = false;
-  //       this.optionList = result;
-  //     }
-  //   );
-  // }
-
-  // selected(event) {
-  //   this.onSelected.emit(event);
-  // }
-
-  // loadMore() {
-  //   this.userService.getMemberSearch(this.userSearch).subscribe(
-  //     result => {
-  //       this.isLoading = false;
-  //       this.optionList = [...this.optionList, ...result];
-  //     }
-  //   );
-  // }
-
-  // randomUserUrl = 'https://api.randomuser.me/?results=10';
-  // optionList: string[] = [];
-  // tslint:disable:no-any
-  // getRandomNameList(): Observable<string[]> {
-  //   return this.http
-  //     .get(`${this.randomUserUrl}`)
-  //     .pipe(map((res: any) => res.results))
-  //     .pipe(
-  //       map((list: any) => {
-  //         return list.map((item: any) => `${item.name.first}`);
-  //       })
-  //     );
-  // }
 
   loadMore(): void {
     this.isLoading = true;
@@ -80,7 +35,11 @@ export class UserSelectComponent implements OnInit {
     this.userService.getMemberSearch(this.userSearch).subscribe(
       result => {
         this.isLoading = false;
-        this.optionList = [...this.optionList, ...result];
+        if (this.optionList.indexOf(result[0])) {
+          this.isLoadFull = true;
+        } else {
+          this.optionList = [...this.optionList, ...result];
+        }
       }
     );
   }
@@ -91,7 +50,7 @@ export class UserSelectComponent implements OnInit {
       this.optionList = [];
       return;
     }
-    if (value.length < 4 || this.optionList.length > 0) {
+    if (value.length < 4 || this.optionList.length > 0 || this.isLoadFull) {
       return;
     }
     this.isLoading = true;
@@ -102,5 +61,9 @@ export class UserSelectComponent implements OnInit {
         this.optionList = result;
       }
     );
+  }
+
+  selected() {
+    this.onSelected.emit(this.selectedUser);
   }
 }

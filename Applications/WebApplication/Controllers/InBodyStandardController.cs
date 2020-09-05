@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ApplicationDomain.Common;
 using ApplicationDomain.Gym.IServices;
 using ApplicationDomain.Gym.Model;
+using ApplicationDomain.Identity.Entities;
 using AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +19,13 @@ namespace WebApplication.Controllers
 
         [Route("latest")]
         [HttpGet]
-        public async Task<IActionResult> GetLatestInBodyStandard()
+        public async Task<IActionResult> GetLatestInBodyStandard(int? userId)
         {
-            return Ok(await this._inBodyStandardService.GetLatestInBodyStandard(this.GetCurrentUserId()));
+            //if(this.GetCurrentRole() == RoleName.MEMBER.ToString())
+            //{
+            //    return Ok(await this._inBodyStandardService.GetLatestInBodyStandard(this.GetCurrentUserId()));
+            //}
+            return Ok(await this._inBodyStandardService.GetLatestInBodyStandard((int)userId));
         }
     }
 }

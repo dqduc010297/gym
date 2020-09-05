@@ -20,16 +20,19 @@ namespace ApplicationDomain.Gym.Services
     public class InBodyService : ServiceBase, IInBodyService
     {
         private IInBodyRepository _inBodyRepository;
+        private IInBodyStandardRepository _inBodyStandardRepository;
         private IInBodyStandardService _inBodyStandardService;
 
         public InBodyService(
-            IInBodyRepository inBodyRepository, 
+            IInBodyRepository inBodyRepository,
             IInBodyStandardService inBodyStandardService,
+            IInBodyStandardRepository inBodyStandardRepository,
             IMapper mapper,
             IUnitOfWork uow) : base(mapper, uow)
         {
             this._inBodyRepository = inBodyRepository;
             this._inBodyStandardService = inBodyStandardService;
+            this._inBodyStandardRepository = inBodyStandardRepository;
         }
         public async Task<MyInBodyRs> GetMyInbodyByTestedDate(int userId, MyInBodyRq rq)
         {
@@ -48,8 +51,13 @@ namespace ApplicationDomain.Gym.Services
             try
             {
                 InBodyStandard standard = _mapper.Map<InBodyStandard>(rq);
-                var isDiff = await this._inBodyStandardService.CheckDiff(standard);
                 InBody inBody = _mapper.Map<InBody>(rq);
+                var isDiff = await this._inBodyStandardService.CheckDiff(standard);
+                if (isDiff)
+                {
+                    int newInBodyStandardId = await this._inBodyStandardService.CreateInBodyStandard(standard);
+                    inBody.InBodyStandardId = newInBodyStandardId;
+                }
                 //this._inBodyRepository.Create(inBody);
                 //await _uow.SaveChangesAsync();
                 return isDiff.ToString();

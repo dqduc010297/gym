@@ -34,17 +34,17 @@ namespace ApplicationDomain.Gym.Services
             {
                 return true;
             }
-            if (entity.BodyWaterMax != inBodyStandard.BodyWaterMax && entity.BodyWaterMin != inBodyStandard.BodyWaterMin) 
+            if (entity.BodyWaterMax != inBodyStandard.BodyWaterMax || entity.BodyWaterMin != inBodyStandard.BodyWaterMin) 
                 return true;
-            if (entity.ProteinMax != inBodyStandard.ProteinMax && entity.ProteinMin != inBodyStandard.ProteinMin) 
+            if (entity.ProteinMax != inBodyStandard.ProteinMax || entity.ProteinMin != inBodyStandard.ProteinMin) 
                 return true;
-            if (entity.MineralMax != inBodyStandard.MineralMax && entity.MineralMin != inBodyStandard.MineralMin) 
+            if (entity.MineralMax != inBodyStandard.MineralMax || entity.MineralMin != inBodyStandard.MineralMin) 
                 return true;
-            if (entity.BodyFatMassMax != inBodyStandard.BodyFatMassMax && entity.BodyFatMassMin != inBodyStandard.BodyFatMassMin) 
+            if (entity.BodyFatMassMax != inBodyStandard.BodyFatMassMax || entity.BodyFatMassMin != inBodyStandard.BodyFatMassMin) 
                 return true;
-            if (entity.SkeletalMuscleMassMax != inBodyStandard.SkeletalMuscleMassMax && entity.SkeletalMuscleMassMin != inBodyStandard.SkeletalMuscleMassMin) 
+            if (entity.SkeletalMuscleMassMax != inBodyStandard.SkeletalMuscleMassMax || entity.SkeletalMuscleMassMin != inBodyStandard.SkeletalMuscleMassMin) 
                 return true;
-            if (entity.WeightMax != inBodyStandard.WeightMax && entity.WeightMin != inBodyStandard.WeightMin)
+            if (entity.WeightMax != inBodyStandard.WeightMax || entity.WeightMin != inBodyStandard.WeightMin)
                 return true;
             return false;
         }
@@ -55,6 +55,14 @@ namespace ApplicationDomain.Gym.Services
                 .MapQueryTo<InBodyStandardRs>(this._mapper)
                 .FirstOrDefaultAsync();
             return result ?? new InBodyStandardRs();
+        }
+
+        public async Task<int> CreateInBodyStandard(InBodyStandard entity)
+        {
+            entity.Id = 0;
+            this._inBodyStandardRepository.Create(entity);
+            await this._uow.SaveChangesAsync();
+            return entity.Id;
         }
     }
 }

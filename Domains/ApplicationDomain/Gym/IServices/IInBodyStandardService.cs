@@ -11,5 +11,6 @@ namespace ApplicationDomain.Gym.IServices
     {
         Task<InBodyStandardRs> GetLatestInBodyStandard(int userId);
         Task<bool> CheckDiff(InBodyStandard inBodyStandard);
+        Task<int> CreateInBodyStandard(InBodyStandard entity);
     }
 }
