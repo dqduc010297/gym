@@ -6,7 +6,6 @@ export class MyInBodyRq extends FilterRequest {
 
   constructor(deviceDetectorService: DeviceDetectorService) {
     super();
-    this.skip = 0;
     this.take = deviceDetectorService.isDesktop() ? 10 : deviceDetectorService.isTablet ? 6 : 3;
   }
 }

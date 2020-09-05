@@ -1,4 +1,4 @@
 export class FilterRequest {
-  skip: number;
-  take: number;
+  skip = 0;
+  take = 5;
 }

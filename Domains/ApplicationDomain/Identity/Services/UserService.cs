@@ -40,10 +40,12 @@ namespace ApplicationDomain.Identity.Services
             users.Where(p => p.PhoneNumber.Contains(searchRq.PhoneNumber))
                 .Skip(searchRq.Skip).Take(searchRq.Take)
                 .ToList()
-                .ForEach(u => userSearches.Add(new UserSearchRs() { 
-                Fullname = u.Fullname,
-                PhoneNumber = u.PhoneNumber
-            }));
+                .ForEach(u => userSearches.Add(new UserSearchRs()
+                {
+                    Fullname = u.Fullname,
+                    PhoneNumber = u.PhoneNumber,
+                    Id = u.Id
+                }));
             return userSearches;
         }
     }

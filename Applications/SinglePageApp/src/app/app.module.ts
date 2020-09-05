@@ -18,7 +18,6 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { WaitingComponent } from './components/waiting/waiting.component';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 registerLocaleData(vi);

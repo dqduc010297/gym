@@ -7,6 +7,7 @@ using ApplicationDomain.Identity.IServices;
 using ApplicationDomain.Identity.Models.Requests;
 using AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace WebApplication.Controllers
 {
@@ -20,9 +21,10 @@ namespace WebApplication.Controllers
 
         [HttpGet]
         [Route("search")]
-        public async Task<IActionResult> GetUserSearch(UserSearchRq searchRq)
+        public async Task<IActionResult> GetUserSearch(string searchRq)
         {
-            return Ok(await this._userService.GetUserSearch(searchRq));
+            var rq = JsonConvert.DeserializeObject<UserSearchRq>(searchRq);
+            return Ok(await this._userService.GetUserSearch(rq));
         }
     }
 }
