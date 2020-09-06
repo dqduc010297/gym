@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { InBodyDetail } from 'src/app/models/inbody/inbody-detail';
 import { DatePipe } from '@angular/common';
 import { BodyCompositionHistory } from 'src/app/models/inbody/body-composition-history';
+import { InBodyStandard } from 'src/app/models/inbody/inBody-standard';
 
 @Injectable()
 export class InBodyStandardService {
@@ -14,7 +15,7 @@ export class InBodyStandardService {
     private datePipe: DatePipe) {
   }
 
-  getLatestInBody(userId: number): Observable<InBodyDetail> {
-    return this.http.get<InBodyDetail>(`${environment.apiUrl}/inbodystandard/latest?userId=${userId}`);
+  getLatestInBody(userId: number): Observable<InBodyStandard> {
+    return this.http.get<InBodyStandard>(`${environment.apiUrl}/inbodystandard/latest?userId=${userId}`);
   }
 }

@@ -9,6 +9,7 @@ namespace ApplicationDomain.Gym.Model.MyInBody
 {
     public class MyInBodyRs: BaseInBody
     {
+        public InBodyStandardDTO InBodyStandard { set; get; }
         public IEnumerable<BodyCompositionHistory> BodyCompositionHistories { set; get; }
     }
 

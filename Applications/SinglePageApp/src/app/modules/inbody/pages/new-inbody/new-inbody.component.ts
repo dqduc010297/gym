@@ -4,6 +4,7 @@ import { InBodyStandardService } from 'src/app/services/inbody/inbody-standard.s
 import { InBodyService } from 'src/app/services/inbody/inbody.service';
 import { LoaderService } from 'src/app/services/core/loader.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { InBodyStandard } from 'src/app/models/inbody/inBody-standard';
 
 @Component({
   selector: 'app-new-inbody',
@@ -12,6 +13,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class NewInbodyComponent implements OnInit {
   inBodyDetail: InBodyDetail = new InBodyDetail();
+  inBodyStandard: InBodyStandard = new InBodyStandard();
 
   constructor(
     private inBodyStandardService: InBodyStandardService,
@@ -23,17 +25,18 @@ export class NewInbodyComponent implements OnInit {
   }
 
   submit() {
-    this.inBodyService.createInBody(this.inBodyDetail).subscribe(
-      result => {
-        console.log(result);
-      }
-    );
+    console.log(this.inBodyDetail);
+    // this.inBodyService.createInBody(this.inBodyDetail).subscribe(
+    //   result => {
+    //     console.log(result);
+    //   }
+    // );
   }
 
-  selectedUser(event){
+  selectedUser(event) {
     this.inBodyStandardService.getLatestInBody(event).subscribe(
       result => {
-        this.inBodyDetail = result;
+        this.inBodyDetail.inBodyStandard = result;
       }
     );
   }

@@ -1,68 +1,55 @@
-<!-- <nz-spin [nzSpinning]="loaderService.showLoader" nzTip="Loading..."> -->
-  <div class="row">
-    <div class="col-xl-8 col-lg-12">
-      <!-- <nz-select nzPlaceHolder="Select users" nzAllowClear nzShowSearch nzServerSearch [(ngModel)]="selectedUser"
-        (nzOnSearch)="onSearch($event)" (ngModelChange)="selected($event)">
-        <ng-container *ngFor="let user of optionList">
-          <nz-option *ngIf="!isLoading" nzCustomContent [nzLabel]="user.phoneNumber" [nzValue]="user.id">{{user.phoneNumber}} - {{user.fullname}}</nz-option>
-        </ng-container>
-        <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
-          <i nz-icon nzType="loading" class="loading-icon"></i> Loading Data...
-        </nz-option>
-      </nz-select> -->
-      <app-user-select (onSelected)="selectedUser($event)"></app-user-select>
-      <nz-table nzTemplateMode nzBordered [nzShowPagination]="false" nzTableLayout="fixed">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th style="width: 60px;">Unit</th>
-            <th>Value</th>
-            <th>Min</th>
-            <th>Max</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr app-tested-item [isView]="false" name="Total Body Water" unit="L"
-            [testedResult]="inBodyDetail.bodyCompositionAnalysis.bodyWater"
-            [minDisabled]="inBodyDetail.bodyCompositionAnalysis.bodyWater.min != 0"
-            [maxDisabled]="inBodyDetail.bodyCompositionAnalysis.bodyWater.max != 0">
-          </tr>
-          <tr app-tested-item [isView]="false" name="Protein" unit="kg"
-            [testedResult]="inBodyDetail.bodyCompositionAnalysis.protein"
-            [minDisabled]="inBodyDetail.bodyCompositionAnalysis.protein.min != 0"
-            [maxDisabled]="inBodyDetail.bodyCompositionAnalysis.protein.max != 0"></tr>
-          <tr app-tested-item [isView]="false" name="Mineral" unit="kg"
-            [testedResult]="inBodyDetail.bodyCompositionAnalysis.mineral"
-            [minDisabled]="inBodyDetail.bodyCompositionAnalysis.mineral.min != 0"
-            [maxDisabled]="inBodyDetail.bodyCompositionAnalysis.mineral.max != 0"></tr>
-          <tr app-tested-item [isView]="false" name="Body Fat Mass" unit="kg"
-            [testedResult]="inBodyDetail.bodyCompositionAnalysis.bodyFatMass"
-            [minDisabled]="inBodyDetail.bodyCompositionAnalysis.bodyFatMass.min != 0"
-            [maxDisabled]="inBodyDetail.bodyCompositionAnalysis.bodyFatMass.max != 0"></tr>
-          <tr app-tested-item [isView]="false" name="SMM" unit="kg"
-            [testedResult]="inBodyDetail.muscleFatAnalysis.skeletalMuscleMass"
-            [minDisabled]="inBodyDetail.muscleFatAnalysis.skeletalMuscleMass.min != 0"
-            [maxDisabled]="inBodyDetail.muscleFatAnalysis.skeletalMuscleMass.max != 0"></tr>
-          <tr app-tested-item [isView]="false" name="Body Fat Mass" unit="kg"
-            [testedResult]="inBodyDetail.muscleFatAnalysis.bodyFatMass"
-            [minDisabled]="inBodyDetail.muscleFatAnalysis.bodyFatMass.min != 0"
-            [maxDisabled]="inBodyDetail.muscleFatAnalysis.bodyFatMass.max != 0"></tr>
-          <tr app-tested-item [isView]="false" name="Weight" unit="kg"
-            [testedResult]="inBodyDetail.muscleFatAnalysis.weight"
-            [minDisabled]="inBodyDetail.muscleFatAnalysis.weight.min != 0"
-            [maxDisabled]="inBodyDetail.muscleFatAnalysis.weight.max != 0"></tr>
-          <tr app-tested-item [isView]="false" name="Waist-Hip Ratio" unit="-"
-            [testedResult]="inBodyDetail.muscleFatAnalysis.waistHipRatio" [isView]="false" [maxDisabled]="true"
-            [minDisabled]="true"></tr>
-          <tr app-tested-item [isView]="false" name="Visceral Fat Level" unit="-"
-            [testedResult]="inBodyDetail.muscleFatAnalysis.visceralFatLevel" [isView]="false" [maxDisabled]="true"
-            [minDisabled]="true"></tr>
-        </tbody>
-      </nz-table>
-    </div>
-    <div class="col-xl-4 col-lg-12">
-      <app-obesity-analysis [obesityAnalysis]="inBodyDetail.obesityAnalysis"></app-obesity-analysis>
-      <button style="margin-top: 20px;" nz-button nzType="primary" nzBlock (click)="submit()">Submit</button>
-    </div>
+<div class="row">
+  <div class="col-xl-8 col-lg-12">
+    <app-user-select (onSelected)="selectedUser($event)"></app-user-select>
+    <nz-table nzTemplateMode nzBordered [nzShowPagination]="false" nzTableLayout="fixed">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th style="width: 60px;">Unit</th>
+          <th>Value</th>
+          <th>Min</th>
+          <th>Max</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr app-tested-item [isView]="false" name="Total Body Water" unit="L"
+          [(min)]="inBodyDetail.inBodyStandard.bodyWaterMin" [(max)]="inBodyDetail.inBodyStandard.bodyWaterMax"
+          [(value)]="inBodyDetail.bodyWater" [minDisabled]="inBodyDetail.inBodyStandard.bodyWaterMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.bodyWaterMax != 0">
+        </tr>
+        <tr app-tested-item [isView]="false" name="Protein" unit="kg" [(min)]="inBodyDetail.inBodyStandard.proteinMin"
+          [(max)]="inBodyDetail.inBodyStandard.proteinMax" [(value)]="inBodyDetail.protein"
+          [minDisabled]="inBodyDetail.inBodyStandard.proteinMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.proteinMax != 0"></tr>
+        <tr app-tested-item [isView]="false" name="Mineral" unit="kg" [(min)]="inBodyDetail.inBodyStandard.mineralMin"
+          [(max)]="inBodyDetail.inBodyStandard.mineralMax" [(value)]="inBodyDetail.mineral"
+          [minDisabled]="inBodyDetail.inBodyStandard.mineralMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.mineralMax != 0"></tr>
+        <tr app-tested-item [isView]="false" name="Body Fat Mass" unit="kg"
+          [(min)]="inBodyDetail.inBodyStandard.bodyFatMassMin" [(max)]="inBodyDetail.inBodyStandard.bodyFatMassMax"
+          [(value)]="inBodyDetail.bodyFatMass" [minDisabled]="inBodyDetail.inBodyStandard.bodyFatMassMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.bodyFatMassMax != 0"></tr>
+        <tr app-tested-item [isView]="false" name="SMM" unit="kg"
+          [(min)]="inBodyDetail.inBodyStandard.skeletalMuscleMassMin"
+          [(max)]="inBodyDetail.inBodyStandard.skeletalMuscleMassMax" [(value)]="inBodyDetail.skeletalMuscleMass"
+          [minDisabled]="inBodyDetail.inBodyStandard.skeletalMuscleMassMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.skeletalMuscleMassMax != 0"></tr>
+        <tr app-tested-item [isView]="false" name="Weight" unit="kg" [(min)]="inBodyDetail.inBodyStandard.weightMin"
+          [(max)]="inBodyDetail.inBodyStandard.weightMax" [(value)]="inBodyDetail.weight"
+          [minDisabled]="inBodyDetail.inBodyStandard.weightMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.weightMax != 0"></tr>
+        <tr app-tested-item [isView]="false" name="Waist-Hip Ratio" unit="-"
+          [(min)]="inBodyDetail.inBodyStandard.waistHipRatioMin" [(max)]="inBodyDetail.inBodyStandard.waistHipRatioMax"
+          [(value)]="inBodyDetail.waistHipRatio" [isView]="false" [maxDisabled]="true" [minDisabled]="true"></tr>
+        <tr app-tested-item [isView]="false" name="Visceral Fat Level" unit="-"
+          [(min)]="inBodyDetail.inBodyStandard.visceralFatLevelMin"
+          [(max)]="inBodyDetail.inBodyStandard.visceralFatLevelMax" [(value)]="inBodyDetail.visceralFatLevel"
+          [maxDisabled]="true" [minDisabled]="true"></tr>
+      </tbody>
+    </nz-table>
   </div>
-<!-- </nz-spin> -->
+  <div class="col-xl-4 col-lg-12">
+    <app-obesity-analysis [obesityAnalysis]="inBodyDetail.obesityAnalysis"></app-obesity-analysis>
+    <button style="margin-top: 20px;" nz-button nzType="primary" nzBlock (click)="submit()">Submit</button>
+  </div>
+</div>

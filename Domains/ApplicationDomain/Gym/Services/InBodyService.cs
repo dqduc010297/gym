@@ -4,11 +4,9 @@ using ApplicationDomain.Gym.IServices;
 using ApplicationDomain.Gym.Model;
 using ApplicationDomain.Gym.Model.MyInBody;
 using ApplicationDomain.Gym.Model.Requests;
-using ApplicationDomain.Identity.Entities;
 using AspNetCore.DataBinding.AutoMapper;
 using AspNetCore.UnitOfWork;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -50,13 +48,13 @@ namespace ApplicationDomain.Gym.Services
         {
             try
             {
-                InBodyStandard standard = _mapper.Map<InBodyStandard>(rq);
-                InBody inBody = _mapper.Map<InBody>(rq);
+                InBodyStandard standard = _mapper.Map<InBodyStandard>(rq.InBodyStandard);
+                //InBody inBody = _mapper.Map<InBody>(rq);
                 var isDiff = await this._inBodyStandardService.CheckDiff(standard);
                 if (isDiff)
                 {
                     int newInBodyStandardId = await this._inBodyStandardService.CreateInBodyStandard(standard);
-                    inBody.InBodyStandardId = newInBodyStandardId;
+                    //inBody.InBodyStandardId = newInBodyStandardId;
                 }
                 //this._inBodyRepository.Create(inBody);
                 //await _uow.SaveChangesAsync();
