@@ -16,25 +16,25 @@
 
         </div>
         <div>
-          <h5>Score: {{inBodyDetail.score}}/100</h5>
+          <h5>Score: {{inBodyPaper.score}}/100</h5>
         </div>
       </div>
-      <app-body-composition-analysis [bodyCompositionAnalysis]="inBodyDetail.bodyCompositionAnalysis">
+      <app-body-composition-analysis [bodyCompositionAnalysis]="inBodyPaper.bodyCompositionAnalysis">
       </app-body-composition-analysis>
     </div>
     <div class="col-xl-4 col-lg-6">
-      <app-muscle-fat-analysis [muscleFatAnalysis]="inBodyDetail.muscleFatAnalysis"></app-muscle-fat-analysis>
+      <app-muscle-fat-analysis [muscleFatAnalysis]="inBodyPaper.muscleFatAnalysis"></app-muscle-fat-analysis>
     </div>
     <div class="col-xl-4 col-lg-6">
-      <app-obesity-analysis [obesityAnalysis]="inBodyDetail.obesityAnalysis"></app-obesity-analysis>
+      <app-obesity-analysis [obesityAnalysis]="inBodyPaper.obesityAnalysis"></app-obesity-analysis>
     </div>
 
 
     <div class="col-xl-4 col-lg-6">
-      <app-weighing [weight]="inBodyDetail.weight"></app-weighing>
+      <app-weighing [weight]="inBodyPaper.weight"></app-weighing>
     </div>
     <div class="col-xl-8 col-lg-12 d-none d-md-block">
-      <app-body-composition-history [bodyCompositionHistories]="inBodyDetail.bodyCompositionHistories">
+      <app-body-composition-history [bodyCompositionHistories]="inBodyPaper.bodyCompositionHistories">
       </app-body-composition-history>
     </div>
   </div>

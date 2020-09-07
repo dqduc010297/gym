@@ -1,11 +1,5 @@
-import { TestedResult } from './tested-result';
+import { TestedResult, Evaluation } from './tested-result';
 
-export enum Evaluation {
-  Normal,
-  Under,
-  SlightlyOver,
-  Over,
-}
 
 export class ObesityAnalysis{
   bmiEvaluation: Evaluation;

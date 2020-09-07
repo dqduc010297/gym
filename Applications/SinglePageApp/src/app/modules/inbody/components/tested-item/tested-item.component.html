@@ -1,7 +1,7 @@
 <td><strong>{{name}}</strong></td>
 <td>({{unit}})</td>
 <td *ngIf="isView">
-  <span class="">{{value}}<br></span>
+  <span [ngClass]="generateEvaluation()">{{value}}<br></span>
   <span class="d-sm-block d-md-none"><small>( {{min}} ~ {{max}} )</small></span>
 </td>
 <td *ngIf="!isView">

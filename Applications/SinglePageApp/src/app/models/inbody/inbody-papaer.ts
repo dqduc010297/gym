@@ -15,5 +15,5 @@ export class InBodyPaper {
   bodyCompositionAnalysis: BodyCompositionAnalysis = new BodyCompositionAnalysis();
   muscleFatAnalysis: MuscleFatAnalysis = new MuscleFatAnalysis();
   obesityAnalysis: ObesityAnalysis = new ObesityAnalysis();
-  // bodyCompositionHistories: BodyCompositionHistory[] = [];
+  bodyCompositionHistories: BodyCompositionHistory[] = [];
 }

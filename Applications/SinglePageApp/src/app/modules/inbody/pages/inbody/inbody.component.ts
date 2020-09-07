@@ -5,10 +5,8 @@ import { LoaderService } from 'src/app/services/core/loader.service';
 import { DatePipe } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { MyInBodyRq } from 'src/app/models/inbody/my-inbody-rq';
-import { BodyCompositionAnalysis } from 'src/app/models/inbody/body-composition-analysis';
-import { MuscleFatAnalysis } from 'src/app/models/inbody/muscle-fat-analysis';
-import { ObesityAnalysis } from 'src/app/models/inbody/obesity-analysis';
-import { TestedResult } from 'src/app/models/inbody/tested-result';
+import { InBodyPaper } from 'src/app/models/inbody/inbody-papaer';
+import { InBodyPaperMapper } from 'src/app/services/mapper/inbody-paper-mapper';
 
 @Component({
   selector: 'app-inbody',
@@ -16,20 +14,18 @@ import { TestedResult } from 'src/app/models/inbody/tested-result';
   styleUrls: ['./inbody.component.scss']
 })
 export class InbodyComponent implements OnInit {
-  inBodyDetail: InBodyDetail = new InBodyDetail();
   testedDates: string[] = [];
   testedDatePicker: Date;
   myInBodyRequest: MyInBodyRq = new MyInBodyRq(this.deviceService);
 
-  bodyCompositionAnalysis: BodyCompositionAnalysis = new BodyCompositionAnalysis();
-  muscleFatAnalysis: MuscleFatAnalysis = new MuscleFatAnalysis();
-  obesityAnalysis: ObesityAnalysis = new ObesityAnalysis();
+  inBodyPaper: InBodyPaper = new InBodyPaper();
 
   constructor(
     private inBodyService: InBodyService,
     public loaderService: LoaderService,
     public datePipe: DatePipe,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private inBodyMPaperMapper: InBodyPaperMapper
   ) { }
 
   listOfData: number[] = [1];
@@ -42,8 +38,8 @@ export class InbodyComponent implements OnInit {
   loadLatestMyInBody() {
     this.inBodyService.getInBody(this.myInBodyRequest).subscribe(
       result => {
-        this.inBodyDetail = result;
-        this.testedDatePicker = this.inBodyDetail.testedDate;
+        this.inBodyPaper = this.inBodyMPaperMapper.map(result);
+        this.testedDatePicker = this.inBodyPaper.testedDate;
       }
     );
   }
@@ -52,7 +48,7 @@ export class InbodyComponent implements OnInit {
     this.myInBodyRequest.testedDate = testedDate;
     this.inBodyService.getInBody(this.myInBodyRequest).subscribe(
       result => {
-        this.inBodyDetail = result;
+        this.inBodyPaper = this.inBodyMPaperMapper.map(result);
       }
     );
   }
@@ -80,38 +76,5 @@ export class InbodyComponent implements OnInit {
       return this.testedDates.indexOf(this.datePipe.transform(current, 'yyyy-MM-dd')) > -1;
     }
     return false;
-  }
-
-  mapData(inBodyDetail: InBodyDetail) {
-    this.bodyCompositionAnalysis = this.mapBodyCompositionAnalysis(inBodyDetail);
-  }
-
-  mapBodyCompositionAnalysis(inBodyDetail: InBodyDetail): BodyCompositionAnalysis {
-    return {
-      bodyWater: {
-        value: inBodyDetail.bodyWater,
-        max: inBodyDetail.inBodyStandard.bodyWaterMax,
-        min: inBodyDetail.inBodyStandard.bodyWaterMin,
-        testedEvaluation: ''
-      },
-      protein: {
-        value: inBodyDetail.bodyWater,
-        max: inBodyDetail.inBodyStandard.bodyWaterMax,
-        min: inBodyDetail.inBodyStandard.bodyWaterMin,
-        testedEvaluation: ''
-      },
-      mineral: {
-        value: inBodyDetail.bodyWater,
-        max: inBodyDetail.inBodyStandard.bodyWaterMax,
-        min: inBodyDetail.inBodyStandard.bodyWaterMin,
-        testedEvaluation: ''
-      },
-      bodyFatMass: {
-        value: inBodyDetail.bodyWater,
-        max: inBodyDetail.inBodyStandard.bodyWaterMax,
-        min: inBodyDetail.inBodyStandard.bodyWaterMin,
-        testedEvaluation: ''
-      },
-    };
   }
 }

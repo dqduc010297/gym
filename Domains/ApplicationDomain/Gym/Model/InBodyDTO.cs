@@ -1,5 +1,6 @@
 ﻿using ApplicationDomain.Common;
 using ApplicationDomain.Gym.Entities;
+using ApplicationDomain.Gym.Model.MyInBody;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace ApplicationDomain.Gym.Model
         public float Weight { set; get; }
         public float SkeletalMuscleMass { set; get; }
         public int Score { set; get; }
+        public float BMI { set; get; }
         public Evaluation BMIEvaluation { set; get; }
         public Evaluation PBFEvaluation { set; get; }
         public float WaistHipRatio { set; get; }
@@ -27,12 +29,15 @@ namespace ApplicationDomain.Gym.Model
         public int InBodyStandardId { set; get; }
     }
 
-    public class InBodyDTOMapper: Profile
+    public class InBodyDTOMapper : Profile
     {
         public InBodyDTOMapper()
         {
             CreateMap<InBodyDTO, InBody>();
-            CreateMap<InBody, InBodyDTO>();
+            CreateMap<InBody, InBodyDTO>()
+                .Include<InBody, MyInBodyRs>()
+                .ForMember(d => d.BMI, opt => opt.MapFrom(s => (float)Math.Round((s.Weight / (s.User.Height * s.User.Height)), 1)))
+                .ForMember(d => d.PercentBodyFat, opt => opt.MapFrom(s => (float)Math.Round(s.PercentBodyFat * 100, 1)));
         }
     }
 }

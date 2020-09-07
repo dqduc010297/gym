@@ -1,8 +1,9 @@
 import { BodyCompositionAnalysis } from './body-composition-analysis';
 import { MuscleFatAnalysis } from './muscle-fat-analysis';
-import { ObesityAnalysis, Evaluation } from './obesity-analysis';
+import { ObesityAnalysis } from './obesity-analysis';
 import { BodyCompositionHistory } from './body-composition-history';
 import { InBodyStandard } from './inBody-standard';
+import { Evaluation } from './tested-result';
 
 export class InBodyDetail {
   id: number;
@@ -24,6 +25,7 @@ export class InBodyDetail {
   mineral: number;
   bodyFatMass: number;
   skeletalMuscleMass: number;
+  bmi: number;
   bmiEvaluation: Evaluation;
   pbfEvaluation: Evaluation;
   waistHipRatio: number;

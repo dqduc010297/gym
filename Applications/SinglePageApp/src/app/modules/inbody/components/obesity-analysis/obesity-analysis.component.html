@@ -1,8 +1,12 @@
 <nz-card nzTitle="Obesity Analysis">
   <nz-table nzTemplateMode [nzShowPagination]="false">
     <tbody>
-      <tr app-tested-item name="BMI" unit="kg/m2" [testedResult]="obesityAnalysis.bmi"></tr>
-      <tr app-tested-item name="PBF" unit="%" [testedResult]="obesityAnalysis.pbf"></tr>
+      <tr app-tested-item name="BMI" unit="kg/m2" [max]="obesityAnalysis.bmi.max" [min]="obesityAnalysis.bmi.min"
+        [value]="obesityAnalysis.bmi.value" [evaluation]="obesityAnalysis.bmi.testedEvaluation">
+      </tr>
+      <tr app-tested-item name="PBF" unit="%" [max]="obesityAnalysis.pbf.max" [min]="obesityAnalysis.pbf.min"
+        [value]="obesityAnalysis.pbf.value" [evaluation]="obesityAnalysis.pbf.testedEvaluation">
+      </tr>
     </tbody>
   </nz-table>
   <nz-table nzTemplateMode [nzShowPagination]="false">

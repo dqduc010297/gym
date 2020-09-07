@@ -1,11 +1,13 @@
 import { IMapper } from './imapper';
-import { InBodyDetail } from 'src/app/models/inbody/inbody-detail';
-import { InBodyPaper } from 'src/app/models/inbody/inbody-papaer';
-import { BodyCompositionAnalysis } from 'src/app/models/inbody/body-composition-analysis';
-import { MuscleFatAnalysis } from 'src/app/models/inbody/muscle-fat-analysis';
-import { ObesityAnalysis } from 'src/app/models/inbody/obesity-analysis';
-import { TestedResult } from 'src/app/models/inbody/tested-result';
+import { TestedResult } from '../../models/inbody/tested-result';
+import { InBodyPaper } from '../../models/inbody/inbody-papaer';
+import { InBodyDetail } from '../../models/inbody/inbody-detail';
+import { BodyCompositionAnalysis } from '../../models/inbody/body-composition-analysis';
+import { MuscleFatAnalysis } from '../../models/inbody/muscle-fat-analysis';
+import { ObesityAnalysis } from '../../models/inbody/obesity-analysis';
+import { Injectable } from '@angular/core';
 
+@Injectable({ providedIn: 'root' })
 export class InBodyPaperMapper implements IMapper<InBodyDetail, InBodyPaper>{
   map(source: InBodyDetail): InBodyPaper {
     return {
@@ -16,77 +18,90 @@ export class InBodyPaperMapper implements IMapper<InBodyDetail, InBodyPaper>{
       userId: source.userId,
       bodyCompositionAnalysis: this.mapBodyCompositionAnalysis(source),
       muscleFatAnalysis: this.mapMuscleFatAnalysis(source),
-      obesityAnalysis: new ObesityAnalysis(),
+      obesityAnalysis: this.mapObesityAnalysis(source),
+      bodyCompositionHistories: [],
     };
   }
 
   private mapBodyCompositionAnalysis(inBodyDetail: InBodyDetail): BodyCompositionAnalysis {
+    const bodyWater: TestedResult = new TestedResult();
+    bodyWater.max = inBodyDetail.inBodyStandard.bodyWaterMax;
+    bodyWater.min = inBodyDetail.inBodyStandard.bodyWaterMin;
+    bodyWater.value = inBodyDetail.bodyWater;
+
+    const protein: TestedResult = new TestedResult();
+    protein.max = inBodyDetail.inBodyStandard.proteinMax;
+    protein.min = inBodyDetail.inBodyStandard.proteinMin;
+    protein.value = inBodyDetail.protein;
+
+    const mineral: TestedResult = new TestedResult();
+    mineral.max = inBodyDetail.inBodyStandard.mineralMax;
+    mineral.min = inBodyDetail.inBodyStandard.mineralMin;
+    mineral.value = inBodyDetail.mineral;
+
+    const bodyFatMass: TestedResult = new TestedResult();
+    bodyFatMass.max = inBodyDetail.inBodyStandard.bodyFatMassMax;
+    bodyFatMass.min = inBodyDetail.inBodyStandard.bodyFatMassMin;
+    bodyFatMass.value = inBodyDetail.bodyFatMass;
+
     return {
-      bodyWater: new TestedResult(
-        inBodyDetail.inBodyStandard.bodyWaterMax,
-        inBodyDetail.inBodyStandard.bodyWaterMin,
-        inBodyDetail.bodyWater
-      ),
-      protein: new TestedResult(
-        inBodyDetail.inBodyStandard.proteinMax,
-        inBodyDetail.inBodyStandard.proteinMin,
-        inBodyDetail.protein
-      ),
-      mineral: new TestedResult(
-        inBodyDetail.inBodyStandard.mineralMax,
-        inBodyDetail.inBodyStandard.mineralMin,
-        inBodyDetail.mineral
-      ),
-      bodyFatMass: new TestedResult(
-        inBodyDetail.inBodyStandard.bodyFatMassMax,
-        inBodyDetail.inBodyStandard.bodyFatMassMin,
-        inBodyDetail.bodyFatMass
-      ),
+      bodyWater: bodyWater,
+      protein: protein,
+      mineral: mineral,
+      bodyFatMass: bodyFatMass,
     };
   }
 
   private mapMuscleFatAnalysis(inBodyDetail: InBodyDetail): MuscleFatAnalysis {
+
+    const skeletalMuscleMass: TestedResult = new TestedResult();
+    skeletalMuscleMass.max = inBodyDetail.inBodyStandard.skeletalMuscleMassMax;
+    skeletalMuscleMass.min = inBodyDetail.inBodyStandard.skeletalMuscleMassMin;
+    skeletalMuscleMass.value = inBodyDetail.skeletalMuscleMass;
+
+    const weight: TestedResult = new TestedResult();
+    weight.max = inBodyDetail.inBodyStandard.weightMax;
+    weight.min = inBodyDetail.inBodyStandard.weightMin;
+    weight.value = inBodyDetail.weight;
+
+    const bodyFatMass: TestedResult = new TestedResult();
+    bodyFatMass.max = inBodyDetail.inBodyStandard.bodyFatMassMax;
+    bodyFatMass.min = inBodyDetail.inBodyStandard.bodyFatMassMin;
+    bodyFatMass.value = inBodyDetail.bodyFatMass;
+
+    const visceralFatLevel: TestedResult = new TestedResult();
+    visceralFatLevel.max = inBodyDetail.inBodyStandard.visceralFatLevelMax;
+    visceralFatLevel.min = inBodyDetail.inBodyStandard.visceralFatLevelMin;
+    visceralFatLevel.value = inBodyDetail.visceralFatLevel;
+
+    const waistHipRatio: TestedResult = new TestedResult();
+    waistHipRatio.max = inBodyDetail.inBodyStandard.waistHipRatioMax;
+    waistHipRatio.min = inBodyDetail.inBodyStandard.waistHipRatioMin;
+    waistHipRatio.value = inBodyDetail.waistHipRatio;
+
     return {
-      skeletalMuscleMass: new TestedResult(
-        inBodyDetail.inBodyStandard.skeletalMuscleMassMax,
-        inBodyDetail.inBodyStandard.skeletalMuscleMassMin,
-        inBodyDetail.skeletalMuscleMass
-      ),
-      weight: new TestedResult(
-        inBodyDetail.inBodyStandard.weightMax,
-        inBodyDetail.inBodyStandard.weightMin,
-        inBodyDetail.weight
-      ),
-      bodyFatMass: new TestedResult(
-        inBodyDetail.inBodyStandard.bodyFatMassMax,
-        inBodyDetail.inBodyStandard.bodyFatMassMin,
-        inBodyDetail.bodyFatMass
-      ),
-      visceralFatLevel: new TestedResult(
-        inBodyDetail.inBodyStandard.visceralFatLevelMax,
-        inBodyDetail.inBodyStandard.visceralFatLevelMin,
-        inBodyDetail.visceralFatLevel
-      ),
-      waistHipRatio: new TestedResult(
-        inBodyDetail.inBodyStandard.waistHipRatioMax,
-        inBodyDetail.inBodyStandard.waistHipRatioMin,
-        inBodyDetail.waistHipRatio
-      ),
+      skeletalMuscleMass: skeletalMuscleMass,
+      weight: weight,
+      bodyFatMass: bodyFatMass,
+      visceralFatLevel: visceralFatLevel,
+      waistHipRatio: waistHipRatio,
     };
   }
 
   private mapObesityAnalysis(inBodyDetail: InBodyDetail): ObesityAnalysis {
+    const bmi: TestedResult = new TestedResult();
+    bmi.max = 25;
+    bmi.min = 18.5;
+    bmi.value = inBodyDetail.bmi;
+
+    const pbf: TestedResult = new TestedResult();
+    pbf.max = inBodyDetail.inBodyStandard.percentBodyFatMax;
+    pbf.min = inBodyDetail.inBodyStandard.percentBodyFatMin;
+    pbf.value = inBodyDetail.percentBodyFat;
+
     return {
-      bmi: new TestedResult(
-        25,
-        18.5,
-        inBodyDetail.skeletalMuscleMass
-      ),
-      pbf: new TestedResult(
-        inBodyDetail.inBodyStandard.percentBodyFatMax,
-        inBodyDetail.inBodyStandard.percentBodyFatMin,
-        inBodyDetail.bodyFatMass / inBodyDetail.weight
-      ),
+      bmi: bmi,
+      pbf: pbf,
       bmiEvaluation: inBodyDetail.bmiEvaluation,
       pbfEvaluation: inBodyDetail.pbfEvaluation,
     };

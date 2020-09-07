@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TestedResult } from 'src/app/models/inbody/tested-result';
+import { TestedResult, Evaluation } from 'src/app/models/inbody/tested-result';
 
 
 @Component({
@@ -19,6 +19,7 @@ export class TestedItemComponent implements OnInit {
   @Input() max: number;
   @Input() min: number;
   @Input() value: number;
+  @Input() evaluation: Evaluation;
   @Output() valueChange: EventEmitter<number> = new EventEmitter<number>();
   @Output() minChange: EventEmitter<number> = new EventEmitter<number>();
   @Output() maxChange: EventEmitter<number> = new EventEmitter<number>();
@@ -36,5 +37,15 @@ export class TestedItemComponent implements OnInit {
   }
   maxOnChange() {
     this.maxChange.emit(this.max);
+  }
+
+  generateEvaluation(): string {
+    if (!this.evaluation) {
+      return Evaluation[this.evaluation];
+    }
+    return this.value < this.min ? Evaluation[Evaluation.Under] :
+      this.value > this.min && this.value < this.max ? Evaluation[Evaluation.Normal] :
+        this.value < this.max * 1.1 ? Evaluation[Evaluation.SlightlyOver] :
+          Evaluation[Evaluation.Over];
   }
 }
