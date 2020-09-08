@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UserSearchRs } from 'src/app/models/user/user-search-rs';
-import { UserSearchByPhoneRequest } from 'src/app/models/user/user-search-by-phone-request';
+import { UserSearchResponse } from 'src/app/models/user/user-search.response';
+import { UserSearchRequest } from 'src/app/models/user/user-search.request';
 import { UserService } from 'src/app/services/user/user.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,8 +15,8 @@ export class UserSelectComponent implements OnInit {
   @Input() isMultiSelect = false;
   @Output() onSelected: EventEmitter<number[]> = new EventEmitter();
 
-  optionList: UserSearchRs[] = [];
-  userSearch: UserSearchByPhoneRequest = new UserSearchByPhoneRequest();
+  optionList: UserSearchResponse[] = [];
+  userSearch: UserSearchRequest = new UserSearchRequest();
   isLoading = false;
   isLoadFull = false;
 
@@ -55,6 +55,7 @@ export class UserSelectComponent implements OnInit {
     }
     this.isLoading = true;
     this.userSearch.phoneNumber = value;
+    this.userSearch.fullname = value;
     this.userService.getMemberSearch(this.userSearch).subscribe(
       result => {
         this.isLoading = false;

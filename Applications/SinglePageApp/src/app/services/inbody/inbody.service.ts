@@ -6,7 +6,8 @@ import { InBodyDetail } from 'src/app/models/inbody/inbody-detail';
 import { DatePipe } from '@angular/common';
 import { BodyCompositionHistory } from 'src/app/models/inbody/body-composition-history';
 import { MyInBodyRq } from 'src/app/models/inbody/my-inbody-rq';
-import { FilterRequest } from 'src/app/models/core/filter.request';
+import { FilterRequest } from 'src/app/requests/filter.request';
+import { HomeRequest } from 'src/app/models/home/home.request';
 
 @Injectable()
 export class InBodyService {
@@ -16,8 +17,8 @@ export class InBodyService {
     private datePipe: DatePipe) {
   }
 
-  getBodyCompositionHistories(inBodyFilter: FilterRequest): Observable<BodyCompositionHistory[]> {
-    const params = new HttpParams().set('myInBodyRq', JSON.stringify(inBodyFilter));
+  getBodyCompositionHistories(homeRequest: HomeRequest): Observable<BodyCompositionHistory[]> {
+    const params = new HttpParams().set('myInBodyRq', JSON.stringify(homeRequest));
     return this.http.get<BodyCompositionHistory[]>(`${environment.apiUrl}/inbody/bodycompositionHistory`, { params });
   }
 

@@ -13,5 +13,7 @@ namespace ApplicationDomain.Identity.Models.Requests
         public RoleName RoleName { set; get; }
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { set; get; }
+        [JsonProperty("fullname")]
+        public string Fullname { set; get; }
     }
 }

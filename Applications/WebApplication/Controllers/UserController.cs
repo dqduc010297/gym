@@ -26,5 +26,20 @@ namespace WebApplication.Controllers
             var rq = JsonConvert.DeserializeObject<UserSearchRq>(searchRq);
             return Ok(await this._userService.GetUserSearch(rq));
         }
+
+        [HttpGet]
+        [Route("overview")]
+        public async Task<IActionResult> GetUserOverview(string overviewRq)
+        {
+            try
+            {
+                var rq = JsonConvert.DeserializeObject<FilterRq>(overviewRq);
+                return Ok(await this._userService.GetUserOverviews(rq));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }

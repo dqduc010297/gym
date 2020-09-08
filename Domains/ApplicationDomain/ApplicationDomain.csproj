@@ -32,8 +32,4 @@
     <ProjectReference Include="..\..\BuildingBlocks\Validation\AspNetCore.FluentValidation\AspNetCore.FluentValidation.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Identity\IRepositories\" />
-  </ItemGroup>
-
 </Project>

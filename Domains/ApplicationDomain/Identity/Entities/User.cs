@@ -7,7 +7,7 @@ using System;
 
 namespace ApplicationDomain.Identity.Entities
 {
-    public class User : IdentityUser<int>
+    public class User : IdentityUser<int>, IEntity<int>
     {
 		public string Fullname { set; get; }
 		public float Height { set; get; }

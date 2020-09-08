@@ -13,6 +13,7 @@ const routes: Routes = [
       { path: 'inbody', loadChildren: () => import('./modules/inbody/inbody.module').then(m => m.InbodyModule) },
       { path: 'reward', loadChildren: () => import('./modules/reward/reward.module').then(m => m.RewardModule) },
       { path: 'blog', loadChildren: () => import('./modules/blog/blog.module').then(m => m.BlogModule) },
+      { path: 'user', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) },
     ]
   },
   { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },

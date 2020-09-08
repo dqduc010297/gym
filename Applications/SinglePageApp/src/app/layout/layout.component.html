@@ -54,6 +54,12 @@
           <span *ngIf="!isCollapsed">Blog</span>
         </a>
       </li>
+      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        <a [routerLink]="['/user']" routerLinkActive="router-link-active">
+          <span *ngIf="!isCollapsed">User</span>
+        </a>
+      </li>
     </ul>
   </nz-sider>
   <nz-layout class="layout" [ngClass]="{'right-layout': !isCollapsed}">

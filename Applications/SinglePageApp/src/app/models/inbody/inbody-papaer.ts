@@ -9,9 +9,7 @@ export class InBodyPaper {
   testedDate: Date;
   weight: number;
   score: number;
-
   userId: number;
-
   bodyCompositionAnalysis: BodyCompositionAnalysis = new BodyCompositionAnalysis();
   muscleFatAnalysis: MuscleFatAnalysis = new MuscleFatAnalysis();
   obesityAnalysis: ObesityAnalysis = new ObesityAnalysis();

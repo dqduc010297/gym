@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ApplicationDomain.Gym.Model.Requests
+namespace ApplicationDomain.Common
 {
-    public abstract class FilterRq
+    public class FilterRq
     {
         [JsonProperty("take")]
         public int Take { set; get; }

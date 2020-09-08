@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { InBodyService } from 'src/app/services/inbody/inbody.service';
-import { BodyCompositionHistory } from 'src/app/models/inbody/body-composition-history';
 import { DatePipe } from '@angular/common';
 import { LoaderService } from 'src/app/services/core/loader.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { FilterRequest } from 'src/app/models/core/filter.request';
+import { HomeRequest } from 'src/app/models/home/home.request';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +15,7 @@ export class HomeComponent implements OnInit {
   smm: number[] = [];
   pbf: number[] = [];
   testedDates: string[] = [];
-  inBodyFilter: FilterRequest = new FilterRequest();
+  homeRequest: HomeRequest = new HomeRequest(this.deviceDetectorService);
 
   constructor(
     private inBodyService: InBodyService,
@@ -26,9 +25,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.inBodyFilter.skip = 0;
-    this.inBodyFilter.take = this.deviceDetectorService.isDesktop() ? 8 : this.deviceDetectorService.isTablet() ? 6 : 4;
-    this.inBodyService.getBodyCompositionHistories(this.inBodyFilter).subscribe(
+    this.inBodyService.getBodyCompositionHistories(this.homeRequest).subscribe(
       result => {
         this.testedDates = result.map(p => this.datePipe.transform(p.testedDate, 'dd/MM/yyyy'));
         this.weights = result.map(p => p.weight);
