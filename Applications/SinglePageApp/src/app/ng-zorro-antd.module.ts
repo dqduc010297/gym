@@ -67,6 +67,9 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzResizableModule } from 'ng-zorro-antd/resizable';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 @NgModule({
   exports: [
     NzAffixModule,
@@ -133,7 +136,9 @@ import { NzResizableModule } from 'ng-zorro-antd/resizable';
     NzTypographyModule,
     NzUploadModule,
     NzWaveModule,
-    NzResizableModule
+    NzResizableModule,
+    DragDropModule,
+    ScrollingModule,
   ]
 })
 export class NgZorroAntModule {

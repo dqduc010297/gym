@@ -5,22 +5,24 @@ import { Injectable } from '@angular/core';
 })
 export class LoaderService {
   public showLoader = false;
+  loadingKey: string[] = [];
+
   constructor() { }
 
-  // addLoadingAPI(serviceName: string) {
-  //   this.loadingAPI.push(serviceName);
-  // }
+  addLoadingKey(key: string) {
+    this.loadingKey.push(key);
+  }
 
-  // removeloadingAPI(serviceName: string) {
-  //   const index = this.loadingAPI.indexOf(serviceName);
-  //   if (index > -1) {
-  //     this.loadingAPI.splice(index, 1);
-  //   }
-  // }
+  removeloadingKey(serviceName: string) {
+    const index = this.loadingKey.indexOf(serviceName);
+    if (index > -1) {
+      this.loadingKey.splice(index, 1);
+    }
+  }
 
-  // showLoader(api: string): boolean {
-  //   return api === this.allPage || this.loadingAPI.indexOf(api) > -1;
-  // }
+  isShowLoader(key: string): boolean {
+    return this.loadingKey.indexOf(key) > -1;
+  }
 
   show() {
     this.showLoader = true;

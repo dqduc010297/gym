@@ -29,11 +29,11 @@ namespace WebApplication.Controllers
 
         [HttpGet]
         [Route("overview")]
-        public async Task<IActionResult> GetUserOverview(string overviewRq)
+        public async Task<IActionResult> GetUserOverview(string request)
         {
             try
             {
-                var rq = JsonConvert.DeserializeObject<FilterRq>(overviewRq);
+                var rq = JsonConvert.DeserializeObject<FilterRq>(request);
                 return Ok(await this._userService.GetUserOverviews(rq));
             }
             catch(Exception ex)

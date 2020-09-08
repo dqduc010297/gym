@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { UserService } from 'src/app/services/user/user.service';
-import { UserOverviewRequest } from 'src/app/models/user/user-overview.request';
+import { UserOverviewRequest } from 'src/app/requests/user/user-overview.request';
+import { LoaderService } from 'src/app/services/core/loader.service';
 
-const count = 5;
-const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
+
 export class UserComponent implements OnInit {
   initLoading = true; // bug
   loadingMore = false;
@@ -19,36 +19,31 @@ export class UserComponent implements OnInit {
   userOverviewRequest: UserOverviewRequest = new UserOverviewRequest();
 
   constructor(
-    private http: HttpClient,
     private msg: NzMessageService,
     private userService: UserService,
+    public loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {
-    this.userService.getUserOverview(new UserOverviewRequest()).subscribe(
-      result => {
-        console.log(result);
-      }
-    );
-    this.getData((res: any) => {
-      this.data = res.results;
-      this.list = res.results;
-      this.initLoading = false;
-    });
+    this.loadingItem();
+    this.loadData();
   }
 
-  getData(callback: (res: any) => void): void {
-    this.http.get(fakeDataUrl).subscribe((res: any) => callback(res));
+  loadData(){
+    this.userService.getUserOverview(this.userOverviewRequest).subscribe(
+      result => {
+        this.data = this.data.concat(result);
+        this.list = [...this.data];
+        this.initLoading = false;
+      }
+    );
   }
 
   onLoadMore(): void {
+    this.userOverviewRequest.skip += this.userOverviewRequest.take;
     this.loadingMore = true;
     this.loadingItem();
-    this.http.get(fakeDataUrl).subscribe((res: any) => {
-      this.data = this.data.concat(res.results);
-      this.list = [...this.data];
-      this.loadingMore = false;
-    });
+    this.loadData();
   }
 
   edit(item: any): void {

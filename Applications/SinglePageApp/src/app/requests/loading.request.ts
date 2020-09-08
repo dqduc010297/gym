@@ -1,3 +1,3 @@
 export interface LoadingRequest {
-    key: string;
+  loadingKey: string;
 }

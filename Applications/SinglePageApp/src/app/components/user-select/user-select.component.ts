@@ -1,10 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserSearchResponse } from 'src/app/models/user/user-search.response';
-import { UserSearchRequest } from 'src/app/models/user/user-search.request';
 import { UserService } from 'src/app/services/user/user.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { UserSearchRequest } from 'src/app/requests/user/user-search.request';
 
 @Component({
   selector: 'app-user-select',
