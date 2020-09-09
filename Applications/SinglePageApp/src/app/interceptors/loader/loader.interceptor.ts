@@ -17,7 +17,12 @@ export class LoaderInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     const loaderService = this.injector.get(LoaderService);
+    debugger;
     let loadingKey = '';
+    console.log(req.params.get('loadingKey'));
+    console.log('before: ', req);
+    req.params.delete('loadingKey');
+    console.log('after: ', req);
     if (req.params.get('request')) {
       const param = JSON.parse(req.params.get('request'));
       if (param.loadingKey) {

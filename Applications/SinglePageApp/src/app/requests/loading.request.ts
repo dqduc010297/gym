@@ -1,3 +1,3 @@
-export interface LoadingRequest {
-  loadingKey: string;
+export interface ILoadingRequest {
+  getLoadingKey(): string;
 }
