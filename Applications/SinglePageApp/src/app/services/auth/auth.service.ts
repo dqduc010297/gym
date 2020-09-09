@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from '../../models/auth/user';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-import { LoginUser } from '../../models/auth/login';
+import { LoginRequest } from '../../requests/auth/login.request';
 import { Router } from '@angular/router';
 
 export const AuthenticationUrl = {
@@ -25,8 +25,9 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(loginUser: LoginUser): Observable<any> {
-    return this.http.post<User>(`${environment.apiUrl}/auth/login`, loginUser).pipe(map(
+  login(loginUser: LoginRequest): Observable<any> {
+    const params = new HttpParams().set('loadingKey', loginUser.getLoadingKey());
+    return this.http.post<User>(`${environment.apiUrl}/auth/login`, loginUser, { params }).pipe(map(
       user => {
         localStorage.setItem(environment.tokenKey, JSON.stringify(user));
         this.currentUserSubject.next(user);

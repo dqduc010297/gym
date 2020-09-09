@@ -1,4 +1,5 @@
 ﻿using ApplicationDomain.Common;
+using ApplicationDomain.Gym.Model.Responses;
 using ApplicationDomain.Identity.Models.Requests;
 using ApplicationDomain.Identity.Models.Responses;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace ApplicationDomain.Identity.IServices
     {
         Task<IEnumerable<UserSearchRs>> GetUserSearch(UserSearchRq searchRq);
         Task<IEnumerable<UserOverviewRs>> GetUserOverviews(FilterRq request);
+        Task<UserInfoRs> GetUserInfo(int userId);
     }
 }

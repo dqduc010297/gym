@@ -18,7 +18,8 @@ export class InBodyService {
   }
 
   getBodyCompositionHistories(homeRequest: HomeRequest): Observable<BodyCompositionHistory[]> {
-    const params = new HttpParams().set('myInBodyRq', JSON.stringify(homeRequest));
+    const params = new HttpParams().set('myInBodyRq', JSON.stringify(homeRequest))
+      .set('loadingKey', homeRequest.getLoadingKey());
     return this.http.get<BodyCompositionHistory[]>(`${environment.apiUrl}/inbody/bodycompositionHistory`, { params });
   }
 
