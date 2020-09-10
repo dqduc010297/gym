@@ -7,14 +7,12 @@ import { UserSearchResponse } from 'src/app/models/user/user-search.response';
 import { FilterRequest } from 'src/app/requests/filter.request';
 import { UserSearchRequest } from 'src/app/requests/user/user-search.request';
 import { UserOverviewRequest } from 'src/app/requests/user/user-overview.request';
-import { HttpService } from '../http.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
   constructor(
-    private http: HttpClient,
-    private httpService: HttpService
+    private http: HttpClient
   ) {
   }
 
@@ -25,7 +23,7 @@ export class UserService {
   }
 
   getUserOverview(userOverviewRequest: UserOverviewRequest): Observable<UserSearchResponse[]> {
-    const params = new HttpParams().set('request', JSON.stringify(userOverviewRequest)).set('loadingKey', userOverviewRequest.getLoadingKey());
+    const params = new HttpParams().set('request', JSON.stringify(userOverviewRequest));
     return this.http.get<UserSearchResponse[]>(`${environment.apiUrl}/user/overview`, { params });
   }
 

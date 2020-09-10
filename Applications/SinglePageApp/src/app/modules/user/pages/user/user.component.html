@@ -25,7 +25,7 @@
       </nz-skeleton>
     </nz-list-item>
     <div class="loadmore" nz-list-load-more>
-      <button nz-button *ngIf="!loaderService.isShowLoader(userOverviewRequest.getLoadingKey())"
+      <button nz-button *ngIf="!loaderService.isShowLoader(userOverviewRequest.loadingKey)"
         (click)="onLoadMore()">loading more</button>
     </div>
   </nz-list>
