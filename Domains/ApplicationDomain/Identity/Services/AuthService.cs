@@ -57,7 +57,7 @@ namespace ApplicationDomain.Identity.Services
             loginProfile.UserName = user.UserName;
             loginProfile.AvatarURL = user.AvatarURL ?? "";
             loginProfile.Height = user.Height;
-            loginProfile.Age = DateTime.Now.Year - user.YearOfBirth;
+            loginProfile.Age = DateTime.Now.Year - user.DateOfBirth.Year;
             loginProfile.Gender = user.Gender;
 
             // generate token

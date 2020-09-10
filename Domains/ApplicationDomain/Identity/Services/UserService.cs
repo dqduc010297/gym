@@ -3,6 +3,7 @@ using ApplicationDomain.Gym.Model.Responses;
 using ApplicationDomain.Identity.Entities;
 using ApplicationDomain.Identity.IRepositories;
 using ApplicationDomain.Identity.IServices;
+using ApplicationDomain.Identity.Models;
 using ApplicationDomain.Identity.Models.Requests;
 using ApplicationDomain.Identity.Models.Responses;
 using AspNetCore.DataBinding.AutoMapper;
@@ -52,11 +53,11 @@ namespace ApplicationDomain.Identity.Services
             return await this._userRepository.GetUserOverview(request);
         }
 
-        public async Task<UserInfoRs> GetUserInfo(int userId)
+        public async Task<UserDTO> GetUserInfo(int userId)
         {
             return await this._userRepository
                 .GetEntitiesQueryableAsync()
-                .MapQueryTo<UserInfoRs>(this._mapper)
+                .MapQueryTo<UserDTO>(this._mapper)
                 .Where(p => p.Id == userId)
                 .FirstOrDefaultAsync();
         }

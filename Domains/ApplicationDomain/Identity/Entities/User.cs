@@ -11,7 +11,7 @@ namespace ApplicationDomain.Identity.Entities
     {
 		public string Fullname { set; get; }
 		public float Height { set; get; }
-		public int YearOfBirth { set; get; }
+		public DateTime DateOfBirth { set; get; }
 		public Gender Gender { set; get; }
 		public DateTime DateJoined { set; get; }
 		public string AvatarURL { set; get; }

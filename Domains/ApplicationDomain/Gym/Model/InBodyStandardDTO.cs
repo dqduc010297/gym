@@ -43,28 +43,28 @@ namespace ApplicationDomain.Gym.Model
             var mapper = CreateMap<InBodyStandard, InBodyStandardDTO>();
             mapper.ForMember(
                 d => d.PercentBodyFatMin,
-                opt => opt.MapFrom(s => CalculatePercentBodyFatMin(s.User.YearOfBirth, s.User.Gender))
+                opt => opt.MapFrom(s => CalculatePercentBodyFatMin(s.User.DateOfBirth, s.User.Gender))
                 );
             mapper.ForMember(
                 d => d.PercentBodyFatMax,
-                opt => opt.MapFrom(s => CalculatePercentBodyFatMax(s.User.YearOfBirth, s.User.Gender))
+                opt => opt.MapFrom(s => CalculatePercentBodyFatMax(s.User.DateOfBirth, s.User.Gender))
                 );
             mapper.ForMember(d => d.WaistHipRatioMax, opt => opt.MapFrom(s => s.User.Gender == Gender.MALE ? (float)0.9 : (float)0.85));
             mapper.ForMember(d => d.WaistHipRatioMin, opt => opt.MapFrom(s => s.User.Gender == Gender.MALE ? (float)0.8 : (float)0.75));
         }
 
-        private int CalculatePercentBodyFatMin(int yearOfBirth, Gender gender)
+        private int CalculatePercentBodyFatMin(DateTime dateOfBirth, Gender gender)
         {
-            int age = DateTime.Now.Year - yearOfBirth;
+            int age = DateTime.Now.Year - dateOfBirth.Year;
             if (gender == Gender.MALE)
             {
                 return age < 39 ? 8 : age < 59 ? 11 : 13;
             }
             return age < 39 ? 21 : age < 59 ? 23 : 24;
         }
-        private int CalculatePercentBodyFatMax(int yearOfBirth, Gender gender)
+        private int CalculatePercentBodyFatMax(DateTime dateOfBirth, Gender gender)
         {
-            int age = DateTime.Now.Year - yearOfBirth;
+            int age = DateTime.Now.Year - dateOfBirth.Year;
             if (gender == Gender.MALE)
             {
                 return age < 39 ? 19 : age < 59 ? 21 : 24;

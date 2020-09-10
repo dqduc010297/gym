@@ -7,6 +7,8 @@ import { UserSearchResponse } from 'src/app/models/user/user-search.response';
 import { FilterRequest } from 'src/app/requests/filter.request';
 import { UserSearchRequest } from 'src/app/requests/user/user-search.request';
 import { UserOverviewRequest } from 'src/app/requests/user/user-overview.request';
+import { UserInfoRequest } from 'src/app/requests/user/user-info.request';
+import { UserInfo } from 'src/app/models/user/user-info';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -28,4 +30,8 @@ export class UserService {
     return this.http.get<UserSearchResponse[]>(`${environment.apiUrl}/user/overview`, { params });
   }
 
+  getUserInfo(userInfoRequest: UserInfoRequest): Observable<UserInfo> {
+    const params = new HttpParams().set('loadingKey', userInfoRequest.getLoadingKey());
+    return this.http.get<UserInfo>(`${environment.apiUrl}/user?userId=${userInfoRequest.userId}`, { params });
+  }
 }

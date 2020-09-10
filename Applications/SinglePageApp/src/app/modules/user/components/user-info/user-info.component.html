@@ -1,1 +1,12 @@
-<nz-card></nz-card>
+<nz-card>
+  <div class="user-summarize">
+    <img src="{{userInfo.avatarURL}}" />
+    <p>{{userInfo.fullname}}</p>
+  </div>
+  <div class="user-detail">
+    <p><i nz-icon nzType="mobile" nzTheme="outline"></i> {{userInfo.phoneNumber}}</p>
+    <p><i nz-icon nzType="mail" nzTheme="outline"></i> {{userInfo.email}}</p>
+    <p><i nz-icon nzType="calendar" nzTheme="outline"></i> {{userInfo.dateOfBirth | date:'dd/MM/yyyy'}}</p>
+    <p><i nz-icon nzType="column-height" nzTheme="outline"></i> {{userInfo.height}} m</p>
+  </div>
+</nz-card>
