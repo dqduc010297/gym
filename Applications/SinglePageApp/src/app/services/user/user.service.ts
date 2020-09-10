@@ -23,7 +23,8 @@ export class UserService {
   }
 
   getUserOverview(userOverviewRequest: UserOverviewRequest): Observable<UserSearchResponse[]> {
-    const params = new HttpParams().set('request', JSON.stringify(userOverviewRequest));
+    const params = new HttpParams().set('request', JSON.stringify(userOverviewRequest))
+      .set('loadingKey', userOverviewRequest.getLoadingKey());
     return this.http.get<UserSearchResponse[]>(`${environment.apiUrl}/user/overview`, { params });
   }
 

@@ -1,4 +1,5 @@
 ﻿using ApplicationDomain.Common;
+using ApplicationDomain.Gym.Model.Responses;
 using ApplicationDomain.Identity.Entities;
 using ApplicationDomain.Identity.IRepositories;
 using ApplicationDomain.Identity.IServices;
@@ -49,6 +50,15 @@ namespace ApplicationDomain.Identity.Services
         public async Task<IEnumerable<UserOverviewRs>> GetUserOverviews(FilterRq request)
         {
             return await this._userRepository.GetUserOverview(request);
+        }
+
+        public async Task<UserInfoRs> GetUserInfo(int userId)
+        {
+            return await this._userRepository
+                .GetEntitiesQueryableAsync()
+                .MapQueryTo<UserInfoRs>(this._mapper)
+                .Where(p => p.Id == userId)
+                .FirstOrDefaultAsync();
         }
     }
 }

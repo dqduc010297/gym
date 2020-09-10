@@ -36,10 +36,17 @@ namespace WebApplication.Controllers
                 var rq = JsonConvert.DeserializeObject<FilterRq>(request);
                 return Ok(await this._userService.GetUserOverviews(rq));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }
+        }
+
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> GetUserInfo(int userId)
+        {
+            return Ok(await this._userService.GetUserInfo(userId));
         }
     }
 }

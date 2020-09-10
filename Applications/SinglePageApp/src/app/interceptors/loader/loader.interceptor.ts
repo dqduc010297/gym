@@ -18,15 +18,19 @@ export class LoaderInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const loaderService = this.injector.get(LoaderService);
     let loadingKey = '';
-    if (req.params.get('request')) {
-      const param = JSON.parse(req.params.get('request'));
-      if (param.loadingKey) {
-        loadingKey = param.loadingKey;
-        loaderService.addLoadingKey(loadingKey);
-      }
+    if (req.params.get('loadingKey')) {
+      loadingKey = req.params.get('loadingKey');
+      loaderService.addLoadingKey(loadingKey);
     }
-    loaderService.show();
-    return next.handle(req).pipe(
+
+    const cloneReq = req.clone({
+      url: req.url,
+      headers: req.headers,
+      params: req.params.delete('loadingKey'),
+      body: req.body
+    });
+
+    return next.handle(cloneReq).pipe(
       delay(2000),
       finalize(() => { loaderService.removeloadingKey(loadingKey); }),
     );
