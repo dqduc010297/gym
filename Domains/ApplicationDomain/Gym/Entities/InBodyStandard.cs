@@ -8,6 +8,7 @@ namespace ApplicationDomain.Gym.Entities
 {
     public class InBodyStandard : EntityBase<int>
     {
+        public float Height { set; get; }
         public float BodyWaterMax { set; get; }
         public float BodyWaterMin { set; get; }
         public float ProteinMax { set; get; }

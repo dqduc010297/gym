@@ -10,7 +10,6 @@ namespace ApplicationDomain.Identity.Entities
     public class User : IdentityUser<int>, IEntity<int>
     {
 		public string Fullname { set; get; }
-		public float Height { set; get; }
 		public DateTime DateOfBirth { set; get; }
 		public Gender Gender { set; get; }
 		public DateTime DateJoined { set; get; }

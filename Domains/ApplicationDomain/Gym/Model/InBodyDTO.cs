@@ -36,7 +36,7 @@ namespace ApplicationDomain.Gym.Model
             CreateMap<InBodyDTO, InBody>();
             CreateMap<InBody, InBodyDTO>()
                 .Include<InBody, MyInBodyRs>()
-                .ForMember(d => d.BMI, opt => opt.MapFrom(s => (float)Math.Round((s.Weight / (s.User.Height * s.User.Height)), 1)))
+                .ForMember(d => d.BMI, opt => opt.MapFrom(s => (float)Math.Round((s.Weight / (s.InBodyStandard.Height * s.InBodyStandard.Height)), 1)))
                 .ForMember(d => d.PercentBodyFat, opt => opt.MapFrom(s => (float)Math.Round(s.PercentBodyFat * 100, 1)));
         }
     }

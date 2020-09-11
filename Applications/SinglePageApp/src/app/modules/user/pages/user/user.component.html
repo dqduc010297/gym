@@ -1,4 +1,11 @@
-<app-user-select (onSelected)="selectedUser($event)"></app-user-select>
+<div class="row" style="margin-bottom: 20px;">
+  <div class="col-lg-10">
+    <app-user-select (onSelected)="selectedUser($event)"></app-user-select>
+  </div>
+  <div class="col-lg-2">
+    <button nz-button nzType="primary" nzBlock>Create new user</button>
+  </div>
+</div>
 <div class="row">
   <div class="col-lg-4">
     <app-user-info [userId]="selectedUserId"></app-user-info>

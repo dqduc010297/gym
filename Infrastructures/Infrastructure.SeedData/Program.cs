@@ -510,7 +510,6 @@ namespace Infrastructure.SeedData
                         Email = $"{i + 1}@gmail.com",
                         PhoneNumber = phoneNumbers[i],
                         DateOfBirth = new DateTime(1990 + (i % 6), (i % 12) + 1, 18),
-                        Height = (float)((140 + (i % 40)) * 1.0 / 100),
                         Gender = i % 2 == 0 ? Gender.MALE : Gender.FEMALE,
                         DateJoined = new DateTime(2019, 8, 1),
                         Status = UserStatus.ACTIVATE
@@ -530,7 +529,6 @@ namespace Infrastructure.SeedData
                         Email = $"{i + 1}@gmail.com",
                         PhoneNumber = phoneNumbers[i],
                         DateOfBirth = new DateTime(1990 + (i % 6), (i % 12) +1, 18),
-                        Height = (float)((130 + (i % 40)) * 1.0 / 100),
                         Gender = i % 2 == 0 ? Gender.MALE : Gender.FEMALE,
                         DateJoined = new DateTime(2019, 8, 1),
                         Status = UserStatus.ACTIVATE
@@ -573,7 +571,8 @@ namespace Infrastructure.SeedData
                                 inBodyStandard.WeightMax = Convert.ToSingle((double)reader.GetValue(9));
                                 inBodyStandard.SkeletalMuscleMassMin = Convert.ToSingle((double)reader.GetValue(10));
                                 inBodyStandard.SkeletalMuscleMassMax = Convert.ToSingle((double)reader.GetValue(11));
-                                inBodyStandard.UserId = Convert.ToInt32((double)reader.GetValue(12));
+                                inBodyStandard.Height = Convert.ToSingle((double)reader.GetValue(12));
+                                inBodyStandard.UserId = Convert.ToInt32((double)reader.GetValue(13));
                                 inBodyStandards.Add(inBodyStandard);
                             }
                         } while (reader.NextResult()); //Move to NEXT SHEET

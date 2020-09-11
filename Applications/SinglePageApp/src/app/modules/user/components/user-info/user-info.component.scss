@@ -10,10 +10,25 @@
   margin-right: auto;
 }
 
-.user-summarize > p {
+.user-summarize p {
   margin-bottom: 4px;
   color: rgba(0, 0, 0, 0.85);
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;
+}
+
+.user-detail p {
+  position: relative;
+  margin-bottom: 8px;
+  padding-left: 26px;
+}
+
+[nz-icon]:hover {
+  color: #1890ff;
+  cursor: pointer;
+}
+
+.user-detail-title {
+  min-width: 150px;
 }

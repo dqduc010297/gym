@@ -1,12 +1,57 @@
 <nz-card>
   <div class="user-summarize">
     <img src="{{userInfo.avatarURL}}" />
-    <p>{{userInfo.fullname}}</p>
+    <p *ngIf="action == formAction.view">{{userInfo.fullname}}</p>
+    <input *ngIf="action != formAction.view" nz-input placeholder="Fullname" [(ngModel)]="userInfo.fullname" />
+    <i nz-icon nzType="edit" nzTheme="outline" *ngIf="action == formAction.view" (click)="edit()"></i>
   </div>
   <div class="user-detail">
-    <p><i nz-icon nzType="mobile" nzTheme="outline"></i> {{userInfo.phoneNumber}}</p>
-    <p><i nz-icon nzType="mail" nzTheme="outline"></i> {{userInfo.email}}</p>
-    <p><i nz-icon nzType="calendar" nzTheme="outline"></i> {{userInfo.dateOfBirth | date:'dd/MM/yyyy'}}</p>
-    <p><i nz-icon nzType="column-height" nzTheme="outline"></i> {{userInfo.height}} m</p>
+    <nz-table nzTemplateMode [nzShowPagination]="false" style="margin: 20px 0;">
+      <tbody>
+        <tr>
+          <td class="user-detail-title">Phone number:</td>
+          <td *ngIf="action == formAction.view">{{userInfo.phoneNumber}}</td>
+          <td>
+            <input *ngIf="action != formAction.view" nz-input placeholder="Phone number"
+              [(ngModel)]="userInfo.phoneNumber" />
+          </td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td *ngIf="action == formAction.view">{{userInfo.email}}</td>
+          <td>
+            <input *ngIf="action != formAction.view" nz-input placeholder="Email" [(ngModel)]="userInfo.email" />
+          </td>
+        </tr>
+        <tr>
+          <td>Date of birth:</td>
+          <td *ngIf="action == formAction.view">{{userInfo.dateOfBirth | date:'dd/MM/yyyy'}}</td>
+          <td>
+            <nz-date-picker *ngIf="action != formAction.view" [(ngModel)]="userInfo.dateOfBirth" nzFormat="dd/MM/yyyy">
+            </nz-date-picker>
+          </td>
+        </tr>
+        <tr>
+          <td>Date joined: </td>
+          <td *ngIf="action == formAction.view">{{userInfo.dateJoined | date:'dd/MM/yyyy'}}</td>
+          <td>
+            <nz-date-picker *ngIf="action != formAction.view" [(ngModel)]="userInfo.dateJoined" nzFormat="dd/MM/yyyy">
+            </nz-date-picker>
+          </td>
+        </tr>
+        <tr>
+          <td>Dropbox link: </td>
+          <td *ngIf="action == formAction.view">
+            {{dropBoxTokenDisplay}}
+          </td>
+          <td>
+            <textarea *ngIf="action != formAction.view" nz-input placeholder="Dropbox link"
+              [(ngModel)]="userInfo.dropboxToken" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <button nz-button nzType="primary" nzBlock (click)="submit()" *ngIf="action == formAction.create">Create</button>
+    <button nz-button nzType="primary" nzBlock (click)="save()" *ngIf="action == formAction.edit">Save</button>
   </div>
 </nz-card>
