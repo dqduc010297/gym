@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.DbMigration.Migrations
 {
-    public partial class Init : Migration
+    public partial class UserInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,8 +44,7 @@ namespace Infrastructure.DbMigration.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Fullname = table.Column<string>(nullable: true),
-                    Height = table.Column<float>(nullable: false),
-                    YearOfBirth = table.Column<int>(nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
                     Gender = table.Column<int>(nullable: false),
                     DateJoined = table.Column<DateTime>(nullable: false),
                     AvatarURL = table.Column<string>(nullable: true),
@@ -174,6 +173,7 @@ namespace Infrastructure.DbMigration.Migrations
                     UpdatedDate = table.Column<DateTimeOffset>(nullable: false),
                     UpdatedByUserId = table.Column<int>(nullable: false),
                     RowVersion = table.Column<byte[]>(nullable: true),
+                    Height = table.Column<float>(nullable: false),
                     BodyWaterMax = table.Column<float>(nullable: false),
                     BodyWaterMin = table.Column<float>(nullable: false),
                     ProteinMax = table.Column<float>(nullable: false),

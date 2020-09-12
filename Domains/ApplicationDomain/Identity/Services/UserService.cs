@@ -11,6 +11,7 @@ using AspNetCore.UnitOfWork;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -60,6 +61,69 @@ namespace ApplicationDomain.Identity.Services
                 .MapQueryTo<UserDTO>(this._mapper)
                 .Where(p => p.Id == userId)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> UpdateUserInfo(int userId, UserDTO updatedUser)
+        {
+
+            var user = await this._userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                return false;
+            }
+            this._mapper.Map(updatedUser, user);
+            this._userRepository.Update(user);
+            int effactRow = await this._uow.SaveChangesAsync();
+            if (effactRow == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<int> CreatedUser(UserDTO createdUser)
+        {
+            try
+            {
+
+                User user = new User();
+                this._mapper.Map(createdUser, user);
+                user.TempPassword = GeneratePassword();
+                user.Status = UserStatus.DEACTIVATE;
+                var result = await this._userManager.CreateAsync(user, user.TempPassword);
+                if (result.Succeeded)
+                {
+                    await this._userManager.AddToRoleAsync(user, RoleName.MEMBER.ToString());
+                    await this._uow.SaveChangesAsync();
+                    return user.Id;
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private string GeneratePassword(int size = 8)
+        {
+            string[] KEY = new string[4] {
+                "abcdefghijklmnopqursuvwxyz",
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                "123456789",
+                @"!@$%^&*()#"
+                };
+            char[] _password = new char[size];
+            System.Random _random = new Random();
+            int counter;
+
+            for (counter = 0; counter < size; counter++)
+            {
+                _password[counter] = KEY[counter % 4][_random.Next(0, KEY[counter % 4].Length - 1)];
+            }
+
+            return String.Join(null, _password);
+
         }
     }
 }

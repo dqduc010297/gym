@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './pages/user/user.component';
 import { SharedModule } from 'src/app/share.module';
-import { UserInfoComponent } from './components/user-info/user-info.component';
+import { UserFormComponent } from './components/user-info/user-form.component';
+import { InitPageComponent } from './components/init-page/init-page.component';
 
 
 @NgModule({
   declarations: [
     UserComponent,
-    UserInfoComponent
+    UserFormComponent,
+    InitPageComponent
   ],
   imports: [
     CommonModule,

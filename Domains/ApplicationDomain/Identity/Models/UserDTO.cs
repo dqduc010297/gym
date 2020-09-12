@@ -11,7 +11,6 @@ namespace ApplicationDomain.Identity.Models
     {
         public int Id { set; get; }
         public string Fullname { set; get; }
-        public float Height { set; get; }
         public DateTime DateOfBirth { set; get; }
         public Gender Gender { set; get; }
         public DateTime DateJoined { set; get; }
@@ -20,14 +19,18 @@ namespace ApplicationDomain.Identity.Models
         public string DropboxToken { set; get; }
         public string PhoneNumber { set; get; }
         public string Email { set; get; }
+        public string TempPassword { set; get; }
     }
 
     public class UserDTOMapper : Profile
     {
         public UserDTOMapper()
         {
+            CreateMap<UserDTO, User>()
+                .ForMember(d => d.UserName, opt => opt.MapFrom(s => s.PhoneNumber));
             CreateMap<User, UserDTO>()
-                .ForMember(d => d.AvatarURL, opt => opt.MapFrom(s => s.AvatarURL == null ? "assets/images/default-avatar.png" : s.AvatarURL));
+                .ForMember(d => d.AvatarURL, opt => opt.MapFrom(s => s.AvatarURL == null ? "assets/images/default-avatar.png" : s.AvatarURL))
+                .ForMember(d => d.TempPassword, opt => opt.MapFrom(s => s.Status == UserStatus.DEACTIVATE ? s.TempPassword : ""));
         }
     }
 }

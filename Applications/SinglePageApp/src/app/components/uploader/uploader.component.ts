@@ -14,13 +14,14 @@ export class UploaderComponent implements OnInit {
   @Input() uploadedUrl: string;
   @Input() description: string;
   @Input() enable: boolean;
-  @Output() returnUrl: EventEmitter<string> = new EventEmitter<string>();
+  @Input() isCircle = false;
+  @Output() uploadedUrlChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private fileService: FileService) { }
 
   ngOnInit(): void {
     if (!this.uploadedUrl) {
-      this.uploadedUrl = 'assets/images/nutritions/oblique.svg';
+      this.uploadedUrl = 'assets/images/default-avatar.png';
     }
   }
 
@@ -36,8 +37,8 @@ export class UploaderComponent implements OnInit {
         this.isUploading = false;
         this.isUploaded = true;
         this.uploadedUrl = event.body.uploadedPath;
+        this.uploadedUrlChange.emit(this.uploadedUrl);
       }
     });
   }
-
 }

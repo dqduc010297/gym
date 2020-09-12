@@ -198,6 +198,8 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<int>("Status");
 
+                    b.Property<string>("TempPassword");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")

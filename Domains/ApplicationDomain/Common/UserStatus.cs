@@ -7,6 +7,7 @@ namespace ApplicationDomain.Common
     public enum UserStatus
     {
         ACTIVATE,
-        DEACTIVATE
+        DEACTIVATE,
+        DELETED,
     }
 }

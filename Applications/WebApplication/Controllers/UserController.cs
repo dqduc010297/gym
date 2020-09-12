@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationDomain.Common;
 using ApplicationDomain.Identity.IServices;
+using ApplicationDomain.Identity.Models;
 using ApplicationDomain.Identity.Models.Requests;
 using AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +48,24 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> GetUserInfo(int userId)
         {
             return Ok(await this._userService.GetUserInfo(userId));
+        }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> UpdateUserInfo(int userId, [FromBody] UserDTO user)
+        {
+            if (await this._userService.UpdateUserInfo(userId, user))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<IActionResult> CreateUserInfo([FromBody] UserDTO user)
+        {
+            return Ok(await this._userService.CreatedUser(user));
         }
     }
 }

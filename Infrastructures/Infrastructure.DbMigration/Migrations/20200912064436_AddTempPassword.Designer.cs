@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.DbMigration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200910142921_ChangeYearToDateOfBirth")]
-    partial class ChangeYearToDateOfBirth
+    [Migration("20200912064436_AddTempPassword")]
+    partial class AddTempPassword
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -93,6 +93,8 @@ namespace Infrastructure.DbMigration.Migrations
                     b.Property<int>("CreatedByUserId");
 
                     b.Property<DateTimeOffset>("CreatedDate");
+
+                    b.Property<float>("Height");
 
                     b.Property<float>("MineralMax");
 
@@ -178,8 +180,6 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<int>("Gender");
 
-                    b.Property<float>("Height");
-
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -199,6 +199,8 @@ namespace Infrastructure.DbMigration.Migrations
                     b.Property<string>("SecurityStamp");
 
                     b.Property<int>("Status");
+
+                    b.Property<string>("TempPassword");
 
                     b.Property<bool>("TwoFactorEnabled");
 

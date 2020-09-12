@@ -18,11 +18,12 @@ namespace WebApplication.Controllers
         {
             this._dropboxService = dropboxService;
         }
+
         [HttpPost, DisableRequestSizeLimit]
         [Route("upload")]
-        public async Task<IActionResult> Upload([FromForm] IFormFile uploadFile)
+        public async Task<IActionResult> Upload([FromForm] IFormFile file)
         {
-            string path = await this._dropboxService.Upload(uploadFile);
+            string path = await this._dropboxService.Upload(file);
             return Ok(new UploadImageRs() { isUploaded = true, UploadedPath = path });
         }
     }

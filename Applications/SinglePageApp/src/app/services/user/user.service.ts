@@ -9,6 +9,7 @@ import { UserSearchRequest } from 'src/app/requests/user/user-search.request';
 import { UserOverviewRequest } from 'src/app/requests/user/user-overview.request';
 import { UserInfoRequest } from 'src/app/requests/user/user-info.request';
 import { UserInfo } from 'src/app/models/user/user-info';
+import { UserRequest } from 'src/app/requests/user/user.request';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -33,5 +34,15 @@ export class UserService {
   getUserInfo(userInfoRequest: UserInfoRequest): Observable<UserInfo> {
     const params = new HttpParams().set('loadingKey', userInfoRequest.getLoadingKey());
     return this.http.get<UserInfo>(`${environment.apiUrl}/user?userId=${userInfoRequest.userId}`, { params });
+  }
+
+  updateUserInfo(userRequest: UserRequest): Observable<UserInfo> {
+    const params = new HttpParams().set('loadingKey', userRequest.getLoadingKey());
+    return this.http.put<UserInfo>(`${environment.apiUrl}/user?userId=${userRequest.userInfo.id}`, userRequest.userInfo, { params });
+  }
+
+  createUser(userRequest: UserRequest): Observable<string>{
+    const params = new HttpParams().set('loadingKey', userRequest.getLoadingKey());
+    return this.http.post<string>(`${environment.apiUrl}/user`, userRequest.userInfo, { params });
   }
 }

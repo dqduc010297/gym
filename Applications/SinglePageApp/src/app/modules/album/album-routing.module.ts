@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WaitingComponent } from 'src/app/components/waiting/waiting.component';
+import { AlbumComponent } from './pages/album/album.component';
 
 
 const routes: Routes = [
-  { path: '', component: WaitingComponent }
+  { path: '', component: AlbumComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class RewardRoutingModule { }
+export class AlbumRoutingModule { }

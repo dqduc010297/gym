@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.DbMigration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200825142909_Init")]
-    partial class Init
+    [Migration("20200912045904_UserInit")]
+    partial class UserInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -94,6 +94,8 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<DateTimeOffset>("CreatedDate");
 
+                    b.Property<float>("Height");
+
                     b.Property<float>("MineralMax");
 
                     b.Property<float>("MineralMin");
@@ -165,6 +167,8 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<DateTime>("DateJoined");
 
+                    b.Property<DateTime>("DateOfBirth");
+
                     b.Property<string>("DropboxToken");
 
                     b.Property<string>("Email")
@@ -175,8 +179,6 @@ namespace Infrastructure.DbMigration.Migrations
                     b.Property<string>("Fullname");
 
                     b.Property<int>("Gender");
-
-                    b.Property<float>("Height");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -202,8 +204,6 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
-
-                    b.Property<int>("YearOfBirth");
 
                     b.HasKey("Id");
 

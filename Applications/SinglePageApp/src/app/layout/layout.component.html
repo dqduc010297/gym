@@ -37,21 +37,15 @@
         </a>
       </li>
       <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
-        <i nz-icon nzType="check-square" nzTheme="outline"></i>
+        <i nz-icon nzType="aim" nzTheme="outline"></i>
         <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
           <span *ngIf="!isCollapsed">Goal</span>
         </a>
       </li>
       <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
-        <i nz-icon nzType="trophy" nzTheme="outline"></i>
-        <a [routerLink]="['/reward']" routerLinkActive="router-link-active">
-          <span *ngIf="!isCollapsed">Reward</span>
-        </a>
-      </li>
-      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
-        <i nz-icon nzType="snippets" nzTheme="outline"></i>
-        <a [routerLink]="['/blog']" routerLinkActive="router-link-active">
-          <span *ngIf="!isCollapsed">Blog</span>
+        <i nz-icon nzType="appstore" nzTheme="outline"></i>
+        <a [routerLink]="['/album']" routerLinkActive="router-link-active">
+          <span *ngIf="!isCollapsed">Album</span>
         </a>
       </li>
       <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
@@ -103,17 +97,13 @@
             </li>
             <li nz-menu-item nzMatchRouter>
               <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
-                <i nz-icon nzType="check-square" nzTheme="outline"></i>
+                <i nz-icon nzType="aim" nzTheme="outline"></i>
               </a>
             </li>
-            <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['/reward']" routerLinkActive="router-link-active">
-                <i nz-icon nzType="trophy" nzTheme="outline"></i>
-              </a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['/blog']" routerLinkActive="router-link-active">
-                <i nz-icon nzType="snippets" nzTheme="outline"></i>
+            <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
+              <i nz-icon nzType="appstore" nzTheme="outline"></i>
+              <a [routerLink]="['/album']" routerLinkActive="router-link-active">
+                <span *ngIf="!isCollapsed">Album</span>
               </a>
             </li>
           </ul>

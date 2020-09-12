@@ -1,7 +1,7 @@
 <nz-spin nzTip="Đang tải ảnh" [nzSpinning]="isUploading">
   <div class="uploader">
-    <p class="description">{{description}}</p>
-    <img src="{{uploadedUrl}}" class="center" />
+    <img *ngIf="!isCircle" src="{{uploadedUrl}}" class="center" />
+    <nz-avatar *ngIf="isCircle" [nzSize]="92" nzIcon="user" [nzSrc]="uploadedUrl"></nz-avatar>
     <input *ngIf="enable" style="margin: 10px;" type="file" accept="image/*" (change)="onUpload($event.target.files)" />
   </div>
 </nz-spin>

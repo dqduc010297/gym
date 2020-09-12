@@ -1,0 +1,21 @@
+<section class="gird">
+  <div>
+    <nz-upload class="avatar-uploader" nzAction="https://localhost:44396/api/file/upload" nzListType="picture-card"
+      [nzShowUploadList]="false" (nzChange)="handleChange($event)">
+      <ng-container *ngIf="!avatarUrl">
+        <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+        <div class="ant-upload-text">Upload</div>
+      </ng-container>
+      <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+    </nz-upload>
+  </div>
+  <div *ngFor="let image of images" (click)="viewImage(image)">
+    <img src="{{image}}" />
+  </div>
+</section>
+
+<nz-modal [nzVisible]="viewImageVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="viewImageVisible = false">
+  <ng-template #modalContent>
+    <img [src]="viewImageURL" [ngStyle]="{ width: '100%' }" />
+  </ng-template>
+</nz-modal>
