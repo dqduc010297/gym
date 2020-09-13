@@ -27,6 +27,12 @@ namespace WebApplication.Controllers
             var rq = JsonConvert.DeserializeObject<UserSearchRq>(searchRq);
             return Ok(await this._userService.GetUserSearch(rq));
         }
+        [HttpGet]
+        [Route("mention")]
+        public async Task<IActionResult> GetUserMention(string fullname)
+        {
+            return Ok(await this._userService.GetUserMention(fullname));
+        }
 
         [HttpGet]
         [Route("overview")]

@@ -1,16 +1,9 @@
 ﻿using ApplicationDomain.Gym.Entities;
 using ApplicationDomain.Gym.IRepositories;
 using ApplicationDomain.Gym.IServices;
-using ApplicationDomain.Gym.Model;
-using ApplicationDomain.Gym.Model.MyInBody;
-using ApplicationDomain.Gym.Model.Requests;
-using AspNetCore.DataBinding.AutoMapper;
+using ApplicationDomain.ThirdParty.Dropbox;
 using AspNetCore.UnitOfWork;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApplicationDomain.Gym.Services
@@ -36,6 +29,14 @@ namespace ApplicationDomain.Gym.Services
             this._imageRepository.Create(image);
             await this._uow.SaveChangesAsync();
             return image.Id;
+        }
+
+        public async Task Share(SharedImageRq sharedImageRq)
+        {
+            Image image = await this._imageRepository.GetEntityByIdAsync(sharedImageRq.ImageId);
+            image.SharedWith = sharedImageRq.SharedWith;
+            this._imageRepository.Update(image);
+            await this._uow.SaveChangesAsync();
         }
     }
 }

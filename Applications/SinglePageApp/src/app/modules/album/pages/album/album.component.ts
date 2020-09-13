@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
+import { MentionOnSearchTypes } from 'ng-zorro-antd/mention';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { UserMentionRequest } from 'src/app/requests/user/user-mention.request';
+import { LoaderService } from 'src/app/services/core/loader.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-album',
@@ -7,13 +12,10 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
   styleUrls: ['./album.component.scss']
 })
 export class AlbumComponent {
+  tplModal?: NzModalRef;
+  tplModalButtonLoading = false;
   inputValue?: string;
-   webFrameworks = [
-    { name: 'React', type: 'JavaScript', icon: 'https://zos.alipayobjects.com/rmsportal/LFIeMPzdLcLnEUe.svg' },
-    { name: 'Angular', type: 'JavaScript', icon: 'https://zos.alipayobjects.com/rmsportal/PJTbxSvzYWjDZnJ.png' },
-    { name: 'Dva', type: 'Javascript', icon: 'https://zos.alipayobjects.com/rmsportal/EYPwSeEJKxDtVxI.png' },
-    { name: 'Flask', type: 'Python', icon: 'https://zos.alipayobjects.com/rmsportal/xaypBUijfnpAlXE.png' }
-  ];
+  suggestions: any[] = [];
 
   images: string[] = [
     'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
@@ -44,10 +46,16 @@ export class AlbumComponent {
   previewVisible = false;
   loading = false;
   avatarUrl?: string;
-  viewImageVisible = false;
   viewImageURL: string;
+  userMentionRequest: UserMentionRequest = new UserMentionRequest();
+
+  constructor(
+    private modal: NzModalService,
+    private userService: UserService,
+    public loaderService: LoaderService,
+  ) { }
+
   handleChange(info: { file: NzUploadFile }): void {
-    console.log(info);
     switch (info.file.status) {
       case 'uploading':
         this.loading = true;
@@ -62,15 +70,47 @@ export class AlbumComponent {
     }
   }
 
-  viewImage(selectedImage: string) {
-    this.viewImageVisible = true;
-    this.viewImageURL = selectedImage;
-  }
-
-
-  valueWith = (data: { name: string; type: string }) => data.name;
+  valueWith = (data: { id: number, fullname: string; avatarURL: string }) => data.fullname;
 
   onSelect(value: string): void {
     console.log(value);
+  }
+
+  createTplModal(imageURL: string, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
+    this.viewImageURL = imageURL;
+    this.tplModal = this.modal.create({
+      nzContent: tplContent,
+      nzFooter: tplFooter,
+      nzMaskClosable: false,
+      nzClosable: false,
+      nzKeyboard: false,
+      nzComponentParams: {
+        value: 'Template Context'
+      },
+      nzOnOk: () => console.log('Click ok'),
+    });
+  }
+
+  destroyTplModal(): void {
+    this.tplModalButtonLoading = true;
+    setTimeout(() => {
+      this.tplModalButtonLoading = false;
+      this.tplModal.destroy();
+    }, 1000);
+  }
+
+  onSearchChange({ value }: MentionOnSearchTypes): void {
+    this.userMentionRequest.fullname = value;
+    this.userService.getMentionUser(this.userMentionRequest).subscribe(
+      result => {
+        this.suggestions = result;
+        this.loading = false;
+      }
+    );
+  }
+
+  cancel() {
+    this.inputValue = '';
+    this.tplModal.destroy();
   }
 }

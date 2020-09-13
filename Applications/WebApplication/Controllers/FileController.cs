@@ -31,5 +31,12 @@ namespace WebApplication.Controllers
             int imageId = await this._imageService.StorageImage(path, this.GetCurrentUserId());
             return Ok(new UploadImageRs() { IsUploaded = true, Id = imageId, UploadedPath = path });
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Share([FromBody] SharedImageRq sharedImageRq)
+        {
+            await this._imageService.Share(sharedImageRq);
+            return Ok();
+        }
     }
 }

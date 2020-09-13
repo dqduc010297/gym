@@ -10,6 +10,8 @@ import { UserOverviewRequest } from 'src/app/requests/user/user-overview.request
 import { UserInfoRequest } from 'src/app/requests/user/user-info.request';
 import { UserInfo } from 'src/app/models/user/user-info';
 import { UserRequest } from 'src/app/requests/user/user.request';
+import { UserMentionRequest } from 'src/app/requests/user/user-mention.request';
+import { UserMentionResponse } from 'src/app/models/user/user-mention.response';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -25,10 +27,9 @@ export class UserService {
     return this.http.get<UserSearchResponse[]>(`${environment.apiUrl}/user/search`, { params });
   }
 
-  getMentionUser(userSearch: UserSearchRequest): Observable<UserSearchResponse[]> {
-    userSearch.roleName = Role[Role.MEMBER];
-    const params = new HttpParams().set('searchRq', JSON.stringify(userSearch));
-    return this.http.get<UserSearchResponse[]>(`${environment.apiUrl}/user/search`, { params });
+  getMentionUser(userMentionRequest: UserMentionRequest): Observable<UserMentionResponse[]> {
+    const params = new HttpParams().set('loadingKey', userMentionRequest.getLoadingKey());
+    return this.http.get<UserMentionResponse[]>(`${environment.apiUrl}/user/mention?fullname=${userMentionRequest.fullname}`, { params });
   }
 
   getUserOverview(userOverviewRequest: UserOverviewRequest): Observable<UserSearchResponse[]> {
@@ -47,7 +48,7 @@ export class UserService {
     return this.http.put<UserInfo>(`${environment.apiUrl}/user?userId=${userRequest.userInfo.id}`, userRequest.userInfo, { params });
   }
 
-  createUser(userRequest: UserRequest): Observable<string>{
+  createUser(userRequest: UserRequest): Observable<string> {
     const params = new HttpParams().set('loadingKey', userRequest.getLoadingKey());
     return this.http.post<string>(`${environment.apiUrl}/user`, userRequest.userInfo, { params });
   }

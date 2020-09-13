@@ -11,6 +11,7 @@ namespace ApplicationDomain.Identity.IServices
     public interface IUserService
     {
         Task<IEnumerable<UserSearchRs>> GetUserSearch(UserSearchRq searchRq);
+        Task<IEnumerable<UserMentionRs>> GetUserMention(string fullname);
         Task<IEnumerable<UserOverviewRs>> GetUserOverviews(FilterRq request);
         Task<UserDTO> GetUserInfo(int userId);
         Task<bool> UpdateUserInfo(int userId, UserDTO updatedUser);

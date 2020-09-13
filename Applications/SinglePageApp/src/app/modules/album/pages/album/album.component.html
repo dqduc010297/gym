@@ -8,23 +8,29 @@
       </ng-container>
     </nz-upload>
   </div>
-  <div *ngFor="let image of images" (click)="viewImage(image)">
+  <div *ngFor="let image of images" (click)="createTplModal(image, tplContent, tplFooter)">
     <img src="{{image}}" />
   </div>
 </section>
-
-<nz-modal [nzVisible]="viewImageVisible" [nzContent]="modalContent" [nzFooter]="modalFooter"
-  (nzOnCancel)="viewImageVisible = false">
-  <ng-template #modalContent>
-    <img [src]="viewImageURL" [ngStyle]="{ width: '100%' }" />
-  </ng-template>
-  <ng-template #modalFooter>
-    <nz-mention [nzSuggestions]="webFrameworks" [nzValueWith]="valueWith" (nzOnSelect)="onSelect($event)">
-      <input placeholder="@someone" nz-input nzMentionTrigger [(ngModel)]="inputValue" />
-      <ng-container *nzMentionSuggestion="let framework">
-        <nz-avatar nzSize="small" [nzText]="framework.name" [nzSrc]="framework.icon"></nz-avatar>
-        <span>{{ framework.name }} - {{ framework.type }}</span>
-      </ng-container>
-    </nz-mention>
-  </ng-template>
-</nz-modal>
+<ng-template #tplContent let-params let-ref="modalRef">
+  <img [src]="viewImageURL" [ngStyle]="{ width: '100%' }" />
+</ng-template>
+<ng-template #tplFooter>
+  <nz-mention [nzSuggestions]="suggestions" [nzLoading]="loaderService.isShowLoader(userMentionRequest.getLoadingKey())"
+    (nzOnSearchChange)="onSearchChange($event)" [nzValueWith]="valueWith">
+    <input nzMentionTrigger nz-input [(ngModel)]="inputValue" />
+    <ng-container *nzMentionSuggestion="let userMention">
+      <nz-avatar nzSize="small" [nzText]="userMention.fullname" [nzSrc]="userMention.avatarURL"></nz-avatar>
+      <span>{{ userMention.fullname }}</span>
+    </ng-container>
+  </nz-mention>
+  <div class="">
+    <button style="margin-top: 10px;" nz-button (click)="cancel()">
+      Cancel
+    </button>
+    <button style="margin-top: 10px;" nz-button nzType="primary" (click)="destroyTplModal()"
+      [nzLoading]="tplModalButtonLoading">
+      Share
+    </button>
+  </div>
+</ng-template>

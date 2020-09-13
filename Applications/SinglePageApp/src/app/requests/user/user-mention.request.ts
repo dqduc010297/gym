@@ -1,10 +1,13 @@
 import { FilterRequest } from '../filter.request';
+import { ILoadingRequest } from '../loading.request';
 
-export class UserMentionRequest implements FilterRequest {
-  skip = 0;
-  take = 10;
+export class UserMentionRequest implements ILoadingRequest {
   fullname: string;
 
   constructor() {
+  }
+
+  getLoadingKey(): string {
+    return 'UserMentionRequest';
   }
 }
