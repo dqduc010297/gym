@@ -7,6 +7,14 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
   styleUrls: ['./album.component.scss']
 })
 export class AlbumComponent {
+  inputValue?: string;
+   webFrameworks = [
+    { name: 'React', type: 'JavaScript', icon: 'https://zos.alipayobjects.com/rmsportal/LFIeMPzdLcLnEUe.svg' },
+    { name: 'Angular', type: 'JavaScript', icon: 'https://zos.alipayobjects.com/rmsportal/PJTbxSvzYWjDZnJ.png' },
+    { name: 'Dva', type: 'Javascript', icon: 'https://zos.alipayobjects.com/rmsportal/EYPwSeEJKxDtVxI.png' },
+    { name: 'Flask', type: 'Python', icon: 'https://zos.alipayobjects.com/rmsportal/xaypBUijfnpAlXE.png' }
+  ];
+
   images: string[] = [
     'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
     'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
@@ -57,5 +65,12 @@ export class AlbumComponent {
   viewImage(selectedImage: string) {
     this.viewImageVisible = true;
     this.viewImageURL = selectedImage;
+  }
+
+
+  valueWith = (data: { name: string; type: string }) => data.name;
+
+  onSelect(value: string): void {
+    console.log(value);
   }
 }

@@ -6,7 +6,8 @@ namespace ApplicationDomain.ThirdParty.Dropbox
 {
     public class UploadImageRs
     {
-        public bool isUploaded { set; get; }
+        public bool IsUploaded { set; get; }
+        public int Id { set; get; }
         public string UploadedPath { set; get; }
     }
 }

@@ -48,6 +48,21 @@ namespace ApplicationDomain.Identity.Services
                 }));
             return userSearches;
         }
+        public async Task<IEnumerable<UserMentionRs>> GetUserMention(UserMentionRq searchRq)
+        {
+            List<UserMentionRs> userMentions = new List<UserMentionRs>();
+            var users = await this._userManager.Users
+                .Where(p => p.Fullname.Contains(searchRq.Fullname))
+                .Skip(searchRq.Skip).Take(searchRq.Take)
+               .ToListAsync();
+            users.ForEach(u => new UserMentionRs()
+            {
+                Id = u.Id,
+                Fullname = u.Fullname,
+                AvatarURL = u.AvatarURL ?? AppSettingCommon.GetVariable("DefaultAvatarURL"),
+            });
+            return userMentions;
+        }
 
         public async Task<IEnumerable<UserOverviewRs>> GetUserOverviews(FilterRq request)
         {

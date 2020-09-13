@@ -29,7 +29,7 @@ namespace ApplicationDomain.Identity.Models
             CreateMap<UserDTO, User>()
                 .ForMember(d => d.UserName, opt => opt.MapFrom(s => s.PhoneNumber));
             CreateMap<User, UserDTO>()
-                .ForMember(d => d.AvatarURL, opt => opt.MapFrom(s => s.AvatarURL == null ? "assets/images/default-avatar.png" : s.AvatarURL))
+                .ForMember(d => d.AvatarURL, opt => opt.MapFrom(s => s.AvatarURL == null ? AppSettingCommon.GetVariable("DefaultAvatarURL") : s.AvatarURL))
                 .ForMember(d => d.TempPassword, opt => opt.MapFrom(s => s.Status == UserStatus.DEACTIVATE ? s.TempPassword : ""));
         }
     }

@@ -25,6 +25,12 @@ export class UserService {
     return this.http.get<UserSearchResponse[]>(`${environment.apiUrl}/user/search`, { params });
   }
 
+  getMentionUser(userSearch: UserSearchRequest): Observable<UserSearchResponse[]> {
+    userSearch.roleName = Role[Role.MEMBER];
+    const params = new HttpParams().set('searchRq', JSON.stringify(userSearch));
+    return this.http.get<UserSearchResponse[]>(`${environment.apiUrl}/user/search`, { params });
+  }
+
   getUserOverview(userOverviewRequest: UserOverviewRequest): Observable<UserSearchResponse[]> {
     const params = new HttpParams().set('request', JSON.stringify(userOverviewRequest))
       .set('loadingKey', userOverviewRequest.getLoadingKey());

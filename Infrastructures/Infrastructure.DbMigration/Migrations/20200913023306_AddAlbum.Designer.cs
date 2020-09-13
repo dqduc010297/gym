@@ -4,14 +4,16 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.DbMigration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200913023306_AddAlbum")]
+    partial class AddAlbum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace Infrastructure.DbMigration.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ApplicationDomain.Gym.Entities.Image", b =>
+            modelBuilder.Entity("ApplicationDomain.Gym.Entities.Album", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,7 +47,7 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Album");
                 });
 
             modelBuilder.Entity("ApplicationDomain.Gym.Entities.InBody", b =>
@@ -330,7 +332,7 @@ namespace Infrastructure.DbMigration.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ApplicationDomain.Gym.Entities.Image", b =>
+            modelBuilder.Entity("ApplicationDomain.Gym.Entities.Album", b =>
                 {
                     b.HasOne("ApplicationDomain.Identity.Entities.User", "User")
                         .WithMany()

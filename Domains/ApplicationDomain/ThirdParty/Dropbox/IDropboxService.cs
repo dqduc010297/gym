@@ -8,6 +8,6 @@ namespace ApplicationDomain.ThirdParty.Dropbox
 {
     public interface IDropboxService
     {
-        Task<string> Upload(IFormFile file);
+        Task<string> Upload(IFormFile file, int userId);
     }
 }

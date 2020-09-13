@@ -1,9 +1,4 @@
-.ant-upload-select-picture-card {
-
-  width: 100%;
-  height: 100%;
-}
-.gird > div > nz-upload > div {
+.gird > div > nz-upload {
   width: 100%;
   height: 100%;
 }
@@ -13,10 +8,21 @@
   height: 100%;
   object-fit: cover;
 }
-.gird {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-auto-rows: 200px;
+
+@media screen and (min-width: 992px) {
+  .gird {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 200px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .gird {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-auto-rows: 100px;
+  }
 }
 
 img {

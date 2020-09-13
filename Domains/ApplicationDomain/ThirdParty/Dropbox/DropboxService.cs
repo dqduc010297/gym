@@ -1,6 +1,10 @@
-﻿using Dropbox.Api;
+﻿using ApplicationDomain.Common;
+using ApplicationDomain.Identity.Entities;
+using Dropbox.Api;
 using Dropbox.Api.Files;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,9 +15,10 @@ namespace ApplicationDomain.ThirdParty.Dropbox
 {
     public class DropboxService : IDropboxService
     {
-        public DropboxService()
+        private readonly UserManager<User> _userManager;
+        public DropboxService(UserManager<User> userManager)
         {
-
+            _userManager = userManager;
         }
         /// <summary>
         /// Generate file name with format ddMMyyyy_hhmmss
@@ -24,9 +29,11 @@ namespace ApplicationDomain.ThirdParty.Dropbox
             DateTime now = DateTime.Now;
             return now.Day.ToString() + now.Month.ToString() + now.Year.ToString() + now.Hour.ToString() + now.Minute.ToString() + now.Second.ToString();
         }
-        public async Task<string> Upload(IFormFile file)
+        public async Task<string> Upload(IFormFile file, int userId)
         {
-            var token = "m-CXENCMI5AAAAAAAAAAAU-H0G9AMUJLY_CbWWjeKHyHfk3nq837WcSUecOMmGsz";
+
+            var user = await this._userManager.FindByIdAsync(userId.ToString());
+            string token = user.DropboxToken ?? AppSettingCommon.GetVariable("DefaultDropboxToken");
             using (DropboxClient dbx = new DropboxClient(token))
             {
                 var full = await dbx.Users.GetCurrentAccountAsync();
