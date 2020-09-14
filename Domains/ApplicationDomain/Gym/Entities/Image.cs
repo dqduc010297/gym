@@ -10,7 +10,6 @@ namespace ApplicationDomain.Gym.Entities
     {
         public string Url { set; get; }
         public string SharedWith { set; get; }
-        public int UserId { set; get; }
         public User User { set; get; }
     }
 }

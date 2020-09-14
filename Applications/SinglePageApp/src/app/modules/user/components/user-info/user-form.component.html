@@ -7,8 +7,8 @@
         <div class="user-summarize">
           <nz-avatar *ngIf="action == formAction.view" [nzSize]="92" nzIcon="user" [nzSrc]="userInfo.avatarURL">
           </nz-avatar>
-          <app-uploader *ngIf="action != formAction.view" [enable]="true" [isCircle]="true"
-            [(uploadedUrl)]="userInfo.avatarURL"></app-uploader>
+          <!-- <app-uploader *ngIf="action != formAction.view" [enable]="true" [isCircle]="true"
+            [(uploadedUrl)]="userInfo.avatarURL"></app-uploader> -->
           <p *ngIf="action == formAction.view">{{userInfo.fullname}}</p>
           <input *ngIf="action != formAction.view" nz-input placeholder="Fullname" [(ngModel)]="userInfo.fullname" />
           <i nz-icon nzType="edit" nzTheme="outline" *ngIf="action == formAction.view" (click)="edit()"></i>

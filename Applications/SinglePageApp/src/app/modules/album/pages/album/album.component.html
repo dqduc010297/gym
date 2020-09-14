@@ -1,8 +1,8 @@
-<section class="gird">
+<!-- <section class="gird">
   <div>
     <nz-upload class="avatar-uploader" nzAction="https://localhost:44396/api/file/upload" nzListType="picture-card"
       [nzShowUploadList]="false" (nzChange)="handleChange($event)">
-      <ng-container *ngIf="!avatarUrl">
+      <ng-container>
         <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
         <div class="ant-upload-text">Upload</div>
       </ng-container>
@@ -33,4 +33,16 @@
       Share
     </button>
   </div>
-</ng-template>
+</ng-template> -->
+<nz-card>
+  <nz-tabset>
+    <nz-tab nzTitle="My image">
+      <app-album-gird [images]="album.myImages"></app-album-gird>
+    </nz-tab>
+    <nz-tab nzTitle="Shared image">
+      <ng-template nz-tab>
+        <app-album-gird></app-album-gird>
+      </ng-template>
+    </nz-tab>
+  </nz-tabset>
+</nz-card>

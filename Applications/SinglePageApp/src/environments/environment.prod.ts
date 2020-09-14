@@ -1,5 +1,9 @@
-export const environment = {
-  production: true,
+export const environment =  {
+  production: false,
   tokenKey: 'F78CN6nmLQ',
-  apiUrl: 'http://localhost:63646/api',
+  apiUrl: 'https://localhost:44396/api',
+  uploadURL: {
+    upload: 'https://localhost:44396/api/file/upload',
+    storage: 'https://localhost:44396/api/file/storage',
+  }
 };

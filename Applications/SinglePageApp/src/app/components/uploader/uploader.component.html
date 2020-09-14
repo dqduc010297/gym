@@ -1,7 +1,7 @@
-<nz-spin nzTip="Đang tải ảnh" [nzSpinning]="isUploading">
-  <div class="uploader">
-    <img *ngIf="!isCircle" src="{{uploadedUrl}}" class="center" />
-    <nz-avatar *ngIf="isCircle" [nzSize]="92" nzIcon="user" [nzSrc]="uploadedUrl"></nz-avatar>
-    <input *ngIf="enable" style="margin: 10px;" type="file" accept="image/*" (change)="onUpload($event.target.files)" />
-  </div>
-</nz-spin>
+<nz-upload class="avatar-uploader" [nzAction]="uploadAPI" nzListType="picture-card" [nzShowUploadList]="false"
+  (nzChange)="handleChange($event)">
+  <ng-container>
+    <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'" placeholder="input @ to mention people"></i>
+    <div class="ant-upload-text">Upload</div>
+  </ng-container>
+</nz-upload>

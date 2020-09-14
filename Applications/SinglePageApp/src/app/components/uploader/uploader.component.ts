@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FileService } from 'src/app/services/core/file.service';
-import { HttpEventType } from '@angular/common/http';
+import { EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { Image } from 'src/app/modules/album/shared/models/image.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-uploader',
@@ -8,37 +10,33 @@ import { HttpEventType } from '@angular/common/http';
   styleUrls: ['./uploader.component.scss']
 })
 export class UploaderComponent implements OnInit {
-  isUploading = false;
-  isUploaded = false;
+  @Input() uploadStyle: string = 'upload';
+  uploadAPI: string = this.uploadStyle === 'storage' ? environment.uploadURL.storage : environment.uploadURL.upload;
 
-  @Input() uploadedUrl: string;
-  @Input() description: string;
-  @Input() enable: boolean;
-  @Input() isCircle = false;
-  @Output() uploadedUrlChange: EventEmitter<string> = new EventEmitter<string>();
+  @Input() isShowAfterUpload = false;
+  @Output() uploaded: EventEmitter<Image> = new EventEmitter<Image>();
 
-  constructor(private fileService: FileService) { }
+  loading = false;
+
+  constructor() { }
 
   ngOnInit(): void {
-    if (!this.uploadedUrl) {
-      this.uploadedUrl = 'assets/images/default-avatar.png';
+  }
+
+
+  handleChange(info: { file: NzUploadFile }): void {
+    switch (info.file.status) {
+      case 'uploading':
+        this.loading = true;
+        break;
+      case 'done':
+        this.loading = false;
+        this.uploaded.emit(info.file.response);
+        break;
+      case 'error':
+        this.loading = false;
+        break;
     }
   }
 
-  onUpload(files: any) {
-    if (files.length !== 1) {
-      return;
-    }
-    this.isUploading = true;
-    this.fileService.upload((files[0] as File)).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-      }
-      else if (event.type === HttpEventType.Response) {
-        this.isUploading = false;
-        this.isUploaded = true;
-        this.uploadedUrl = event.body.uploadedPath;
-        this.uploadedUrlChange.emit(this.uploadedUrl);
-      }
-    });
-  }
 }

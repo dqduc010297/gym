@@ -1,0 +1,31 @@
+<section class="gird">
+    <div>
+        <!-- <nz-upload class="avatar-uploader" nzAction="https://localhost:44396/api/file/storage" nzListType="picture-card"
+            [nzShowUploadList]="false" (nzChange)="handleChange($event)">
+            <ng-container>
+                <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+                <div class="ant-upload-text">Upload</div>
+            </ng-container>
+        </nz-upload> -->
+        <app-uploader (uploaded)="uploaded($event)"></app-uploader>
+    </div>
+    <div *ngFor="let image of images" (click)="createTplModal(image, tplContent, tplFooter)">
+        <img src="{{image.url}}" />
+    </div>
+</section>
+
+<ng-template #tplContent let-params let-ref="modalRef">
+    <img [src]="selectedImage.url" [ngStyle]="{ width: '100%' }" />
+</ng-template>
+<ng-template #tplFooter>
+    <app-user-mention [(inputValue)]="inputValue" [(mentioned)]="selectedImage.sharedWith"></app-user-mention>
+    <div class="">
+        <button style="margin-top: 10px;" nz-button (click)="cancel()">
+            Cancel
+        </button>
+        <button style="margin-top: 10px;" nz-button nzType="primary" (click)="share()"
+            [nzLoading]="tplModalButtonLoading">
+            Share
+        </button>
+    </div>
+</ng-template>

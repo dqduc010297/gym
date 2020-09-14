@@ -16,7 +16,7 @@ namespace AspNetCore.Mvc
             });
 
             mvcBuilder.AddJsonOptions(x => {
-                x.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                x.SerializerSettings.NullValueHandling = NullValueHandling.Include;
                 x.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
                 x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Error;
             });
@@ -41,7 +41,7 @@ namespace AspNetCore.Mvc
             });
 
             mvcBuilder.AddJsonOptions(x => {
-                x.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                x.SerializerSettings.NullValueHandling = NullValueHandling.Include;
                 x.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
                 x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Error;
             });

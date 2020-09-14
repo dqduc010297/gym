@@ -5,6 +5,7 @@ import { NgZorroAntModule } from './ng-zorro-antd.module';
 import { UploaderComponent } from './components/uploader/uploader.component';
 import { WaitingComponent } from './components/waiting/waiting.component';
 import { UserSelectComponent } from './components/user-select/user-select.component';
+import { UserMentionComponent } from './components/user-mention/user-mention.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { UserSelectComponent } from './components/user-select/user-select.compon
   declarations: [
     UploaderComponent,
     WaitingComponent,
-    UserSelectComponent
+    UserSelectComponent,
+    UserMentionComponent,
   ],
   providers: [
     DatePipe
@@ -27,7 +29,8 @@ import { UserSelectComponent } from './components/user-select/user-select.compon
     NgZorroAntModule,
     UploaderComponent,
     WaitingComponent,
-    UserSelectComponent
+    UserSelectComponent,
+    UserMentionComponent,
   ],
   entryComponents: [
   ]
