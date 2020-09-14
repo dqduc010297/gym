@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { SharedUser } from 'src/app/models/user/shared-user';
 import { LoaderService } from 'src/app/services/core/loader.service';
 import { Image } from '../../shared/models/image.model';
 import { AlbumService } from '../../shared/services/album.service';
@@ -50,6 +51,7 @@ export class AlbumGirdComponent implements OnInit {
   }
 
   share() {
+    console.log(this.selectedImage);
     this.albumService.share(this.selectedImage).subscribe(
       result => {
         this.tplModal.destroy();
@@ -61,7 +63,7 @@ export class AlbumGirdComponent implements OnInit {
     this.images = [{
       id: event.id,
       url: event.uploadedPath,
-      sharedWith: null,
+      sharedWith: [],
     }].concat(this.images);
   }
 }

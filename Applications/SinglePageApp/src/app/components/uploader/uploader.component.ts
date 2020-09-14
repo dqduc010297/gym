@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Image } from 'src/app/modules/album/shared/models/image.model';
@@ -9,16 +9,24 @@ import { environment } from 'src/environments/environment';
   templateUrl: './uploader.component.html',
   styleUrls: ['./uploader.component.scss']
 })
-export class UploaderComponent implements OnInit {
-  @Input() uploadStyle: string = 'upload';
-  uploadAPI: string = this.uploadStyle === 'storage' ? environment.uploadURL.storage : environment.uploadURL.upload;
+export class UploaderComponent implements OnInit, OnChanges {
+  @Input() uploadStyle: string;
+  uploadAPI: string = environment.uploadURL.upload;
 
+  @Input() uploadedPath: string;
   @Input() isShowAfterUpload = false;
+  @Input() isAvatar = false;
   @Output() uploaded: EventEmitter<Image> = new EventEmitter<Image>();
 
   loading = false;
 
   constructor() { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.uploadStyle.currentValue) {
+      this.uploadAPI = this.uploadStyle === 'storage' ? environment.uploadURL.storage : environment.uploadURL.upload;
+    }
+  }
 
   ngOnInit(): void {
   }
@@ -31,6 +39,7 @@ export class UploaderComponent implements OnInit {
         break;
       case 'done':
         this.loading = false;
+        this.uploadedPath = info.file?.response.uploadedPath;
         this.uploaded.emit(info.file.response);
         break;
       case 'error':

@@ -45,7 +45,7 @@ namespace ApplicationDomain.Gym.Services
         {
             ImageRs imageRs = new ImageRs();
             imageRs.MyImages = await this._imageRepository.GetMyImage(userId).MapQueryTo<ImageDTO>(this._mapper).ToListAsync();
-            imageRs.SharedImage = await this._imageRepository.GetSharedImage(userId).MapQueryTo<ImageDTO>(this._mapper).ToListAsync();
+            imageRs.SharedImages = await this._imageRepository.GetSharedImage(userId).MapQueryTo<ImageDTO>(this._mapper).ToListAsync();
             return imageRs;
         }
     }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { MentionOnSearchTypes } from 'ng-zorro-antd/mention';
+import { SharedUser } from 'src/app/models/user/shared-user';
 import { UserMentionRequest } from 'src/app/requests/user/user-mention.request';
 import { LoaderService } from 'src/app/services/core/loader.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -10,11 +11,11 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./user-mention.component.scss']
 })
 export class UserMentionComponent implements OnInit, OnChanges {
-  @Input() inputValue?: string;
+  @Input() inputValue = '';
   @Output() inputValueChange: EventEmitter<string> = new EventEmitter<string>();
 
-  @Input() mentioned: number[]=[];
-  @Output() mentionedChange: EventEmitter<number[]> = new EventEmitter<number[]>();
+  @Input() mentioned: SharedUser[] = [];
+  @Output() mentionedChange: EventEmitter<SharedUser[]> = new EventEmitter<SharedUser[]>();
 
   suggestions: any[] = [];
   userMentionRequest: UserMentionRequest = new UserMentionRequest();
@@ -25,12 +26,14 @@ export class UserMentionComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.mentioned.currentValue) {
-      console.log(changes.mentioned.currentValue);
+    if (changes.mentioned?.currentValue) {
+      if (this.inputValue === undefined) { this.inputValue = ''; }
+      this.mentioned.forEach(p => {
+        this.inputValue += '@' + p.fullname + ' ';
+      });
     }
   }
 
-  
   ngOnInit(): void {
 
   }
@@ -38,7 +41,10 @@ export class UserMentionComponent implements OnInit, OnChanges {
   valueWith = (data: { id: number, fullname: string; avatarURL: string }) => data.fullname;
 
   onSearchChange({ value }: MentionOnSearchTypes): void {
-    if(value === '') {
+    if (value === ''
+      || (this.suggestions.length > 0 && value.length > 0)
+      || this.loaderService.isShowLoader(this.userMentionRequest.getLoadingKey())
+    ) {
       return;
     }
     this.userMentionRequest.fullname = value;
@@ -50,7 +56,7 @@ export class UserMentionComponent implements OnInit, OnChanges {
   }
 
   onSelectedMention(event) {
-    this.mentioned.push(event.id);
+    this.mentioned.push({ id: event.id, fullname: event.fullname });
     this.mentionedChange.emit(this.mentioned);
   }
 }

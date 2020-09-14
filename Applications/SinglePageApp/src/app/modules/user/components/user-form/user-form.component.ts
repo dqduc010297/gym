@@ -87,4 +87,8 @@ export class UserFormComponent implements OnInit {
       }
     );
   }
+
+  uploaded(event: any) {
+    this.userInfo.avatarURL = event.uploadedPath;
+  }
 }

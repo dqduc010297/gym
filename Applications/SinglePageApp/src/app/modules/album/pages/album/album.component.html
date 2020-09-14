@@ -1,39 +1,3 @@
-<!-- <section class="gird">
-  <div>
-    <nz-upload class="avatar-uploader" nzAction="https://localhost:44396/api/file/upload" nzListType="picture-card"
-      [nzShowUploadList]="false" (nzChange)="handleChange($event)">
-      <ng-container>
-        <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
-        <div class="ant-upload-text">Upload</div>
-      </ng-container>
-    </nz-upload>
-  </div>
-  <div *ngFor="let image of images" (click)="createTplModal(image, tplContent, tplFooter)">
-    <img src="{{image}}" />
-  </div>
-</section>
-<ng-template #tplContent let-params let-ref="modalRef">
-  <img [src]="viewImageURL" [ngStyle]="{ width: '100%' }" />
-</ng-template>
-<ng-template #tplFooter>
-  <nz-mention [nzSuggestions]="suggestions" [nzLoading]="loaderService.isShowLoader(userMentionRequest.getLoadingKey())"
-    (nzOnSearchChange)="onSearchChange($event)" [nzValueWith]="valueWith">
-    <input nzMentionTrigger nz-input [(ngModel)]="inputValue" />
-    <ng-container *nzMentionSuggestion="let userMention">
-      <nz-avatar nzSize="small" [nzText]="userMention.fullname" [nzSrc]="userMention.avatarURL"></nz-avatar>
-      <span>{{ userMention.fullname }}</span>
-    </ng-container>
-  </nz-mention>
-  <div class="">
-    <button style="margin-top: 10px;" nz-button (click)="cancel()">
-      Cancel
-    </button>
-    <button style="margin-top: 10px;" nz-button nzType="primary" (click)="destroyTplModal()"
-      [nzLoading]="tplModalButtonLoading">
-      Share
-    </button>
-  </div>
-</ng-template> -->
 <nz-card>
   <nz-tabset>
     <nz-tab nzTitle="My image">
@@ -41,7 +5,7 @@
     </nz-tab>
     <nz-tab nzTitle="Shared image">
       <ng-template nz-tab>
-        <app-album-gird></app-album-gird>
+        <app-album-gird [images]="album.sharedImages"></app-album-gird>
       </ng-template>
     </nz-tab>
   </nz-tabset>
