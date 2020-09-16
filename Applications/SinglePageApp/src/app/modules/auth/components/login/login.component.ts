@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, AuthenticationUrl } from '../../../../services/auth/auth.service';
-import { LoginRequest } from '../../../../requests/auth/login.request';
+import { AuthService, AuthenticationUrl } from '../../shared/services/auth.service';
+import { LoginRequest } from '../../shared/requests/login.request';
 import { LoaderService } from 'src/app/services/core/loader.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { LoginMock } from 'src/app/mocks/login.mock';
@@ -26,18 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    this.authService.login(this.loginRequest)
-      .subscribe(
-        result => {
-          this.router.navigate(['']);
-        },
-        error => {
-          this.modalService.error({
-            nzTitle: 'Đăng nhập thất bại',
-            nzContent: 'Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng đăng nhập lại.'
-          });
-        }
-      );
+    this.authService.login(this.loginRequest);
     // this.loginMock.doMock().subscribe(
     //   result => {
     //     localStorage.setItem(environment.tokenKey, JSON.stringify(result));

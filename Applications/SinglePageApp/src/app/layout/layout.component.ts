@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../models/auth/user';
-import { AuthService } from '../services/auth/auth.service';
+import { Role } from '../const/role';
+import { LoginUser } from '../modules/auth/shared/models/login.user';
+import { AuthService } from '../modules/auth/shared/services/auth.service';
 import { LoaderService } from '../services/core/loader.service';
 
 @Component({
@@ -11,7 +12,8 @@ import { LoaderService } from '../services/core/loader.service';
 export class LayoutComponent implements OnInit {
   isCollapsed = false;
   isLogin = false;
-  currentUser: User;
+  currentUser: LoginUser = new LoginUser();
+  userRole = Role;
 
   constructor(
     public authService: AuthService,

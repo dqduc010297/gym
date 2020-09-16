@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ApplicationDomain.Identity.IServices;
 using ApplicationDomain.Identity.Models;
+using ApplicationDomain.Identity.Models.Requests;
 using AspNetCore.Mvc;
 using AspNetCore.Mvc.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -56,6 +57,13 @@ namespace WebApplication.Controllers
             }
 
             return BadRequest("User Name or Password does not match");
+        }
+
+        [Route("change-password")]
+        [HttpPut]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRq changePasswordRq)
+        {
+            return Ok(await this._authService.ChangePassword(this.GetCurrentUserId(), changePasswordRq));
         }
     }
 }

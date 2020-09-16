@@ -9,5 +9,7 @@ namespace ApplicationDomain.Identity.Models
         public string Token { set; get; }
         public int Age { set; get; }
         public Gender Gender { set; get; }
+        public RoleName Role { set; get; }
+        public bool IsNeedToChangePassword { set; get; }
     }
 }

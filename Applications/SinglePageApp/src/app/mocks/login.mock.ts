@@ -1,8 +1,6 @@
 import { IMock } from './imock';
 import { Observable, of } from 'rxjs';
-import { GoalOverview } from '../modules/goal/models/goal';
 import { Injectable } from '@angular/core';
-import { User } from '../models/auth/user';
 
 @Injectable({ providedIn: 'root' })
 export class LoginMock implements IMock {

@@ -8,6 +8,10 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using AspNetCore.Mvc.JwtBearer;
+using ApplicationDomain.Identity.Models.Requests;
+using System.Linq;
+using ApplicationDomain.Common;
+using System.Collections.Generic;
 
 namespace ApplicationDomain.Identity.Services
 {
@@ -49,7 +53,24 @@ namespace ApplicationDomain.Identity.Services
             signInResult.LoginProfile = await LoadingProfileAsync(user);
             return signInResult;
         }
+        public async Task<bool> ChangePassword(int userId, ChangePasswordRq rq)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
 
+            if (user == null)
+            {
+                return false;
+            }
+            var changePasswordResult = await this._userManager.ChangePasswordAsync(user, rq.CurrentPassword, rq.NewPassword);
+            if (changePasswordResult.Succeeded)
+            {
+                user.TempPassword = null;
+                await this._userManager.UpdateAsync(user);
+                await this._uow.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
         private async Task<LoginProfile> LoadingProfileAsync(User user)
         {
             LoginProfile loginProfile = new LoginProfile();
@@ -68,7 +89,14 @@ namespace ApplicationDomain.Identity.Services
                 UserName = user.UserName,
             };
             loginProfile.Token = _jwtTokenService.GenerateLoginToken<int>(userIdentity, roles);
+            if (user.TempPassword != null)
+            {
+                loginProfile.IsNeedToChangePassword = true;
+                return loginProfile;
+            }
             return loginProfile;
         }
+
+
     }
 }

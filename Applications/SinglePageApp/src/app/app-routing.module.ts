@@ -11,7 +11,7 @@ const routes: Routes = [
       { path: 'timesheet', loadChildren: () => import('./modules/timesheet/timesheet.module').then(m => m.TimesheetModule) },
       { path: 'goal', loadChildren: () => import('./modules/goal/goal.module').then(m => m.GoalModule) },
       { path: 'inbody', loadChildren: () => import('./modules/inbody/inbody.module').then(m => m.InbodyModule) },
-      { path: 'user', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) },
+      { path: 'user', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule), canActivate: [] },
       { path: 'album', loadChildren: () => import('./modules/album/album.module').then(m => m.AlbumModule) },
     ]
   },

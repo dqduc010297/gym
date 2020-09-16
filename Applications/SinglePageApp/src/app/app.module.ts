@@ -19,6 +19,8 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { MenuItemComponent } from './layout/components/menu-item/menu-item.component';
+import { MenuComponent } from './layout/components/menu/menu.component';
 
 registerLocaleData(vi);
 
@@ -26,6 +28,8 @@ registerLocaleData(vi);
   declarations: [
     AppComponent,
     LayoutComponent,
+    MenuItemComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

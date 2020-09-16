@@ -7,54 +7,7 @@
         <h1></h1>
       </a>
     </div>
-    <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
-        <i nz-icon nzType="home" nzTheme="outline"></i>
-        <a [routerLink]="['/home']" routerLinkActive="router-link-active">
-          <span *ngIf="!isCollapsed">Home</span>
-        </a>
-      </li>
-      <li nz-submenu nzTitle="Inbody" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
-            <a [routerLink]="['/inbody/list']" routerLinkActive="router-link-active">
-              <span *ngIf="!isCollapsed">List</span>
-            </a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <i nz-icon nzType="plus" nzTheme="outline"></i>
-            <a [routerLink]="['/inbody/new']" routerLinkActive="router-link-active">
-              <span *ngIf="!isCollapsed">New</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
-        <i nz-icon nzType="calendar" nzTheme="outline"></i>
-        <a [routerLink]="['/timesheet']" routerLinkActive="router-link-active">
-          <span *ngIf="!isCollapsed">Timesheet</span>
-        </a>
-      </li>
-      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
-        <i nz-icon nzType="aim" nzTheme="outline"></i>
-        <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
-          <span *ngIf="!isCollapsed">Goal</span>
-        </a>
-      </li>
-      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
-        <i nz-icon nzType="appstore" nzTheme="outline"></i>
-        <a [routerLink]="['/album']" routerLinkActive="router-link-active">
-          <span *ngIf="!isCollapsed">Album</span>
-        </a>
-      </li>
-      <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
-        <i nz-icon nzType="user" nzTheme="outline"></i>
-        <a [routerLink]="['/user']" routerLinkActive="router-link-active">
-          <span *ngIf="!isCollapsed">User</span>
-        </a>
-      </li>
-    </ul>
+    <app-menu menuType="inline" [role]="currentUser.role"></app-menu>
   </nz-sider>
   <nz-layout class="layout" [ngClass]="{'right-layout': !isCollapsed}">
     <div [ngClass]="{'fixed-top': isCollapsed}">
@@ -68,7 +21,7 @@
           </div>
           <div class="sidebar-logo d-none d-md-block" style="float: right; margin-right: 8px;">
             <a nz-dropdown [nzDropdownMenu]="menu">
-              <nz-avatar [nzSize]="36" nzIcon="user"></nz-avatar>
+              <nz-avatar [nzSize]="36" nzIcon="user" [nzSrc]="currentUser.avatarURL"></nz-avatar>
             </a>
             <nz-dropdown-menu #menu="nzDropdownMenu">
               <ul nz-menu nzSelectable>
@@ -78,35 +31,7 @@
               </ul>
             </nz-dropdown-menu>
           </div>
-          <ul nz-menu nzMode="horizontal" class="d-sm-block d-md-none d-flex justify-content-around"
-            style="line-height: 48px;">
-            <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['/home']" routerLinkActive="router-link-active">
-                <i nz-icon nzType="home" nzTheme="outline"></i>
-              </a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['/inbody/list']" routerLinkActive="router-link-active">
-                <i nz-icon nzType="form" nzTheme="outline"></i>
-              </a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['/timesheet']" routerLinkActive="router-link-active">
-                <i nz-icon nzType="calendar" nzTheme="outline"></i>
-              </a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['/goal']" routerLinkActive="router-link-active">
-                <i nz-icon nzType="aim" nzTheme="outline"></i>
-              </a>
-            </li>
-            <li nz-menu-item nzMatchRouter nz-tooltip nzTooltipPlacement="right">
-              <i nz-icon nzType="appstore" nzTheme="outline"></i>
-              <a [routerLink]="['/album']" routerLinkActive="router-link-active">
-                <span *ngIf="!isCollapsed">Album</span>
-              </a>
-            </li>
-          </ul>
+          <app-menu menuType="horizontal"></app-menu>
         </nz-header>
       </div>
     </div>
