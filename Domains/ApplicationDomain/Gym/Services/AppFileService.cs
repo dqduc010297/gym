@@ -42,5 +42,14 @@ namespace ApplicationDomain.Gym.Services
             await this._uow.SaveChangesAsync();
             return appFile.Id;
         }
+
+        public async Task ShareMediaFile(MediaFile sharedFile)
+        {
+            AppFile appFile = await this._appFileRepository.GetEntityByIdAsync(sharedFile.Id);
+            this._mapper.Map(sharedFile, appFile);
+            this._appFileRepository.Update(appFile);
+            await this._uow.SaveChangesAsync();
+        }
+
     }
 }

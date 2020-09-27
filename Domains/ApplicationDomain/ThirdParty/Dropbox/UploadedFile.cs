@@ -4,10 +4,11 @@ using System.Text;
 
 namespace ApplicationDomain.ThirdParty.Dropbox
 {
-    public class UploadImageRs
+    public class UploadedFile
     {
         public bool IsUploaded { set; get; }
         public int Id { set; get; }
         public string UploadedPath { set; get; }
+        public string ContentType { set; get; }
     }
 }

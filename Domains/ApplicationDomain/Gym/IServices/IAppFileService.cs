@@ -1,4 +1,5 @@
-﻿using ApplicationDomain.Gym.Model.Responses;
+﻿using ApplicationDomain.Gym.Model;
+using ApplicationDomain.Gym.Model.Responses;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,5 +11,6 @@ namespace ApplicationDomain.Gym.IServices
     {
         Task<int> Storage(string url, string contentType);
         Task<AlbumRs> GetAlbum(int userId);
+        Task ShareMediaFile(MediaFile sharedFile);
     }
 }

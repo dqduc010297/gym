@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { UploadedFile } from 'src/app/components/uploader/uploaded-file.model';
 import { LoaderService } from 'src/app/services/core/loader.service';
+import { MediaFile } from '../../shared/models/media-file.model';
 import { AlbumService } from '../../shared/services/album.service';
 
 @Component({
@@ -10,10 +12,10 @@ import { AlbumService } from '../../shared/services/album.service';
 })
 
 export class AlbumGirdComponent implements OnInit {
-  @Input() images: Image[] = [];
+  @Input() mediaFiles: MediaFile[] = [];
 
   inputValue?: string;
-  selectedImage: Image = new Image();
+  selectedMediaFile: MediaFile = new MediaFile();
   mentioned: number[] = [];
 
   tplModal?: NzModalRef;
@@ -29,8 +31,8 @@ export class AlbumGirdComponent implements OnInit {
 
   }
 
-  createTplModal(image: Image, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
-    this.selectedImage = image;
+  createTplModal(mediaFile: MediaFile, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
+    this.selectedMediaFile = mediaFile;
     this.tplModal = this.modal.create({
       nzContent: tplContent,
       nzFooter: tplFooter,
@@ -49,20 +51,19 @@ export class AlbumGirdComponent implements OnInit {
   }
 
   share() {
-    console.log(this.selectedImage);
-    this.albumService.share(this.selectedImage).subscribe(
+    this.albumService.share(this.selectedMediaFile).subscribe(
       result => {
         this.tplModal.destroy();
       }
     );
   }
 
-  uploaded(event: any) {
-    this.images = [{
+  uploaded(event: UploadedFile) {
+    this.mediaFiles = [{
       id: event.id,
       url: event.uploadedPath,
       sharedWith: [],
-      fileType: event.fileType,
-    }].concat(this.images);
+      isImage: event.contentType.includes('image'),
+    }].concat(this.mediaFiles);
   }
 }

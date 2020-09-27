@@ -8,16 +8,16 @@ import { MediaFile } from '../models/media-file.model';
 @Injectable({ providedIn: 'root' })
 export class AlbumService {
 
-    constructor(
-        private http: HttpClient
-    ) {
-    }
+  constructor(
+    private http: HttpClient
+  ) {
+  }
 
-    getImages(): Observable<AlbumResponse> {
-        return this.http.get<AlbumResponse>(`${environment.apiUrl}/album`);
-    }
+  getImages(): Observable<AlbumResponse> {
+    return this.http.get<AlbumResponse>(`${environment.apiUrl}/album`);
+  }
 
-    share(image: MediaFile): Observable<any> {
-        return this.http.put<any>(`${environment.apiUrl}/image`, image);
-    }
+  share(image: MediaFile): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/album/share`, image);
+  }
 }

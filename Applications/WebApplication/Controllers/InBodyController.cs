@@ -47,7 +47,6 @@ namespace WebApplication.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateInBody()
         {
-
             return Ok("Inbody");
         }
 

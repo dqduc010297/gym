@@ -40,7 +40,7 @@ namespace WebApplication.Controllers
             //};
             //string path = source[new Random().Next(0, source.Length - 1)];
             int appFileId = await this._appFileService.Storage(path, file.ContentType);
-            return Ok(new UploadImageRs() { IsUploaded = true, Id = appFileId, UploadedPath = path });
+            return Ok(new UploadedFile() { IsUploaded = true, Id = appFileId, UploadedPath = path, ContentType = file.ContentType });
         }
 
         [HttpPost, DisableRequestSizeLimit]
@@ -58,14 +58,7 @@ namespace WebApplication.Controllers
             //    "https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
             //};
             //string path = source[new Random().Next(0, source.Length - 1)];
-            return Ok(new UploadImageRs() { IsUploaded = true, Id = 0, UploadedPath = path });
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Share([FromBody] ImageDTO imageDTO)
-        {
-            //await this._imageService.Share(imageDTO);
-            return Ok();
+            return Ok(new UploadedFile() { IsUploaded = true, Id = 0, UploadedPath = path, ContentType = file.ContentType });
         }
     }
 }
