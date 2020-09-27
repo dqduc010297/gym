@@ -1,5 +1,6 @@
 export class InBodyStandard {
   id: number;
+  height: number;
   bodyWaterMax: number;
   bodyWaterMin: number;
   proteinMax: number;

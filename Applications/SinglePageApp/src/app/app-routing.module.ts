@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
+import { Role } from './const/role';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -11,7 +13,11 @@ const routes: Routes = [
       { path: 'timesheet', loadChildren: () => import('./modules/timesheet/timesheet.module').then(m => m.TimesheetModule) },
       { path: 'goal', loadChildren: () => import('./modules/goal/goal.module').then(m => m.GoalModule) },
       { path: 'inbody', loadChildren: () => import('./modules/inbody/inbody.module').then(m => m.InbodyModule) },
-      { path: 'user', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule), canActivate: [] },
+      {
+        path: 'user',
+        loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule),
+        canActivate: [RoleGuard], data: { expectedRole: Role.SYS_ADMIN.toString() }
+      },
       { path: 'album', loadChildren: () => import('./modules/album/album.module').then(m => m.AlbumModule) },
     ]
   },

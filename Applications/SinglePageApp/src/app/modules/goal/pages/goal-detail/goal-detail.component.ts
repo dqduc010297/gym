@@ -32,4 +32,8 @@ export class GoalDetailComponent implements OnInit {
       }
     );
   }
+
+  uploaded(event) {
+    console.log(event);
+  }
 }

@@ -1,6 +1,10 @@
-<div class="row">
-  <div class="col-xl-8 col-lg-12">
+<div class="row" style="margin-bottom: 20px;">
+  <div class="col-xl-4">
     <app-user-select (onSelected)="selectedUser($event)"></app-user-select>
+  </div>
+</div>
+<div class="row" *ngIf="userId > 0">
+  <div class="col-xl-8 col-lg-12">
     <nz-table nzTemplateMode nzBordered [nzShowPagination]="false" nzTableLayout="fixed">
       <thead>
         <tr>
@@ -53,3 +57,6 @@
     <button style="margin-top: 20px;" nz-button nzType="primary" nzBlock (click)="submit()">Submit</button>
   </div>
 </div>
+
+<nz-result *ngIf="userId == 0" [nzIcon]="'smile-twotone'" nzTitle="Vui lòng chọn user để thêm InBody!">
+</nz-result>

@@ -10,7 +10,7 @@ import { ColorLevel } from 'src/app/const/bmi';
 export class WeighingComponent implements OnInit, OnChanges {
   chartOptions: any;
   updateChartOptions: any;
-  height = this.authService.currentUserValue.height;
+  @Input() height: number;
   @Input() weight: number;
 
   constructor(

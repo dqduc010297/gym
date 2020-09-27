@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { InBodyDetail } from 'src/app/models/inbody/inbody-detail';
 import { InBodyService } from 'src/app/services/inbody/inbody.service';
 import { LoaderService } from 'src/app/services/core/loader.service';
 import { DatePipe } from '@angular/common';
@@ -19,6 +18,7 @@ export class InbodyComponent implements OnInit {
   myInBodyRequest: MyInBodyRq = new MyInBodyRq(this.deviceService);
 
   inBodyPaper: InBodyPaper = new InBodyPaper();
+  isEmptyData = true;
 
   constructor(
     private inBodyService: InBodyService,
@@ -38,6 +38,11 @@ export class InbodyComponent implements OnInit {
   loadLatestMyInBody() {
     this.inBodyService.getInBody(this.myInBodyRequest).subscribe(
       result => {
+        if (!result) {
+          this.isEmptyData = true;
+          return;
+        }
+        this.isEmptyData = false;
         this.inBodyPaper = this.inBodyMPaperMapper.map(result);
         this.testedDatePicker = this.inBodyPaper.testedDate;
       }
@@ -56,7 +61,6 @@ export class InbodyComponent implements OnInit {
   getTestedDate() {
     this.inBodyService.getTestedDates().subscribe(
       result => {
-        // tslint:disable-next-line: no-shadowed-variable
         result.forEach(element => {
           this.testedDates.push(element.toString().substring(0, 10));
         });

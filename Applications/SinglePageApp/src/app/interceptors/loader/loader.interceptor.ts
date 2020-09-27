@@ -31,8 +31,10 @@ export class LoaderInterceptor implements HttpInterceptor {
     });
 
     return next.handle(cloneReq).pipe(
-      delay(2000),
-      finalize(() => { loaderService.removeloadingKey(loadingKey); }),
+      delay(200),
+      finalize(() => {
+        loaderService.removeloadingKey(loadingKey);
+      }),
     );
   }
 }

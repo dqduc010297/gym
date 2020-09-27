@@ -32,6 +32,7 @@ namespace ApplicationDomain.Gym.Model
         public float WaistHipRatioMin { set; get; }
         public int PercentBodyFatMax { set; get; }
         public int PercentBodyFatMin { set; get; }
+        public float Height { set; get; }
         public int UserId { set; get; }
     }
 

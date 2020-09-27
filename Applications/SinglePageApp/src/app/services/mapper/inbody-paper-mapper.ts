@@ -15,11 +15,12 @@ export class InBodyPaperMapper implements IMapper<InBodyDetail, InBodyPaper>{
       score: source.score,
       testedDate: source.testedDate,
       weight: source.weight,
+      height: source.inBodyStandard.height,
       userId: source.userId,
       bodyCompositionAnalysis: this.mapBodyCompositionAnalysis(source),
       muscleFatAnalysis: this.mapMuscleFatAnalysis(source),
       obesityAnalysis: this.mapObesityAnalysis(source),
-      bodyCompositionHistories: [],
+      bodyCompositionHistories: source.bodyCompositionHistories,
     };
   }
 
@@ -45,10 +46,10 @@ export class InBodyPaperMapper implements IMapper<InBodyDetail, InBodyPaper>{
     bodyFatMass.value = inBodyDetail.bodyFatMass;
 
     return {
-      bodyWater: bodyWater,
-      protein: protein,
-      mineral: mineral,
-      bodyFatMass: bodyFatMass,
+      bodyWater,
+      protein,
+      mineral,
+      bodyFatMass,
     };
   }
 
@@ -80,11 +81,11 @@ export class InBodyPaperMapper implements IMapper<InBodyDetail, InBodyPaper>{
     waistHipRatio.value = inBodyDetail.waistHipRatio;
 
     return {
-      skeletalMuscleMass: skeletalMuscleMass,
-      weight: weight,
-      bodyFatMass: bodyFatMass,
-      visceralFatLevel: visceralFatLevel,
-      waistHipRatio: waistHipRatio,
+      skeletalMuscleMass,
+      weight,
+      bodyFatMass,
+      visceralFatLevel,
+      waistHipRatio,
     };
   }
 
@@ -100,8 +101,8 @@ export class InBodyPaperMapper implements IMapper<InBodyDetail, InBodyPaper>{
     pbf.value = inBodyDetail.percentBodyFat;
 
     return {
-      bmi: bmi,
-      pbf: pbf,
+      bmi,
+      pbf,
       bmiEvaluation: inBodyDetail.bmiEvaluation,
       pbfEvaluation: inBodyDetail.pbfEvaluation,
     };

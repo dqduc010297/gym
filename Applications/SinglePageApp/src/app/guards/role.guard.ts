@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { decode } from 'punycode';
 import { AuthService } from '../modules/auth/shared/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RoleGuardService implements CanActivate {
+export class RoleGuard implements CanActivate {
 
   constructor(public auth: AuthService, public router: Router) { }
 
@@ -22,7 +21,7 @@ export class RoleGuardService implements CanActivate {
       }
     }
     if (currentRole || !checkRole) {
-      this.router.navigate(['401']);
+      this.router.navigate(['']);
       return false;
     }
     return true;

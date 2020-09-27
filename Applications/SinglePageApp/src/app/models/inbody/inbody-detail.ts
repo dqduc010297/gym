@@ -11,8 +11,6 @@ export class InBodyDetail {
   testedDate: Date;
   weight: number;
   score: number;
-  height: number;
-
   userId: number;
 
   bodyCompositionAnalysis: BodyCompositionAnalysis = new BodyCompositionAnalysis();

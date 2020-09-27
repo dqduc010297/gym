@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { NgZorroAntModule } from './ng-zorro-antd.module';
 import { UploaderComponent } from './components/uploader/uploader.component';
 import { WaitingComponent } from './components/waiting/waiting.component';

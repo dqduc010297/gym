@@ -1,42 +1,42 @@
-<nz-spin [nzSpinning]="loaderService.showLoader" nzTip="Loading...">
-  <div class="row">
-    <div class="col-xl-4 col-lg-6">
-      <div class="d-flex justify-content-between" style="margin-bottom: 8px;">
-        <div>
-          <strong>Tested date:</strong>
-          <nz-date-picker [nzDateRender]="tplRender" style="margin-left: 10px;" [(ngModel)]="testedDatePicker"
-            (ngModelChange)="onChange($event)" nzFormat="dd/MM/yyyy" [nzDisabledDate]="disabledDate">
-          </nz-date-picker>
-
-          <ng-template #tplRender let-current>
-            <div class="ant-picker-cell-inner" [class.border]="checkDate(current)">
-              {{ current.getDate() }}
-            </div>
-          </ng-template>
-
+<nz-spin [nzSpinning]="loaderService.isShowLoader(myInBodyRequest.getLoadingKey())" nzTip="Loading...">
+  <nz-result *ngIf="isEmptyData" [nzIcon]="'smile-twotone'" nzTitle="Bạn chưa có thông tin về Inbody!"
+    nzSubTitle="Vui lòng liên hệ nhân viên để được đo InBody.">
+  </nz-result>
+  <div *ngIf="!isEmptyData">
+    <div class="row">
+      <div class="col-xl-4 col-lg-6">
+        <div class="d-flex justify-content-between" style="margin-bottom: 8px;">
+          <div>
+            <strong>Tested date:</strong>
+            <nz-date-picker [nzDateRender]="tplRender" style="margin-left: 10px;" [(ngModel)]="testedDatePicker"
+              (ngModelChange)="onChange($event)" nzFormat="dd/MM/yyyy" [nzDisabledDate]="disabledDate">
+            </nz-date-picker>
+            <ng-template #tplRender let-current>
+              <div class="ant-picker-cell-inner" [class.border]="checkDate(current)">
+                {{ current.getDate() }}
+              </div>
+            </ng-template>
+          </div>
+          <div>
+            <h5>Score: {{inBodyPaper.score}}/100</h5>
+          </div>
         </div>
-        <div>
-          <h5>Score: {{inBodyPaper.score}}/100</h5>
-        </div>
+        <app-body-composition-analysis [bodyCompositionAnalysis]="inBodyPaper.bodyCompositionAnalysis">
+        </app-body-composition-analysis>
       </div>
-      <app-body-composition-analysis [bodyCompositionAnalysis]="inBodyPaper.bodyCompositionAnalysis">
-      </app-body-composition-analysis>
-    </div>
-    <div class="col-xl-4 col-lg-6">
-      <app-muscle-fat-analysis [muscleFatAnalysis]="inBodyPaper.muscleFatAnalysis"></app-muscle-fat-analysis>
-    </div>
-    <div class="col-xl-4 col-lg-6">
-      <app-obesity-analysis [obesityAnalysis]="inBodyPaper.obesityAnalysis"></app-obesity-analysis>
-    </div>
-
-
-    <div class="col-xl-4 col-lg-6">
-      <app-weighing [weight]="inBodyPaper.weight"></app-weighing>
-    </div>
-    <div class="col-xl-8 col-lg-12 d-none d-md-block">
-      <app-body-composition-history [bodyCompositionHistories]="inBodyPaper.bodyCompositionHistories">
-      </app-body-composition-history>
+      <div class="col-xl-4 col-lg-6">
+        <app-muscle-fat-analysis [muscleFatAnalysis]="inBodyPaper.muscleFatAnalysis"></app-muscle-fat-analysis>
+      </div>
+      <div class="col-xl-4 col-lg-6">
+        <app-obesity-analysis [obesityAnalysis]="inBodyPaper.obesityAnalysis"></app-obesity-analysis>
+      </div>
+      <div class="col-xl-4 col-lg-6">
+        <app-weighing [weight]="inBodyPaper.weight" [height]="inBodyPaper.height"></app-weighing>
+      </div>
+      <div class="col-xl-8 col-lg-12 d-none d-md-block">
+        <app-body-composition-history [bodyCompositionHistories]="inBodyPaper.bodyCompositionHistories">
+        </app-body-composition-history>
+      </div>
     </div>
   </div>
-
 </nz-spin>

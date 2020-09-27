@@ -12,12 +12,12 @@ import { InBodyStandard } from 'src/app/models/inbody/inBody-standard';
   styleUrls: ['./new-inbody.component.scss']
 })
 export class NewInbodyComponent implements OnInit {
+  userId = 0;
   inBodyDetail: InBodyDetail = new InBodyDetail();
   inBodyStandard: InBodyStandard = new InBodyStandard();
 
   constructor(
     private inBodyStandardService: InBodyStandardService,
-    private inBodyService: InBodyService,
     public loaderService: LoaderService,
   ) { }
 
@@ -33,7 +33,8 @@ export class NewInbodyComponent implements OnInit {
     // );
   }
 
-  selectedUser(event) {
+  selectedUser(event: number) {
+    this.userId = event;
     this.inBodyStandardService.getLatestInBody(event).subscribe(
       result => {
         this.inBodyDetail.inBodyStandard = result;

@@ -8,10 +8,10 @@
             <app-inbody-goal [inbodyGoal]="goal.inbodyGoal"></app-inbody-goal>
           </div>
           <div class="col-3">
-            <!-- <app-uploader [enable]="true" [description]="'11/03/2020'"></app-uploader> -->
+            <app-uploader uploadStyle="upload" (uploaded)="uploaded($event)" isShowAfterUpload="true"></app-uploader>
           </div>
           <div class="col-3">
-            <!-- <app-uploader [enable]="true" [description]="'11/03/2020'"></app-uploader> -->
+            <app-uploader uploadStyle="upload" (uploaded)="uploaded($event)" isShowAfterUpload="true"></app-uploader>
           </div>
         </div>
       </nz-card>

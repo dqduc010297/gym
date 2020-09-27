@@ -24,7 +24,8 @@ export class InBodyService {
   }
 
   getInBody(myInBodyRq: MyInBodyRq): Observable<InBodyDetail> {
-    const params = new HttpParams().set('myInBodyRq', JSON.stringify(myInBodyRq));
+    const params = new HttpParams().set('myInBodyRq', JSON.stringify(myInBodyRq))
+      .set('loadingKey', myInBodyRq.getLoadingKey());
     return this.http.get<InBodyDetail>(`${environment.apiUrl}/inbody`, { params });
   }
 

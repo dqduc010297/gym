@@ -34,15 +34,24 @@ namespace ApplicationDomain.Gym.Services
         }
         public async Task<MyInBodyRs> GetMyInbodyByTestedDate(int userId, MyInBodyRq rq)
         {
-            // load inbody information
-            var myInBody = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, rq.TestedDate)
-                     .MapQueryTo<MyInBodyRs>(this._mapper)
-                     .FirstOrDefaultAsync();
+            try
+            {
 
-            // load body history
-            myInBody.BodyCompositionHistories = await this.GetBodyCompositionHistories(userId, rq);
-
-            return myInBody;
+                // load inbody information
+                var myInBody = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, rq.TestedDate)
+                         .MapQueryTo<MyInBodyRs>(this._mapper)
+                         .FirstOrDefaultAsync();
+                if (myInBody != null)
+                {
+                    // load body history
+                    myInBody.BodyCompositionHistories = await this.GetBodyCompositionHistories(userId, rq);
+                }
+                return myInBody;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public async Task<string> AddNewInBody(InBodyRq rq)
         {
@@ -83,11 +92,12 @@ namespace ApplicationDomain.Gym.Services
         }
         public async Task<List<BodyCompositionHistory>> GetBodyCompositionHistories(int userId, MyInBodyRq rq)
         {
-            return await this._inBodyRepository.GetMyInBodyByTestedDate(userId, rq.TestedDate)
+            List<BodyCompositionHistory> result = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, rq.TestedDate)
                 .MapQueryTo<BodyCompositionHistory>(this._mapper)
                 .Skip(rq.Skip).Take(rq.Take)
                 .OrderBy(p => p.TestedDate)
                 .ToListAsync();
+            return result;
         }
     }
 }

@@ -11,6 +11,7 @@ import { HomeRequest } from 'src/app/models/home/home.request';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  isEmptyData = true;
   weights: number[] = [];
   smm: number[] = [];
   pbf: number[] = [];
@@ -27,6 +28,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.inBodyService.getBodyCompositionHistories(this.homeRequest).subscribe(
       result => {
+        if (result.length === 0) {
+          this.isEmptyData = true;
+          return;
+        }
+        console.log(result);
+        this.isEmptyData = false;
         this.testedDates = result.map(p => this.datePipe.transform(p.testedDate, 'dd/MM/yyyy'));
         this.weights = result.map(p => p.weight);
         this.smm = result.map(p => p.skeletalMuscleMass);

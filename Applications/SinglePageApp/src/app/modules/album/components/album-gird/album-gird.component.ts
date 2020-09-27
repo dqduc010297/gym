@@ -64,6 +64,7 @@ export class AlbumGirdComponent implements OnInit {
       id: event.id,
       url: event.uploadedPath,
       sharedWith: [],
+      fileType: event.fileType,
     }].concat(this.images);
   }
 }
