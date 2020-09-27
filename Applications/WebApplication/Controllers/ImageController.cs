@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using ApplicationDomain.Gym.IRepositories;
 using ApplicationDomain.Gym.IServices;
 using ApplicationDomain.Gym.Model;
 using ApplicationDomain.ThirdParty.Dropbox;
 using AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication.Controllers

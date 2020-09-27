@@ -4,10 +4,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.DbMigration.Migrations
 {
-    public partial class UserInit : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AppFile",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    CreatedByUserId = table.Column<int>(nullable: false),
+                    UpdatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    UpdatedByUserId = table.Column<int>(nullable: false),
+                    RowVersion = table.Column<byte[]>(nullable: true),
+                    Url = table.Column<string>(nullable: true),
+                    SharedWith = table.Column<string>(nullable: true),
+                    ContentType = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppFile", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -49,7 +69,8 @@ namespace Infrastructure.DbMigration.Migrations
                     DateJoined = table.Column<DateTime>(nullable: false),
                     AvatarURL = table.Column<string>(nullable: true),
                     Status = table.Column<int>(nullable: false),
-                    DropboxToken = table.Column<string>(nullable: true)
+                    DropboxToken = table.Column<string>(nullable: true),
+                    TempPassword = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -300,6 +321,9 @@ namespace Infrastructure.DbMigration.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AppFile");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

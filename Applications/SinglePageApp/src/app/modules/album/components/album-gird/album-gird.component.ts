@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { SharedUser } from 'src/app/models/user/shared-user';
 import { LoaderService } from 'src/app/services/core/loader.service';
-import { Image } from '../../shared/models/image.model';
 import { AlbumService } from '../../shared/services/album.service';
 
 @Component({

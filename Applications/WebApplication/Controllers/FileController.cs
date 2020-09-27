@@ -17,11 +17,11 @@ namespace WebApplication.Controllers
     public class FileController : BaseController
     {
         private readonly IDropboxService _dropboxService;
-        private readonly IImageService _imageService;
-        public FileController(IDropboxService dropboxService, IImageService imageService)
+        private readonly IAppFileService _appFileService;
+        public FileController(IDropboxService dropboxService, IAppFileService appFileService)
         {
             this._dropboxService = dropboxService;
-            this._imageService = imageService;
+            this._appFileService = appFileService;
         }
 
         [HttpPost, DisableRequestSizeLimit]
@@ -39,8 +39,8 @@ namespace WebApplication.Controllers
             //    "https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
             //};
             //string path = source[new Random().Next(0, source.Length - 1)];
-            int imageId = await this._imageService.StorageImage(path);
-            return Ok(new UploadImageRs() { IsUploaded = true, Id = imageId, UploadedPath = path });
+            int appFileId = await this._appFileService.Storage(path, file.ContentType);
+            return Ok(new UploadImageRs() { IsUploaded = true, Id = appFileId, UploadedPath = path });
         }
 
         [HttpPost, DisableRequestSizeLimit]
@@ -64,7 +64,7 @@ namespace WebApplication.Controllers
         [HttpPut]
         public async Task<IActionResult> Share([FromBody] ImageDTO imageDTO)
         {
-            await this._imageService.Share(imageDTO);
+            //await this._imageService.Share(imageDTO);
             return Ok();
         }
     }

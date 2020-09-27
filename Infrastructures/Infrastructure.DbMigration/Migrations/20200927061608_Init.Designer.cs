@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.DbMigration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200912045904_UserInit")]
-    partial class UserInit
+    [Migration("20200927061608_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,33 @@ namespace Infrastructure.DbMigration.Migrations
                 .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ApplicationDomain.Gym.Entities.AppFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContentType");
+
+                    b.Property<int>("CreatedByUserId");
+
+                    b.Property<DateTimeOffset>("CreatedDate");
+
+                    b.Property<byte[]>("RowVersion");
+
+                    b.Property<string>("SharedWith");
+
+                    b.Property<int>("UpdatedByUserId");
+
+                    b.Property<DateTimeOffset>("UpdatedDate");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppFile");
+                });
 
             modelBuilder.Entity("ApplicationDomain.Gym.Entities.InBody", b =>
                 {
@@ -199,6 +226,8 @@ namespace Infrastructure.DbMigration.Migrations
                     b.Property<string>("SecurityStamp");
 
                     b.Property<int>("Status");
+
+                    b.Property<string>("TempPassword");
 
                     b.Property<bool>("TwoFactorEnabled");
 

@@ -1,6 +1,7 @@
-import { Image } from '../shared/models/image.model';
+import { MediaFile } from '../shared/models/media-file.model';
+
 
 export class AlbumResponse {
-    myImages: Image[] = [];
-    sharedImages: Image[] = [];
+    myMediaFiles: MediaFile[] = [];
+    sharedMediaFiles: MediaFile[] = [];
 }

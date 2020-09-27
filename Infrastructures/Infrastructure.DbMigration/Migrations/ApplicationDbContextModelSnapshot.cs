@@ -19,11 +19,13 @@ namespace Infrastructure.DbMigration.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ApplicationDomain.Gym.Entities.Image", b =>
+            modelBuilder.Entity("ApplicationDomain.Gym.Entities.AppFile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContentType");
 
                     b.Property<int>("CreatedByUserId");
 
@@ -39,13 +41,9 @@ namespace Infrastructure.DbMigration.Migrations
 
                     b.Property<string>("Url");
 
-                    b.Property<int?>("UserId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Image");
+                    b.ToTable("AppFile");
                 });
 
             modelBuilder.Entity("ApplicationDomain.Gym.Entities.InBody", b =>
@@ -328,14 +326,6 @@ namespace Infrastructure.DbMigration.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("ApplicationDomain.Gym.Entities.Image", b =>
-                {
-                    b.HasOne("ApplicationDomain.Identity.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ApplicationDomain.Gym.Entities.InBody", b =>

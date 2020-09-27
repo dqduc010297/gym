@@ -1,7 +1,6 @@
 import { EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { Image } from 'src/app/modules/album/shared/models/image.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,7 +15,7 @@ export class UploaderComponent implements OnInit, OnChanges {
   @Input() uploadedPath: string;
   @Input() isShowAfterUpload = false;
   @Input() isAvatar = false;
-  @Output() uploaded: EventEmitter<Image> = new EventEmitter<Image>();
+  @Output() uploaded: EventEmitter<any> = new EventEmitter<any>();
 
   loading = false;
 

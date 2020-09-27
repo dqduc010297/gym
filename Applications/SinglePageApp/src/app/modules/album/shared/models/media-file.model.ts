@@ -1,8 +1,8 @@
 import { SharedUser } from 'src/app/models/user/shared-user';
 
-export class Image {
+export class MediaFile {
     id: number;
     url: string;
-    fileType: string;
+    isImage: boolean;
     sharedWith: SharedUser[] = [];
 }
