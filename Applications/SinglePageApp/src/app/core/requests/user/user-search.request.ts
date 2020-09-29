@@ -1,6 +1,8 @@
-import { FilterRequest } from '../../requests/filter.request';
+import { HttpParams } from '@angular/common/http';
+import { IFilterRequest } from '../ifilter.request';
+import { IRequest } from '../irequest';
 
-export class UserSearchRequest implements FilterRequest {
+export class UserSearchRequest implements IRequest, IFilterRequest {
   skip = 0;
   take = 10;
   roleName: string;
@@ -8,5 +10,9 @@ export class UserSearchRequest implements FilterRequest {
   fullname: string;
 
   constructor() {
+  }
+
+  public createParam(): HttpParams {
+    return new HttpParams().set('request', JSON.stringify(this));
   }
 }

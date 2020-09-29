@@ -22,9 +22,9 @@ namespace WebApplication.Controllers
 
         [HttpGet]
         [Route("search")]
-        public async Task<IActionResult> GetUserSearch(string searchRq)
+        public async Task<IActionResult> GetUserSearch(string request)
         {
-            var rq = JsonConvert.DeserializeObject<UserSearchRq>(searchRq);
+            var rq = JsonConvert.DeserializeObject<UserSearchRq>(request);
             return Ok(await this._userService.GetUserSearch(rq));
         }
         [HttpGet]

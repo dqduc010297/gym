@@ -1,7 +1,7 @@
-import { FilterRequest } from '../../requests/filter.request';
+import { IFilterRequest } from '../ifilter.request';
 import { ILoadingRequest } from '../loading.request';
 
-export class UserOverviewRequest implements FilterRequest, ILoadingRequest {
+export class UserOverviewRequest implements IFilterRequest, ILoadingRequest {
   skip = 0;
   take = 10;
   getLoadingKey(): string {

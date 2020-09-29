@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AuthService } from 'src/app/modules/auth/shared/services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Gender } from 'src/app/const/gender';
 import { MenSMMLevel, WomenSMMLevel, ColorLevel } from 'src/app/const/bmi';
 

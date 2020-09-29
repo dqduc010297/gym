@@ -1,4 +1,4 @@
-import { FilterRequest } from '../../requests/filter.request';
+import { FilterRequest } from '../../requests/ifilter.request';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ILoadingRequest } from 'src/app/requests/loading.request';
 

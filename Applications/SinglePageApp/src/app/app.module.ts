@@ -1,26 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import vi from '@angular/common/locales/vi';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
-import vi from '@angular/common/locales/vi';
-import { httpInterceptorProviders } from './interceptors';
-import { LayoutComponent } from './layout/layout.component';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { MenuItemComponent } from './layout/components/menu-item/menu-item.component';
-import { MenuComponent } from './layout/components/menu/menu.component';
+import { httpInterceptorProviders } from './core/interceptors';
+import { MenuItemComponent } from './shared/components/layout/components/menu-item/menu-item.component';
+import { MenuComponent } from './shared/components/layout/components/menu/menu.component';
+import { LayoutComponent } from './shared/components/layout/layout.component';
+
 
 registerLocaleData(vi);
 

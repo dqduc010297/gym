@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { MentionOnSearchTypes } from 'ng-zorro-antd/mention';
-import { SharedUser } from 'src/app/models/user/shared-user';
-import { UserMentionRequest } from 'src/app/requests/user/user-mention.request';
-import { LoaderService } from 'src/app/services/core/loader.service';
-import { UserService } from 'src/app/services/user/user.service';
+import { SharedUser } from 'src/app/core/models/shared-user.model';
+import { UserMentionRequest } from 'src/app/core/requests/user/user-mention.request';
+import { UserAPIService } from 'src/app/core/services/api/user.api.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
 
 @Component({
   selector: 'app-user-mention',
@@ -21,7 +21,7 @@ export class UserMentionComponent implements OnInit, OnChanges {
   userMentionRequest: UserMentionRequest = new UserMentionRequest();
 
   constructor(
-    private userService: UserService,
+    private userAPIService: UserAPIService,
     public loaderService: LoaderService,
   ) { }
 
@@ -48,7 +48,7 @@ export class UserMentionComponent implements OnInit, OnChanges {
       return;
     }
     this.userMentionRequest.fullname = value;
-    this.userService.getMentionUser(this.userMentionRequest).subscribe(
+    this.userAPIService.getMentionUser(this.userMentionRequest).subscribe(
       result => {
         this.suggestions = result;
       }
