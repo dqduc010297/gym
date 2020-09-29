@@ -7,6 +7,7 @@ export class UserMentionRequest implements IRequest, ILoadingRequest {
 
   constructor() {
   }
+
   createParam(): HttpParams {
     return new HttpParams().set('loadingKey', this.getLoadingKey());
   }

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { MediaFile } from 'src/app/core/models/media-file.model';
-import { AlbumAPIService } from 'src/app/core/services/api/album.api.service';
+import { MediaFile } from 'src/app/album/core/models/media-file.model';
+import { AlbumAPIService } from 'src/app/album/core/album.api.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { UploadedFile } from 'src/app/shared/components/uploader/uploaded-file.model';
 

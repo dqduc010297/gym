@@ -1,11 +1,11 @@
 import { IMapper } from './imapper';
 import { Injectable } from '@angular/core';
-import { BodyCompositionAnalysis } from '../models/inbody/body-composition-analysis';
-import { InBodyDetail } from '../models/inbody/inbody-detail';
-import { InBodyPaper } from '../models/inbody/inbody-papaer';
-import { MuscleFatAnalysis } from '../models/inbody/muscle-fat-analysis';
-import { ObesityAnalysis } from '../models/inbody/obesity-analysis';
-import { TestedResult } from '../models/inbody/tested-result';
+import { BodyCompositionAnalysis } from '../../inbody/core/models/body-composition-analysis';
+import { InBodyDetail } from 'src/app/inbody/core/models/inbody-detail';
+import { InBodyPaper } from 'src/app/inbody/core/models/inbody-papaer';
+import { MuscleFatAnalysis } from 'src/app/inbody/core/models/muscle-fat-analysis';
+import { ObesityAnalysis } from 'src/app/inbody/core/models/obesity-analysis';
+import { TestedResult } from 'src/app/inbody/core/models/tested-result';
 
 @Injectable({ providedIn: 'root' })
 export class InBodyPaperMapper implements IMapper<InBodyDetail, InBodyPaper>{

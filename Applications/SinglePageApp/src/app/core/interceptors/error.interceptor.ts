@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Injectable } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../auth/core/auth.service';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService, private modalService: NzModalService) { }

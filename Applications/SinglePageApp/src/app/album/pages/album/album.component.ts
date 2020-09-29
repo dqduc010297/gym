@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Album } from 'src/app/core/models/album.model';
-import { AlbumAPIService } from 'src/app/core/services/api/album.api.service';
+import { Album } from 'src/app/album/core/models/album.model';
+import { AlbumAPIService } from 'src/app/album/core/album.api.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 
 @Component({
@@ -24,6 +24,4 @@ export class AlbumComponent implements OnInit{
       }
     );
   }
-
-
 }

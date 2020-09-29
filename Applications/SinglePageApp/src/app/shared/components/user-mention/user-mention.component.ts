@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { MentionOnSearchTypes } from 'ng-zorro-antd/mention';
-import { SharedUser } from 'src/app/core/models/shared-user.model';
+import { SharedUser } from 'src/app/album/core/models/shared-user.model';
 import { UserMentionRequest } from 'src/app/core/requests/user/user-mention.request';
 import { UserAPIService } from 'src/app/core/services/api/user.api.service';
 import { LoaderService } from 'src/app/core/services/loader.service';

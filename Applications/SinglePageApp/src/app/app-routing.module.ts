@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   {
     path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
-      // { path: 'home', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule) },
+      { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
       // { path: 'timesheet', loadChildren: () => import('./features/timesheet/timesheet.module').then(m => m.TimesheetModule) },
       // { path: 'goal', loadChildren: () => import('./features/goal/goal.module').then(m => m.GoalModule) },
       // { path: 'inbody', loadChildren: () => import('./features/inbody/inbody.module').then(m => m.InbodyModule) },

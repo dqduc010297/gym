@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ChangePasswordModel } from 'src/app/core/models/change-password.model';
-import { ChangePasswordRequest } from 'src/app/core/requests/auth/change-password.request';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { ChangePasswordModel } from 'src/app/auth/core/models/change-password.model';
+import { ChangePasswordRequest } from 'src/app/auth/core/models/change-password.request';
+import { AuthService } from 'src/app/auth/core/auth.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 
 @Component({
