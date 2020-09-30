@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserSearch } from 'src/app/core/models/user-search.model';
 import { UserSearchRequest } from 'src/app/core/requests/user/user-search.request';
-import { UserAPIService } from 'src/app/core/services/api/user.api.service';
+import { UserSystemAPIService } from 'src/app/core/services/api/user-system.api.service';
 
 @Component({
   selector: 'app-user-select',
@@ -20,7 +20,7 @@ export class UserSelectComponent implements OnInit {
   selectedUser = null;
 
   constructor(
-    private userAPIService: UserAPIService
+    private userSystemAPIService: UserSystemAPIService
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class UserSelectComponent implements OnInit {
   loadMore(): void {
     this.isLoading = true;
     this.userSearch.skip += this.userSearch.take;
-    this.userAPIService.getMemberSearch(this.userSearch).subscribe(
+    this.userSystemAPIService.getUserSearch(this.userSearch).subscribe(
       result => {
         this.isLoading = false;
         if (this.optionList.indexOf(result[0])) {
@@ -53,7 +53,7 @@ export class UserSelectComponent implements OnInit {
     this.isLoading = true;
     this.userSearch.phoneNumber = value;
     this.userSearch.fullname = value;
-    this.userAPIService.getMemberSearch(this.userSearch).subscribe(
+    this.userSystemAPIService.getUserSearch(this.userSearch).subscribe(
       result => {
         this.isLoading = false;
         this.optionList = result;

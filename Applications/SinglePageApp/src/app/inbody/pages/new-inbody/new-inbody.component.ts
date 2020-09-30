@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { InBodyDetail } from 'src/app/core/models/inbody/inbody-detail';
-import { InBodyStandard } from 'src/app/core/models/inbody/inBody-standard';
-import { InBodyStandardService } from 'src/app/core/services/inbody-standard.service';
+import { InBodyStandardAPIService } from 'src/app/inbody/core/services/inbody-standard.api.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { InBodyStandard } from '../../core/models/inBody-standard';
+import { InBody } from '../../core/models/inbody.model';
 
 @Component({
   selector: 'app-new-inbody',
@@ -11,11 +11,11 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 })
 export class NewInbodyComponent implements OnInit {
   userId = 0;
-  inBodyDetail: InBodyDetail = new InBodyDetail();
+  inBodyDetail: InBody = new InBody();
   inBodyStandard: InBodyStandard = new InBodyStandard();
 
   constructor(
-    private inBodyStandardService: InBodyStandardService,
+    private inBodyStandardAPIService: InBodyStandardAPIService,
     public loaderService: LoaderService,
   ) { }
 
@@ -33,7 +33,7 @@ export class NewInbodyComponent implements OnInit {
 
   selectedUser(event: number) {
     this.userId = event;
-    this.inBodyStandardService.getLatestInBody(event).subscribe(
+    this.inBodyStandardAPIService.getLatestInBody(event).subscribe(
       result => {
         this.inBodyDetail.inBodyStandard = result;
       }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { HomeRequest } from 'src/app/core/requests/home/home.request';
-import { InBodyAPIService } from 'src/app/core/services/api/inbody.api.service';
+import { HomeRequest } from 'src/app/home/core/models/home.request';
+import { InBodyAPIService } from 'src/app/inbody/core/services/inbody.api.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 
 @Component({

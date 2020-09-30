@@ -1,4 +1,4 @@
-export class UserMentionResponse {
+export class UserMention {
     id: number;
     fullname: string;
     avatarURL: string;

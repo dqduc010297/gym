@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { BodyCompositionHistory } from 'src/app/inbody/core/models/body-composition-history';
+import { InBody } from 'src/app/inbody/core/models/inbody.model';
 import { environment } from 'src/environments/environment';
-import { HomeRequest } from '../../requests/home/home.request';
-import { BodyCompositionHistory } from '../../models/inbody/body-composition-history';
-import { InBodyDetail } from '../../models/inbody/inbody-detail';
-import { InBodyRequest, } from '../../requests/inbody/my-inbody.request';
+import { HomeRequest } from '../../../home/core/models/home.request';
+import { InBodyRequest, } from '../models/inbody.request';
 
 
 @Injectable()
@@ -21,16 +21,16 @@ export class InBodyAPIService {
     return this.http.get<BodyCompositionHistory[]>(`${environment.apiUrl}/inbody/bodycompositionHistory`, { params });
   }
 
-  getInBody(inBodyRequest: InBodyRequest): Observable<InBodyDetail> {
+  getInBody(inBodyRequest: InBodyRequest): Observable<InBody> {
     const params = inBodyRequest.createParam();
-    return this.http.get<InBodyDetail>(`${environment.apiUrl}/inbody`, { params });
+    return this.http.get<InBody>(`${environment.apiUrl}/inbody`, { params });
   }
 
   getTestedDates(): Observable<Date[]> {
     return this.http.get<Date[]>(`${environment.apiUrl}/inbody/testeddates`);
   }
 
-  createInBody(inBodyDetail: InBodyDetail): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/inbody`, inBodyDetail);
+  createInBody(InBody: InBody): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/inbody`, InBody);
   }
 }

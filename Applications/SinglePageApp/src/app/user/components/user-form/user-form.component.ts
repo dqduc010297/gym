@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormAction, FormState } from 'src/app/core/const/form';
-import { User } from 'src/app/core/models/user';
-import { UserRequest } from 'src/app/core/requests/user/user.request';
-import { UserAPIService } from 'src/app/core/services/api/user.api.service';
+import { User } from 'src/app/user/core/models/user';
+import { UserRequest } from 'src/app/user/core/models/user.request';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { UserAPIService } from '../../core/services/user.api.service';
 
 @Component({
   selector: 'app-user-form',
@@ -45,7 +45,7 @@ export class UserFormComponent implements OnInit {
   loadUser(userId: number) {
     this.userRequest.body.id = userId;
     this.state = FormState.loading;
-    this.userAPIService.getUserInfo(this.userRequest).subscribe(
+    this.userAPIService.getUser(this.userRequest).subscribe(
       result => {
         this.user = result;
         this.storagedUser = JSON.stringify(result);
@@ -65,7 +65,7 @@ export class UserFormComponent implements OnInit {
     this.state = FormState.saving;
     this.action = this.formAction.view;
     this.userRequest.body = this.user;
-    this.userAPIService.updateUserInfo(this.userRequest).subscribe();
+    this.userAPIService.updateUser(this.userRequest).subscribe();
   }
 
   discard() {

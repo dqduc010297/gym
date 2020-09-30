@@ -1,15 +1,15 @@
 import { IMapper } from './imapper';
 import { Injectable } from '@angular/core';
 import { BodyCompositionAnalysis } from '../../inbody/core/models/body-composition-analysis';
-import { InBodyDetail } from 'src/app/inbody/core/models/inbody-detail';
 import { InBodyPaper } from 'src/app/inbody/core/models/inbody-papaer';
 import { MuscleFatAnalysis } from 'src/app/inbody/core/models/muscle-fat-analysis';
 import { ObesityAnalysis } from 'src/app/inbody/core/models/obesity-analysis';
 import { TestedResult } from 'src/app/inbody/core/models/tested-result';
+import { InBody } from 'src/app/inbody/core/models/inbody.model';
 
 @Injectable({ providedIn: 'root' })
-export class InBodyPaperMapper implements IMapper<InBodyDetail, InBodyPaper>{
-  map(source: InBodyDetail): InBodyPaper {
+export class InBodyPaperMapper implements IMapper<InBody, InBodyPaper>{
+  map(source: InBody): InBodyPaper {
     return {
       id: source.id,
       score: source.score,
@@ -24,7 +24,7 @@ export class InBodyPaperMapper implements IMapper<InBodyDetail, InBodyPaper>{
     };
   }
 
-  private mapBodyCompositionAnalysis(inBodyDetail: InBodyDetail): BodyCompositionAnalysis {
+  private mapBodyCompositionAnalysis(inBodyDetail: InBody): BodyCompositionAnalysis {
     const bodyWater: TestedResult = new TestedResult();
     bodyWater.max = inBodyDetail.inBodyStandard.bodyWaterMax;
     bodyWater.min = inBodyDetail.inBodyStandard.bodyWaterMin;
@@ -53,7 +53,7 @@ export class InBodyPaperMapper implements IMapper<InBodyDetail, InBodyPaper>{
     };
   }
 
-  private mapMuscleFatAnalysis(inBodyDetail: InBodyDetail): MuscleFatAnalysis {
+  private mapMuscleFatAnalysis(inBodyDetail: InBody): MuscleFatAnalysis {
 
     const skeletalMuscleMass: TestedResult = new TestedResult();
     skeletalMuscleMass.max = inBodyDetail.inBodyStandard.skeletalMuscleMassMax;
@@ -89,7 +89,7 @@ export class InBodyPaperMapper implements IMapper<InBodyDetail, InBodyPaper>{
     };
   }
 
-  private mapObesityAnalysis(inBodyDetail: InBodyDetail): ObesityAnalysis {
+  private mapObesityAnalysis(inBodyDetail: InBody): ObesityAnalysis {
     const bmi: TestedResult = new TestedResult();
     bmi.max = 25;
     bmi.min = 18.5;
