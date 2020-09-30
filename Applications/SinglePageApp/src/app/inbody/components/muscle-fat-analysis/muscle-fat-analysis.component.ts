@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MuscleFatAnalysis } from 'src/app/models/inbody/muscle-fat-analysis';
-
+import { MuscleFatAnalysis } from '../../core/models/muscle-fat-analysis';
 @Component({
   selector: 'app-muscle-fat-analysis',
   templateUrl: './muscle-fat-analysis.component.html',

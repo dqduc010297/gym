@@ -22,9 +22,9 @@ namespace WebApplication.Controllers
 
         [Route("")]
         [HttpGet]
-        public async Task<IActionResult> GetMyInBodyByTestedDate(string myInBodyRq)
+        public async Task<IActionResult> GetMyInBodyByTestedDate(string request)
         {
-            var rq = JsonConvert.DeserializeObject<MyInBodyRq>(myInBodyRq);
+            var rq = JsonConvert.DeserializeObject<MyInBodyRq>(request);
             return Ok(await this._inBodyService.GetMyInbodyByTestedDate(this.GetCurrentUserId(), rq));
         }
 
@@ -52,9 +52,9 @@ namespace WebApplication.Controllers
 
         [Route("bodycompositionHistory")]
         [HttpGet]
-        public async Task<IActionResult> GetBodyCompositionHistories(string myInBodyRq)
+        public async Task<IActionResult> GetBodyCompositionHistories(string request)
         {
-            var rq = JsonConvert.DeserializeObject<MyInBodyRq>(myInBodyRq);
+            var rq = JsonConvert.DeserializeObject<MyInBodyRq>(request);
             return Ok(await this._inBodyService.GetBodyCompositionHistories(this.GetCurrentUserId(), rq));
         }
     }

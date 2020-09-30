@@ -5,7 +5,7 @@ import { IRequest } from 'src/app/core/requests/irequest';
 import { ILoadingRequest } from 'src/app/core/requests/loading.request';
 
 export class LoginRequest implements IRequest, ILoadingRequest, IBodyRequest {
-  body: LoginModel;
+  body: LoginModel = new LoginModel();
 
   createParam(): HttpParams {
     return new HttpParams().set('loadingKey', this.getLoadingKey());

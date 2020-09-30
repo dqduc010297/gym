@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { InBodyStandard } from 'src/app/inbody/core/models/inBody-standard';
 import { environment } from 'src/environments/environment';
 
+@Injectable({ providedIn: 'root' })
 
-@Injectable()
 export class InBodyStandardAPIService {
 
   constructor(

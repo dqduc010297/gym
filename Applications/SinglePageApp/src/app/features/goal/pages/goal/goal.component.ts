@@ -1,14 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Nutrition } from '../../models/nutrition';
-import { WorkOut, Exercise } from '../../models/exercise';
-import { GoalOverviewMock } from 'src/app/mocks/goal-overview.mock';
-import { GoalOverview, Goal } from '../../models/goal';
-import { GoalMock } from 'src/app/mocks/goal.mock';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable, Observer } from 'rxjs';
-import { FileService } from 'src/app/services/core/file.service';
-import { HttpEventType } from '@angular/common/http';
+import { GoalOverviewMock } from 'src/app/core/mocks/goal-overview.mock';
+import { GoalOverview } from '../../models/goal';
 
 @Component({
   selector: 'app-goal',

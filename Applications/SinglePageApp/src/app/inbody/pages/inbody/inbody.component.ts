@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { InBodyService } from 'src/app/services/inbody/inbody.service';
-import { LoaderService } from 'src/app/services/core/loader.service';
 import { DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { MyInBodyRq } from 'src/app/models/inbody/my-inbody-rq';
-import { InBodyPaper } from 'src/app/models/inbody/inbody-papaer';
-import { InBodyPaperMapper } from 'src/app/services/mapper/inbody-paper-mapper';
+import { InBodyPaperMapper } from 'src/app/core/mapper/inbody-paper-mapper';
+import { LoaderService } from 'src/app/core/services/loader.service';
+import { InBodyPaper } from '../../core/models/inbody-papaer';
+import { InBodyRequest } from '../../core/models/inbody.request';
+import { InBodyAPIService } from '../../core/services/inbody.api.service';
 
 @Component({
   selector: 'app-inbody',
@@ -15,13 +15,13 @@ import { InBodyPaperMapper } from 'src/app/services/mapper/inbody-paper-mapper';
 export class InbodyComponent implements OnInit {
   testedDates: string[] = [];
   testedDatePicker: Date;
-  myInBodyRequest: MyInBodyRq = new MyInBodyRq(this.deviceService);
+  myInBodyRequest: InBodyRequest = new InBodyRequest(this.deviceService);
 
   inBodyPaper: InBodyPaper = new InBodyPaper();
   isEmptyData = true;
 
   constructor(
-    private inBodyService: InBodyService,
+    private inBodyAPIService: InBodyAPIService,
     public loaderService: LoaderService,
     public datePipe: DatePipe,
     private deviceService: DeviceDetectorService,
@@ -36,7 +36,7 @@ export class InbodyComponent implements OnInit {
   }
 
   loadLatestMyInBody() {
-    this.inBodyService.getInBody(this.myInBodyRequest).subscribe(
+    this.inBodyAPIService.getInBody(this.myInBodyRequest).subscribe(
       result => {
         if (!result) {
           this.isEmptyData = true;
@@ -51,7 +51,7 @@ export class InbodyComponent implements OnInit {
 
   onChange(testedDate: Date): void {
     this.myInBodyRequest.testedDate = testedDate;
-    this.inBodyService.getInBody(this.myInBodyRequest).subscribe(
+    this.inBodyAPIService.getInBody(this.myInBodyRequest).subscribe(
       result => {
         this.inBodyPaper = this.inBodyMPaperMapper.map(result);
       }
@@ -59,7 +59,7 @@ export class InbodyComponent implements OnInit {
   }
 
   getTestedDate() {
-    this.inBodyService.getTestedDates().subscribe(
+    this.inBodyAPIService.getTestedDates().subscribe(
       result => {
         result.forEach(element => {
           this.testedDates.push(element.toString().substring(0, 10));

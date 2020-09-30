@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GoalOverview } from '../../models/goal';
 import { Router } from '@angular/router';
-import { GoalOverviewMock } from 'src/app/mocks/goal-overview.mock';
+import { GoalOverviewMock } from 'src/app/core/mocks/goal-overview.mock';
 
 @Component({
   selector: 'app-goal-timeline',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GoalMock } from 'src/app/core/mocks/goal.mock';
 import { Goal } from '../../models/goal';
-import { GoalMock } from 'src/app/mocks/goal.mock';
 
 @Component({
   selector: 'app-goal-detail',

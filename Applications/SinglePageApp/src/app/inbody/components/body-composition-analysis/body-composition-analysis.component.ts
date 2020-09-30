@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BodyCompositionAnalysis } from 'src/app/models/inbody/body-composition-analysis';
+import { BodyCompositionAnalysis } from '../../core/models/body-composition-analysis';
 
 @Component({
   selector: 'app-body-composition-analysis',

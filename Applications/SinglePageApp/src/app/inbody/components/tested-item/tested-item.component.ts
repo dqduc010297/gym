@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TestedResult, Evaluation } from 'src/app/models/inbody/tested-result';
+import { TestedResult, Evaluation } from '../../core/models/tested-result';
 
 
 @Component({

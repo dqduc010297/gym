@@ -1,7 +1,7 @@
 import { IMock } from './imock';
 import { Observable, of } from 'rxjs';
-import { GoalOverview } from '../modules/goal/models/goal';
 import { Injectable } from '@angular/core';
+import { GoalOverview } from 'src/app/features/goal/models/goal';
 
 @Injectable({ providedIn: 'root' })
 export class GoalOverviewMock implements IMock {

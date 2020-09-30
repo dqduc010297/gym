@@ -10,9 +10,9 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
       { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
-      // { path: 'timesheet', loadChildren: () => import('./features/timesheet/timesheet.module').then(m => m.TimesheetModule) },
-      // { path: 'goal', loadChildren: () => import('./features/goal/goal.module').then(m => m.GoalModule) },
-      // { path: 'inbody', loadChildren: () => import('./features/inbody/inbody.module').then(m => m.InbodyModule) },
+      { path: 'timesheet', loadChildren: () => import('./features/timesheet/timesheet.module').then(m => m.TimesheetModule) },
+      { path: 'goal', loadChildren: () => import('./features/goal/goal.module').then(m => m.GoalModule) },
+      { path: 'inbody', loadChildren: () => import('./inbody/inbody.module').then(m => m.InbodyModule) },
       {
         path: 'user',
         loadChildren: () => import('./user/user.module').then(m => m.UserModule),

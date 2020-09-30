@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { BodyCompositionHistory } from 'src/app/models/inbody/body-composition-history';
 import { DatePipe } from '@angular/common';
+import { BodyCompositionHistory } from '../../core/models/body-composition-history';
 
 @Component({
   selector: 'app-body-composition-history',

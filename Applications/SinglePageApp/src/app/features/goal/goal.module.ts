@@ -12,9 +12,9 @@ import { WorkoutComponent } from './components/workout/workout.component';
 import { NutritionComponent } from './components/nutrition/nutrition.component';
 import { InbodyImageComponent } from './components/inbody-image/inbody-image.component';
 import { GoalDetailComponent } from './pages/goal-detail/goal-detail.component';
-import { GoalMock } from 'src/app/mocks/goal.mock';
 import { GoalResultComponent } from './components/goal-result/goal-result.component';
 import { GoalTimelineComponent } from './components/goal-timeline/goal-timeline.component';
+import { GoalMock } from 'src/app/core/mocks/goal.mock';
 
 @NgModule({
   declarations: [

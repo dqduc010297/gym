@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ObesityAnalysis } from 'src/app/models/inbody/obesity-analysis';
-import { Evaluation } from 'src/app/models/inbody/tested-result';
+import { ObesityAnalysis } from '../../core/models/obesity-analysis';
+import { Evaluation } from '../../core/models/tested-result';
 
 @Component({
   selector: 'app-obesity-analysis',

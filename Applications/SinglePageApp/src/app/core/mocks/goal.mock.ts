@@ -1,12 +1,12 @@
-import { IMock } from './imock';
-import { Observable, of } from 'rxjs';
-import { GoalOverview, Goal } from '../modules/goal/models/goal';
 import { Injectable } from '@angular/core';
-import { Nutrition } from '../modules/goal/models/nutrition';
-import { WorkOut } from '../modules/goal/models/exercise';
 import * as moment from 'moment';
+import { Observable, of } from 'rxjs';
+import { WorkOut } from 'src/app/features/goal/models/exercise';
+import { Goal } from 'src/app/features/goal/models/goal';
+import { Nutrition } from 'src/app/features/goal/models/nutrition';
+import { IMock } from './imock';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class GoalMock implements IMock {
   doMock(param?: any): Observable<any> {
     const data: Goal[] = [

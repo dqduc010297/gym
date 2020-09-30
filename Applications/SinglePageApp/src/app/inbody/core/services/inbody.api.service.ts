@@ -7,8 +7,7 @@ import { environment } from 'src/environments/environment';
 import { HomeRequest } from '../../../home/core/models/home.request';
 import { InBodyRequest, } from '../models/inbody.request';
 
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class InBodyAPIService {
 
   constructor(
@@ -30,7 +29,7 @@ export class InBodyAPIService {
     return this.http.get<Date[]>(`${environment.apiUrl}/inbody/testeddates`);
   }
 
-  createInBody(InBody: InBody): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/inbody`, InBody);
+  createInBody(inBody: InBody): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/inbody`, inBody);
   }
 }
