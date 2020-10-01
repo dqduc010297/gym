@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/auth/core/auth.service';
 export class WeightHistoryComponent implements OnInit, OnChanges {
   @Input() weights: number[] = [];
   @Input() testedDates: string[] = [];
-  @Input() height: number;
+  @Input() heights: number[] = [];
 
   weightChartOptions: any;
   weightUpdateChartOptions: any;
@@ -149,10 +149,14 @@ export class WeightHistoryComponent implements OnInit, OnChanges {
   }
 
   private generateWeightStandard(k: number): number[] {
-    let weightStandard = Math.round((BMILevel[k] * this.height * this.height) / 10) * 10;
+    return Array.from(Array(this.heights.length), (_, i) => this.calculateWeightStandard(this.heights[i], k));
+  }
+
+  private calculateWeightStandard(height: number, k: number) {
+    let weightStandard = Math.round((BMILevel[k] * height * height) / 10) * 10;
     if (k > 0) {
-      weightStandard -= Math.round((BMILevel[k - 1] * this.height * this.height) / 10) * 10;
+      weightStandard -= Math.round((BMILevel[k - 1] * height * height) / 10) * 10;
     }
-    return Array.from(Array(this.weights.length), (_, i) => weightStandard);
+    return weightStandard;
   }
 }

@@ -13,6 +13,6 @@ namespace ApplicationDomain.Gym.IServices
         Task<string> AddNewInBody(InBodyRq rq);
         Task UpdateInBody(InBodyRq rq);
         Task<List<DateTime>> GetTestedDate(int userId);
-        Task<List<BodyCompositionHistory>> GetBodyCompositionHistories(int userId, MyInBodyRq rq);
+        Task<IEnumerable<BodyCompositionHistory>> GetBodyCompositionHistories(int userId, MyInBodyRq rq);
     }
 }

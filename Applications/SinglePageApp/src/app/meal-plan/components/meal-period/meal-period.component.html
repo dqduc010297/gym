@@ -1,0 +1,12 @@
+<nz-steps [nzCurrent]="index" (nzIndexChange)="onIndexChange($event)">
+    <nz-step nzTitle="Breakfast" nzDescription="Sáng"></nz-step>
+    <nz-step nzTitle="Lunch" nzDescription="Trưa"></nz-step>
+    <nz-step nzTitle="Before workout" nzDescription="Trước tập"></nz-step>
+    <nz-step nzTitle="Dinner" nzDescription="Tối"></nz-step>
+</nz-steps>
+
+<div class="steps-content">
+    <nz-radio-group [(ngModel)]="radioValue">
+        <label nz-radio [nzValue]="o.value" *ngFor="let o of options">{{ o.label }}</label>
+    </nz-radio-group>
+</div>

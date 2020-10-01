@@ -3,4 +3,5 @@ export class BodyCompositionHistory {
   weight: number;
   skeletalMuscleMass: number;
   percentBodyFat: number;
+  height: number;
 }

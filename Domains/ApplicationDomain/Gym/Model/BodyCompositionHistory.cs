@@ -12,6 +12,7 @@ namespace ApplicationDomain.Gym.Model.MyInBody
         public float Weight { set; get; }
         public float SkeletalMuscleMass { set; get; }
         public float PercentBodyFat { set; get; }
+        public float Height { set; get; }
     }
 
     public class BodyCompositionHistoryMapper : Profile
@@ -22,6 +23,10 @@ namespace ApplicationDomain.Gym.Model.MyInBody
             mapper.ForMember(
                 d => d.PercentBodyFat,
                 opt => opt.MapFrom(s => s == null ? (float)0.0 : Convert.ToSingle(Math.Round(s.PercentBodyFat * 100)))
+                );
+            mapper.ForMember(
+                d => d.Height,
+                opt => opt.MapFrom(s => s.InBodyStandard.Height)
                 );
         }
     }

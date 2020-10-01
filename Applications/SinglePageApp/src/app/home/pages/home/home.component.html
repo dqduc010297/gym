@@ -1,9 +1,9 @@
-<nz-spin [nzSpinning]="loaderService.isShowLoader(homeRequest.getLoadingKey())" nzTip="Loading...">
+<!-- <nz-spin [nzSpinning]="loaderService.isShowLoader(homeRequest.getLoadingKey())" nzTip="Loading...">
   <nz-result *ngIf="isEmptyData" [nzIcon]="'smile-twotone'" nzTitle="Bạn chưa có thông tin về Inbody!"
     nzSubTitle="Vui lòng liên hệ nhân viên để được đo InBody.">
   </nz-result>
   <div *ngIf="!isEmptyData">
-    <app-weight-history [weights]="weights" [testedDates]="testedDates"></app-weight-history>
+    <app-weight-history [weights]="weights" [heights]="heights" [testedDates]="testedDates"></app-weight-history>
     <div class="row">
       <div class="col-xl-6 col-lg-12">
         <app-smm-history [smm]="smm" [testedDates]="testedDates"></app-smm-history>
@@ -13,4 +13,4 @@
       </div>
     </div>
   </div>
-</nz-spin>
+</nz-spin> -->

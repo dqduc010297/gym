@@ -90,7 +90,7 @@ namespace ApplicationDomain.Gym.Services
                     .Select(p => p.TestedDate)
                     .ToListAsync();
         }
-        public async Task<List<BodyCompositionHistory>> GetBodyCompositionHistories(int userId, MyInBodyRq rq)
+        public async Task<IEnumerable<BodyCompositionHistory>> GetBodyCompositionHistories(int userId, MyInBodyRq rq)
         {
             List<BodyCompositionHistory> result = await this._inBodyRepository.GetMyInBodyByTestedDate(userId, rq.TestedDate)
                 .MapQueryTo<BodyCompositionHistory>(this._mapper)

@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   weights: number[] = [];
   smm: number[] = [];
   pbf: number[] = [];
+  heights: number[] = [];
   testedDates: string[] = [];
   homeRequest: HomeRequest = new HomeRequest(this.deviceDetectorService);
 
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
         this.isEmptyData = false;
         this.testedDates = result.map(p => this.datePipe.transform(p.testedDate, 'dd/MM/yyyy'));
         this.weights = result.map(p => p.weight);
+        this.heights = result.map(p => p.height);
         this.smm = result.map(p => p.skeletalMuscleMass);
         this.pbf = result.map(p => p.percentBodyFat);
       }
