@@ -1,4 +1,4 @@
-<nz-steps [nzCurrent]="index" (nzIndexChange)="onIndexChange($event)">
+<!-- <nz-steps [nzCurrent]="index" (nzIndexChange)="onIndexChange($event)">
     <nz-step nzTitle="Breakfast" nzDescription="Sáng"></nz-step>
     <nz-step nzTitle="Lunch" nzDescription="Trưa"></nz-step>
     <nz-step nzTitle="Before workout" nzDescription="Trước tập"></nz-step>
@@ -9,4 +9,12 @@
     <nz-radio-group [(ngModel)]="radioValue">
         <label nz-radio [nzValue]="o.value" *ngFor="let o of options">{{ o.label }}</label>
     </nz-radio-group>
+</div> -->
+<div class="row">
+    <div class="col-lg-3">
+        <app-meal-plan-summarize></app-meal-plan-summarize>
+    </div>
+    <div class="col-lg-9">
+        <app-meal-plan-detail></app-meal-plan-detail>
+    </div>
 </div>
