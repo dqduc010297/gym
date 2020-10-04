@@ -3,5 +3,5 @@ export enum Role {
   MEMBER,
   MASTER,
   MANAGER,
-  SYS_ADMIN,
+  SYS_ADMIN = 'SYS_ADMIN',
 }

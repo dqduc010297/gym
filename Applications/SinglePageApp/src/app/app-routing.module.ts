@@ -9,14 +9,14 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   {
     path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
-      { path: 'home', loadChildren: () => import('./meal-plan/meal-plan.module').then(m => m.MealPlanModule)},
+      { path: 'home', loadChildren: () => import('./meal-plan/meal-plan.module').then(m => m.MealPlanModule) },
       { path: 'timesheet', loadChildren: () => import('./features/timesheet/timesheet.module').then(m => m.TimesheetModule) },
       { path: 'goal', loadChildren: () => import('./features/goal/goal.module').then(m => m.GoalModule) },
       { path: 'inbody', loadChildren: () => import('./inbody/inbody.module').then(m => m.InbodyModule) },
       {
         path: 'user',
         loadChildren: () => import('./user/user.module').then(m => m.UserModule),
-        canActivate: [RoleGuard], data: { expectedRole: Role.SYS_ADMIN.toString() }
+        canActivate: [RoleGuard], data: { expectedRole: [Role[Role.SYS_ADMIN]] }
       },
       { path: 'album', loadChildren: () => import('./album/album.module').then(m => m.AlbumModule) },
     ]

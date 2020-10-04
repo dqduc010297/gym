@@ -8,6 +8,7 @@ import { ChangePasswordRequest } from './models/change-password.request';
 import jwt_decode from 'jwt-decode';
 import { AuthAPIService } from './auth.api.service';
 import { LoginRequest } from './models/login.request';
+import { Role } from 'src/app/core/const/role';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -88,5 +89,9 @@ export class AuthService {
       const tokenPayload = jwt_decode(user.token);
       return tokenPayload[key];
     }
+  }
+
+  public getUserRole(): string {
+    return this.decodeToken('http://schemas.microsoft.com/ws/2008/06/identity/claims/role');
   }
 }

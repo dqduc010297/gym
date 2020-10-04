@@ -1,1 +1,12 @@
-<div echarts [options]="chartOptions" [merge]="updateChartOptions" class="echart"></div>
+<div style="text-align: center;">
+    <h5>Tổng calo: {{mealPlanSummarize.calo}} calo</h5>
+    <p>Mục tiêu: {{mealPlanSummarize.target}}</p>
+    <p>{{mealPlanSummarize.start | date: 'dd/MM/yyyy'}} - {{mealPlanSummarize.end | date: 'dd/MM/yyyy'}}</p>
+</div>
+<div style="max-height: 310px;" echarts [options]="chartOptions" class="echart"></div>
+<p>
+    Ghi chú: <br>
+    <i>
+        <span *ngFor="let note of mealPlanSummarize.notes">{{note}} <br></span>
+    </i>
+</p>

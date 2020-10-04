@@ -1,14 +1,14 @@
-export enum MealType {
-    Breakfast,
-    Lunch,
-    PreWorkout,
-    Dinner,
-    Extra,
+export enum MealTitle {
+    Breakfast = 'Breakfast - Bữa sáng',
+    Lunch = 'Lunch - Bữa trưa',
+    BeforeWorkout = 'BeforeWorkout - Bữa trước tập',
+    Dinner = 'Dinner - Bữa tối',
+    Extra = 'Extra - Bữa phụ',
 }
-
 export class Meal {
-    mealType: MealType;
-    menu: string;
-    note: string;
+    title: string;
+    menu: string[];
+    notes: string[];
     calo: number;
+    isActive: boolean;
 }

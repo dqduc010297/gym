@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-lg-4">
+        <form nz-form [nzLayout]="'vertical'" [nzAutoTips]="true">
+            <div class="row">
+                <div class="col-3">
+                    <nz-form-item>
+                        <nz-form-label>Tổng calo</nz-form-label>
+                        <nz-input-group>
+                            <nz-input-number [(ngModel)]="mealPeriod.mealPlanSummarize.calo" name="fat-percent">
+                            </nz-input-number>
+                        </nz-input-group>
+                    </nz-form-item>
+                </div>
+                <div class="col-9">
+                    <nz-form-item>
+                        <nz-form-label>Mục tiêu</nz-form-label>
+                        <nz-input-group>
+                            <input type="text" [(ngModel)]="mealPeriod.mealPlanSummarize.target" name="password" nz-input />
+                        </nz-input-group>
+                    </nz-form-item>
+                </div>
+            </div>
+
+            <nz-form-item>
+                <nz-form-label>Thời gian</nz-form-label>
+                <nz-input-group>
+                    <nz-range-picker nzFormat="dd/MM/yyyy"></nz-range-picker>
+                </nz-input-group>
+            </nz-form-item>
+            <div class="row">
+                <div class="col-4">
+                    <nz-form-item>
+                        <nz-form-label>Protein %</nz-form-label>
+                        <nz-input-group>
+                            <nz-input-number [(ngModel)]="mealPeriod.mealPlanSummarize.proteinPercent" [nzMin]="0" [nzStep]="0.1"
+                                name="protein-percent">
+                            </nz-input-number>
+                        </nz-input-group>
+                    </nz-form-item>
+                </div>
+                <div class="col-4">
+                    <nz-form-item>
+                        <nz-form-label>Carb %</nz-form-label>
+                        <nz-input-group>
+                            <nz-input-number [(ngModel)]="mealPeriod.mealPlanSummarize.carbPercent" name="carb-percent">
+                            </nz-input-number>
+                        </nz-input-group>
+                    </nz-form-item>
+                </div>
+                <div class="col-4">
+                    <nz-form-item>
+                        <nz-form-label>Fat %</nz-form-label>
+                        <nz-input-group>
+                            <nz-input-number [(ngModel)]="mealPeriod.mealPlanSummarize.fatPercent" name="fat-percent">
+                            </nz-input-number>
+                        </nz-input-group>
+                    </nz-form-item>
+
+                </div>
+            </div>
+            <nz-form-item>
+                <nz-form-label>Ghi chú</nz-form-label>
+                <nz-input-group>
+                    <textarea rows="6" nz-input [(ngModel)]="mealPeriod.mealPlanSummarize.notes" name="note"></textarea>
+                </nz-input-group>
+            </nz-form-item>
+        </form>
+    </div>
+    <div class="col-lg-8">
+        <nz-collapse>
+            <nz-collapse-panel [nzHeader]="mealPeriod.breakfast.title" nzActive="true">
+                <app-meal [meal]="mealPeriod.breakfast" [isView]="false"></app-meal>
+            </nz-collapse-panel>
+            <nz-collapse-panel [nzHeader]="mealPeriod.lunch.title" nzActive="true">
+                <app-meal [meal]="mealPeriod.lunch" [isView]="false"></app-meal>
+            </nz-collapse-panel>
+            <nz-collapse-panel [nzHeader]="mealPeriod.beforeWorkout.title" nzActive="true">
+                <app-meal [meal]="mealPeriod.beforeWorkout" [isView]="false"></app-meal>
+            </nz-collapse-panel>
+            <nz-collapse-panel [nzHeader]="mealPeriod.dinner.title" nzActive="true">
+                <app-meal [meal]="mealPeriod.dinner" [isView]="false"></app-meal>
+            </nz-collapse-panel>
+        </nz-collapse>
+    </div>
+</div>

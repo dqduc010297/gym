@@ -9,10 +9,17 @@ import { MealPlanSummarizeComponent } from './components/meal-plan-summarize/mea
 
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
-import { MealPlanDetailComponent } from './components/meal-plan-detail/meal-plan-detail.component';
+import { MealComponent } from './components/meal/meal.component';
+import { NewMealPeriodComponent } from './components/new-meal-period/new-meal-period.component';
 
 @NgModule({
-  declarations: [MealPlanComponent, MealPeriodComponent, MealPlanSummarizeComponent, MealPlanDetailComponent],
+  declarations: [
+    MealPlanComponent,
+    MealPeriodComponent,
+    MealPlanSummarizeComponent,
+    MealComponent,
+    NewMealPeriodComponent,
+  ],
   imports: [
     CommonModule,
     MealPlanRoutingModule,

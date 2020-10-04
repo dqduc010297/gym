@@ -501,6 +501,23 @@ namespace Infrastructure.SeedData
                     "Phạm Hải Đức Phát",
                     "Nguyễn Việt Phong"
                 };
+                var sysUser = new User
+                {
+                    Fullname = "system",
+                    UserName = "0338279632",
+                    Email = "system@gmail.com",
+                    PhoneNumber = "0338279632",
+                    DateOfBirth = new DateTime(1997,2,1),
+                    Gender =  Gender.MALE,
+                    DateJoined = new DateTime(2020, 10, 3),
+                    Status = UserStatus.ACTIVATE,
+                }; 
+                var sysResult = await userManagement.CreateAsync(sysUser, "Password@1");
+                if (sysResult.Succeeded)
+                {
+                    await userManagement.AddToRoleAsync(sysUser, RoleName.SYS_ADMIN.ToString());
+                }
+
                 for (int i = 0; i < 150; i++)
                 {
                     var user = new User

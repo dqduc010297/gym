@@ -20,6 +20,7 @@ export class UserComponent implements OnInit {
   }
 
   selectedUser(event) {
+    console.log(event);
     this.isInitPage = false;
     this.redirectiToForm(event);
   }

@@ -14,6 +14,7 @@ export class LayoutComponent implements OnInit {
   isLogin = false;
   currentUser: LoginUser = new LoginUser();
   userRole = Role;
+  currentRole: string;
 
   constructor(
     public authService: AuthService,
@@ -23,6 +24,7 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentRole = this.authService.getUserRole();
   }
 
   logout() {

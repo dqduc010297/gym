@@ -1,13 +1,10 @@
 <nz-card>
-    <nz-tabset>
-        <nz-tab nzTitle="Giai đoạn 1">
-            <app-meal-period></app-meal-period>
-        </nz-tab>
-        <nz-tab nzTitle="Tab 2">
-            Content of Tab Pane 2
-        </nz-tab>
-        <nz-tab nzTitle="Tab 3">
-            Content of Tab Pane 3
+    <nz-tabset [(nzSelectedIndex)]="selectedIndex" nzType="editable-card" (nzAdd)="newTab()"
+        (nzClose)="closeTab($event)">
+        <nz-tab *ngFor="let mealPeriod of mealPeriods; let i = index" [nzTitle]="mealPeriod.title"
+            [nzClosable]="mealPeriod.id == 0">
+            <app-meal-period [mealPeriod]="mealPeriod" *ngIf="mealPeriod.id > 0"></app-meal-period>
+            <app-new-meal-period [mealPeriod]="mealPeriod" *ngIf="mealPeriod.id == 0"></app-new-meal-period>
         </nz-tab>
     </nz-tabset>
 </nz-card>

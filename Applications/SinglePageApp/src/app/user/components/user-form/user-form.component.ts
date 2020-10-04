@@ -32,6 +32,7 @@ export class UserFormComponent implements OnInit {
   ngOnInit(): void {
     this.activateRouter.params.subscribe(
       params => {
+        console.log(params);
         if (params.id > 0) {
           this.loadUser(params.id);
           this.action = FormAction.view;
@@ -43,6 +44,7 @@ export class UserFormComponent implements OnInit {
   }
 
   loadUser(userId: number) {
+    console.log(userId);
     this.userRequest.body.id = userId;
     this.state = FormState.loading;
     this.userAPIService.getUser(this.userRequest).subscribe(

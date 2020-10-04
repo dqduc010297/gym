@@ -17,6 +17,6 @@
   <app-menu-item iconType="appstore" [url]="['/album']" title="Album" [isShowTitle]="menuType != 'horizontal'">
   </app-menu-item>
   <app-menu-item iconType="user" [url]="['/user']" title="User" [isShowTitle]="menuType != 'horizontal'"
-    *ngIf="role == userRole.SYS_ADMIN">
+    *ngIf="role == 'SYS_ADMIN'">
   </app-menu-item>
 </ul>
