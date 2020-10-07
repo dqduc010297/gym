@@ -1,7 +1,7 @@
 import { MealPlanSummarize } from './meal-plan-summarize.model';
 import { Meal, MealTitle } from './meal.model';
 
-export class MealPeriod {
+export class MealPlanPeriod {
     id: number;
     index: number;
     title: string;

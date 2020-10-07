@@ -1,7 +1,7 @@
 import { IMock } from './imock';
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { MealPeriod } from 'src/app/meal-plan/core/models/meal-plan.model';
+import { MealPlanPeriod } from 'src/app/meal-plan/core/models/meal-plan-period.model';
 import { MealTitle } from 'src/app/meal-plan/core/models/meal.model';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
@@ -13,7 +13,7 @@ export class MealPeriodMock implements IMock {
 
     }
     doMock(param?: any): Observable<any> {
-        const data: MealPeriod[] = [
+        const data: MealPlanPeriod[] = [
             {
                 id: 1,
                 index: 1,

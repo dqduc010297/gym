@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MealPeriodMock } from 'src/app/core/mocks/meal-period.mock';
-import { MealPeriod } from '../../core/models/meal-plan.model';
+import { MealPlanPeriod } from '../../core/models/meal-plan-period.model';
 
 @Component({
   selector: 'app-meal-plan',
@@ -8,7 +8,7 @@ import { MealPeriod } from '../../core/models/meal-plan.model';
   styleUrls: ['./meal-plan.component.scss']
 })
 export class MealPlanComponent implements OnInit {
-  mealPeriods: MealPeriod[] = [];
+  mealPlanPeriods: MealPlanPeriod[] = [];
   selectedIndex = 0;
 
   constructor(
@@ -19,20 +19,20 @@ export class MealPlanComponent implements OnInit {
   ngOnInit(): void {
     this.mealPeriodMock.doMock().subscribe(
       result => {
-        this.mealPeriods = result;
+        this.mealPlanPeriods = result;
       }
     );
   }
 
   newTab(): void {
-    const period = new MealPeriod();
-    period.index = Math.max(...this.mealPeriods.map(p => p.index)) + 1;
+    const period = new MealPlanPeriod();
+    period.index = Math.max(...this.mealPlanPeriods.map(p => p.index)) + 1;
     period.title = `Giai đoạn ${period.index}`;
-    this.mealPeriods.push(period);
-    this.selectedIndex = this.mealPeriods.length;
+    this.mealPlanPeriods.push(period);
+    this.selectedIndex = this.mealPlanPeriods.length;
   }
 
   closeTab({ index }: { index: number }): void {
-    this.mealPeriods.splice(index, 1);
+    this.mealPlanPeriods.splice(index, 1);
   }
 }

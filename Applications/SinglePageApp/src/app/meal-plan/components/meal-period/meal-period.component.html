@@ -1,21 +1,21 @@
 <div class="row">
     <div class="col-lg-4">
-        <app-meal-plan-summarize [mealPlanSummarize]="mealPeriod.mealPlanSummarize">
+        <app-meal-plan-summarize [mealPlanSummarize]="mealPlanPeriod.mealPlanSummarize">
         </app-meal-plan-summarize>
     </div>
     <div class="col-lg-8">
         <nz-collapse>
-            <nz-collapse-panel [nzHeader]="mealPeriod.breakfast.title" [nzActive]="mealPeriod.breakfast.isActive">
-                <app-meal [meal]="mealPeriod.breakfast"></app-meal>
+            <nz-collapse-panel [nzHeader]="mealPlanPeriod.breakfast.title" [nzActive]="mealPlanPeriod.breakfast.isActive">
+                <app-meal [meal]="mealPlanPeriod.breakfast"></app-meal>
             </nz-collapse-panel>
-            <nz-collapse-panel [nzHeader]="mealPeriod.lunch.title" [nzActive]="mealPeriod.breakfast.isActive">
-                <app-meal [meal]="mealPeriod.lunch"></app-meal>
+            <nz-collapse-panel [nzHeader]="mealPlanPeriod.lunch.title" [nzActive]="mealPlanPeriod.breakfast.isActive">
+                <app-meal [meal]="mealPlanPeriod.lunch"></app-meal>
             </nz-collapse-panel>
-            <nz-collapse-panel [nzHeader]="mealPeriod.beforeWorkout.title" [nzActive]="mealPeriod.breakfast.isActive">
-                <app-meal [meal]="mealPeriod.beforeWorkout"></app-meal>
+            <nz-collapse-panel [nzHeader]="mealPlanPeriod.beforeWorkout.title" [nzActive]="mealPlanPeriod.breakfast.isActive">
+                <app-meal [meal]="mealPlanPeriod.beforeWorkout"></app-meal>
             </nz-collapse-panel>
-            <nz-collapse-panel [nzHeader]="mealPeriod.dinner.title" [nzActive]="mealPeriod.breakfast.isActive">
-                <app-meal [meal]="mealPeriod.dinner"></app-meal>
+            <nz-collapse-panel [nzHeader]="mealPlanPeriod.dinner.title" [nzActive]="mealPlanPeriod.breakfast.isActive">
+                <app-meal [meal]="mealPlanPeriod.dinner"></app-meal>
             </nz-collapse-panel>
         </nz-collapse>
     </div>

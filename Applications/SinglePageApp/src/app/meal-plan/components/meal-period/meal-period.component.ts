@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MealPeriod } from '../../core/models/meal-plan.model';
+import { MealPlanPeriod } from '../../core/models/meal-plan-period.model';
 
 @Component({
   selector: 'app-meal-period',
@@ -7,7 +7,7 @@ import { MealPeriod } from '../../core/models/meal-plan.model';
   styleUrls: ['./meal-period.component.scss']
 })
 export class MealPeriodComponent implements OnInit {
-  @Input() mealPeriod: MealPeriod = new MealPeriod();
+  @Input() mealPlanPeriod: MealPlanPeriod = new MealPlanPeriod();
 
   constructor() { }
 
