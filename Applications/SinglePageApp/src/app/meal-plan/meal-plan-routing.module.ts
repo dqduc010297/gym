@@ -4,7 +4,10 @@ import { MealPlanComponent } from './pages/meal-plan/meal-plan.component';
 
 
 const routes: Routes = [
-  { path: '', component: MealPlanComponent }
+  {
+    path: '', component: MealPlanComponent, children: [
+    ]
+  }
 ];
 
 @NgModule({

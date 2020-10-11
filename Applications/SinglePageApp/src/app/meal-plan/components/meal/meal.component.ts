@@ -12,19 +12,17 @@ export class MealComponent implements OnInit, OnChanges {
   @Input() meal: Meal;
   @Input() isSubmit = false;
 
-  textMenu: string;
-  textNote: string;
+  menus: string[];
+  notes: string[];
 
   constructor(
     private stringUtil: StringUtil
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.isSubmit) {
-      if (changes.isSubmit.currentValue) {
-        this.meal.menu = this.stringUtil.convertStringToList(this.textMenu);
-        this.meal.notes = this.stringUtil.convertStringToList(this.textNote);
-      }
+    if (changes.meal?.currentValue) {
+      this.menus = this.stringUtil.convertStringToList(this.meal.menu);
+      this.notes = this.stringUtil.convertStringToList(this.meal.note);
     }
   }
 

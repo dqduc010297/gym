@@ -1,11 +1,11 @@
 <div *ngIf="isView">
-    <p style="margin:0;" *ngFor="let option of meal.menu">
+    <p style="margin:0;" *ngFor="let option of menus">
         {{option}}<br>
     </p>
     <br>
     <p>
         <i>Ghi chú: <br>
-            <span *ngFor="let note of meal.notes">{{note}}</span>
+            <span *ngFor="let note of notes">{{note}}</span>
         </i>
     </p>
 </div>
@@ -15,7 +15,7 @@
             <nz-form-label>Menu</nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="Vui lòng nhập mật khẩu">
                 <nz-input-group>
-                    <textarea rows="6" nz-input [(ngModel)]="textMenu" name="menu"></textarea>
+                    <textarea rows="6" nz-input [(ngModel)]="meal.menu" name="menu"></textarea>
                 </nz-input-group>
             </nz-form-control>
         </nz-form-item>
@@ -23,7 +23,7 @@
             <nz-form-label>Ghi chú</nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="Vui lòng nhập mật khẩu">
                 <nz-input-group>
-                    <textarea rows="6" nz-input [(ngModel)]="textNote" name="note"></textarea>
+                    <textarea rows="6" nz-input [(ngModel)]="meal.note" name="note"></textarea>
                 </nz-input-group>
             </nz-form-control>
         </nz-form-item>

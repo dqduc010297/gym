@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MealPeriodMock } from 'src/app/core/mocks/meal-period.mock';
-import { MealPlanPeriod } from '../../core/models/meal-plan-period.model';
+import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/core/services/loader.service';
 
 @Component({
   selector: 'app-meal-plan',
@@ -8,31 +8,21 @@ import { MealPlanPeriod } from '../../core/models/meal-plan-period.model';
   styleUrls: ['./meal-plan.component.scss']
 })
 export class MealPlanComponent implements OnInit {
-  mealPlanPeriods: MealPlanPeriod[] = [];
-  selectedIndex = 0;
+  isInitPage = true;
+  selectedUserId = -1;
 
   constructor(
-    private mealPeriodMock: MealPeriodMock
-  ) {
-  }
+    public loaderService: LoaderService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.mealPeriodMock.doMock().subscribe(
-      result => {
-        this.mealPlanPeriods = result;
-      }
-    );
   }
 
-  newTab(): void {
-    const period = new MealPlanPeriod();
-    period.index = Math.max(...this.mealPlanPeriods.map(p => p.index)) + 1;
-    period.title = `Giai đoạn ${period.index}`;
-    this.mealPlanPeriods.push(period);
-    this.selectedIndex = this.mealPlanPeriods.length;
+  selectedUser(event: number) {
+    console.log(event);
+    this.isInitPage = false;
+    this.selectedUserId = event;
   }
 
-  closeTab({ index }: { index: number }): void {
-    this.mealPlanPeriods.splice(index, 1);
-  }
 }

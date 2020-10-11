@@ -17,12 +17,19 @@ namespace WebApplication.Controllers
             this._mealPlanPeriodService = mealPlanPeriodService;
         }
 
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> GetMealPlanPeriods(int userId)
+        {
+            var result = await this._mealPlanPeriodService.GetMealPlanPeriods(userId);
+            return Ok(result);
+        }
         [HttpPost]
         [Route("")]
         public async Task<IActionResult> CreateMealPlanPeriod([FromBody] MealPlanPeriodDTO request)
         {
-            await this._mealPlanPeriodService.CreateMealPlanPeriod(request);
-            return Ok();
+            int newMealPlanPeriodId = await this._mealPlanPeriodService.CreateMealPlanPeriod(request);
+            return Ok(newMealPlanPeriodId);
         }
     }
 }

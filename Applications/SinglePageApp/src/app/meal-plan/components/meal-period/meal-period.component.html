@@ -1,17 +1,32 @@
 <div class="row">
     <div class="col-lg-4">
-        <app-meal-plan-summarize [mealPlanSummarize]="mealPlanPeriod.mealPlanSummarize">
-        </app-meal-plan-summarize>
+        <div style="text-align: center;">
+            <h5>Tổng calo: {{mealPlanPeriod.calo}} calo
+                <i nz-icon nzType="edit" nzTheme="outline" (click)="editMealPlanPeriod()"></i>
+            </h5>
+            <p>Mục tiêu: {{mealPlanPeriod.target}}</p>
+            <p>{{mealPlanPeriod.estimateTime[0] | date: 'dd/MM/yyyy'}} -
+                {{mealPlanPeriod.estimateTime[1] | date: 'dd/MM/yyyy'}}</p>
+        </div>
+        <div style="max-height: 310px;" echarts [options]="chartOptions" class="echart"></div>
+        <p>
+            Ghi chú: <br>
+            <i>
+                <span *ngFor="let note of notes">{{note}} <br></span>
+            </i>
+        </p>
     </div>
     <div class="col-lg-8">
         <nz-collapse>
-            <nz-collapse-panel [nzHeader]="mealPlanPeriod.breakfast.title" [nzActive]="mealPlanPeriod.breakfast.isActive">
+            <nz-collapse-panel [nzHeader]="mealPlanPeriod.breakfast.title"
+                [nzActive]="mealPlanPeriod.breakfast.isActive">
                 <app-meal [meal]="mealPlanPeriod.breakfast"></app-meal>
             </nz-collapse-panel>
             <nz-collapse-panel [nzHeader]="mealPlanPeriod.lunch.title" [nzActive]="mealPlanPeriod.breakfast.isActive">
                 <app-meal [meal]="mealPlanPeriod.lunch"></app-meal>
             </nz-collapse-panel>
-            <nz-collapse-panel [nzHeader]="mealPlanPeriod.beforeWorkout.title" [nzActive]="mealPlanPeriod.breakfast.isActive">
+            <nz-collapse-panel [nzHeader]="mealPlanPeriod.beforeWorkout.title"
+                [nzActive]="mealPlanPeriod.breakfast.isActive">
                 <app-meal [meal]="mealPlanPeriod.beforeWorkout"></app-meal>
             </nz-collapse-panel>
             <nz-collapse-panel [nzHeader]="mealPlanPeriod.dinner.title" [nzActive]="mealPlanPeriod.breakfast.isActive">

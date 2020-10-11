@@ -1,4 +1,3 @@
-import { MealPlanSummarize } from './meal-plan-summarize.model';
 import { Meal, MealTitle } from './meal.model';
 
 export class MealPlanPeriod {
@@ -12,7 +11,15 @@ export class MealPlanPeriod {
     extra: Meal = new Meal();
     isLock: boolean;
     isActivate: boolean;
-    mealPlanSummarize: MealPlanSummarize = new MealPlanSummarize();
+    proteinPercent: number;
+    fatPercent: number;
+    carbPercent: number;
+    note: string;
+    calo: number;
+    target: string;
+    estimateTime: Date[] = [];
+    isView: boolean;
+    userId: number;
 
     constructor() {
         this.id = 0;

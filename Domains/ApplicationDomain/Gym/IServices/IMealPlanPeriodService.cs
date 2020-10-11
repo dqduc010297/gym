@@ -8,6 +8,7 @@ namespace ApplicationDomain.Gym.IServices
 {
     public interface IMealPlanPeriodService
     {
-        Task CreateMealPlanPeriod(MealPlanPeriodDTO mealPlanPeriodDTO);
+        Task<int> CreateMealPlanPeriod(MealPlanPeriodDTO mealPlanPeriodDTO);
+        Task<IEnumerable<MealPlanPeriodDTO>> GetMealPlanPeriods(int userId);
     }
 }

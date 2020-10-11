@@ -5,20 +5,20 @@ import { MealPlanRoutingModule } from './meal-plan-routing.module';
 import { MealPlanComponent } from './pages/meal-plan/meal-plan.component';
 import { SharedModule } from '../shared/share.module';
 import { MealPeriodComponent } from './components/meal-period/meal-period.component';
-import { MealPlanSummarizeComponent } from './components/meal-plan-summarize/meal-plan-summarize.component';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { MealComponent } from './components/meal/meal.component';
-import { NewMealPeriodComponent } from './components/new-meal-period/new-meal-period.component';
+import { MealPlanOverviewComponent } from './components/meal-plan-overview/meal-plan-overview.component';
+import { EditableMealPeriodComponent } from './components/editable-meal-period/editable-meal-period.component';
 
 @NgModule({
   declarations: [
     MealPlanComponent,
     MealPeriodComponent,
-    MealPlanSummarizeComponent,
     MealComponent,
-    NewMealPeriodComponent,
+    EditableMealPeriodComponent,
+    MealPlanOverviewComponent,
   ],
   imports: [
     CommonModule,

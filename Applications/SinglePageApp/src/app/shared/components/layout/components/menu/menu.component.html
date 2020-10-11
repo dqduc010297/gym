@@ -19,4 +19,7 @@
   <app-menu-item iconType="user" [url]="['/user']" title="User" [isShowTitle]="menuType != 'horizontal'"
     *ngIf="role == 'SYS_ADMIN'">
   </app-menu-item>
+  <app-menu-item iconType="carry-out" [url]="['/meal-plan']" title="Meal plan" [isShowTitle]="menuType != 'horizontal'"
+    *ngIf="role == 'SYS_ADMIN'">
+  </app-menu-item>
 </ul>

@@ -1,0 +1,11 @@
+<nz-card>
+    <nz-tabset [(nzSelectedIndex)]="selectedIndex" nzType="editable-card" (nzAdd)="newTab()"
+        (nzClose)="closeTab($event)" [nzHideAdd]="isHideAddIcon">
+        <nz-tab *ngFor="let mealPeriod of mealPlanPeriods; let i = index" [nzTitle]="mealPeriod.title"
+            [nzClosable]="mealPeriod.id == 0">
+            <app-meal-period [mealPlanPeriod]="mealPeriod" (changeToEditState)="changeToEditState($event)" *ngIf="mealPeriod.isView"></app-meal-period>
+            <app-editable-meal-period [mealPlanPeriod]="mealPeriod" *ngIf="!mealPeriod.isView"
+                (submitSuccess)="submitSuccess($event)"></app-editable-meal-period>
+        </nz-tab>
+    </nz-tabset>
+</nz-card>

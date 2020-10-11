@@ -6,7 +6,7 @@ import { MealPlanPeriod } from '../models/meal-plan-period.model';
 import { MealPlanPeriodRequest } from '../models/meal-plan-period.request';
 
 @Injectable({ providedIn: 'root' })
-export class MealPlanPeriodService {
+export class MealPlanPeriodAPIService {
     constructor(
         private http: HttpClient
     ) { }
@@ -14,5 +14,9 @@ export class MealPlanPeriodService {
     create(mealPlanPeriodRequest: MealPlanPeriodRequest): Observable<any> {
         const params = mealPlanPeriodRequest.createParam();
         return this.http.post<any>(`${environment.apiUrl}/mealplan`, mealPlanPeriodRequest.body, { params });
+    }
+
+    getList(userId: number): Observable<MealPlanPeriod[]> {
+        return this.http.get<MealPlanPeriod[]>(`${environment.apiUrl}/mealplan?userId=${userId}`);
     }
 }

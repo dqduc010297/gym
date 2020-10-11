@@ -7,8 +7,8 @@ export enum MealTitle {
 }
 export class Meal {
     title: string;
-    menu: string[];
-    notes: string[];
+    menu: string;
+    note: string;
     calo: number;
     isActive: boolean;
 }
