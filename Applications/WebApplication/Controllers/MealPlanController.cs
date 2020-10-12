@@ -24,12 +24,21 @@ namespace WebApplication.Controllers
             var result = await this._mealPlanPeriodService.GetMealPlanPeriods(userId);
             return Ok(result);
         }
+
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CreateMealPlanPeriod([FromBody] MealPlanPeriodDTO request)
+        public async Task<IActionResult> Create([FromBody] MealPlanPeriodDTO request)
         {
             int newMealPlanPeriodId = await this._mealPlanPeriodService.CreateMealPlanPeriod(request);
             return Ok(newMealPlanPeriodId);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> Update([FromBody] MealPlanPeriodDTO request)
+        {
+            await this._mealPlanPeriodService.UpdateMealPlanPeriod(request);
+            return Ok();
         }
     }
 }

@@ -34,13 +34,25 @@ namespace ApplicationDomain.Gym.Services
             return mealPlanPeriod.Id;
         }
 
+        public async Task UpdateMealPlanPeriod(MealPlanPeriodDTO mealPlanPeriodDTO)
+        {
+            var mealPlanPeriod = await this._mealPlanPeriodRepository.GetEntityByIdAsync(mealPlanPeriodDTO.Id);
+            if (mealPlanPeriod == null)
+            {
+                throw new Exception("Cannot find meal plan period");
+            }
+            this._mapper.Map(mealPlanPeriodDTO, mealPlanPeriod);
+            this._mealPlanPeriodRepository.Update(mealPlanPeriod);
+            await this._uow.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<MealPlanPeriodDTO>> GetMealPlanPeriods(int userId)
         {
-                var mealPlanPeriodDTOs = await this._mealPlanPeriodRepository
-                    .GetMealPlanPeriodsByUserId(userId)
-                    .MapQueryTo<MealPlanPeriodDTO>(this._mapper)
-                    .ToListAsync();
-                return mealPlanPeriodDTOs;
+            var mealPlanPeriodDTOs = await this._mealPlanPeriodRepository
+                .GetMealPlanPeriodsByUserId(userId)
+                .MapQueryTo<MealPlanPeriodDTO>(this._mapper)
+                .ToListAsync();
+            return mealPlanPeriodDTOs;
         }
     }
 }

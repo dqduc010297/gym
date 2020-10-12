@@ -27,6 +27,13 @@ import { EditableMealPeriodComponent } from './components/editable-meal-period/e
       echarts
     }),
     SharedModule.forRoot(),
+  ],
+  exports: [
+    MealPlanComponent,
+    MealPeriodComponent,
+    MealComponent,
+    EditableMealPeriodComponent,
+    MealPlanOverviewComponent,
   ]
 })
 export class MealPlanModule { }

@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/share.module';
 import { WeightHistoryComponent } from './components/weight-history/weight-history.component';
 import { SmmHistoryComponent } from './components/smm-history/smm-history.component';
 import { PbfHistoryComponent } from './components/pbf-history/pbf-history.component';
+import { MealPlanModule } from '../meal-plan/meal-plan.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PbfHistoryComponent } from './components/pbf-history/pbf-history.compon
       echarts
     }),
     SharedModule.forRoot(),
+    MealPlanModule,
   ],
   providers: []
 })

@@ -5,5 +5,5 @@ export class LoginUser {
   userName: string;
   avatarURL: string;
   token?: string;
-  role: Role;
+  id: number;
 }

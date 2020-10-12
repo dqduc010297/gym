@@ -11,7 +11,7 @@ import { MealPlanPeriodAPIService } from '../../core/services/meal-period.api.se
 })
 export class EditableMealPeriodComponent implements OnInit {
   @Input() mealPlanPeriod: MealPlanPeriod = new MealPlanPeriod();
-  @Output() submitSuccess: EventEmitter<MealPlanPeriod> = new EventEmitter<MealPlanPeriod>();
+  @Output() submitSuccess: EventEmitter<any> = new EventEmitter<any>();
 
   mealPlanPeriodRequest: MealPlanPeriodRequest = new MealPlanPeriodRequest();
 
@@ -32,6 +32,15 @@ export class EditableMealPeriodComponent implements OnInit {
       result => {
         this.mealPlanPeriod.id = result;
         this.submitSuccess.emit(this.mealPlanPeriod);
+      }
+    );
+  }
+
+  save() {
+    this.mealPlanPeriodRequest.body = this.mealPlanPeriod;
+    this.mealPlanPeriodAPIService.update(this.mealPlanPeriodRequest).subscribe(
+      result => {
+        this.submitSuccess.emit(this.mealPlanPeriod.id);
       }
     );
   }

@@ -9,6 +9,7 @@ import { MealPlanPeriodAPIService } from '../../core/services/meal-period.api.se
 })
 export class MealPlanOverviewComponent implements OnInit, OnChanges {
   @Input() userId: number;
+  @Input() isView = false;
 
   mealPlanPeriods: MealPlanPeriod[] = [];
   selectedIndex = 0;
@@ -23,7 +24,7 @@ export class MealPlanOverviewComponent implements OnInit, OnChanges {
     if (changes.userId?.currentValue) {
       this.mealPlanPeriodAPIService.getList(changes.userId.currentValue).subscribe(
         result => {
-          if (result.length === 0) {
+          if (result.length === 0 && !this.isView) {
             this.newTab();
           } else {
             this.mealPlanPeriods = result;
@@ -61,9 +62,14 @@ export class MealPlanOverviewComponent implements OnInit, OnChanges {
     this.mealPlanPeriods.find(p => p.id === event).isView = false;
   }
 
-  submitSuccess(event: MealPlanPeriod) {
+  submitSuccess(event: any) {
     this.isHideAddIcon = false;
-    this.mealPlanPeriods.pop();
-    this.mealPlanPeriods.push(event);
+    if (Number.isInteger(event)) {
+      this.mealPlanPeriods.find(p => p.id === event).isView = true;
+    } else {
+      this.mealPlanPeriods.pop();
+      event.isView = true;
+      this.mealPlanPeriods.push(event);
+    }
   }
 }

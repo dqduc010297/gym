@@ -4,6 +4,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { HomeRequest } from 'src/app/home/core/models/home.request';
 import { InBodyAPIService } from 'src/app/inbody/core/services/inbody.api.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { AuthService } from 'src/app/auth/core/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -19,21 +20,24 @@ export class HomeComponent implements OnInit {
   testedDates: string[] = [];
   homeRequest: HomeRequest = new HomeRequest(this.deviceDetectorService);
 
+  userId: number;
+
   constructor(
     private inBodyAPIService: InBodyAPIService,
     private datePipe: DatePipe,
     public loaderService: LoaderService,
-    private deviceDetectorService: DeviceDetectorService
+    private deviceDetectorService: DeviceDetectorService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.userId = this.authService.currentUserValue.id;
     this.inBodyAPIService.getBodyCompositionHistories(this.homeRequest).subscribe(
       result => {
         if (result.length === 0) {
           this.isEmptyData = true;
           return;
         }
-        console.log(result);
         this.isEmptyData = false;
         this.testedDates = result.map(p => this.datePipe.transform(p.testedDate, 'dd/MM/yyyy'));
         this.weights = result.map(p => p.weight);

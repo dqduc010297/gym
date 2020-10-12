@@ -10,7 +10,6 @@ import { Meal } from '../../core/models/meal.model';
 export class MealComponent implements OnInit, OnChanges {
   @Input() isView = true;
   @Input() meal: Meal;
-  @Input() isSubmit = false;
 
   menus: string[];
   notes: string[];

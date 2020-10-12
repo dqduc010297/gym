@@ -11,9 +11,14 @@ export class MealPlanPeriodAPIService {
         private http: HttpClient
     ) { }
 
-    create(mealPlanPeriodRequest: MealPlanPeriodRequest): Observable<any> {
+    create(mealPlanPeriodRequest: MealPlanPeriodRequest): Observable<number> {
         const params = mealPlanPeriodRequest.createParam();
-        return this.http.post<any>(`${environment.apiUrl}/mealplan`, mealPlanPeriodRequest.body, { params });
+        return this.http.post<number>(`${environment.apiUrl}/mealplan`, mealPlanPeriodRequest.body, { params });
+    }
+
+    update(mealPlanPeriodRequest: MealPlanPeriodRequest): Observable<any> {
+        const params = mealPlanPeriodRequest.createParam();
+        return this.http.put<any>(`${environment.apiUrl}/mealplan`, mealPlanPeriodRequest.body, { params });
     }
 
     getList(userId: number): Observable<MealPlanPeriod[]> {
