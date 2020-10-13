@@ -1,0 +1,62 @@
+<div class="row" style="margin-bottom: 20px;">
+  <div class="col-xl-4">
+    <app-user-select (onSelected)="selectedUser($event)"></app-user-select>
+  </div>
+</div>
+<div class="row" *ngIf="userId > 0">
+  <div class="col-xl-8 col-lg-12">
+    <nz-table nzTemplateMode nzBordered [nzShowPagination]="false" nzTableLayout="fixed">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th style="width: 60px;">Unit</th>
+          <th>Value</th>
+          <th>Min</th>
+          <th>Max</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr app-tested-item [isView]="false" name="Total Body Water" unit="L"
+          [(min)]="inBodyDetail.inBodyStandard.bodyWaterMin" [(max)]="inBodyDetail.inBodyStandard.bodyWaterMax"
+          [(value)]="inBodyDetail.bodyWater" [minDisabled]="inBodyDetail.inBodyStandard.bodyWaterMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.bodyWaterMax != 0">
+        </tr>
+        <tr app-tested-item [isView]="false" name="Protein" unit="kg" [(min)]="inBodyDetail.inBodyStandard.proteinMin"
+          [(max)]="inBodyDetail.inBodyStandard.proteinMax" [(value)]="inBodyDetail.protein"
+          [minDisabled]="inBodyDetail.inBodyStandard.proteinMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.proteinMax != 0"></tr>
+        <tr app-tested-item [isView]="false" name="Mineral" unit="kg" [(min)]="inBodyDetail.inBodyStandard.mineralMin"
+          [(max)]="inBodyDetail.inBodyStandard.mineralMax" [(value)]="inBodyDetail.mineral"
+          [minDisabled]="inBodyDetail.inBodyStandard.mineralMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.mineralMax != 0"></tr>
+        <tr app-tested-item [isView]="false" name="Body Fat Mass" unit="kg"
+          [(min)]="inBodyDetail.inBodyStandard.bodyFatMassMin" [(max)]="inBodyDetail.inBodyStandard.bodyFatMassMax"
+          [(value)]="inBodyDetail.bodyFatMass" [minDisabled]="inBodyDetail.inBodyStandard.bodyFatMassMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.bodyFatMassMax != 0"></tr>
+        <tr app-tested-item [isView]="false" name="SMM" unit="kg"
+          [(min)]="inBodyDetail.inBodyStandard.skeletalMuscleMassMin"
+          [(max)]="inBodyDetail.inBodyStandard.skeletalMuscleMassMax" [(value)]="inBodyDetail.skeletalMuscleMass"
+          [minDisabled]="inBodyDetail.inBodyStandard.skeletalMuscleMassMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.skeletalMuscleMassMax != 0"></tr>
+        <tr app-tested-item [isView]="false" name="Weight" unit="kg" [(min)]="inBodyDetail.inBodyStandard.weightMin"
+          [(max)]="inBodyDetail.inBodyStandard.weightMax" [(value)]="inBodyDetail.weight"
+          [minDisabled]="inBodyDetail.inBodyStandard.weightMin != 0"
+          [maxDisabled]="inBodyDetail.inBodyStandard.weightMax != 0"></tr>
+        <tr app-tested-item [isView]="false" name="Waist-Hip Ratio" unit="-"
+          [(min)]="inBodyDetail.inBodyStandard.waistHipRatioMin" [(max)]="inBodyDetail.inBodyStandard.waistHipRatioMax"
+          [(value)]="inBodyDetail.waistHipRatio" [isView]="false" [maxDisabled]="true" [minDisabled]="true"></tr>
+        <tr app-tested-item [isView]="false" name="Visceral Fat Level" unit="-"
+          [(min)]="inBodyDetail.inBodyStandard.visceralFatLevelMin"
+          [(max)]="inBodyDetail.inBodyStandard.visceralFatLevelMax" [(value)]="inBodyDetail.visceralFatLevel"
+          [maxDisabled]="true" [minDisabled]="true"></tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <!-- <div class="col-xl-4 col-lg-12">
+    <app-obesity-analysis [obesityAnalysis]="inBodyDetail.obesityAnalysis"></app-obesity-analysis>
+    <button style="margin-top: 20px;" nz-button nzType="primary" nzBlock (click)="submit()">Submit</button>
+  </div> -->
+</div>
+
+<nz-result *ngIf="userId == 0" [nzIcon]="'smile-twotone'" nzTitle="Vui lòng chọn user để thêm InBody!">
+</nz-result>

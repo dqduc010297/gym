@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-lg-6 col-xl-4 d-none d-md-block" style="margin: 10px 0;">
+    <div style="border: 1px solid #d9d9d9; border-radius: 4px; ">
+      <nz-calendar [nzFullscreen]="false" (nzSelectChange)="onValueChange($event)"
+        (nzPanelChange)="onPanelChange($event)"></nz-calendar>
+      <button nz-button nzType="default" nzBlock nzType="primary">New Goal</button>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xl-8">
+    <app-goal-timeline (goalSelected)="goalOverviewSelected($event)" [goalOverviews]="goalOverviews">
+    </app-goal-timeline>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<nz-layout>
+  <nz-sider class="menu-sidebar d-none d-md-block" nzCollapsible nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a href="/home">
+        <img src="assets/images/logo.png" alt="logo">
+        <h1></h1>
+      </a>
+    </div>
+    <app-menu menuType="inline" [role]="currentRole"></app-menu>
+  </nz-sider>
+  <nz-layout class="layout" [ngClass]="{'right-layout': !isCollapsed}">
+    <div [ngClass]="{'fixed-top': isCollapsed}">
+      <div [ngClass]="{'fixed-top': !isCollapsed, 'right-layout': !isCollapsed}">
+        <nz-header style="height: 48px;">
+          <div class="sidebar-logo d-sm-block d-md-none">
+            <a href="/home">
+              <img src="assets/images/logo.png" alt="logo">
+              <h1></h1>
+            </a>
+          </div>
+          <div class="sidebar-logo d-none d-md-block" style="float: right; margin-right: 8px;">
+            <a nz-dropdown [nzDropdownMenu]="menu">
+              <nz-avatar [nzSize]="36" nzIcon="user" [nzSrc]="currentUser.avatarURL"></nz-avatar>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu nzSelectable>
+                <li nz-menu-item (click)="logout()">Logout</li>
+                <li nz-menu-item>2nd menu item</li>
+                <li nz-menu-item>3rd menu item</li>
+              </ul>
+            </nz-dropdown-menu>
+          </div>
+          <app-menu menuType="horizontal"></app-menu>
+        </nz-header>
+      </div>
+    </div>
+    <nz-content>
+      <div class="inner-content" [ngClass]="{'isCollapsed': isCollapsed, 'isNotCollapsed': !isCollapsed}">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <!-- <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer> -->
+  </nz-layout>
+</nz-layout>

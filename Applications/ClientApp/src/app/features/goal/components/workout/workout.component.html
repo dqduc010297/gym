@@ -1,0 +1,27 @@
+<nz-card nzTitle="Chương trình tập">
+  <nz-table #workOut nzBordered [nzData]="workOuts" nzShowPagination="true" nzPaginationPosition="top"
+    nzPageSize="2">
+    <thead>
+      <tr>
+        <th style="width: 100px;">Ngày</th>
+        <th>Bài tập</th>
+        <th style="width: 100px;">Số hiệp</th>
+        <th style="width: 100px;">Lần/ hiệp</th>
+        <th style="width: 150px;">Thời gian nghỉ(s)</th>
+        <th>Ghi chú</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of workOut.data">
+        <tr *ngFor="let exercise of data.exercises; let i =index">
+          <td [attr.rowspan]="data.exercises.length" *ngIf="i ==0">{{data.date | date: 'dd/MM/yyyy'}}</td>
+          <td>{{exercise.name}}</td>
+          <td>{{exercise.rep}}</td>
+          <td>{{exercise.set}}</td>
+          <td>{{exercise.restTime}}</td>
+          <td>{{exercise.remarks}}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </nz-table>
+</nz-card>

@@ -1,0 +1,22 @@
+<div style="margin-top: 8px;">
+  <nz-result nzStatus="success" nzTitle="Chúc mừng bạn đã hoàn thành mục tiêu!" nzSubTitle="
+      Giảm 1.5kg mỡ, Tăng 1kg cơ, Giảm 1.0 kg">
+    <div nz-result-content>
+      <nz-card>
+        <div class="row">
+          <div class="col-6">
+            <app-inbody-goal [inbodyGoal]="goal.inbodyGoal"></app-inbody-goal>
+          </div>
+          <div class="col-3">
+            <app-uploader uploadStyle="upload" (uploaded)="uploaded($event)" isShowAfterUpload="true"></app-uploader>
+          </div>
+          <div class="col-3">
+            <app-uploader uploadStyle="upload" (uploaded)="uploaded($event)" isShowAfterUpload="true"></app-uploader>
+          </div>
+        </div>
+      </nz-card>
+      <app-workout [workOuts]="goal.workOuts"></app-workout>
+      <app-nutrition [nutritions]="goal.nutritions"></app-nutrition>
+    </div>
+  </nz-result>
+</div>

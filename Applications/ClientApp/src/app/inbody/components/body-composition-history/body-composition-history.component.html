@@ -1,0 +1,31 @@
+<nz-card [nzBodyStyle]="{padding:'24px 10px'}" nzTitle="Body Composition History">
+  <nz-table nzTemplateMode [nzShowPagination]="false" nzTableLayout="fixed">
+    <tbody>
+      <tr>
+        <td width="80px"><strong>Weight</strong></td>
+        <td [attr.colspan]="testedDates.length">
+          <div style="height:60px;" echarts [options]="chartOptions" [merge]="weightUpdateChartOptions" class="echart">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="80px"><strong>SMM</strong></td>
+        <td [attr.colspan]="testedDates.length">
+          <div style="height:60px;" echarts [options]="chartOptions" [merge]="smmUpdateChartOptions" class="echart">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="80px"><strong>PBF</strong></td>
+        <td [attr.colspan]="testedDates.length">
+          <div style="height:60px;" echarts [options]="chartOptions" [merge]="pbfUpdateChartOptions" class="echart">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="80px"></td>
+        <td style="text-align: center;" *ngFor="let testedDate of testedDates"><small>{{testedDate}}</small></td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

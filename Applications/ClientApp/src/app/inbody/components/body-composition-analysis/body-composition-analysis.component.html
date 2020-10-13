@@ -1,0 +1,22 @@
+<nz-card [nzBodyStyle]="{padding:'24px 10px'}" nzTitle="Body Composition Analysis" style="margin-top: 20px;">
+  <nz-table nzTemplateMode [nzShowPagination]="false">
+    <tbody>
+      <tr app-tested-item name="Total Body Water" unit="L" [max]="bodyCompositionAnalysis.bodyWater.max"
+        [min]="bodyCompositionAnalysis.bodyWater.min" [value]="bodyCompositionAnalysis.bodyWater.value"
+        [evaluation]="bodyCompositionAnalysis.bodyWater.testedEvaluation">
+      </tr>
+      <tr app-tested-item name="Protein" unit="kg" [max]="bodyCompositionAnalysis.protein.max"
+        [min]="bodyCompositionAnalysis.protein.min" [value]="bodyCompositionAnalysis.protein.value"
+        [evaluation]="bodyCompositionAnalysis.protein.testedEvaluation">
+      </tr>
+      <tr app-tested-item name="Mineral" unit="kg" [max]="bodyCompositionAnalysis.mineral.max"
+        [min]="bodyCompositionAnalysis.mineral.min" [value]="bodyCompositionAnalysis.mineral.value"
+        [evaluation]="bodyCompositionAnalysis.mineral.testedEvaluation">
+      </tr>
+      <tr app-tested-item name="Body Fat Mass" unit="kg" [max]="bodyCompositionAnalysis.bodyFatMass.max"
+        [min]="bodyCompositionAnalysis.bodyFatMass.min" [value]="bodyCompositionAnalysis.bodyFatMass.value"
+        [evaluation]="bodyCompositionAnalysis.bodyFatMass.testedEvaluation">
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

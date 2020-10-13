@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col-lg-4">
+    <nz-spin
+      [nzSpinning]="loaderService.isShowLoader(userRequest.getLoadingKey()) || loaderService.isShowLoader(userRequest.getLoadingKey())"
+      [nzTip]="state">
+      <nz-card>
+        <div class="user-summarize">
+          <nz-avatar *ngIf="action == formAction.view" [nzSize]="92" nzIcon="user" [nzSrc]="user.avatarURL">
+          </nz-avatar>
+          <app-uploader *ngIf="action != formAction.view" style="height: 200px;" uploadStyle="upload" isAvatar="true"
+            (uploaded)="uploaded($event)" [uploadedPath]="user.avatarURL"></app-uploader>
+          <p *ngIf="action == formAction.view">{{user.fullname}}</p>
+          <input *ngIf="action != formAction.view" nz-input placeholder="Fullname" [(ngModel)]="user.fullname" />
+          <i nz-icon nzType="edit" nzTheme="outline" *ngIf="action == formAction.view" (click)="edit()"></i>
+        </div>
+        <div class="user-detail">
+          <nz-table nzTemplateMode [nzShowPagination]="false" style="margin: 20px 0;">
+            <tbody>
+              <tr>
+                <td class="user-detail-title">Phone number:</td>
+                <td *ngIf="action == formAction.view">{{user.phoneNumber}}</td>
+                <td>
+                  <input *ngIf="action != formAction.view" nz-input placeholder="Phone number"
+                    [(ngModel)]="user.phoneNumber" />
+                </td>
+              </tr>
+              <tr>
+                <td>Email:</td>
+                <td *ngIf="action == formAction.view">{{user.email}}</td>
+                <td>
+                  <input *ngIf="action != formAction.view" nz-input placeholder="Email" [(ngModel)]="user.email" />
+                </td>
+              </tr>
+              <tr>
+                <td>Date of birth:</td>
+                <td *ngIf="action == formAction.view">{{user.dateOfBirth | date:'dd/MM/yyyy'}}</td>
+                <td>
+                  <nz-date-picker *ngIf="action != formAction.view" [(ngModel)]="user.dateOfBirth"
+                    nzFormat="dd/MM/yyyy">
+                  </nz-date-picker>
+                </td>
+              </tr>
+              <tr>
+                <td>Date joined: </td>
+                <td *ngIf="action == formAction.view">{{user.dateJoined | date:'dd/MM/yyyy'}}</td>
+                <td>
+                  <nz-date-picker *ngIf="action != formAction.view" [(ngModel)]="user.dateJoined"
+                    nzFormat="dd/MM/yyyy">
+                  </nz-date-picker>
+                </td>
+              </tr>
+              <tr *ngIf="user.status == 1">
+                <td>Password: </td>
+                <td *ngIf="action == formAction.view">{{user.tempPassword}}</td>
+                <td>
+                  <input *ngIf="action != formAction.view" nz-input disabled [(ngModel)]="user.tempPassword" />
+                </td>
+              </tr>
+              <tr>
+                <td>Dropbox link: </td>
+                <td *ngIf="action == formAction.view">
+                  {{dropBoxTokenDisplay}}
+                </td>
+                <td>
+                  <textarea *ngIf="action != formAction.view" nz-input placeholder="Dropbox link"
+                    [(ngModel)]="user.dropboxToken" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+          <button nz-button nzType="primary" nzBlock (click)="create()"
+            *ngIf="action == formAction.create">Create</button>
+          <div class="row">
+            <div class="col-6">
+              <button nz-button nzBlock (click)="discard()" *ngIf="action == formAction.edit">Discard</button>
+            </div>
+            <div class="col-6">
+              <button nz-button nzType="primary" nzBlock (click)="save()"
+                *ngIf="action == formAction.edit">Save</button>
+            </div>
+          </div>
+        </div>
+      </nz-card>
+    </nz-spin>
+  </div>
+  <div class="col-lg-8">
+    <nz-card style="min-height: 80vh;">
+      <nz-tabset>
+        <nz-tab nzTitle="Các gói tập">
+          <app-waiting></app-waiting>
+        </nz-tab>
+        <nz-tab nzTitle="Các gói tập PT">
+          <app-waiting></app-waiting>
+        </nz-tab>
+      </nz-tabset>
+    </nz-card>
+  </div>
+</div>

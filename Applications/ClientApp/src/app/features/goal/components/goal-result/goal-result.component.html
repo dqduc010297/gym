@@ -1,0 +1,16 @@
+<!-- <div class="container"> -->
+  <div [ngSwitch]="status">
+    <div *ngSwitchCase="goalStatus.Success">output</div>
+    <div *ngSwitchCase="goalStatus.Fail">output</div>
+    <div *ngSwitchCase="goalStatus.InProgress">output</div>
+    <div *ngSwitchDefault>output2</div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button nz-button>Hình ảnh</button>
+    <button nz-button>Bài tập</button>
+    <button nz-button>Dinh dưỡng</button>
+    <button nz-button>Quay lại</button>
+  </div>
+
+
+<!-- </div> -->
