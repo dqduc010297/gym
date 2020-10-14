@@ -6,9 +6,10 @@ import { RoleGuard } from './core/guards/role.guard';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/meal-plan' },
+  { path: '', pathMatch: 'full', redirectTo: '/home' },
   {
     path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
+      { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
       { path: 'timesheet', loadChildren: () => import('./features/timesheet/timesheet.module').then(m => m.TimesheetModule) },
       { path: 'goal', loadChildren: () => import('./features/goal/goal.module').then(m => m.GoalModule) },
       { path: 'inbody', loadChildren: () => import('./inbody/inbody.module').then(m => m.InbodyModule) },

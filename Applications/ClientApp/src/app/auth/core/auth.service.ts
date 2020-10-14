@@ -35,7 +35,7 @@ export class AuthService {
         if (result.isNeedToChangePassword) {
           this.router.navigate(['auth/change-password']);
         } else {
-          this.router.navigate(['']);
+          this.router.navigate(['home']);
         }
       },
       error => {
