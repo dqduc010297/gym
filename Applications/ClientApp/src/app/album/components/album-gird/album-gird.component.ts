@@ -4,6 +4,7 @@ import { MediaFile } from 'src/app/album/core/models/media-file.model';
 import { AlbumAPIService } from 'src/app/album/core/album.api.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { UploadedFile } from 'src/app/shared/components/uploader/uploaded-file.model';
+import { AlbumService } from '../../core/album.service';
 
 @Component({
   selector: 'app-album-gird',
@@ -63,6 +64,7 @@ export class AlbumGirdComponent implements OnInit {
       id: event.id,
       url: event.uploadedPath,
       sharedWith: [],
+      isTemp: false,
       isImage: event.contentType.includes('image'),
     }].concat(this.mediaFiles);
   }

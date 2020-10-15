@@ -12,20 +12,12 @@ import { Role } from 'src/app/core/const/role';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  public currentUserSubject: BehaviorSubject<LoginUser>;
-  public currentUser: Observable<LoginUser>;
 
   constructor(
     private authAPIService: AuthAPIService,
     private router: Router,
     private modalService: NzModalService,
   ) {
-    this.currentUserSubject = new BehaviorSubject<LoginUser>(JSON.parse(localStorage.getItem(environment.tokenKey)));
-    this.currentUser = this.currentUserSubject.asObservable();
-  }
-
-  public get currentUserValue(): LoginUser {
-    return this.currentUserSubject.value;
   }
 
   login(loginRequest: LoginRequest) {
@@ -51,16 +43,14 @@ export class AuthService {
     if (localStorage.getItem(environment.tokenKey)) {
       localStorage.removeItem(environment.tokenKey);
     }
-    this.currentUserSubject.next(null);
     this.router.navigate(['auth/login']);
   }
 
   private storageUser(user: LoginUser) {
     localStorage.setItem(environment.tokenKey, JSON.stringify(user));
-    this.currentUserSubject.next(user);
   }
 
-  private getUserFromLocalStorage(): LoginUser {
+  public getUserFromLocalStorage(): LoginUser {
     return JSON.parse(localStorage.getItem(environment.tokenKey));
   }
 

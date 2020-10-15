@@ -4,5 +4,6 @@ export class MediaFile {
     id: number;
     url: string;
     isImage: boolean;
+    isTemp: boolean;
     sharedWith: SharedUser[] = [];
 }

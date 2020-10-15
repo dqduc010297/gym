@@ -1,8 +1,9 @@
 <section class="gird">
-  <div>
+  <div class="hover">
     <app-uploader uploadStyle="storage" (uploaded)="uploaded($event)"></app-uploader>
   </div>
-  <div *ngFor="let mediaFile of mediaFiles" (click)="createTplModal(mediaFile, tplContent, tplFooter)">
+  <div *ngFor="let mediaFile of mediaFiles"
+    (click)="!mediaFile.isTemp ? createTplModal(mediaFile, tplContent, tplFooter) : null" [ngClass]="{'hover': !mediaFile.isTemp}">
     <img *ngIf="mediaFile.isImage" src="{{mediaFile.url}}" />
     <video *ngIf="!mediaFile.isImage">
       <source src="{{mediaFile.url}}" type="video/mp4">

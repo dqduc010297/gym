@@ -20,11 +20,11 @@ export class LayoutComponent implements OnInit {
     public authService: AuthService,
     public loaderService: LoaderService,
   ) {
-    this.authService.currentUser.subscribe(user => this.currentUser = user);
   }
 
   ngOnInit(): void {
     this.currentRole = this.authService.getUserRole();
+    this.currentUser = this.authService.getUserFromLocalStorage();
   }
 
   logout() {

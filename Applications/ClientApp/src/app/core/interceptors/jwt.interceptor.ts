@@ -8,7 +8,7 @@ import { AuthService } from '../../auth/core/auth.service';
 export class JwtInterceptor implements HttpInterceptor {
     constructor(private authService: AuthService) { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const currentUser = this.authService.currentUserValue;
+        const currentUser = this.authService.getUserFromLocalStorage();
         const isLoggedIn = currentUser && currentUser.token;
         if (isLoggedIn) {
             req = req.clone({ setHeaders: { Authorization: `Bearer ${currentUser.token}` } });

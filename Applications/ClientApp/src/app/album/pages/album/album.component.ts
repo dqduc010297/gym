@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Album } from 'src/app/album/core/models/album.model';
 import { AlbumAPIService } from 'src/app/album/core/album.api.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { AlbumService } from '../../core/album.service';
 
 @Component({
   selector: 'app-album',
@@ -14,13 +15,14 @@ export class AlbumComponent implements OnInit{
 
   constructor(
     public loaderService: LoaderService,
-    private albumAPIService: AlbumAPIService
+    private albumAPIService: AlbumAPIService,
+    private albumService: AlbumService,
   ) { }
 
   ngOnInit(): void {
     this.albumAPIService.getImages().subscribe(
       result => {
-        this.album = result;
+        this.album = this.albumService.addTempImage(result);
       }
     );
   }
