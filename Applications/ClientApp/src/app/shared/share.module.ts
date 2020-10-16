@@ -6,6 +6,7 @@ import { WaitingComponent } from './components/waiting/waiting.component';
 import { UserSelectComponent } from './components/user-select/user-select.component';
 import { UserMentionComponent } from './components/user-mention/user-mention.component';
 import { NgZorroAntModule } from './ng-zorro-antd.module';
+import { NguiInViewComponent } from './components/ngui-in-view/ngui-in-view.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { NgZorroAntModule } from './ng-zorro-antd.module';
     WaitingComponent,
     UserSelectComponent,
     UserMentionComponent,
+    NguiInViewComponent,
   ],
   providers: [
     DatePipe
@@ -31,6 +33,7 @@ import { NgZorroAntModule } from './ng-zorro-antd.module';
     WaitingComponent,
     UserSelectComponent,
     UserMentionComponent,
+    NguiInViewComponent,
   ],
   entryComponents: [
   ]

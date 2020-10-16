@@ -1,8 +1,0 @@
-<nz-mention [nzSuggestions]="suggestions" [nzLoading]="loaderService.isShowLoader(userMentionRequest.getLoadingKey())"
-  (nzOnSearchChange)="onSearchChange($event)" [nzValueWith]="valueWith" (nzOnSelect)="onSelectedMention($event)">
-  <input nzMentionTrigger nz-input [(ngModel)]="inputValue" (ngModelChange)="inputValueChange.emit(inputValue);" />
-  <ng-container *nzMentionSuggestion="let userMention">
-    <nz-avatar nzSize="small" [nzText]="userMention.fullname" [nzSrc]="userMention.avatarURL"></nz-avatar>
-    <span>{{ userMention.fullname }}</span>
-  </ng-container>
-</nz-mention>

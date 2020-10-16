@@ -4,7 +4,8 @@ import { AlbumComponent } from './pages/album/album.component';
 
 
 const routes: Routes = [
-  { path: '', component: AlbumComponent }
+  { path: '', component: AlbumComponent },
+  { path: 'detail', component: AlbumComponent }
 ];
 
 @NgModule({

@@ -1,7 +1,0 @@
-export enum Role {
-  PERSONAL_TRAINER,
-  MEMBER,
-  MASTER,
-  MANAGER,
-  SYS_ADMIN = 'SYS_ADMIN',
-}
