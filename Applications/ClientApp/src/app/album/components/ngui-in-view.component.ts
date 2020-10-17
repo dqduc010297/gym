@@ -1,20 +1,40 @@
+import {
+  Component,
+  ContentChild,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  PLATFORM_ID,
+  Renderer2,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
+
 import { isPlatformBrowser } from '@angular/common';
-import { Component, ContentChild, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, PLATFORM_ID, Renderer2, TemplateRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-ngui-in-view',
-  templateUrl: './ngui-in-view.component.html',
-  styleUrls: ['./ngui-in-view.component.scss']
+  template: `
+    <ng-container *ngIf="inView" [ngTemplateOutlet]="template">
+    </ng-container>
+  `,
+  styles: []
 })
 export class NguiInViewComponent implements OnInit, OnDestroy {
-
   observer: IntersectionObserver;
-  inView: boolean = false;
-  once50PctVisible: boolean = false;
+  inView = false;
+  once50PctVisible = false;
 
   @ContentChild(TemplateRef) template: TemplateRef<any>;
   @Input() options: any = { threshold: [.1, .2, .3, .4, .5, .6, .7, .8] };
+  // tslint:disable-next-line: no-output-rename
   @Output('inView') inView$: EventEmitter<any> = new EventEmitter();
+  // tslint:disable-next-line: no-output-rename
   @Output('notInView') notInView$: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -34,7 +54,6 @@ export class NguiInViewComponent implements OnInit, OnDestroy {
   }
 
   handleIntersect(entries, observer): void {
-    console.log(entries.length)
     entries.forEach((entry: IntersectionObserverEntry) => {
       if (entry.isIntersecting) {
         this.inView = true;
@@ -47,16 +66,16 @@ export class NguiInViewComponent implements OnInit, OnDestroy {
   }
 
   defaultInViewHandler(entry) {
-    console.log('defaultInViewHandler', entry.intersectionRatio);
-    if (this.once50PctVisible)
+    if (this.once50PctVisible) {
       return false;
-    if (this.inView$.observers.length)
+    }
+    if (this.inView$.observers.length) {
       return false;
-
+    }
     if (entry.intersectionRatio < 0.8) {
-      let opacity = entry.intersectionRatio * (1 / 0.8);
-      let blur = 20 - Math.floor(entry.intersectionRatio * 10) * 4;
-      let filter = `blur(${blur}px)`;
+      const opacity = entry.intersectionRatio * (1 / 0.8);
+      const blur = 20 - Math.floor(entry.intersectionRatio * 10) * 4;
+      const filter = `blur(${blur}px)`;
       Object.assign(entry.target.style, { opacity, filter });
     } else {
       entry.target.style.opacity = 1;
@@ -65,5 +84,4 @@ export class NguiInViewComponent implements OnInit, OnDestroy {
       this.once50PctVisible = true;
     }
   }
-
 }

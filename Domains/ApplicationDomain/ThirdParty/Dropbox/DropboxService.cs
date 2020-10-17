@@ -44,7 +44,7 @@ namespace ApplicationDomain.ThirdParty.Dropbox
                 var upload = await dbx.Files.UploadAsync(imagePath, WriteMode.Overwrite.Instance, false, null, false, null, true, fileStream);
                 var shared = await dbx.Sharing.CreateSharedLinkWithSettingsAsync(upload.PathDisplay);
                 string s = shared.Url;
-                s = s.Replace("?dl=0", "?dl=1");
+                s = s.Replace("?dl=0", "");
                 return s;
             }
         }

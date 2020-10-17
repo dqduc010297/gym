@@ -32,6 +32,10 @@ namespace ApplicationDomain.Gym.Model
                  .ForMember(
                     d => d.IsImage,
                     opt => opt.MapFrom(s => FileExtension.FileExtensionContainImage(s.ContentType))
+                    )
+                 .ForMember(
+                    d => d.Url,
+                    opt => opt.MapFrom(s => $"{s.Url}?raw=1")
                     );
             CreateMap<MediaFile, AppFile>()
                 .ForMember(

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, TemplateRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { MediaFile } from 'src/app/album/core/models/media-file.model';
 import { AlbumAPIService } from 'src/app/album/core/album.api.service';
@@ -22,14 +22,22 @@ export class AlbumGirdComponent implements OnInit {
   tplModal?: NzModalRef;
   tplModalButtonLoading = false;
 
+
+  numArr = Array.from(Array(100), (_, x) => x);
+
+  get numImages(): number {
+    return this.element.nativeElement.querySelectorAll('img').length;
+  }
+
+
   constructor(
     private modal: NzModalService,
     public loaderService: LoaderService,
     private albumAPIService: AlbumAPIService,
+    public element: ElementRef
   ) { }
 
   ngOnInit(): void {
-
   }
 
   createTplModal(mediaFile: MediaFile, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {

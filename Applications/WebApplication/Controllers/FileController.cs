@@ -40,7 +40,7 @@ namespace WebApplication.Controllers
             //};
             //string path = source[new Random().Next(0, source.Length - 1)];
             int appFileId = await this._appFileService.Storage(path, file.ContentType);
-            return Ok(new UploadedFile() { IsUploaded = true, Id = appFileId, UploadedPath = path, ContentType = file.ContentType });
+            return Ok(new UploadedFile() { IsUploaded = true, Id = appFileId, UploadedPath = $"{path}?raw=1", ContentType = file.ContentType });
         }
 
         [HttpPost, DisableRequestSizeLimit]
