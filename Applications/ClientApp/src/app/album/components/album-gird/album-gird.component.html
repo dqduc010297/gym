@@ -1,18 +1,20 @@
-<!-- <section class="gird">
-  <div class="hover">
+<section class="gird">
+  <div class="hover" *ngIf="haveUploadButton">
     <app-uploader uploadStyle="storage" (uploaded)="uploaded($event)"></app-uploader>
   </div>
   <div *ngFor="let mediaFile of mediaFiles"
-    (click)="!mediaFile.isTemp ? createTplModal(mediaFile, tplContent, tplFooter) : null" [ngClass]="{'hover': !mediaFile.isTemp}">
-    <img *ngIf="mediaFile.isImage" src="{{mediaFile.url}}" />
-    <video *ngIf="!mediaFile.isImage">
+    (click)="!mediaFile.isTemp ? createTplModal(mediaFile, tplContent, tplFooter) : null"
+    [ngClass]="{'hover': !mediaFile.isTemp}">
+    <img *ngIf="mediaFile.isTemp" style="display: none;" />
+    <img *ngIf="mediaFile.isImage && !mediaFile.isTemp" src="{{mediaFile.url}}" />
+    <video *ngIf="!mediaFile.isImage && !mediaFile.isTemp">
       <source src="{{mediaFile.url}}" type="video/mp4">
     </video>
   </div>
 </section>
-
-<ng-template #tplContent let-params let-ref="modalRef">
-  <img *ngIf="selectedMediaFile.isImage" src="{{selectedMediaFile.url}}" [ngStyle]="{ width: '100%' }" />
+<ng-template #tplContent let-params let-ref="modalRef" >
+  <img *ngIf="selectedMediaFile.isImage" src="{{selectedMediaFile.url}}" style="width: 60%;
+  height: auto;" />
   <video *ngIf="!selectedMediaFile.isImage" [ngStyle]="{ width: '100%' }" autoplay controls>
     <source src="{{selectedMediaFile.url}}" type="video/mp4">
   </video>
@@ -27,20 +29,4 @@
       Share
     </button>
   </div>
-</ng-template> -->
-<section class="gird">
-  <div class="hover">
-    <app-uploader uploadStyle="storage" (uploaded)="uploaded($event)"></app-uploader>
-  </div>
-  <div *ngFor="let mediaFile of mediaFiles"
-    (click)="!mediaFile.isTemp ? createTplModal(mediaFile, tplContent, tplFooter) : null"
-    [ngClass]="{'hover': !mediaFile.isTemp}">
-    <img *ngIf="mediaFile.isTemp" src="" />
-    <app-ngui-in-view *ngIf="!mediaFile.isTemp">
-      <img *ngIf="mediaFile.isImage" src="{{mediaFile.url}}" />
-      <!-- <video *ngIf="!mediaFile.isImage">
-        <source src="{{mediaFile.url}}" type="video/mp4">
-      </video> -->
-    </app-ngui-in-view>
-  </div>
-</section>
+</ng-template>

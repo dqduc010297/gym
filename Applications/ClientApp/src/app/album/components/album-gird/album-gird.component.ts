@@ -14,6 +14,7 @@ import { AlbumService } from '../../core/album.service';
 
 export class AlbumGirdComponent implements OnInit {
   @Input() mediaFiles: MediaFile[] = [];
+  @Input() haveUploadButton = true;
 
   inputValue?: string;
   selectedMediaFile: MediaFile = new MediaFile();
@@ -50,7 +51,8 @@ export class AlbumGirdComponent implements OnInit {
       nzKeyboard: false,
       nzComponentParams: {
         value: 'Template Context'
-      }
+      },
+      nzWidth: '100%',
     });
   }
 
