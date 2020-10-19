@@ -1,0 +1,6 @@
+<div class="media-boundary">
+  <img *ngIf="isImage" src="{{mediaUrl}}" />
+  <video *ngIf="!isImage">
+    <source src="https://www.dropbox.com/s/83a3m1euizlrifv/1810202020500.mp4?raw=1" type="video/mp4">
+  </video>
+</div>

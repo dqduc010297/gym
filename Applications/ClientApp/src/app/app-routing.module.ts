@@ -4,6 +4,7 @@ import { Role } from './core/const/role';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 import { LayoutComponent } from './shared/components/layout/layout.component';
+import { MediaViewComponent } from './shared/components/media-view/media-view.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -27,6 +28,7 @@ const routes: Routes = [
     ]
   },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+  { path: 'media-view/:url', component: MediaViewComponent, }
 ];
 
 @NgModule({

@@ -5,6 +5,8 @@ import { AlbumAPIService } from 'src/app/album/core/album.api.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { UploadedFile } from 'src/app/shared/components/uploader/uploaded-file.model';
 import { AlbumService } from '../../core/album.service';
+import { Router } from '@angular/router';
+import { decode } from 'querystring';
 
 @Component({
   selector: 'app-album-gird',
@@ -35,7 +37,8 @@ export class AlbumGirdComponent implements OnInit {
     private modal: NzModalService,
     public loaderService: LoaderService,
     private albumAPIService: AlbumAPIService,
-    public element: ElementRef
+    public element: ElementRef,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -52,7 +55,7 @@ export class AlbumGirdComponent implements OnInit {
       nzComponentParams: {
         value: 'Template Context'
       },
-      nzWidth: '100%',
+      nzBodyStyle: { height: '100%' },
     });
   }
 
@@ -77,5 +80,13 @@ export class AlbumGirdComponent implements OnInit {
       isTemp: false,
       isImage: event.contentType.includes('image'),
     }].concat(this.mediaFiles);
+  }
+
+  viewMedia(media: MediaFile) {
+    // remove hosting image
+    let param = media.url.replace('https://www.dropbox.com/s/', '');
+    // encode url
+    param = encodeURIComponent(param);
+    window.open(`${window.location.origin}/#/media-view/${param}?isImage=${media.isImage}`, '_blank');
   }
 }

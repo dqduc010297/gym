@@ -3,7 +3,7 @@
     <app-uploader uploadStyle="storage" (uploaded)="uploaded($event)"></app-uploader>
   </div>
   <div *ngFor="let mediaFile of mediaFiles"
-    (click)="!mediaFile.isTemp ? createTplModal(mediaFile, tplContent, tplFooter) : null"
+    (click)="!mediaFile.isTemp ? viewMedia(mediaFile) : null"
     [ngClass]="{'hover': !mediaFile.isTemp}">
     <img *ngIf="mediaFile.isTemp" style="display: none;" />
     <img *ngIf="mediaFile.isImage && !mediaFile.isTemp" src="{{mediaFile.url}}" />
@@ -12,9 +12,9 @@
     </video>
   </div>
 </section>
-<ng-template #tplContent let-params let-ref="modalRef" >
-  <img *ngIf="selectedMediaFile.isImage" src="{{selectedMediaFile.url}}" style="width: 60%;
-  height: auto;" />
+
+<ng-template #tplContent let-params let-ref="modalRef">
+  <img *ngIf="selectedMediaFile.isImage" src="{{selectedMediaFile.url}}" />
   <video *ngIf="!selectedMediaFile.isImage" [ngStyle]="{ width: '100%' }" autoplay controls>
     <source src="{{selectedMediaFile.url}}" type="video/mp4">
   </video>
