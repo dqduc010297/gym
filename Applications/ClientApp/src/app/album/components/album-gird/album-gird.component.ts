@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { MediaFile } from 'src/app/album/core/models/media-file.model';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { UploadedFile } from 'src/app/shared/components/uploader/uploaded-file.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-album-gird',
@@ -15,7 +16,7 @@ export class AlbumGirdComponent implements OnInit {
 
   constructor(
     public loaderService: LoaderService,
-    public element: ElementRef  ) { }
+    public element: ElementRef) { }
 
   ngOnInit(): void {
   }
@@ -30,7 +31,11 @@ export class AlbumGirdComponent implements OnInit {
     }].concat(this.mediaFiles);
   }
 
-  viewMedia(mediaId: number) {
-    window.open(`${window.location.origin}/#/media-view?id=${mediaId}`, '_blank');
+  viewMedia(media: MediaFile) {
+    const fileParam = encodeURIComponent(media.url.replace(environment.dropboxHost, ""));
+    window.open(
+      `${window.location.origin}/#/media-view/${fileParam}?id=${media.id}&isImage=${media.isImage}`,
+      '_blank'
+    );
   }
 }

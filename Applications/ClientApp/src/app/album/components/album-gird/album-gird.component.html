@@ -3,7 +3,7 @@
     <app-uploader uploadStyle="storage" (uploaded)="uploaded($event)"></app-uploader>
   </div>
   <div *ngFor="let mediaFile of mediaFiles"
-    (click)="!mediaFile.isTemp ? viewMedia(mediaFile.id) : null"
+    (click)="!mediaFile.isTemp ? viewMedia(mediaFile) : null"
     [ngClass]="{'hover': !mediaFile.isTemp}">
     <img *ngIf="mediaFile.isTemp" style="display: none;" />
     <img *ngIf="mediaFile.isImage && !mediaFile.isTemp" src="{{mediaFile.url}}" />

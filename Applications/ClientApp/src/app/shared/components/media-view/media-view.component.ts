@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { MediaFile } from 'src/app/album/core/models/media-file.model';
 import { AppFileAPIService } from 'src/app/core/services/api/app-file.api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-media-view',
@@ -10,6 +11,10 @@ import { AppFileAPIService } from 'src/app/core/services/api/app-file.api.servic
   styleUrls: ['./media-view.component.scss']
 })
 export class MediaViewComponent implements OnInit {
+  url: string;
+  isImage = true;
+  id: number;
+
   mediaFile: MediaFile = new MediaFile();
   inputValue?: string;
 
@@ -23,18 +28,29 @@ export class MediaViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(
+      param => {
+        this.url = decodeURIComponent(`${environment.dropboxHost}${param.url}`);
+      }
+    );
     this.activatedRoute.queryParams.subscribe(
       query => {
-        this.appFileAPIService.getAppFileById(query.id).subscribe(
-          result => {
-            this.mediaFile = result;
-          }
-        );
+        this.isImage = query.isImage;
+        this.id = query.id;
       }
     );
   }
 
-  createTplModal(mediaFile: MediaFile, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
+  loadData(id: number) {
+    this.appFileAPIService.getAppFileById(id).subscribe(
+      result => {
+        this.mediaFile = result;
+      }
+    );
+  }
+
+  createTplModal(tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
+    this.loadData(this.id);
     this.tplModal = this.modal.create({
       nzContent: tplContent,
       nzFooter: tplFooter,

@@ -1,12 +1,12 @@
+{{isImage}}
 <div class="media-boundary">
-  <img *ngIf="mediaFile.isImage" src="{{mediaFile.url}}" />
-  <!-- <video *ngIf="!isImage">
-    <source src="https://www.dropbox.com/s/83a3m1euizlrifv/1810202020500.mp4?raw=1" type="video/mp4">
-  </video> -->
-
+  <img *ngIf="isImage" [src]="url" />
+  <video *ngIf="isImage" controls>
+    <source [src]="url" type="video/mp4">
+  </video>
   <div class="action">
     <i nz-icon nzType="share-alt" nzTheme="outline" style="font-size: 32px; color: #ffffff;"
-      (click)="createTplModal(mediaFile, tplContent, tplFooter)"></i>
+      (click)="createTplModal(tplContent, tplFooter)"></i>
   </div>
 </div>
 
