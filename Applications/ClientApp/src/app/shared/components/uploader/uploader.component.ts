@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./uploader.component.scss']
 })
 export class UploaderComponent implements OnInit, OnChanges {
-  @Input() uploadStyle: string;
+  @Input() uploadStyle = environment.uploadURL.upload;
   uploadAPI: string = environment.uploadURL.upload;
 
   @Input() uploadedPath: string;
@@ -22,7 +22,7 @@ export class UploaderComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.uploadStyle.currentValue) {
+    if (changes.uploadStyle?.currentValue) {
       this.uploadAPI = this.uploadStyle === 'storage' ? environment.uploadURL.storage : environment.uploadURL.upload;
     }
   }

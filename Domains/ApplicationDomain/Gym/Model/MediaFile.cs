@@ -15,7 +15,7 @@ namespace ApplicationDomain.Gym.Model
     {
         public int Id { set; get; }
         public string Url { set; get; }
-        public bool IsImage { set; get; }
+        public bool IsVideo { set; get; }
         public IEnumerable<SharedUser> SharedWith { set; get; }
     }
 
@@ -30,8 +30,8 @@ namespace ApplicationDomain.Gym.Model
                         s => JsonConvert.DeserializeObject<List<SharedUser>>(s.SharedWith ?? "[]"))
                     )
                  .ForMember(
-                    d => d.IsImage,
-                    opt => opt.MapFrom(s => FileExtension.FileExtensionContainImage(s.ContentType))
+                    d => d.IsVideo,
+                    opt => opt.MapFrom(s => FileExtension.FileExtensonContainVideo(s.ContentType))
                     )
                  .ForMember(
                     d => d.Url,

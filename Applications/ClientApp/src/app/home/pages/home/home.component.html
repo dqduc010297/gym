@@ -1,4 +1,2 @@
-<div>
-    <img src="./assets/images/logo.png" />
-</div>
-<button nz-button (click)="logout()">Logout</button>
+<app-user-form [userId]="myId"></app-user-form>
+<button nz-button nzType="primary" nzBlock (click)="logout()" style="margin-top: 20px;">Logout</button>

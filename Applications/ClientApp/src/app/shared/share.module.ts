@@ -7,6 +7,7 @@ import { UserSelectComponent } from './components/user-select/user-select.compon
 import { UserMentionComponent } from './components/user-mention/user-mention.component';
 import { NgZorroAntModule } from './ng-zorro-antd.module';
 import { MediaViewComponent } from './components/media-view/media-view.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 
 @NgModule({
@@ -16,6 +17,8 @@ import { MediaViewComponent } from './components/media-view/media-view.component
     NgZorroAntModule,
   ],
   declarations: [
+    SafePipe,
+
     UploaderComponent,
     WaitingComponent,
     UserSelectComponent,

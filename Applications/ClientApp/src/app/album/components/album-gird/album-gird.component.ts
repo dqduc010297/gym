@@ -26,7 +26,7 @@ export class AlbumGirdComponent implements OnInit {
       url: event.uploadedPath,
       sharedWith: [],
       isTemp: false,
-      isImage: event.contentType.includes('image'),
+      isVideo: event.contentType.includes('video'),
     }].concat(this.mediaFiles);
   }
 

@@ -19,18 +19,6 @@
               <h1></h1>
             </a>
           </div>
-          <div class="sidebar-logo d-none d-md-block" style="float: right; margin-right: 8px;">
-            <a nz-dropdown [nzDropdownMenu]="menu">
-              <nz-avatar [nzSize]="36" nzIcon="user" [nzSrc]="currentUser.avatarURL"></nz-avatar>
-            </a>
-            <nz-dropdown-menu #menu="nzDropdownMenu">
-              <ul nz-menu nzSelectable>
-                <li nz-menu-item (click)="logout()">Logout</li>
-                <li nz-menu-item>2nd menu item</li>
-                <li nz-menu-item>3rd menu item</li>
-              </ul>
-            </nz-dropdown-menu>
-          </div>
           <app-menu menuType="horizontal"></app-menu>
         </nz-header>
       </div>
