@@ -23,12 +23,5 @@ namespace WebApplication.Controllers
         {
             return Ok(await this._appFileService.GetAlbum(this.GetCurrentUserId()));
         }
-        [Route("share")]
-        [HttpPut]
-        public async Task<IActionResult> ShareMediaFile([FromBody] MediaFile mediaFile)
-        {
-            await this._appFileService.ShareMediaFile(mediaFile);
-            return Ok();
-        }
     }
 }

@@ -14,18 +14,6 @@ namespace Infrastructure.Repositories.Gym
         {
         }
 
-        public IQueryable GetMyMediaFile(int userId)
-        {
-            return this.dbSet.Where(p => p.CreatedByUserId == userId).OrderByDescending(p => p.Id);
-        }
-
-        public IQueryable GetSharedMediaFile(int userId)
-        {
-            return this.dbSet
-            .Where(p => p.SharedWith != null && this.CheckUserInJson(p.SharedWith, userId))
-            .OrderByDescending(p => p.Id);
-        }
-
         private bool CheckUserInJson(string json, int userId)
         {
             var sharedUsers = JsonConvert.DeserializeObject<List<SharedUser>>(json);
@@ -37,6 +25,17 @@ namespace Infrastructure.Repositories.Gym
                 }
             }
             return false;
+        }
+        public IQueryable GetMyMediaFile(int userId)
+        {
+            return this.dbSet.Where(p => p.CreatedByUserId == userId).OrderByDescending(p => p.Id);
+        }
+
+        public IQueryable GetSharedMediaFile(int userId)
+        {
+            return this.dbSet
+            .Where(p => p.SharedWith != null && this.CheckUserInJson(p.SharedWith, userId))
+            .OrderByDescending(p => p.Id);
         }
     }
 }

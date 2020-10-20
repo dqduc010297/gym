@@ -42,7 +42,11 @@ namespace ApplicationDomain.Gym.Model
                     d => d.SharedWith,
                     opt => opt.MapFrom(
                         s => JsonConvert.SerializeObject(s.SharedWith ?? new List<SharedUser>()))
-                    );
+                    )
+                .ForMember(
+                    d => d.Url,
+                    opt => opt.MapFrom(s => s.Url.Replace("?raw=1", ""))
+                );
         }
     }
 }

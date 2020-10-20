@@ -51,5 +51,10 @@ namespace ApplicationDomain.Gym.Services
             await this._uow.SaveChangesAsync();
         }
 
+        public async Task<MediaFile> GetAppFileById(int id)
+        {
+            return await this._appFileRepository.GetEntityById(id).MapQueryTo<MediaFile>(this._mapper).FirstOrDefaultAsync();
+        }
+
     }
 }

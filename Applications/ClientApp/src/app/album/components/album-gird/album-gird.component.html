@@ -3,7 +3,7 @@
     <app-uploader uploadStyle="storage" (uploaded)="uploaded($event)"></app-uploader>
   </div>
   <div *ngFor="let mediaFile of mediaFiles"
-    (click)="!mediaFile.isTemp ? viewMedia(mediaFile) : null"
+    (click)="!mediaFile.isTemp ? viewMedia(mediaFile.id) : null"
     [ngClass]="{'hover': !mediaFile.isTemp}">
     <img *ngIf="mediaFile.isTemp" style="display: none;" />
     <img *ngIf="mediaFile.isImage && !mediaFile.isTemp" src="{{mediaFile.url}}" />
@@ -12,21 +12,3 @@
     </video>
   </div>
 </section>
-
-<ng-template #tplContent let-params let-ref="modalRef">
-  <img *ngIf="selectedMediaFile.isImage" src="{{selectedMediaFile.url}}" />
-  <video *ngIf="!selectedMediaFile.isImage" [ngStyle]="{ width: '100%' }" autoplay controls>
-    <source src="{{selectedMediaFile.url}}" type="video/mp4">
-  </video>
-</ng-template>
-<ng-template #tplFooter>
-  <app-user-mention [(inputValue)]="inputValue" [(mentioned)]="selectedMediaFile.sharedWith"></app-user-mention>
-  <div class="">
-    <button style="margin-top: 10px;" nz-button (click)="cancel()">
-      Cancel
-    </button>
-    <button style="margin-top: 10px;" nz-button nzType="primary" (click)="share()" [nzLoading]="tplModalButtonLoading">
-      Share
-    </button>
-  </div>
-</ng-template>

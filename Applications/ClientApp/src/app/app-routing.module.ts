@@ -28,7 +28,7 @@ const routes: Routes = [
     ]
   },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-  { path: 'media-view/:url', component: MediaViewComponent, }
+  { path: 'media-view', component: MediaViewComponent, }
 ];
 
 @NgModule({

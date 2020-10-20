@@ -74,6 +74,11 @@ namespace AspNetCore.UnitOfWork.EntityFramework
             await dbSet.AddRangeAsync(entities);
         }
 
+        public IQueryable GetEntityById(TKey id)
+        {
+            return dbSet.Where(p => p.Id.Equals(id));
+        }
+
         public void DeleteRange(List<TEntity> entitiesToDelete)
         {
             if (entitiesToDelete.Count > 0)

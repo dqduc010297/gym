@@ -17,6 +17,8 @@ export class UserMentionComponent implements OnInit, OnChanges {
   @Input() mentioned: SharedUser[] = [];
   @Output() mentionedChange: EventEmitter<SharedUser[]> = new EventEmitter<SharedUser[]>();
 
+  @Input() isMultiRow = false;
+
   suggestions: any[] = [];
   userMentionRequest: UserMentionRequest = new UserMentionRequest();
 
@@ -55,9 +57,29 @@ export class UserMentionComponent implements OnInit, OnChanges {
     );
   }
 
-  onSelectedMention(event) {
-    this.mentioned.push({ id: event.id, fullname: event.fullname });
-    this.mentionedChange.emit(this.mentioned);
+  onSelectedMention(event: SharedUser) {
+    if (!this.mentioned.map(p => p.id).includes(event.id)) {
+      this.mentioned.push({ id: event.id, fullname: event.fullname });
+      this.mentionedChange.emit(this.mentioned);
+    }
+  }
+
+  onChange(event: string) {
+    this.mentioned.forEach(
+      (e, index) => {
+        if (!this.inputValue.includes(e.fullname)) {
+          this.mentioned.splice(index, 1);
+          this.buildMentionName();
+        }
+      }
+    );
+  }
+
+  private buildMentionName() {
+    this.inputValue = '';
+    this.mentioned.forEach(e => {
+      this.inputValue += '@' + e.fullname + ' ';
+    });
   }
 }
 

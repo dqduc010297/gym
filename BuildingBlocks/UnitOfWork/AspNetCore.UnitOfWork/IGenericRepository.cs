@@ -14,6 +14,7 @@ namespace AspNetCore.UnitOfWork
         Task<TEntity> GetEntity();
         Task<TEntity> GetEntityByIdAsync(TKey id);
         Task<IEnumerable<TEntity>> GetEntitiesAsync();
+        IQueryable GetEntityById(TKey id);
         void Update(TEntity entity);
         Task DeleteAsync(TKey id);
         void Delete(TEntity entityToDelete);

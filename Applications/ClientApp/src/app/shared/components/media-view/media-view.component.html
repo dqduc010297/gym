@@ -1,6 +1,27 @@
 <div class="media-boundary">
-  <img *ngIf="isImage" src="{{mediaUrl}}" />
-  <video *ngIf="!isImage">
+  <img *ngIf="mediaFile.isImage" src="{{mediaFile.url}}" />
+  <!-- <video *ngIf="!isImage">
     <source src="https://www.dropbox.com/s/83a3m1euizlrifv/1810202020500.mp4?raw=1" type="video/mp4">
-  </video>
+  </video> -->
+
+  <div class="action">
+    <i nz-icon nzType="share-alt" nzTheme="outline" style="font-size: 32px; color: #ffffff;"
+      (click)="createTplModal(mediaFile, tplContent, tplFooter)"></i>
+  </div>
 </div>
+
+<ng-template #tplContent let-params let-ref="modalRef">
+  <app-user-mention [(inputValue)]="inputValue" [(mentioned)]="mediaFile.sharedWith" [isMultiRow]="true">
+  </app-user-mention>
+</ng-template>
+
+<ng-template #tplFooter>
+  <div class="">
+    <button style="margin-top: 10px;" nz-button (click)="cancel()">
+      Cancel
+    </button>
+    <button style="margin-top: 10px;" nz-button nzType="primary" (click)="share()" [nzLoading]="tplModalButtonLoading">
+      Share
+    </button>
+  </div>
+</ng-template>

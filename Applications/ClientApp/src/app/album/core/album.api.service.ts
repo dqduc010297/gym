@@ -16,8 +16,4 @@ export class AlbumAPIService {
   getImages(): Observable<Album> {
     return this.http.get<Album>(`${environment.apiUrl}/album`);
   }
-
-  share(image: MediaFile): Observable<any> {
-    return this.http.put<any>(`${environment.apiUrl}/album/share`, image);
-  }
 }

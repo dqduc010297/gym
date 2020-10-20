@@ -12,5 +12,6 @@ namespace ApplicationDomain.Gym.IServices
         Task<int> Storage(string url, string contentType);
         Task<AlbumRs> GetAlbum(int userId);
         Task ShareMediaFile(MediaFile sharedFile);
+        Task<MediaFile> GetAppFileById(int id);
     }
 }
