@@ -6,8 +6,8 @@
     (click)="!mediaFile.isTemp ? viewMedia(mediaFile) : null"
     [ngClass]="{'hover': !mediaFile.isTemp}">
     <img *ngIf="mediaFile.isTemp" style="display: none;" />
-    <img *ngIf="mediaFile.isImage && !mediaFile.isTemp" src="{{mediaFile.url}}" />
-    <video *ngIf="!mediaFile.isImage && !mediaFile.isTemp">
+    <img *ngIf="!mediaFile.isVideo && !mediaFile.isTemp" src="{{mediaFile.url}}" />
+    <video *ngIf="mediaFile.isVideo && !mediaFile.isTemp">
       <source src="{{mediaFile.url}}" type="video/mp4">
     </video>
   </div>

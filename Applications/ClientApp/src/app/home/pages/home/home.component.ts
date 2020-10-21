@@ -7,12 +7,14 @@ import { AuthService } from 'src/app/auth/core/auth.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  myId: number;
 
   constructor(
     private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.myId = this.authService.getUserFromLocalStorage().id;
   }
 
   logout() {

@@ -79,20 +79,27 @@ namespace ApplicationDomain.Identity.Services
 
         public async Task<bool> UpdateUserInfo(int userId, UserDTO updatedUser)
         {
-
-            var user = await this._userManager.FindByIdAsync(userId.ToString());
-            if (user == null)
+            try
             {
+
+                var user = await this._userManager.FindByIdAsync(userId.ToString());
+                if (user == null)
+                {
+                    return false;
+                }
+                this._mapper.Map(updatedUser, user);
+                this._userRepository.Update(user);
+                int effactRow = await this._uow.SaveChangesAsync();
+                if (effactRow == 1)
+                {
+                    return true;
+                }
                 return false;
             }
-            this._mapper.Map(updatedUser, user);
-            this._userRepository.Update(user);
-            int effactRow = await this._uow.SaveChangesAsync();
-            if (effactRow == 1)
+            catch(Exception ex)
             {
-                return true;
+                throw ex;
             }
-            return false;
         }
 
         public async Task<int> CreatedUser(UserDTO createdUser)

@@ -21,7 +21,7 @@ export class UserAPIService {
 
   updateUser(userRequest: UserRequest): Observable<User> {
     const params = userRequest.createParam();
-    return this.http.put<User>(`${environment.apiUrl}/user?userId=${userRequest.body.id}`, userRequest, { params });
+    return this.http.put<User>(`${environment.apiUrl}/user?userId=${userRequest.body.id}`, userRequest.body, { params });
   }
 
   createUser(userRequest: UserRequest): Observable<string> {

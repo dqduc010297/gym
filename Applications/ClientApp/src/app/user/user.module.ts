@@ -18,6 +18,9 @@ import { InitPageComponent } from './components/init-page/init-page.component';
     CommonModule,
     UserRoutingModule,
     SharedModule.forRoot(),
+  ],
+  exports: [
+    UserFormComponent,
   ]
 })
 export class UserModule { }

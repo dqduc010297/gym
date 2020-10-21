@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from '../shared/share.module';
+import { UserModule } from '../user/user.module';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { SharedModule } from '../shared/share.module';
     CommonModule,
     HomeRoutingModule,
     SharedModule.forRoot(),
+    UserModule,
   ]
 })
 export class HomeModule { }

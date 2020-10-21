@@ -1,9 +1,12 @@
 {{isImage}}
 <div class="media-boundary">
-  <img *ngIf="isImage" [src]="url" />
-  <video *ngIf="isImage" controls>
-    <source [src]="url" type="video/mp4">
-  </video>
+  <div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+      <img *ngIf="!mediaFile.isVideo" src="{{mediaFile.url}}" />
+      <video *ngIf="mediaFile.isVideo" controls autoplay src="{{mediaFile.url}}">
+      </video>
+    </div>
+  </div>
   <div class="action">
     <i nz-icon nzType="share-alt" nzTheme="outline" style="font-size: 32px; color: #ffffff;"
       (click)="createTplModal(tplContent, tplFooter)"></i>

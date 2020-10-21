@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/core/auth.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 
 @Component({
@@ -10,17 +11,18 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 
 export class UserComponent implements OnInit {
   isInitPage = true;
+  currentRole: string;
 
   constructor(
     public loaderService: LoaderService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
   }
 
   selectedUser(event) {
-    console.log(event);
     this.isInitPage = false;
     this.redirectiToForm(event);
   }

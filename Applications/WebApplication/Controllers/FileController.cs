@@ -33,7 +33,7 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> Upload([FromForm] IFormFile file)
         {
             string path = await this._dropboxService.Upload(file, this.GetCurrentUserId());
-            return Ok(new UploadedFile() { IsUploaded = true, Id = 0, UploadedPath = path, ContentType = file.ContentType });
+            return Ok(new UploadedFile() { IsUploaded = true, Id = 0, UploadedPath = $"{path}?raw=1", ContentType = file.ContentType });
         }
        
         [HttpGet]

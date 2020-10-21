@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormAction, FormState } from 'src/app/core/const/form';
 import { User } from 'src/app/user/core/models/user';
@@ -11,7 +11,9 @@ import { UserAPIService } from '../../core/services/user.api.service';
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnInit, OnChanges {
+  @Input() userId: number;
+
   formAction = FormAction;
   state: FormState;
   action: FormAction = FormAction.view;
@@ -29,14 +31,21 @@ export class UserFormComponent implements OnInit {
     private router: Router
   ) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.userId) {
+      this.loadUser(changes.userId?.currentValue);
+      this.action = FormAction.view;
+    }
+  }
+
   ngOnInit(): void {
     this.activateRouter.params.subscribe(
       params => {
-        console.log(params);
         if (params.id > 0) {
           this.loadUser(params.id);
           this.action = FormAction.view;
-        } else {
+        }
+        if (params.id === 0) {
           this.action = FormAction.create;
         }
       }
@@ -44,7 +53,6 @@ export class UserFormComponent implements OnInit {
   }
 
   loadUser(userId: number) {
-    console.log(userId);
     this.userRequest.body.id = userId;
     this.state = FormState.loading;
     this.userAPIService.getUser(this.userRequest).subscribe(
@@ -53,10 +61,6 @@ export class UserFormComponent implements OnInit {
         this.storagedUser = JSON.stringify(result);
       }
     );
-  }
-
-  loadedAvatar(event: string) {
-    this.user.avatarURL = event;
   }
 
   edit() {
