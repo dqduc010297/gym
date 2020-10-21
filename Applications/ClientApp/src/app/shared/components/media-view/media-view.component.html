@@ -1,9 +1,8 @@
-{{isImage}}
 <div class="media-boundary">
   <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center">
-      <img *ngIf="!mediaFile.isVideo" src="{{mediaFile.url}}" />
-      <video *ngIf="mediaFile.isVideo" controls autoplay src="{{mediaFile.url}}">
+      <img *ngIf="!isVideo" [src]="url" />
+      <video *ngIf="isVideo" controls autoplay [src]="url">
       </video>
     </div>
   </div>

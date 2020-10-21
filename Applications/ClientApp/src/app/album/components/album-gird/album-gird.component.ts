@@ -34,7 +34,7 @@ export class AlbumGirdComponent implements OnInit {
   viewMedia(media: MediaFile) {
     const fileParam = encodeURIComponent(media.url.replace(environment.dropboxHost, ""));
     window.open(
-      `${window.location.origin}/#/media-view/${fileParam}?id=${media.id}&isImage=${media.isImage}`,
+      `${window.location.origin}/#/media-view/${fileParam}?id=${media.id}&isVideo=${media.isVideo}`,
       '_blank'
     );
   }

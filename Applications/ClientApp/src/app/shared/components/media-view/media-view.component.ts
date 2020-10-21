@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MediaViewComponent implements OnInit {
   url: string;
-  isImage = true;
+  isVideo: boolean;
   id: number;
 
   mediaFile: MediaFile = new MediaFile();
@@ -35,7 +35,7 @@ export class MediaViewComponent implements OnInit {
     );
     this.activatedRoute.queryParams.subscribe(
       query => {
-        this.isImage = query.isImage;
+        this.isVideo = query.isVideo;
         this.id = query.id;
       }
     );
