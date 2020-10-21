@@ -11,10 +11,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./media-view.component.scss']
 })
 export class MediaViewComponent implements OnInit {
-  url: string;
-  isVideo: boolean;
-  id: number;
-
   mediaFile: MediaFile = new MediaFile();
   inputValue?: string;
 
@@ -30,13 +26,9 @@ export class MediaViewComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
       param => {
-        this.url = decodeURIComponent(`${environment.dropboxHost}${param.url}`);
-      }
-    );
-    this.activatedRoute.queryParams.subscribe(
-      query => {
-        this.isVideo = query.isVideo;
-        this.id = query.id;
+        if (param.id) {
+          this.loadData(param.id);
+        }
       }
     );
   }
@@ -50,7 +42,6 @@ export class MediaViewComponent implements OnInit {
   }
 
   createTplModal(tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
-    this.loadData(this.id);
     this.tplModal = this.modal.create({
       nzContent: tplContent,
       nzFooter: tplFooter,
