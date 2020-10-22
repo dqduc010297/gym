@@ -11,15 +11,15 @@
   </li>
   <app-menu-item iconType="form" [url]="['/inbody/list']" *ngIf="menuType == 'horizontal'">
   </app-menu-item>
-  <app-menu-item iconType="calendar" [url]="['/timesheet']" title="Timesheet" [isShowTitle]="menuType != 'horizontal'">
+  <app-menu-item iconType="carry-out" [url]="['/meal-plan']" title="Meal plan" [isShowTitle]="menuType != 'horizontal'" >
+  </app-menu-item>
+  <app-menu-item iconType="calendar" [url]="['/timesheet']" title="Timesheet" [isShowTitle]="menuType != 'horizontal'"
+    *ngIf="menuType != 'horizontal'">
   </app-menu-item>
   <app-menu-item iconType="aim" [url]="['/goal']" title="Goal" [isShowTitle]="menuType != 'horizontal'"></app-menu-item>
   <app-menu-item iconType="appstore" [url]="['/album']" title="Album" [isShowTitle]="menuType != 'horizontal'">
   </app-menu-item>
   <app-menu-item iconType="user" [url]="['/user']" title="User" [isShowTitle]="menuType != 'horizontal'"
-    *ngIf="role == 'SYS_ADMIN'">
-  </app-menu-item>
-  <app-menu-item iconType="carry-out" [url]="['/meal-plan']" title="Meal plan" [isShowTitle]="menuType != 'horizontal'"
-    *ngIf="role == 'SYS_ADMIN'">
+    *ngIf="role == 'SYS_ADMIN' && menuType != 'horizontal'">
   </app-menu-item>
 </ul>

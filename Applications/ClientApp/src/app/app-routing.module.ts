@@ -22,7 +22,6 @@ const routes: Routes = [
       {
         path: 'meal-plan',
         loadChildren: () => import('./meal-plan/meal-plan.module').then(m => m.MealPlanModule),
-        canActivate: [RoleGuard], data: { expectedRole: [Role[Role.SYS_ADMIN]] }
       },
       { path: 'album', loadChildren: () => import('./album/album.module').then(m => m.AlbumModule) },
     ]
