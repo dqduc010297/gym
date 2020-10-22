@@ -6,7 +6,7 @@
     (click)="!mediaFile.isTemp ? viewMedia(mediaFile) : null"
     [ngClass]="{'hover': !mediaFile.isTemp}">
     <img *ngIf="mediaFile.isTemp" style="display: none;" />
-    <img *ngIf="!mediaFile.isVideo && !mediaFile.isTemp" src="{{mediaFile.url}}" />
+    <img *ngIf="!mediaFile.isVideo && !mediaFile.isTemp" [lazyLoad]="mediaFile.url" [customObservable]="scroll$"/>
     <video *ngIf="mediaFile.isVideo && !mediaFile.isTemp">
       <source src="{{mediaFile.url}}" type="video/mp4">
     </video>

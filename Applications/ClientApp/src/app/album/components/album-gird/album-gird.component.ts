@@ -37,4 +37,5 @@ export class AlbumGirdComponent implements OnInit {
       '_blank'
     );
   }
+  image = 'https://images.unsplash.com/photo-1443890923422-7819ed4101c0?fm=jpg';
 }
