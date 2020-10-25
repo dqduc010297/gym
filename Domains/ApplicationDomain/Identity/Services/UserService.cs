@@ -36,16 +36,17 @@ namespace ApplicationDomain.Identity.Services
         public async Task<IEnumerable<UserSearchRs>> GetUserSearch(UserSearchRq searchRq)
         {
             List<UserSearchRs> userSearches = new List<UserSearchRs>();
-            var users = await this._userManager.GetUsersInRoleAsync(searchRq.RoleName.ToString());
-            users.Where(p => p.PhoneNumber.Contains(searchRq.PhoneNumber) || p.Fullname.Contains(searchRq.Fullname))
+            var users = await this._userManager.Users
+                .Where(p => p.PhoneNumber.Contains(searchRq.PhoneNumber) || p.Fullname.Contains(searchRq.Fullname))
                 .Skip(searchRq.Skip).Take(searchRq.Take)
-                .ToList()
-                .ForEach(u => userSearches.Add(new UserSearchRs()
-                {
-                    Fullname = u.Fullname,
-                    PhoneNumber = u.PhoneNumber,
-                    Id = u.Id
-                }));
+                .ToListAsync();
+
+            users.ForEach(u => userSearches.Add(new UserSearchRs()
+            {
+                Fullname = u.Fullname,
+                PhoneNumber = u.PhoneNumber,
+                Id = u.Id
+            }));
             return userSearches;
         }
         public async Task<IEnumerable<UserMentionRs>> GetUserMention(string fullname)
@@ -96,7 +97,7 @@ namespace ApplicationDomain.Identity.Services
                 }
                 return false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

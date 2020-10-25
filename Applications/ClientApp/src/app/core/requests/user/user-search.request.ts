@@ -15,7 +15,7 @@ export class UserSearchRequest implements IRequest, IFilterRequest, ILoadingRequ
   }
 
   getLoadingKey(): string {
-    return 'UserSearchRequest'; 
+    return 'UserSearchRequest';
   }
 
   public createParam(): HttpParams {

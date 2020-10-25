@@ -42,7 +42,6 @@ namespace WebApplication.Controllers
                 var result = await this._userService.GetUserSearch(
                     new UserSearchRq()
                     {
-                        RoleName = RoleName.MEMBER,
                         Fullname = "",
                         PhoneNumber = "0355",
                         Skip = 0,

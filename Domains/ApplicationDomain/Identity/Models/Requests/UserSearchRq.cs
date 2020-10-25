@@ -9,8 +9,6 @@ namespace ApplicationDomain.Identity.Models.Requests
 {
     public class UserSearchRq : FilterRq
     {
-        [JsonProperty("roleName")]
-        public RoleName RoleName { set; get; }
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { set; get; }
         [JsonProperty("fullname")]

@@ -87,6 +87,7 @@ namespace ApplicationDomain.Identity.Services
                 UserName = user.UserName,
             };
             loginProfile.Token = _jwtTokenService.GenerateLoginToken<int>(userIdentity, roles);
+            loginProfile.Permission = new Permission(roles.FirstOrDefault());
             if (user.TempPassword != null)
             {
                 loginProfile.IsNeedToChangePassword = true;

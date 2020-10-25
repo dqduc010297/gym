@@ -8,4 +8,4 @@
     [nzSubTitle]="subTitle">
 </nz-result>
 
-<app-meal-plan-overview *ngIf="selectedUserId != -1" [userId]="selectedUserId" [isView]="currentRole != 'SYS_ADMIN'"></app-meal-plan-overview>
+<app-meal-plan-overview *ngIf="selectedUserId != -1" [userId]="selectedUserId" [canEdit]="canEdit"></app-meal-plan-overview>

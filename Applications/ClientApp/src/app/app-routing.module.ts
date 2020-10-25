@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Role } from './core/const/role';
 import { AuthGuard } from './core/guards/auth.guard';
+import { PermissionGuard } from './core/guards/permission.guard';
 import { RoleGuard } from './core/guards/role.guard';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { MediaViewComponent } from './shared/components/media-view/media-view.component';
@@ -16,8 +17,7 @@ const routes: Routes = [
       { path: 'inbody', loadChildren: () => import('./inbody/inbody.module').then(m => m.InbodyModule) },
       {
         path: 'user',
-        loadChildren: () => import('./user/user.module').then(m => m.UserModule),
-        canActivate: [RoleGuard], data: { expectedRole: [Role[Role.SYS_ADMIN]] }
+        loadChildren: () => import('./user/user.module').then(m => m.UserModule)
       },
       {
         path: 'meal-plan',

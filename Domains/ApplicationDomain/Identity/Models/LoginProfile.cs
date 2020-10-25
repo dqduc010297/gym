@@ -9,5 +9,6 @@ namespace ApplicationDomain.Identity.Models
         public string Token { set; get; }
         public bool IsNeedToChangePassword { set; get; }
         public int Id { set; get; }
+        public Permission Permission { set; get; }
     }
 }

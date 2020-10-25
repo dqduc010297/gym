@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginUser } from './models/login.user';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
@@ -8,7 +7,7 @@ import { ChangePasswordRequest } from './models/change-password.request';
 import jwt_decode from 'jwt-decode';
 import { AuthAPIService } from './auth.api.service';
 import { LoginRequest } from './models/login.request';
-import { Role } from 'src/app/core/const/role';
+import { PermissionService } from './permission.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -17,12 +16,15 @@ export class AuthService {
     private authAPIService: AuthAPIService,
     private router: Router,
     private modalService: NzModalService,
+    private permissionService: PermissionService
   ) {
   }
 
   login(loginRequest: LoginRequest) {
     return this.authAPIService.login(loginRequest).subscribe(
       result => {
+        this.permissionService.parsePermission(result.permission);
+        result.permission = null;
         this.storageUser(result);
         if (result.isNeedToChangePassword) {
           this.router.navigate(['auth/change-password']);
@@ -64,7 +66,7 @@ export class AuthService {
           this.router.navigate(['']);
         }
       },
-      error => {
+      () => {
         this.modalService.error({
           nzTitle: 'Đổi password thất bại',
           nzContent: 'Mật khẩu không đúng. Vui lòng nhập lại.'
