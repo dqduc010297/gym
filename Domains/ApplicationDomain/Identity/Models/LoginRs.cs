@@ -1,4 +1,5 @@
-﻿using AspNetCore.Common.Identity;
+﻿using ApplicationDomain.Identity.Entities;
+using AspNetCore.Common.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,6 @@ namespace ApplicationDomain.Identity.Models
         public bool IsLockedOut { get; set; }
         public bool IsNotAllowed { get; set; }
         public bool RequiresTwoFactor { get; set; }
-
-        public IEnumerable<string> Roles { get; set; }
-        public UserIdentity<int> UserIdentity { get; set; }
-        public string AvatarURL { set; get; }
-        public LoginProfile LoginProfile { set; get; }
+        public User UserAuth { set; get; }
     }
 }

@@ -11,6 +11,7 @@ import { PermissionService } from './permission.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  loginUser: LoginUser;
 
   constructor(
     private authAPIService: AuthAPIService,
@@ -76,11 +77,12 @@ export class AuthService {
   }
 
   decodeToken(key: string): string {
-    const user = this.getUserFromLocalStorage();
-    if (user.token) {
-      const tokenPayload = jwt_decode(user.token);
-      return tokenPayload[key];
-    }
+    // const user = this.getUserFromLocalStorage();
+    // if (user.token) {
+    //   const tokenPayload = jwt_decode(user.token);
+    //   return tokenPayload[key];
+    // }
+    return '';
   }
 
   public getUserRole(): string {

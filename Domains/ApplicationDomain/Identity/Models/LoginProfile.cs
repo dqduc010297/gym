@@ -1,4 +1,6 @@
 ﻿using ApplicationDomain.Common;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace ApplicationDomain.Identity.Models
 {

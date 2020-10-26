@@ -68,7 +68,8 @@ namespace WebApplication.Controllers
 
                 if (result.Succeeded)
                 {
-                    return Ok(result.LoginProfile);
+                    var token = await this._authService.GenerateToken(result.UserAuth);
+                    return Ok(token);
                 }
 
                 if (result.IsLockedOut)

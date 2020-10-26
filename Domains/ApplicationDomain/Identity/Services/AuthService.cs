@@ -12,6 +12,9 @@ using ApplicationDomain.Identity.Models.Requests;
 using System.Linq;
 using ApplicationDomain.Common;
 using System.Collections.Generic;
+using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace ApplicationDomain.Identity.Services
 {
@@ -19,18 +22,21 @@ namespace ApplicationDomain.Identity.Services
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
         private readonly IJwtTokenService _jwtTokenService;
         public AuthService(
             IMapper mapper,
             IUnitOfWork uow,
             SignInManager<User> signInManager,
             UserManager<User> userManager,
+            RoleManager<Role> roleManager,
             IJwtTokenService jwtTokenService
             ) : base(mapper, uow)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _jwtTokenService = jwtTokenService;
+            _roleManager = roleManager;
         }
 
         public async Task<LoginRs> LoginAsync(LoginRq rq)
@@ -50,7 +56,7 @@ namespace ApplicationDomain.Identity.Services
             {
                 return signInResult;
             }
-            signInResult.LoginProfile = await LoadingProfileAsync(user);
+            signInResult.UserAuth = user;
             return signInResult;
         }
         public async Task<bool> ChangePassword(int userId, ChangePasswordRq rq)
@@ -71,14 +77,8 @@ namespace ApplicationDomain.Identity.Services
             }
             return false;
         }
-        private async Task<LoginProfile> LoadingProfileAsync(User user)
+        public async Task<string> GenerateToken(User user)
         {
-            LoginProfile loginProfile = new LoginProfile();
-            // load base information
-            loginProfile.UserName = user.UserName;
-            loginProfile.AvatarURL = user.AvatarURL ?? "";
-            loginProfile.Id = user.Id;
-
             // generate token
             var roles = await _userManager.GetRolesAsync(user);
             var userIdentity = new UserIdentity<int>
@@ -86,16 +86,16 @@ namespace ApplicationDomain.Identity.Services
                 Id = user.Id,
                 UserName = user.UserName,
             };
-            loginProfile.Token = _jwtTokenService.GenerateLoginToken<int>(userIdentity, roles);
-            loginProfile.Permission = new Permission(roles.FirstOrDefault());
-            if (user.TempPassword != null)
+            List<Claim> customClaims = new List<Claim>();
+            customClaims.Add(new Claim("IsNeedToChangePassword", (user.TempPassword == null).ToString()));
+
+            // grant permission
+            Permission permission = new Permission(roles.FirstOrDefault());
+            foreach (PropertyInfo propertyInfo in permission.GetType().GetProperties())
             {
-                loginProfile.IsNeedToChangePassword = true;
-                return loginProfile;
+                customClaims.Add(new Claim(propertyInfo.Name, propertyInfo.GetValue(permission).ToString()));
             }
-            return loginProfile;
+            return _jwtTokenService.GenerateLoginToken<int>(userIdentity, roles, customClaims);
         }
-
-
     }
 }
