@@ -8,6 +8,11 @@ namespace ApplicationDomain.Common
 {
     public static class PermissionChecker
     {
+        // Permission to view menu
+        public static bool CanViewUserMenu (string userRole)
+        {
+            return userRole == RoleName.MANAGER || userRole == RoleName.RECEPTION;
+        }
         public static bool CanCreateUser(string userRole)
         {
             return userRole == RoleName.RECEPTION;

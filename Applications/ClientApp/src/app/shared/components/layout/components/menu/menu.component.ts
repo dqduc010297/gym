@@ -19,10 +19,11 @@ export class MenuComponent implements OnInit {
   }
 
   checkPermission(permission: string) {
-    const permissionIndex = this.currentUser._claims.map(p => p.type).indexOf(permission);
+    debugger;
+    const permissionIndex = this.currentUser._claims.map(p => p.type.toLowerCase()).indexOf(permission.toLowerCase());
     if (permissionIndex === -1) {
       return false;
     }
-    return this.currentUser._claims[permissionIndex].value;
+    return Boolean(JSON.parse(this.currentUser._claims[permissionIndex].value));
   }
 }
