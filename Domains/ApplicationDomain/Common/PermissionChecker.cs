@@ -8,6 +8,10 @@ namespace ApplicationDomain.Common
 {
     public static class PermissionChecker
     {
+        public static bool CanCreateUser(string userRole)
+        {
+            return userRole == RoleName.RECEPTION;
+        }
         public static bool CanCreateMealPlan(string userRole)
         {
             return userRole == RoleName.PERSONAL_TRAINER;

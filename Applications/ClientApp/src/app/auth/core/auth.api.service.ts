@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { LoginUser } from './models/login.user';
 import { ChangePasswordRequest } from './models/change-password.request';
 import { LoginRequest } from './models/login.request';
+import { LoginResponse } from './models/login.response';
 
 @Injectable({ providedIn: 'root' })
 export class AuthAPIService {
@@ -14,9 +14,9 @@ export class AuthAPIService {
     ) {
     }
 
-    login(loginRequest: LoginRequest): Observable<LoginUser> {
+    login(loginRequest: LoginRequest): Observable<LoginResponse> {
         const params = loginRequest.createParam();
-        return this.http.post<LoginUser>(`${environment.apiUrl}/auth/login`, loginRequest.body, { params });
+        return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, loginRequest.body, { params });
     }
 
     changePassword(changePasswordRequest: ChangePasswordRequest): Observable<boolean>{

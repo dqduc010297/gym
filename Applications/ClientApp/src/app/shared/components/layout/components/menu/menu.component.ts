@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/core/auth.service';
+import { LoginUser } from 'src/app/auth/core/models/login.user';
 
 @Component({
   selector: 'app-menu',
@@ -7,12 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
   @Input() menuType: string;
-  @Input() role: string;
+  currentUser: LoginUser
 
   constructor(
+    private authService: AuthService
   ) { }
-
   ngOnInit(): void {
+    this.currentUser = this.authService._loginUser;
   }
 
+  checkPermission(permission: string) {
+    const permissionIndex = this.currentUser._claims.map(p => p.type).indexOf(permission);
+    if (permissionIndex === -1) {
+      return false;
+    }
+    return this.currentUser._claims[permissionIndex].value;
+  }
 }

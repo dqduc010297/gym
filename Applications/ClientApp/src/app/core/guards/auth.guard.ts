@@ -6,12 +6,8 @@ import { AuthService } from '../../auth/core/auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const currentUser = this.authService.getUserFromLocalStorage();
+    const currentUser = this.authService._loginUser;
     if (currentUser) {
-      if (currentUser.isNeedToChangePassword) {
-        this.router.navigate(['/auth/change-password']);
-        return false;
-      }
       return true;
     }
     this.router.navigate(['/auth/login']);

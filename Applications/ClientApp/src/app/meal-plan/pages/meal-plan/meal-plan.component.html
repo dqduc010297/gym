@@ -1,4 +1,4 @@
-<div class="row" style="margin-bottom: 20px;" *ngIf="currentRole == 'SYS_ADMIN'">
+<div class="row" style="margin-bottom: 20px;" *hasClaim="'canCreateOrEditMealPlan'">
     <div class="col-lg-4">
         <app-user-select (onSelected)="selectedUser($event)"></app-user-select>
     </div>

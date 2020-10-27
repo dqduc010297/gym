@@ -19,10 +19,9 @@ export class MealPlanComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentRole = this.authService.getUserRole();
     if (this.currentRole !== Role[Role.SYS_ADMIN]) {
       this.subTitle = 'Bạn chưa có meal plan';
-      this.selectedUserId = this.authService.getUserFromLocalStorage().id;
+      // this.selectedUserId = this.authService.getUserFromLocalStorage().id;
     }
   }
 

@@ -1,4 +1,4 @@
-<div class="row" style="margin-bottom: 20px;">
+<div class="row" style="margin-bottom: 20px;" *hasClaim="'canCreateUser'">
   <div class="col-lg-10">
     <app-user-select (onSelected)="selectedUser($event)"></app-user-select>
   </div>

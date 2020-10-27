@@ -4,36 +4,32 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ChangePasswordRequest } from './models/change-password.request';
-import jwt_decode from 'jwt-decode';
 import { AuthAPIService } from './auth.api.service';
 import { LoginRequest } from './models/login.request';
-import { PermissionService } from './permission.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  loginUser: LoginUser;
+  private loginUser: LoginUser = new LoginUser();
 
   constructor(
     private authAPIService: AuthAPIService,
     private router: Router,
     private modalService: NzModalService,
-    private permissionService: PermissionService
   ) {
   }
 
   login(loginRequest: LoginRequest) {
     return this.authAPIService.login(loginRequest).subscribe(
       result => {
-        this.permissionService.parsePermission(result.permission);
-        result.permission = null;
-        this.storageUser(result);
+        localStorage.setItem(environment.tokenKey, result.token);
+        this.loginUser.updateLoginUser(result.token);
         if (result.isNeedToChangePassword) {
           this.router.navigate(['auth/change-password']);
         } else {
           this.router.navigate(['home']);
         }
       },
-      error => {
+      () => {
         this.modalService.error({
           nzTitle: 'Đăng nhập thất bại',
           nzContent: 'Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng đăng nhập lại.'
@@ -46,24 +42,14 @@ export class AuthService {
     if (localStorage.getItem(environment.tokenKey)) {
       localStorage.removeItem(environment.tokenKey);
     }
+    this.loginUser.resetLoginUser();
     this.router.navigate(['auth/login']);
-  }
-
-  private storageUser(user: LoginUser) {
-    localStorage.setItem(environment.tokenKey, JSON.stringify(user));
-  }
-
-  public getUserFromLocalStorage(): LoginUser {
-    return JSON.parse(localStorage.getItem(environment.tokenKey));
   }
 
   changePassword(changePasswordRequest: ChangePasswordRequest) {
     return this.authAPIService.changePassword(changePasswordRequest).subscribe(
       result => {
         if (result) {
-          const loginUser = this.getUserFromLocalStorage();
-          loginUser.isNeedToChangePassword = false;
-          this.storageUser(loginUser);
           this.router.navigate(['']);
         }
       },
@@ -76,16 +62,71 @@ export class AuthService {
     );
   }
 
-  decodeToken(key: string): string {
-    // const user = this.getUserFromLocalStorage();
-    // if (user.token) {
-    //   const tokenPayload = jwt_decode(user.token);
-    //   return tokenPayload[key];
-    // }
-    return '';
+  // This method can be called a couple of different ways
+  // *hasClaim="'claimType'"  // Assumes claimValue is true
+  // *hasClaim="'claimType:value'" // Compares claimValue to value
+  // *hasClaim="['claimType1','claimType2:value','claimType3']"
+  hasClaim(claimType: any): boolean {
+    let ret: boolean = false;
+
+    // See if an array of values was passed in.
+    if (typeof claimType === 'string') {
+      ret = this.isClaimValid(claimType);
+    }
+    else {
+      let claims: string[] = claimType;
+      if (claims) {
+        for (let index = 0; index < claims.length; index++) {
+          ret = this.isClaimValid(claims[index]);
+          // If one is successful, then let them in
+          if (ret) {
+            break;
+          }
+        }
+      }
+    }
+
+    return ret;
   }
 
-  public getUserRole(): string {
-    return this.decodeToken('http://schemas.microsoft.com/ws/2008/06/identity/claims/role');
+  private isClaimValid(claimType: string): boolean {
+    let ret: boolean = false;
+    let auth: LoginUser = null;
+    let claimValue: string = '';
+
+    // Retrieve security object
+    auth = this.loginUser;
+    if (auth) {
+      // See if the claim type has a value
+      // *hasClaim="'claimType:value'"
+      if (claimType.indexOf(":") >= 0) {
+        let words: string[] = claimType.split(":");
+        claimType = words[0].toLowerCase();
+        claimValue = words[1];
+      }
+      else {
+        claimType = claimType.toLowerCase();
+        // Either get the claim value, or assume 'true'
+        claimValue = claimValue ? claimValue : "true";
+      }
+      // Attempt to find the claim
+      ret = auth._claims.find(
+        c => c.type.toLowerCase() == claimType
+          && c.value == claimValue) != null;
+    }
+
+    return ret;
+  }
+
+  public get _loginUser(): LoginUser {
+    if (!this.loginUser._id) {
+      const token = localStorage.getItem(environment.tokenKey);
+      if (token) {
+        this.loginUser.updateLoginUser(localStorage.getItem(environment.tokenKey));
+      } else {
+        this.router.navigate(['auth/login']);
+      }
+    }
+    return this.loginUser;
   }
 }

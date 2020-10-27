@@ -8,7 +8,7 @@ import { UserMentionComponent } from './components/user-mention/user-mention.com
 import { NgZorroAntModule } from './ng-zorro-antd.module';
 import { MediaViewComponent } from './components/media-view/media-view.component';
 import { SafePipe } from './pipes/safe.pipe';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { HasClaimDirective } from './directives/has-claim.directive';
 
 
 @NgModule({
@@ -19,6 +19,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
   ],
   declarations: [
     SafePipe,
+
+    HasClaimDirective,
 
     UploaderComponent,
     WaitingComponent,
@@ -33,6 +35,9 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     CommonModule,
     FormsModule,
     NgZorroAntModule,
+
+    HasClaimDirective,
+
     UploaderComponent,
     WaitingComponent,
     UserSelectComponent,

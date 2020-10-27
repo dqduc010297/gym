@@ -9,6 +9,6 @@ namespace ApplicationDomain.Identity.IServices
     {
         Task<LoginRs> LoginAsync(LoginRq rq); 
         Task<bool> ChangePassword(int userId, ChangePasswordRq rq);
-        Task<string> GenerateToken(User user);
+        Task<LoginProfile> LoadProfile(User user);
     }
 }

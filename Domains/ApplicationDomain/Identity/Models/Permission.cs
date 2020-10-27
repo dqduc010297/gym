@@ -16,5 +16,12 @@ namespace ApplicationDomain.Identity.Models
         }
         public bool CanCreateOrEditMealPlan { get { return PermissionChecker.CanCreateMealPlan(this._currentRole); } }
         public bool CanApproveMealPlan { get { return PermissionChecker.CanApproveMealPlan(this._currentRole); } }
+        public bool CanCreateUser { get { return PermissionChecker.CanCreateUser(this._currentRole); } }
+    }
+
+    public class PermissionClaim
+    {
+        public string type { set; get; }
+        public string value { set; get; }
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Infrastructure.SeedData
@@ -16,88 +17,7 @@ namespace Infrastructure.SeedData
     class Program
     {
         public static IServiceProvider _serviceProvider;
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Starting to seed data");
-            _serviceProvider = ConfigureService(new ServiceCollection(), args);
-            using (var dbContext = _serviceProvider.GetService<ApplicationDbContext>())
-            {
-                using (var transaction = dbContext.Database.BeginTransaction())
-                {
-                    SeedDataAsync(dbContext).Wait();
-                    transaction.Commit();
-                    Console.WriteLine("Commit all seed");
-                }
-            }
-            Console.WriteLine("Seed data successfull");
-        }
-
-        public static IServiceProvider ConfigureService(IServiceCollection services, string[] args)
-        {
-            var dbContextFactory = new DesignTimeDbContextFactory();
-
-            services.AddLogging();
-            services.AddScoped<ApplicationDbContext>(p => dbContextFactory.CreateDbContext(args));
-            services.AddIdentity<User, Role>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireLowercase = false;
-
-                // User settings
-                options.User.RequireUniqueEmail = true;
-            });
-            return services.BuildServiceProvider();
-        }
-        private static async Task SeedDataAsync(ApplicationDbContext dbContext)
-        {
-            SeedRoleDataAsync(dbContext).Wait();
-            SeedUserDataAsync(dbContext).Wait();
-            SeedInbodyStandardDataAsync(dbContext).Wait();
-            await SeedInbodyDataAsync(dbContext);
-        }
-        private static async Task SeedRoleDataAsync(ApplicationDbContext dbContext)
-        {
-            if (!await dbContext.Set<Role>().AnyAsync())
-            {
-                Console.WriteLine("Start to seed role info");
-                var roleManagement = _serviceProvider.GetService<RoleManager<Role>>();
-                await roleManagement.CreateAsync(new Role
-                {
-                    Name = RoleName.SYS_ADMIN.ToString(),
-                });
-                await roleManagement.CreateAsync(new Role
-                {
-                    Name = RoleName.MANAGER.ToString(),
-                });
-                await roleManagement.CreateAsync(new Role
-                {
-                    Name = RoleName.MASTER.ToString(),
-                });
-                await roleManagement.CreateAsync(new Role
-                {
-                    Name = RoleName.PERSONAL_TRAINER.ToString(),
-                });
-                await roleManagement.CreateAsync(new Role
-                {
-                    Name = RoleName.MEMBER.ToString(),
-                });
-                Console.WriteLine("Finish seed role info");
-            }
-        }
-        private static async Task SeedUserDataAsync(ApplicationDbContext dbContext)
-        {
-            if (!await dbContext.Set<User>().AnyAsync() && await dbContext.Set<Role>().AnyAsync())
-            {
-                Console.WriteLine("Start to seed user info");
-                var userManagement = _serviceProvider.GetService<UserManager<User>>();
-                string[] phoneNumbers = {
+        private static string[] phoneNumbers = {
                     "0355588574",
                     "0355546955",
                     "0355555200",
@@ -299,7 +219,7 @@ namespace Infrastructure.SeedData
                     "0755529757",
                     "0755570413"
                 };
-                string[] names = {
+        private static string[] names = {
                     "Đặng Tuấn Anh",
                     "Hoàng Đức Anh",
                     "Lưu Trang Anh",
@@ -501,70 +421,187 @@ namespace Infrastructure.SeedData
                     "Phạm Hải Đức Phát",
                     "Nguyễn Việt Phong"
                 };
-                var sysUser = new User
-                {
-                    Fullname = "system",
-                    UserName = "0338279632",
-                    Email = "system@gmail.com",
-                    PhoneNumber = "0338279632",
-                    DateOfBirth = new DateTime(1997,2,1),
-                    Gender =  Gender.MALE,
-                    DateJoined = new DateTime(2020, 10, 3),
-                    Status = UserStatus.ACTIVATE,
-                }; 
-                var sysResult = await userManagement.CreateAsync(sysUser, "Password@1");
-                if (sysResult.Succeeded)
-                {
-                    await userManagement.AddToRoleAsync(sysUser, RoleName.SYS_ADMIN.ToString());
-                }
 
-                for (int i = 0; i < 150; i++)
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Starting to seed data");
+            _serviceProvider = ConfigureService(new ServiceCollection(), args);
+            using (var dbContext = _serviceProvider.GetService<ApplicationDbContext>())
+            {
+                using (var transaction = dbContext.Database.BeginTransaction())
                 {
-                    var user = new User
-                    {
-                        Fullname = names[i],
-                        UserName = phoneNumbers[i],
-                        Email = $"{i + 1}@gmail.com",
-                        PhoneNumber = phoneNumbers[i],
-                        DateOfBirth = new DateTime(1990 + (i % 6), (i % 12) + 1, 18),
-                        Gender = i % 2 == 0 ? Gender.MALE : Gender.FEMALE,
-                        DateJoined = new DateTime(2019, 8, 1),
-                        Status = UserStatus.ACTIVATE
-                    };
-                    var result = await userManagement.CreateAsync(user, "Password@1");
-                    if (result.Succeeded)
-                    {
-                        await userManagement.AddToRoleAsync(user, RoleName.MEMBER.ToString());
-                    }
+                    SeedDataAsync(dbContext).Wait();
+                    transaction.Commit();
+                    Console.WriteLine("Commit all seed");
                 }
-                for (int i = 150; i < 200; i++)
+            }
+            Console.WriteLine("Seed data successfull");
+        }
+
+        public static IServiceProvider ConfigureService(IServiceCollection services, string[] args)
+        {
+            var dbContextFactory = new DesignTimeDbContextFactory();
+
+            services.AddLogging();
+            services.AddScoped<ApplicationDbContext>(p => dbContextFactory.CreateDbContext(args));
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = false;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+            return services.BuildServiceProvider();
+        }
+        private static async Task SeedDataAsync(ApplicationDbContext dbContext)
+        {
+            SeedRoleDataAsync(dbContext).Wait();
+            SeedUserDataAsync(dbContext).Wait();
+            SeedInbodyStandardDataAsync(dbContext).Wait();
+            await SeedInbodyDataAsync(dbContext);
+        }
+        private static async Task SeedRoleDataAsync(ApplicationDbContext dbContext)
+        {
+            if (!await dbContext.Set<Role>().AnyAsync())
+            {
+                Console.WriteLine("Start to seed role info");
+                var roleManagement = _serviceProvider.GetService<RoleManager<Role>>();
+                await roleManagement.CreateAsync(new Role
                 {
-                    var user = new User
-                    {
-                        Fullname = names[i],
-                        UserName = phoneNumbers[i],
-                        Email = $"{i + 1}@gmail.com",
-                        PhoneNumber = phoneNumbers[i],
-                        DateOfBirth = new DateTime(1990 + (i % 6), (i % 12) +1, 18),
-                        Gender = i % 2 == 0 ? Gender.MALE : Gender.FEMALE,
-                        DateJoined = new DateTime(2019, 8, 1),
-                        Status = UserStatus.ACTIVATE
-                    };
-                    var result = await userManagement.CreateAsync(user, "Password@1");
-                    if (result.Succeeded)
-                    {
-                        await userManagement.AddToRoleAsync(user, RoleName.PERSONAL_TRAINER.ToString());
-                    }
+                    Name = RoleName.SYS_ADMIN.ToString(),
+                });
+                await roleManagement.CreateAsync(new Role
+                {
+                    Name = RoleName.MANAGER.ToString(),
+                });
+                await roleManagement.CreateAsync(new Role
+                {
+                    Name = RoleName.MASTER.ToString(),
+                });
+                await roleManagement.CreateAsync(new Role
+                {
+                    Name = RoleName.PERSONAL_TRAINER.ToString(),
+                });
+                await roleManagement.CreateAsync(new Role
+                {
+                    Name = RoleName.MEMBER.ToString(),
+                });
+
+                await roleManagement.CreateAsync(new Role
+                {
+                    Name = RoleName.RECEPTION.ToString(),
+                });
+                Console.WriteLine("Finish seed role info");
+            }
+        }
+        private static async Task SeedUserDataAsync(ApplicationDbContext dbContext)
+        {
+            if (!await dbContext.Set<User>().AnyAsync() && await dbContext.Set<Role>().AnyAsync())
+            {
+                Console.WriteLine("Start to seed user info");
+                var userManagement = _serviceProvider.GetService<UserManager<User>>();
+
+                int index = 0;
+                // create sysadmin user
+                await CreateUser(index, RoleName.SYS_ADMIN);
+                index++;
+                // create manager
+                await CreateUser(index, RoleName.MANAGER);
+                index++;
+                // create master
+                await CreateUser(index, RoleName.MASTER);
+                index++;
+                // create receiption
+                while (index < 10)
+                {
+                    await CreateUser(index, RoleName.RECEPTION);
+                    index++;
+                }
+                // create pt
+                while (index < 25)
+                {
+                    await CreateUser(index, RoleName.PERSONAL_TRAINER);
+                    index++;
+                }
+                while (index < 200)
+                {
+                    await CreateUser(index, RoleName.MEMBER);
+                    index++;
                 }
                 Console.WriteLine("Finish seed user info");
             }
+        }
+        private async static Task CreateUser(int i, string role)
+        {
+            var userManagement = _serviceProvider.GetService<UserManager<User>>();
+            if (i < 0 || i > names.Length || i > phoneNumbers.Length)
+            {
+                return;
+            }
+            var user = new User
+            {
+                Fullname = names[i],
+                UserName = phoneNumbers[i],
+                Email = GenerateEmail(names[i]),
+                PhoneNumber = phoneNumbers[i],
+                DateOfBirth = new DateTime(1990 + (i % 6), (i % 12) + 1, 18),
+                Gender = i % 2 == 0 ? Gender.MALE : Gender.FEMALE,
+                DateJoined = new DateTime(2019, 8, 1),
+                Status = UserStatus.ACTIVATE
+            };
+            var userResult = await userManagement.CreateAsync(user, "Password@1");
+            if (userResult.Succeeded)
+            {
+                await userManagement.AddToRoleAsync(user, role);
+            }
+            return;
+        }
+        private static string GenerateEmail(string suffix)
+        {
+            suffix = RemoveUnicode(suffix);
+            suffix = suffix.Replace(" ", "");
+            return $"{suffix.ToLower()}@gmail.com";
+        }
+        private static string RemoveUnicode(string text)
+        {
+            string[] arr1 = new string[] { "á", "à", "ả", "ã", "ạ", "â", "ấ", "ầ", "ẩ", "ẫ", "ậ", "ă", "ắ", "ằ", "ẳ", "ẵ", "ặ",
+    "đ",
+    "é","è","ẻ","ẽ","ẹ","ê","ế","ề","ể","ễ","ệ",
+    "í","ì","ỉ","ĩ","ị",
+    "ó","ò","ỏ","õ","ọ","ô","ố","ồ","ổ","ỗ","ộ","ơ","ớ","ờ","ở","ỡ","ợ",
+    "ú","ù","ủ","ũ","ụ","ư","ứ","ừ","ử","ữ","ự",
+    "ý","ỳ","ỷ","ỹ","ỵ",};
+            string[] arr2 = new string[] { "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
+    "d",
+    "e","e","e","e","e","e","e","e","e","e","e",
+    "i","i","i","i","i",
+    "o","o","o","o","o","o","o","o","o","o","o","o","o","o","o","o","o",
+    "u","u","u","u","u","u","u","u","u","u","u",
+    "y","y","y","y","y",};
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                text = text.Replace(arr1[i], arr2[i]);
+                text = text.Replace(arr1[i].ToUpper(), arr2[i].ToUpper());
+            }
+            return text;
         }
         private static async Task SeedInbodyStandardDataAsync(ApplicationDbContext dbContext)
         {
             if (!await dbContext.Set<InBodyStandard>().AnyAsync())
             {
                 Console.WriteLine("Start to seed inbody standard info");
-
+                // first member 
+                var userManagement = _serviceProvider.GetService<UserManager<User>>();
+                var member = await userManagement.GetUsersInRoleAsync(RoleName.MEMBER);
+                var memberId = member.ToList().FirstOrDefault()?.Id;
                 List<InBodyStandard> inBodyStandards = new List<InBodyStandard>();
                 using (var stream = File.Open(String.Format(@"{0}\Data\InbodyStandard.xlsx", Environment.CurrentDirectory), FileMode.Open, FileAccess.Read))
                 {
@@ -589,7 +626,7 @@ namespace Infrastructure.SeedData
                                 inBodyStandard.SkeletalMuscleMassMin = Convert.ToSingle((double)reader.GetValue(10));
                                 inBodyStandard.SkeletalMuscleMassMax = Convert.ToSingle((double)reader.GetValue(11));
                                 inBodyStandard.Height = Convert.ToSingle((double)reader.GetValue(12));
-                                inBodyStandard.UserId = Convert.ToInt32((double)reader.GetValue(13));
+                                inBodyStandard.UserId = memberId ?? -1;
                                 inBodyStandards.Add(inBodyStandard);
                             }
                         } while (reader.NextResult()); //Move to NEXT SHEET
@@ -606,7 +643,9 @@ namespace Infrastructure.SeedData
             if (!await dbContext.Set<InBody>().AnyAsync() && await dbContext.Set<User>().AnyAsync())
             {
                 Console.WriteLine("Start to seed inbody info");
-
+                var userManagement = _serviceProvider.GetService<UserManager<User>>();
+                var member = await userManagement.GetUsersInRoleAsync(RoleName.MEMBER);
+                var memberId = member.ToList().FirstOrDefault()?.Id;
                 List<InBody> inbodys = new List<InBody>();
                 using (var stream = File.Open(String.Format(@"{0}\Data\Inbody.xlsx", Environment.CurrentDirectory), FileMode.Open, FileAccess.Read))
                 {
@@ -629,7 +668,7 @@ namespace Infrastructure.SeedData
                                 inBody.Score = Convert.ToInt32((double)reader.GetValue(7));
                                 inBody.WaistHipRatio = Convert.ToSingle((double)reader.GetValue(8));
                                 inBody.VisceralFatLevel = Convert.ToInt32((double)reader.GetValue(9));
-                                inBody.UserId = Convert.ToInt32((double)reader.GetValue(10));
+                                inBody.UserId = memberId ?? -1;
                                 inBody.InBodyStandardId = Convert.ToInt32((double)reader.GetValue(11));
                                 inbodys.Add(inBody);
                             }

@@ -24,10 +24,6 @@ export class AuthInterceptor implements HttpInterceptor {
         req: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-        // if (!req.url.includes(paths.auth)) {
-        //   return next.handle(req);
-        // }
-
         if (!req.headers.has('Content-Type') && !req.url.includes('file')) {
             req = req.clone({
                 headers: req.headers.set('Content-Type', 'application/json')
@@ -86,9 +82,8 @@ export class AuthInterceptor implements HttpInterceptor {
         // if (!request.url.match(/www.mydomain.com\//)) {
         //     return request;
         // }
-        const accessToken = JSON.parse(this.token);
         return request.clone({
-            headers: request.headers.set(this.AUTH_HEADER, 'Bearer ' + accessToken.access_token)
+            headers: request.headers.set(this.AUTH_HEADER, `Bearer ${this.token}`)
         });
     }
 }

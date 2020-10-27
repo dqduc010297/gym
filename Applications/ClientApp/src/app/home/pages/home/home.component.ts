@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.myId = this.authService.getUserFromLocalStorage().id;
+    this.myId = this.authService._loginUser._id;
   }
 
   logout() {

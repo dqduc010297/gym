@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace ApplicationDomain.Identity.Services
 {
@@ -77,8 +78,11 @@ namespace ApplicationDomain.Identity.Services
             }
             return false;
         }
-        public async Task<string> GenerateToken(User user)
+        public async Task<LoginProfile> LoadProfile(User user)
         {
+            LoginProfile profile = new LoginProfile();
+            profile.IsNeedToChangePassword = !string.IsNullOrEmpty(user.TempPassword);
+
             // generate token
             var roles = await _userManager.GetRolesAsync(user);
             var userIdentity = new UserIdentity<int>
@@ -87,15 +91,19 @@ namespace ApplicationDomain.Identity.Services
                 UserName = user.UserName,
             };
             List<Claim> customClaims = new List<Claim>();
-            customClaims.Add(new Claim("IsNeedToChangePassword", (user.TempPassword == null).ToString()));
-
             // grant permission
             Permission permission = new Permission(roles.FirstOrDefault());
+
             foreach (PropertyInfo propertyInfo in permission.GetType().GetProperties())
             {
-                customClaims.Add(new Claim(propertyInfo.Name, propertyInfo.GetValue(permission).ToString()));
+                customClaims.Add(new Claim("permissions", JsonConvert.SerializeObject(new PermissionClaim()
+                {
+                    type = propertyInfo.Name,
+                    value = propertyInfo.GetValue(permission).ToString()
+                })));
             }
-            return _jwtTokenService.GenerateLoginToken<int>(userIdentity, roles, customClaims);
+            profile.Token = _jwtTokenService.GenerateLoginToken<int>(userIdentity, roles, customClaims);
+            return profile;
         }
     }
 }

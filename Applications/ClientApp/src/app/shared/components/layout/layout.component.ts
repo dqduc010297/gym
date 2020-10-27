@@ -12,9 +12,6 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 export class LayoutComponent implements OnInit {
   isCollapsed = false;
   isLogin = false;
-  currentUser: LoginUser = new LoginUser();
-  userRole = Role;
-  currentRole: string;
 
   constructor(
     public authService: AuthService,
@@ -23,8 +20,6 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentRole = this.authService.getUserRole();
-    this.currentUser = this.authService.getUserFromLocalStorage();
   }
 
   logout() {

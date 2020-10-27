@@ -11,5 +11,6 @@ namespace ApplicationDomain.Common
         public const string MASTER = "MASTER";
         public const string MANAGER = "MANAGER";
         public const string SYS_ADMIN = "SYS_ADMIN";
+        public const string RECEPTION = "RECEPTION";
     }
 }
