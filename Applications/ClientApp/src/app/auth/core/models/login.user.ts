@@ -17,6 +17,7 @@ export class LoginUser {
     const tokenPayload = jwt_decode(token);
     this.roles = tokenPayload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
     this.id = tokenPayload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    // tslint:disable-next-line: no-string-literal
     tokenPayload['permissions'].forEach(permission => {
       this.claims.push(JSON.parse(permission));
     });

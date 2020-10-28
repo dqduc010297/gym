@@ -67,15 +67,16 @@ export class AuthService {
   // *hasClaim="'claimType:value'" // Compares claimValue to value
   // *hasClaim="['claimType1','claimType2:value','claimType3']"
   hasClaim(claimType: any): boolean {
-    let ret: boolean = false;
+    let ret = false;
 
     // See if an array of values was passed in.
     if (typeof claimType === 'string') {
       ret = this.isClaimValid(claimType);
     }
     else {
-      let claims: string[] = claimType;
+      const claims: string[] = claimType;
       if (claims) {
+        // tslint:disable-next-line: prefer-for-of
         for (let index = 0; index < claims.length; index++) {
           ret = this.isClaimValid(claims[index]);
           // If one is successful, then let them in
@@ -90,29 +91,29 @@ export class AuthService {
   }
 
   private isClaimValid(claimType: string): boolean {
-    let ret: boolean = false;
+    let ret = false;
     let auth: LoginUser = null;
-    let claimValue: string = '';
+    let claimValue = '';
 
     // Retrieve security object
     auth = this.loginUser;
     if (auth) {
       // See if the claim type has a value
       // *hasClaim="'claimType:value'"
-      if (claimType.indexOf(":") >= 0) {
-        let words: string[] = claimType.split(":");
+      if (claimType.indexOf(':') >= 0) {
+        const words: string[] = claimType.split(':');
         claimType = words[0].toLowerCase();
         claimValue = words[1];
       }
       else {
         claimType = claimType.toLowerCase();
         // Either get the claim value, or assume 'true'
-        claimValue = claimValue ? claimValue : "true";
+        claimValue = claimValue ? claimValue : 'true';
       }
       // Attempt to find the claim
       ret = auth._claims.find(
-        c => c.type.toLowerCase() == claimType
-          && c.value == claimValue) != null;
+        c => c.type.toLowerCase() === claimType
+          && c.value === claimValue) != null;
     }
 
     return ret;

@@ -36,23 +36,15 @@ namespace WebApplication.Controllers
         [Route("test")]
         public async Task<IActionResult> Test()
         {
-            try
-            {
-
-                var result = await this._userService.GetUserSearch(
-                    new UserSearchRq()
-                    {
-                        Fullname = "",
-                        PhoneNumber = "0355",
-                        Skip = 0,
-                        Take = 10
-                    });
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var result = await this._userService.GetUserSearch(
+                new UserSearchRq()
+                {
+                    Fullname = "",
+                    PhoneNumber = "0355",
+                    Skip = 0,
+                    Take = 10
+                });
+            return Ok(result);
         }
         [Route("login")]
         [HttpPost]

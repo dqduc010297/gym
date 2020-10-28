@@ -21,10 +21,6 @@ namespace WebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> GetLatestInBodyStandard(int? userId)
         {
-            //if(this.GetCurrentRole() == RoleName.MEMBER.ToString())
-            //{
-            //    return Ok(await this._inBodyStandardService.GetLatestInBodyStandard(this.GetCurrentUserId()));
-            //}
             return Ok(await this._inBodyStandardService.GetLatestInBodyStandard((int)userId));
         }
     }
