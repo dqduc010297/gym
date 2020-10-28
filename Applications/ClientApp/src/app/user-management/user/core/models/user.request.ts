@@ -1,8 +1,8 @@
 import { HttpParams } from '@angular/common/http';
+import { IBodyRequest } from 'src/app/core/requests/ibody.request';
+import { IRequest } from 'src/app/core/requests/irequest';
+import { ILoadingRequest } from 'src/app/core/requests/loading.request';
 import { User } from './user';
-import { IBodyRequest } from '../../../core/requests/ibody.request';
-import { IRequest } from '../../../core/requests/irequest';
-import { ILoadingRequest } from '../../../core/requests/loading.request';
 
 export class UserRequest implements IRequest, IBodyRequest, ILoadingRequest {
     body: User = new User();

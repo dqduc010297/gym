@@ -1,9 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormAction, FormState } from 'src/app/core/const/form';
-import { User } from 'src/app/user/core/models/user';
-import { UserRequest } from 'src/app/user/core/models/user.request';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { User } from '../../core/models/user';
+import { UserRequest } from '../../core/models/user.request';
 import { UserAPIService } from '../../core/services/user.api.service';
 
 @Component({

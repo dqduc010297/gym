@@ -73,5 +73,13 @@ namespace WebApplication.Controllers
         {
             return Ok(await this._userService.CreatedUser(user));
         }
+
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> List(string request)
+        {
+            var rq = JsonConvert.DeserializeObject<UserSearchRq>(request);
+            return Ok(await this._userService.GetUsers(rq));
+        }
     }
 }

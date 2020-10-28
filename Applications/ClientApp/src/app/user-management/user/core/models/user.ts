@@ -1,4 +1,4 @@
-import { Gender } from '../../../core/const/gender';
+import { Gender } from 'src/app/core/const/gender';
 
 export class User {
   id: number;

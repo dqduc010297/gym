@@ -17,5 +17,6 @@ namespace ApplicationDomain.Identity.Entities
 		public UserStatus Status { set; get; }
 		public string DropboxToken { set; get; }
 		public string TempPassword { set; get; }
+		public string SearchName { set; get; }
 	}
 }

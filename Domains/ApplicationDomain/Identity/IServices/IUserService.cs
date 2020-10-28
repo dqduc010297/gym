@@ -16,5 +16,6 @@ namespace ApplicationDomain.Identity.IServices
         Task<UserDTO> GetUserInfo(int userId);
         Task<bool> UpdateUserInfo(int userId, UserDTO updatedUser);
         Task<int> CreatedUser(UserDTO createdUser);
+        Task<IEnumerable<UserDTO>> GetUsers(UserSearchRq request);
     }
 }

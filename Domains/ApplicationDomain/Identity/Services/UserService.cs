@@ -35,19 +35,18 @@ namespace ApplicationDomain.Identity.Services
 
         public async Task<IEnumerable<UserSearchRs>> GetUserSearch(UserSearchRq searchRq)
         {
-            List<UserSearchRs> userSearches = new List<UserSearchRs>();
             var users = await this._userManager.Users
                 .Where(p => p.PhoneNumber.Contains(searchRq.PhoneNumber) || p.Fullname.Contains(searchRq.Fullname))
                 .Skip(searchRq.Skip).Take(searchRq.Take)
+                .Select(p => new UserSearchRs()
+                {
+                    Fullname = p.Fullname,
+                    PhoneNumber = p.PhoneNumber,
+                    Id = p.Id
+                })
                 .ToListAsync();
 
-            users.ForEach(u => userSearches.Add(new UserSearchRs()
-            {
-                Fullname = u.Fullname,
-                PhoneNumber = u.PhoneNumber,
-                Id = u.Id
-            }));
-            return userSearches;
+            return users;
         }
         public async Task<IEnumerable<UserMentionRs>> GetUserMention(string fullname)
         {
@@ -146,6 +145,13 @@ namespace ApplicationDomain.Identity.Services
 
             return String.Join(null, _password);
 
+        }
+        public async Task<IEnumerable<UserDTO>> GetUsers(UserSearchRq request)
+        {
+            return await this._userRepository
+                .GetUsersSearchByNameOrPhone(request)
+                .MapQueryTo<UserDTO>(this._mapper)
+                .ToListAsync();
         }
     }
 }
