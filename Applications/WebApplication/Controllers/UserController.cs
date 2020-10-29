@@ -50,10 +50,10 @@ namespace WebApplication.Controllers
         }
 
         [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> GetUserInfo(int userId)
+        [Route("{id}")]
+        public async Task<IActionResult> GetUserInfo(int id)
         {
-            return Ok(await this._userService.GetUserInfo(userId));
+            return Ok(await this._userService.GetUserInfo(id));
         }
 
         [HttpPut]
@@ -74,12 +74,11 @@ namespace WebApplication.Controllers
             return Ok(await this._userService.CreatedUser(user));
         }
 
-        //[HttpGet]
-        //[Route("")]
-        //public async Task<IActionResult> List(string request)
-        //{
-        //    var rq = JsonConvert.DeserializeObject<UserSearchRq>(request);
-        //    return Ok(await this._userService.GetUsers(rq));
-        //}
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> List(PaginationRequest request)
+        {
+            return Ok(await this._userService.GetUsers(request));
+        }
     }
 }

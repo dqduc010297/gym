@@ -37,7 +37,7 @@ namespace ApplicationDomain.Identity.Services
         {
             var users = await this._userManager.Users
                 .Where(p => p.PhoneNumber.Contains(searchRq.PhoneNumber) || p.Fullname.Contains(searchRq.Fullname))
-                .Skip(searchRq.Skip).Take(searchRq.Take)
+                //.Skip(searchRq.Skip).Take(searchRq.Take)
                 .Select(p => new UserSearchRs()
                 {
                     Fullname = p.Fullname,
@@ -146,12 +146,21 @@ namespace ApplicationDomain.Identity.Services
             return String.Join(null, _password);
 
         }
-        public async Task<IEnumerable<UserDTO>> GetUsers(UserSearchRq request)
+        public async Task<PaginationResponse<UserDTO>> GetUsers(PaginationRequest request)
         {
-            return await this._userRepository
-                .GetUsersSearchByNameOrPhone(request)
-                .MapQueryTo<UserDTO>(this._mapper)
-                .ToListAsync();
+            PaginationResponse<UserDTO> result = new PaginationResponse<UserDTO>();
+
+            result.PageNumber = request.PageNumber;
+            result.PageCount = await this._userManager.Users.CountAsync();
+            if(result.PageCount > 0)
+            {
+                result.Data = await this._userManager
+                    .Users
+                    .Skip(request.SkipCount).Take(request.TakeCount)
+                    .MapQueryTo<UserDTO>(this._mapper)
+                    .ToListAsync();
+            }
+            return result;
         }
     }
 }

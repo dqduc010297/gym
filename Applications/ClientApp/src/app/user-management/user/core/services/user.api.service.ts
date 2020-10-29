@@ -16,7 +16,7 @@ export class UserAPIService {
 
   getUser(userRequest: UserRequest): Observable<User> {
     const params = userRequest.createParam();
-    return this.http.get<User>(`${environment.apiUrl}/user?userId=${userRequest.body.id}`, { params });
+    return this.http.get<User>(`${environment.apiUrl}/user/${userRequest.body.id}`, { params });
   }
 
   updateUser(userRequest: UserRequest): Observable<User> {

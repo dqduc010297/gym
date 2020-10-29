@@ -120,7 +120,7 @@ export class AuthService {
   }
 
   public get _loginUser(): LoginUser {
-    if (!this.loginUser._id) {
+    if (this.loginUser._id === -1 || !this.loginUser._id) {
       const token = localStorage.getItem(environment.tokenKey);
       if (token) {
         this.loginUser.updateLoginUser(localStorage.getItem(environment.tokenKey));

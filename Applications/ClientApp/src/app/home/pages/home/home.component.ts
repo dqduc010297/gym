@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    debugger;
     this.myId = this.authService._loginUser._id;
   }
 

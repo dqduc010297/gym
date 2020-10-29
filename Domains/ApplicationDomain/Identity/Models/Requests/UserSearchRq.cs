@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ApplicationDomain.Identity.Models.Requests
 {
-    public class UserSearchRq : FilterRq
+    public class UserSearchRq
     {
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { set; get; }

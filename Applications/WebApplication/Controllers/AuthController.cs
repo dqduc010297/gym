@@ -41,8 +41,8 @@ namespace WebApplication.Controllers
                 {
                     Fullname = "",
                     PhoneNumber = "0355",
-                    Skip = 0,
-                    Take = 10
+                    //Skip = 0,
+                    //Take = 10
                 });
             return Ok(result);
         }
