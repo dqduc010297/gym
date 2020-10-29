@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ApplicationDomain.Common
 {
-    public abstract class PaginationRequest
+    public class PaginationRequest
     {
         protected int _pageNumber;
         protected int _rowsPerPage;

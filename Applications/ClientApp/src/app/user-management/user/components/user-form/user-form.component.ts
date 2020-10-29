@@ -2,9 +2,9 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormAction, FormState } from 'src/app/core/const/form';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { UserAPIService } from 'src/app/user-management/services/user.api.service';
 import { User } from '../../core/models/user';
 import { UserRequest } from '../../core/models/user.request';
-import { UserAPIService } from '../../core/services/user.api.service';
 
 @Component({
   selector: 'app-user-form',

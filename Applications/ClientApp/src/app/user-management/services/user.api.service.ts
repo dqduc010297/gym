@@ -2,16 +2,22 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserRequest } from '../../../user/core/models/user.request';
-import { User } from '../models/user';
-
+import { User } from '../user/core/models/user';
+import { UserRequest } from '../user/core/models/user.request';
+import { UsersRequest } from '../users/models/users.request';
 
 @Injectable({ providedIn: 'root' })
+
 export class UserAPIService {
 
   constructor(
     private http: HttpClient
   ) {
+  }
+
+  list(usersRequest: UsersRequest): Observable<any> {
+    const params = usersRequest.createParam();
+    return this.http.get<any>(`${environment.apiUrl}/user`, { params });
   }
 
   getUser(userRequest: UserRequest): Observable<User> {

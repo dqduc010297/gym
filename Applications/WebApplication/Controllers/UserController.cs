@@ -76,9 +76,10 @@ namespace WebApplication.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> List(PaginationRequest request)
+        public async Task<IActionResult> List(string request)
         {
-            return Ok(await this._userService.GetUsers(request));
+            PaginationRequest requestData = this.TryToParseRequest<PaginationRequest>(request);
+            return Ok(await this._userService.GetUsers(requestData));
         }
     }
 }

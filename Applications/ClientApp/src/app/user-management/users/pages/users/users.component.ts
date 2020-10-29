@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserAPIService } from 'src/app/user-management/services/user.api.service';
+import { UsersRequest } from '../../models/users.request';
 
 @Component({
   selector: 'app-users',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
 
-  constructor() { }
+  usersRequest: UsersRequest = new UsersRequest();
+
+  constructor(
+    private userAPIService: UserAPIService
+  ) { }
 
   ngOnInit(): void {
+    this.userAPIService.list(this.usersRequest).subscribe(
+      result => {
+        console.log(result);
+      }
+    );
   }
 
 }

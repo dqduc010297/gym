@@ -148,11 +148,9 @@ namespace ApplicationDomain.Identity.Services
         }
         public async Task<PaginationResponse<UserDTO>> GetUsers(PaginationRequest request)
         {
-            PaginationResponse<UserDTO> result = new PaginationResponse<UserDTO>();
-
-            result.PageNumber = request.PageNumber;
-            result.PageCount = await this._userManager.Users.CountAsync();
-            if(result.PageCount > 0)
+            int totalRows = await this._userManager.Users.CountAsync();
+            PaginationResponse<UserDTO> result = new PaginationResponse<UserDTO>(request.PageNumber, totalRows, request.RowsPerPage);
+            if (result.PageCount > 0)
             {
                 result.Data = await this._userManager
                     .Users

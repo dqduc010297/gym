@@ -92,6 +92,18 @@ namespace AspNetCore.Mvc
 
             return result;
         }
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public virtual T TryToParseRequest<T>(string request)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(request);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }
