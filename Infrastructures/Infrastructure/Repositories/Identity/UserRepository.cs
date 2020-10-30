@@ -43,12 +43,11 @@ namespace Infrastructure.Repositories.Identity
             return query;
         }
 
-        public IQueryable GetUsersSearchByNameOrPhone(UserSearchRq searchRq)
+        public IQueryable GetUsersSearchByNameOrPhone(string searchTerm)
         {
             var query = _userManager.Users
-                .Where(p => p.SearchName.Contains(StringUtil.GenerateSearchString(searchRq.Fullname))
-                || p.PhoneNumber.Contains(searchRq.PhoneNumber));
-                //.Skip(searchRq.Skip).Take(searchRq.Take);
+                .Where(p => p.SearchName.Contains(StringUtil.GenerateSearchString(searchTerm))
+                || p.PhoneNumber.Contains(searchTerm));
 
             return query;
         }

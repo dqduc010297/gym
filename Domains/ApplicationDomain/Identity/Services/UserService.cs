@@ -146,18 +146,21 @@ namespace ApplicationDomain.Identity.Services
             return String.Join(null, _password);
 
         }
-        public async Task<PaginationResponse<UserDTO>> GetUsers(PaginationRequest request)
+        public async Task<PaginationResponse<UserDTO>> GetUsers(UserListRequest request)
         {
-            int totalRows = await this._userManager.Users.CountAsync();
-            PaginationResponse<UserDTO> result = new PaginationResponse<UserDTO>(request.PageNumber, totalRows, request.RowsPerPage);
-            if (result.PageCount > 0)
-            {
-                result.Data = await this._userManager
-                    .Users
-                    .Skip(request.SkipCount).Take(request.TakeCount)
-                    .MapQueryTo<UserDTO>(this._mapper)
-                    .ToListAsync();
-            }
+            int totalRows = await this._userRepository
+                .GetUsersSearchByNameOrPhone(request.SearchTerm)
+                .MapQueryTo<UserDTO>(this._mapper)
+                .CountAsync();
+
+            PaginationResponse<UserDTO> result = new PaginationResponse<UserDTO>(request.PageNumber, totalRows);
+
+            result.Data = await this._userRepository
+                .GetUsersSearchByNameOrPhone(request.SearchTerm)
+                .MapQueryTo<UserDTO>(this._mapper)
+                .Skip(request.SkipCount).Take(request.TakeCount)
+                .ToListAsync();
+
             return result;
         }
     }

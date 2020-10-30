@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { PaginationResponse } from 'src/app/core/responses/pagination.response';
+import { LoaderService } from 'src/app/core/services/loader.service';
+import { UsersRequest } from 'src/app/user-management/models/users.request';
 import { UserAPIService } from 'src/app/user-management/services/user.api.service';
-import { UsersRequest } from '../../models/users.request';
+import { User } from 'src/app/user-management/user/core/models/user';
 
 @Component({
   selector: 'app-users',
@@ -10,17 +15,40 @@ import { UsersRequest } from '../../models/users.request';
 export class UsersComponent implements OnInit {
 
   usersRequest: UsersRequest = new UsersRequest();
+  usersResponse: PaginationResponse<User> = new PaginationResponse<User>();
 
   constructor(
-    private userAPIService: UserAPIService
+    private userAPIService: UserAPIService,
+    private router: Router,
+    public loaderService: LoaderService,
   ) { }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  onQueryParamsChange(params: NzTableQueryParams): void {
+    this.usersRequest.pageNumber = params.pageIndex;
+    this.loadData();
+  }
+
+  loadData() {
     this.userAPIService.list(this.usersRequest).subscribe(
       result => {
-        console.log(result);
+        this.usersResponse = result;
       }
     );
   }
 
+  detail(id: number) {
+    this.router.navigate([`/user/${id}`]);
+  }
+
+  reload() {
+    this.loadData();
+  }
+
+  createUser() {
+    this.router.navigate([`/user/0`]);
+  }
 }

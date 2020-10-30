@@ -14,6 +14,6 @@ namespace ApplicationDomain.Identity.IRepositories
     public interface IUserRepository : IGenericRepository<User, int>
     {
         Task<IEnumerable<UserOverviewRs>> GetUserOverview(FilterRq request);
-        IQueryable GetUsersSearchByNameOrPhone(UserSearchRq searchRq);
+        IQueryable GetUsersSearchByNameOrPhone(string searchTerm);
     }
 }

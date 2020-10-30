@@ -41,11 +41,13 @@ export class UserFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.activateRouter.params.subscribe(
       params => {
-        if (params.id > 0) {
+        // tslint:disable-next-line: radix
+        const id = Number.parseInt(params.id);
+        if (id > 0) {
           this.loadUser(params.id);
           this.action = FormAction.view;
         }
-        if (params.id === 0) {
+        if (id === 0) {
           this.action = FormAction.create;
         }
       }

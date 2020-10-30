@@ -1,11 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PaginationResponse } from 'src/app/core/responses/pagination.response';
 import { environment } from 'src/environments/environment';
+import { UsersRequest } from '../models/users.request';
 import { User } from '../user/core/models/user';
 import { UserRequest } from '../user/core/models/user.request';
-import { UsersRequest } from '../users/models/users.request';
-
 @Injectable({ providedIn: 'root' })
 
 export class UserAPIService {
@@ -15,9 +15,9 @@ export class UserAPIService {
   ) {
   }
 
-  list(usersRequest: UsersRequest): Observable<any> {
+  list(usersRequest: UsersRequest): Observable<PaginationResponse<User>> {
     const params = usersRequest.createParam();
-    return this.http.get<any>(`${environment.apiUrl}/user`, { params });
+    return this.http.get<PaginationResponse<User>>(`${environment.apiUrl}/user`, { params });
   }
 
   getUser(userRequest: UserRequest): Observable<User> {

@@ -78,7 +78,7 @@ namespace WebApplication.Controllers
         [Route("")]
         public async Task<IActionResult> List(string request)
         {
-            PaginationRequest requestData = this.TryToParseRequest<PaginationRequest>(request);
+            UserListRequest requestData = this.TryToParseRequest<UserListRequest>(request);
             return Ok(await this._userService.GetUsers(requestData));
         }
     }

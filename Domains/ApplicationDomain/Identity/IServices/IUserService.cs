@@ -16,6 +16,6 @@ namespace ApplicationDomain.Identity.IServices
         Task<UserDTO> GetUserInfo(int userId);
         Task<bool> UpdateUserInfo(int userId, UserDTO updatedUser);
         Task<int> CreatedUser(UserDTO createdUser);
-        Task<PaginationResponse<UserDTO>> GetUsers(PaginationRequest request);
+        Task<PaginationResponse<UserDTO>> GetUsers(UserListRequest request);
     }
 }
