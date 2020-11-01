@@ -12,4 +12,5 @@ export class User {
   phoneNumber: string;
   email: string;
   tempPassword: string;
+  roleName: string;
 }

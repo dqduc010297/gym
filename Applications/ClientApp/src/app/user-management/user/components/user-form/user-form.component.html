@@ -17,7 +17,7 @@
           <nz-table nzTemplateMode [nzShowPagination]="false" style="margin: 20px 0;">
             <tbody>
               <tr>
-                <td class="user-detail-title">Phone number:</td>
+                <td class="user-detail-title">Điện thoại:</td>
                 <td *ngIf="action == formAction.view">{{user.phoneNumber}}</td>
                 <td>
                   <input *ngIf="action != formAction.view" nz-input placeholder="Phone number"
@@ -32,7 +32,7 @@
                 </td>
               </tr>
               <tr>
-                <td>Date of birth:</td>
+                <td>Ngày sinh:</td>
                 <td *ngIf="action == formAction.view">{{user.dateOfBirth | date:'dd/MM/yyyy'}}</td>
                 <td>
                   <nz-date-picker *ngIf="action != formAction.view" [(ngModel)]="user.dateOfBirth"
@@ -41,19 +41,29 @@
                 </td>
               </tr>
               <tr>
-                <td>Date joined: </td>
+                <td>Ngày tham gia: </td>
                 <td *ngIf="action == formAction.view">{{user.dateJoined | date:'dd/MM/yyyy'}}</td>
                 <td>
-                  <nz-date-picker *ngIf="action != formAction.view" [(ngModel)]="user.dateJoined"
-                    nzFormat="dd/MM/yyyy">
+                  <nz-date-picker *ngIf="action != formAction.view" [(ngModel)]="user.dateJoined" nzFormat="dd/MM/yyyy">
                   </nz-date-picker>
                 </td>
               </tr>
               <tr *ngIf="user.status == 1">
-                <td>Password: </td>
+                <td>Mật khẩu: </td>
                 <td *ngIf="action == formAction.view">{{user.tempPassword}}</td>
                 <td>
                   <input *ngIf="action != formAction.view" nz-input disabled [(ngModel)]="user.tempPassword" />
+                </td>
+              </tr>
+              <tr>
+                <td>Tài khoản: </td>
+                <td *ngIf="action == formAction.view">{{roleLabel}}</td>
+                <td>
+                  <nz-select *ngIf="action != formAction.view" [(ngModel)]="user.roleName" nzAllowClear
+                    nzPlaceHolder="Chọn loại tài khoản" style="width: 100%;">
+                    <nz-option *ngFor="let option of roleOptions" [nzValue]="option.value" [nzLabel]="option.label">
+                    </nz-option>
+                  </nz-select>
                 </td>
               </tr>
               <tr>
@@ -68,15 +78,14 @@
               </tr>
             </tbody>
           </nz-table>
-          <button nz-button nzType="primary" nzBlock (click)="create()"
-            *ngIf="action == formAction.create">Create</button>
+          <button nz-button nzType="primary" nzBlock (click)="create()" *ngIf="action == formAction.create">Tạo
+            mới</button>
           <div class="row">
             <div class="col-6">
-              <button nz-button nzBlock (click)="discard()" *ngIf="action == formAction.edit">Discard</button>
+              <button nz-button nzBlock (click)="discard()" *ngIf="action == formAction.edit">Bỏ thay đổi</button>
             </div>
             <div class="col-6">
-              <button nz-button nzType="primary" nzBlock (click)="save()"
-                *ngIf="action == formAction.edit">Save</button>
+              <button nz-button nzType="primary" nzBlock (click)="save()" *ngIf="action == formAction.edit">Lưu</button>
             </div>
           </div>
         </div>

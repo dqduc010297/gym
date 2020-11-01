@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ApplicationDomain.Identity.Services
@@ -70,60 +71,41 @@ namespace ApplicationDomain.Identity.Services
 
         public async Task<UserDTO> GetUserInfo(int userId)
         {
-            return await this._userRepository
-                .GetEntitiesQueryableAsync()
-                .MapQueryTo<UserDTO>(this._mapper)
-                .Where(p => p.Id == userId)
-                .FirstOrDefaultAsync();
+            var user = await this._userRepository.GetUsers(p => p.Id == userId);
+            return user.FirstOrDefault();
         }
 
         public async Task<bool> UpdateUserInfo(int userId, UserDTO updatedUser)
         {
-            try
+            var user = await this._userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
             {
-
-                var user = await this._userManager.FindByIdAsync(userId.ToString());
-                if (user == null)
-                {
-                    return false;
-                }
-                this._mapper.Map(updatedUser, user);
-                this._userRepository.Update(user);
-                int effactRow = await this._uow.SaveChangesAsync();
-                if (effactRow == 1)
-                {
-                    return true;
-                }
                 return false;
             }
-            catch (Exception ex)
+            this._mapper.Map(updatedUser, user);
+            this._userRepository.Update(user);
+            int effactRow = await this._uow.SaveChangesAsync();
+            if (effactRow == 1)
             {
-                throw ex;
+                return true;
             }
+            return false;
         }
 
         public async Task<int> CreatedUser(UserDTO createdUser)
         {
-            try
+            User user = new User();
+            this._mapper.Map(createdUser, user);
+            user.TempPassword = GeneratePassword();
+            user.Status = UserStatus.DEACTIVATE;
+            var result = await this._userManager.CreateAsync(user, user.TempPassword);
+            if (result.Succeeded)
             {
-
-                User user = new User();
-                this._mapper.Map(createdUser, user);
-                user.TempPassword = GeneratePassword();
-                user.Status = UserStatus.DEACTIVATE;
-                var result = await this._userManager.CreateAsync(user, user.TempPassword);
-                if (result.Succeeded)
-                {
-                    await this._userManager.AddToRoleAsync(user, RoleName.MEMBER.ToString());
-                    await this._uow.SaveChangesAsync();
-                    return user.Id;
-                }
-                return 0;
+                await this._userManager.AddToRoleAsync(user, createdUser.RoleName);
+                await this._uow.SaveChangesAsync();
+                return user.Id;
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return 0;
         }
 
         private string GeneratePassword(int size = 8)
@@ -148,18 +130,11 @@ namespace ApplicationDomain.Identity.Services
         }
         public async Task<PaginationResponse<UserDTO>> GetUsers(UserListRequest request)
         {
-            int totalRows = await this._userRepository
-                .GetUsersSearchByNameOrPhone(request.SearchTerm)
-                .MapQueryTo<UserDTO>(this._mapper)
-                .CountAsync();
-
+            int totalRows = await this._userRepository.GetUsersSearchByNameOrPhoneCount(request.SearchTerm);
             PaginationResponse<UserDTO> result = new PaginationResponse<UserDTO>(request.PageNumber, totalRows);
-
-            result.Data = await this._userRepository
-                .GetUsersSearchByNameOrPhone(request.SearchTerm)
-                .MapQueryTo<UserDTO>(this._mapper)
-                .Skip(request.SkipCount).Take(request.TakeCount)
-                .ToListAsync();
+            Expression<Func<User, bool>> predicate = p => p.SearchName.Contains(StringUtil.GenerateSearchString(request.SearchTerm))
+              || p.PhoneNumber.Contains(request.SearchTerm);
+            result.Data = await this._userRepository.GetUsers(predicate, request.SkipCount, request.TakeCount);
 
             return result;
         }

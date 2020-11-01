@@ -24,6 +24,17 @@ export class UserFormComponent implements OnInit, OnChanges {
 
   userRequest: UserRequest = new UserRequest();
 
+  roleOptions = [
+    { label: 'Huấn luyện viên', value: 'PERSONAL_TRAINER' },
+    { label: 'Khách hàng', value: 'MEMBER' },
+    { label: 'Master', value: 'MASTER' },
+    { label: 'Quản lý', value: 'MANAGER' },
+    { label: 'SYS_ADMIN', value: 'SYS_ADMIN' },
+    { label: 'Tiếp tân', value: 'RECEPTION' },
+  ];
+
+  roleLabel: string;
+
   constructor(
     private userAPIService: UserAPIService,
     public loaderService: LoaderService,
@@ -61,6 +72,7 @@ export class UserFormComponent implements OnInit, OnChanges {
       result => {
         this.user = result;
         this.storagedUser = JSON.stringify(result);
+        this.roleLabel = this.roleOptions.find(p => p.value === result.roleName).label;
       }
     );
   }
@@ -79,6 +91,7 @@ export class UserFormComponent implements OnInit, OnChanges {
   discard() {
     this.action = this.formAction.view;
     this.user = JSON.parse(this.storagedUser);
+    this.roleLabel = this.roleOptions.find(p => p.value === this.user.roleName).label;
   }
 
   create() {

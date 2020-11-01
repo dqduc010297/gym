@@ -7,6 +7,11 @@ using System.Text;
 
 namespace ApplicationDomain.Identity.Models
 {
+    public class UserRoleTranfer
+    {
+        public User User { set; get; }
+        public Role Role { set; get; }
+    }
     public class UserDTO
     {
         public int Id { set; get; }
@@ -20,6 +25,7 @@ namespace ApplicationDomain.Identity.Models
         public string PhoneNumber { set; get; }
         public string Email { set; get; }
         public string TempPassword { set; get; }
+        public string RoleName { set; get; }
     }
 
     public class UserDTOMapper : Profile
@@ -29,9 +35,6 @@ namespace ApplicationDomain.Identity.Models
             CreateMap<UserDTO, User>()
                 .ForMember(d => d.UserName, opt => opt.MapFrom(s => s.PhoneNumber))
                 .ForMember(d => d.AvatarURL, opt => opt.MapFrom(s => s.AvatarURL.Replace("?raw=1", "")));
-            CreateMap<User, UserDTO>()
-                .ForMember(d => d.AvatarURL, opt => opt.MapFrom(s => s.AvatarURL == null ? AppSettingCommon.GetVariable("DefaultAvatarURL") : $"{s.AvatarURL}?raw=1"))
-                .ForMember(d => d.TempPassword, opt => opt.MapFrom(s => s.Status == UserStatus.DEACTIVATE ? s.TempPassword : ""));
         }
     }
 }
