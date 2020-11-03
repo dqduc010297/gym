@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  appVersion: require('../../package.json').version,
   tokenKey: 'F78CN6nmLQ',
   apiUrl: 'https://localhost:44396/api',
   dropboxHost: 'https://www.dropbox.com/s/',

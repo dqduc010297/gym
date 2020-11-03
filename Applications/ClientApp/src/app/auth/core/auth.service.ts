@@ -22,6 +22,7 @@ export class AuthService {
     return this.authAPIService.login(loginRequest).subscribe(
       result => {
         localStorage.setItem(environment.tokenKey, result.token);
+        localStorage.setItem('appVersion', environment.appVersion);
         this.loginUser.updateLoginUser(result.token);
         if (result.isNeedToChangePassword) {
           this.router.navigate(['auth/change-password']);
