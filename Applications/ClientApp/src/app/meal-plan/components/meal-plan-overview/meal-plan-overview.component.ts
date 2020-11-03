@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AuthService } from 'src/app/auth/core/auth.service';
 import { PermissionService } from 'src/app/auth/core/permission.service';
 
 import { MealPlanPeriod } from '../../core/models/meal-plan-period.model';
@@ -21,12 +22,13 @@ export class MealPlanOverviewComponent implements OnInit, OnChanges {
 
   constructor(
     private mealPlanPeriodAPIService: MealPlanPeriodAPIService,
-    public permissionService: PermissionService
+    private authService: AuthService
   ) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.userId?.currentValue) {
+      this.mealPlanPeriods = [];
       this.mealPlanPeriodAPIService.getList(changes.userId.currentValue).subscribe(
         result => {
           if (result.length === 0) {
@@ -40,11 +42,10 @@ export class MealPlanOverviewComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.permissionService._canCreateOrEditMealPlan());
   }
 
   newTab(): void {
-    if (!this.permissionService._canCreateOrEditMealPlan) {
+    if (!this.authService.isClaimValid('CanCreateOrEditMealPlan')) {
       return;
     }
     this.isHideAddIcon = true;

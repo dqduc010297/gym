@@ -6,7 +6,7 @@
       <app-meal-period [mealPlanPeriod]="mealPeriod" (changeToEditState)="changeToEditState($event)"
         *ngIf="mealPeriod.isView"></app-meal-period>
       <app-editable-meal-period [mealPlanPeriod]="mealPeriod"
-        *ngIf="!mealPeriod.isView && permissionService._canCreateOrEditMealPlan"
+        *ngIf="!mealPeriod.isView && authService.isClaimValid('CanCreateOrEditMealPlan')"
         (submitSuccess)="submitSuccess($event)"></app-editable-meal-period>
     </nz-tab>
   </nz-tabset>

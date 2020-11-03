@@ -22,11 +22,10 @@ namespace WebApplication.Controllers
 
         [HttpGet]
         [Route("search")]
-        public async Task<IActionResult> GetUserSearch(string request)
+        public async Task<IActionResult> Search(string request)
         {
-            var rq = JsonConvert.DeserializeObject<UserSearchRq>(request);
             UserSearchRequest searchRequest = this.TryToParseRequest<UserSearchRequest>(request);
-            return Ok(await this._userService.GetUserSearch(searchRequest));
+            return Ok(await this._userService.Search(searchRequest));
         }
         [HttpGet]
         [Route("mention")]

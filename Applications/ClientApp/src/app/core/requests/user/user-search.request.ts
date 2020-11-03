@@ -3,13 +3,8 @@ import { IFilterRequest } from '../ifilter.request';
 import { IRequest } from '../irequest';
 import { ILoadingRequest } from '../loading.request';
 
-export class UserSearchRequest implements IRequest, IFilterRequest, ILoadingRequest {
-  skip = 0;
-  take = 10;
-
-  roleName: string;
-  phoneNumber: string;
-  fullname: string;
+export class UserSearchRequest implements IRequest, ILoadingRequest {
+  searchTerm: string;
 
   constructor() {
   }

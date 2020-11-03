@@ -91,7 +91,7 @@ export class AuthService {
     return ret;
   }
 
-  private isClaimValid(claimType: string): boolean {
+  public isClaimValid(claimType: string): boolean {
     let ret = false;
     let auth: LoginUser = null;
     let claimValue = '';
@@ -114,7 +114,7 @@ export class AuthService {
       // Attempt to find the claim
       ret = auth._claims.find(
         c => c.type.toLowerCase() === claimType
-          && c.value === claimValue) != null;
+          && c.value.toLocaleLowerCase() === claimValue) != null;
     }
 
     return ret;

@@ -36,13 +36,10 @@ namespace WebApplication.Controllers
         [Route("test")]
         public async Task<IActionResult> Test()
         {
-            var result = await this._userService.GetUserSearch(
+            var result = await this._userService.Search(
                 new UserSearchRequest()
                 {
-                    Fullname = "",
-                    PhoneNumber = "0355",
-                    //Skip = 0,
-                    //Take = 10
+                    SearchTerm = "0355",
                 });
             return Ok(result);
         }

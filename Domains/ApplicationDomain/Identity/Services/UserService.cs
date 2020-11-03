@@ -34,18 +34,18 @@ namespace ApplicationDomain.Identity.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<UserSearchResponse>> GetUserSearch(UserSearchRequest request)
+        public async Task<IEnumerable<UserSearchResponse>> Search(UserSearchRequest request)
         {
             var users = await this._userManager.Users
-                .Where(p => 
-                    p.PhoneNumber.Contains(request.PhoneNumber) || 
-                    p.SearchName.Contains(StringUtil.GenerateSearchString(request.Fullname)))
+                .Where(p =>
+                    p.PhoneNumber.Contains(request.SearchTerm) ||
+                    p.SearchName.Contains(StringUtil.GenerateSearchString(request.SearchTerm)))
                 .Select(p => new UserSearchResponse()
                 {
                     Fullname = p.Fullname,
                     PhoneNumber = p.PhoneNumber,
                     Id = p.Id,
-                    AvatarURL = p.AvatarURL
+                    AvatarURL = p.AvatarURL == null ? AppSettingCommon.GetVariable("DefaultAvatarURL") : $"{p.AvatarURL}?raw=1",
                 })
                 .ToListAsync();
 

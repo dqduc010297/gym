@@ -2,6 +2,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AuthService } from 'src/app/auth/core/auth.service';
 
 @Directive({
+  // tslint:disable-next-line: directive-selector
   selector: '[hasClaim]'
 })
 export class HasClaimDirective {
