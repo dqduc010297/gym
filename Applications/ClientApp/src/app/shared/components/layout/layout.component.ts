@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from 'src/app/core/const/role';
-import { LoginUser } from 'src/app/auth/core/models/login.user';
 import { AuthService } from 'src/app/auth/core/auth.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
-import { env } from 'process';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -22,8 +19,7 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // get version storage 
-    debugger;
+    // get version storage
     const appVersion = localStorage.getItem('appVersion');
     if (appVersion) {
       if (appVersion === environment.appVersion) {
