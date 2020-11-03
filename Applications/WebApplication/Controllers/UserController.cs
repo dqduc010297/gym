@@ -25,7 +25,8 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> GetUserSearch(string request)
         {
             var rq = JsonConvert.DeserializeObject<UserSearchRq>(request);
-            return Ok(await this._userService.GetUserSearch(rq));
+            UserSearchRequest searchRequest = this.TryToParseRequest<UserSearchRequest>(request);
+            return Ok(await this._userService.GetUserSearch(searchRequest));
         }
         [HttpGet]
         [Route("mention")]

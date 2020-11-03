@@ -37,7 +37,7 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> Test()
         {
             var result = await this._userService.GetUserSearch(
-                new UserSearchRq()
+                new UserSearchRequest()
                 {
                     Fullname = "",
                     PhoneNumber = "0355",

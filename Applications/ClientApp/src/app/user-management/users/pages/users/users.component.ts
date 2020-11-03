@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { PaginationResponse } from 'src/app/core/responses/pagination.response';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { User } from 'src/app/user-management/models/user';
 import { UsersRequest } from 'src/app/user-management/models/users.request';
 import { UserAPIService } from 'src/app/user-management/services/user.api.service';
-import { User } from 'src/app/user-management/user/core/models/user';
 
 @Component({
   selector: 'app-users',
