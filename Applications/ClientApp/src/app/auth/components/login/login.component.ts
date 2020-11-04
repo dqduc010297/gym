@@ -26,13 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
+    console.log(123);
     this.authService.login(this.loginRequest);
-    // this.loginMock.doMock().subscribe(
-    //   result => {
-    //     localStorage.setItem(environment.tokenKey, JSON.stringify(result));
-    //     this.authService.currentUserSubject.next(result);
-    //     this.router.navigate(['']);
-    //   }
-    // );
   }
 }

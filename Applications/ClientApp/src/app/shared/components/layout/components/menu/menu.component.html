@@ -6,7 +6,7 @@
   <li nz-submenu nzTitle="Inbody" nzIcon="form" *ngIf="menuType != 'horizontal'">
     <ul>
       <app-menu-item iconType="unordered-list" [url]="['/inbody/list']" title="List"></app-menu-item>
-      <app-menu-item iconType="plus" [url]="['/inbody/new']" title="New"></app-menu-item>
+      <app-menu-item iconType="plus" [url]="['/inbody/new']" title="New" *ngIf="checkPermission('canCreateInBody')"></app-menu-item>
     </ul>
   </li>
   <app-menu-item iconType="form" [url]="['/inbody/list']" *ngIf="menuType == 'horizontal'">

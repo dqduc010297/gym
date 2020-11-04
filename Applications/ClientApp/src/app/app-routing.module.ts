@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Role } from './core/const/role';
 import { AuthGuard } from './core/guards/auth.guard';
-import { PermissionGuard } from './core/guards/permission.guard';
-import { RoleGuard } from './core/guards/role.guard';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { MediaViewComponent } from './shared/components/media-view/media-view.component';
 

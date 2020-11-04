@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { AuthService } from 'src/app/auth/core/auth.service';
-import { PermissionService } from 'src/app/auth/core/permission.service';
 
 import { MealPlanPeriod } from '../../core/models/meal-plan-period.model';
 import { MealPlanPeriodAPIService } from '../../core/services/meal-period.api.service';

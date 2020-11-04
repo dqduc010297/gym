@@ -25,5 +25,9 @@ namespace ApplicationDomain.Common
         {
             return userRole == RoleName.MASTER;
         }
+        public static bool CanCreateInBody(string userRole)
+        {
+            return userRole == RoleName.RECEPTION;
+        }
     }
 }

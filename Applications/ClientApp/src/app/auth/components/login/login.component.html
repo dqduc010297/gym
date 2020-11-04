@@ -1,5 +1,6 @@
 <div class="form">
-  <form nz-form [nzLayout]="'vertical'" [nzAutoTips]="true" class="login-form" (ngSubmit)="signIn()">
+  <form nz-form [nzLayout]="'vertical'" [nzAutoTips]="true" class="login-form" (ngSubmit)="signIn()"
+    (keyup.enter)="signIn()">
     <img src="../../../../../assets/images/logo.png" style="width: 64px; margin-left: 120px; " />
     <h2 style="text-align: center;">Login</h2>
     <nz-form-item>

@@ -9,7 +9,7 @@ import { LoginUser } from 'src/app/auth/core/models/login.user';
 })
 export class MenuComponent implements OnInit {
   @Input() menuType: string;
-  currentUser: LoginUser
+  currentUser: LoginUser;
 
   constructor(
     private authService: AuthService
@@ -19,10 +19,6 @@ export class MenuComponent implements OnInit {
   }
 
   checkPermission(permission: string) {
-    const permissionIndex = this.currentUser._claims.map(p => p.type.toLowerCase()).indexOf(permission.toLowerCase());
-    if (permissionIndex === -1) {
-      return false;
-    }
-    return this.currentUser._claims[permissionIndex].value === 'True';
+    return this.authService.isClaimValid(permission);
   }
 }

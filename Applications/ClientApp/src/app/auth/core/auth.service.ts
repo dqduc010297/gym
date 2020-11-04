@@ -43,6 +43,9 @@ export class AuthService {
     if (localStorage.getItem(environment.tokenKey)) {
       localStorage.removeItem(environment.tokenKey);
     }
+    if (localStorage.getItem('appVersion')) {
+      localStorage.removeItem('appVersion');
+    }
     this.loginUser.resetLoginUser();
     this.router.navigate(['auth/login']);
   }
