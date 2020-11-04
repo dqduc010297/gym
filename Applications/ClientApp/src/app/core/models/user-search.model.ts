@@ -1,5 +1,5 @@
 export class UserSearch {
   id: number;
-  phoneNumber: string;
-  fullName: string;
+  label: string;
+  avatarURL: string;
 }

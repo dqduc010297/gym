@@ -19,14 +19,6 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // get version storage
-    const appVersion = localStorage.getItem('appVersion');
-    if (appVersion) {
-      if (appVersion === environment.appVersion) {
-        return;
-      }
-    }
-    this.logout();
   }
 
   logout() {

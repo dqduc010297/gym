@@ -42,8 +42,7 @@ namespace ApplicationDomain.Identity.Services
                     p.SearchName.Contains(StringUtil.GenerateSearchString(request.SearchTerm)))
                 .Select(p => new UserSearchResponse()
                 {
-                    Fullname = p.Fullname,
-                    PhoneNumber = p.PhoneNumber,
+                    Label = $"{p.PhoneNumber} - {p.Fullname}",
                     Id = p.Id,
                     AvatarURL = p.AvatarURL == null ? AppSettingCommon.GetVariable("DefaultAvatarURL") : $"{p.AvatarURL}?raw=1",
                 })

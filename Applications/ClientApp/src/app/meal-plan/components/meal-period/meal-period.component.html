@@ -2,7 +2,7 @@
     <div class="col-lg-4">
         <div style="text-align: center;">
             <h5>Tổng calo: {{mealPlanPeriod.calo}} calo
-                <i nz-icon nzType="edit" nzTheme="outline" (click)="editMealPlanPeriod()"></i>
+                <i nz-icon nzType="edit" nzTheme="outline" (click)="editMealPlanPeriod()" *hasClaim="'canCreateOrEditMealPlan'"></i>
             </h5>
             <p>Mục tiêu: {{mealPlanPeriod.target}}</p>
             <p>{{mealPlanPeriod.estimateTime[0] | date: 'dd/MM/yyyy'}} -
