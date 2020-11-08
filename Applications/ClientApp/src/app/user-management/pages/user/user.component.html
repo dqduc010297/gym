@@ -1,0 +1,64 @@
+<!-- <div class="row">
+  <div class="col-lg-4">
+    <nz-spin
+      [nzSpinning]="userService.isLoading"
+      [nzTip]="userService.state">
+      <nz-card>
+        <div class="user-summarize">
+          <nz-avatar [nzSize]="92" nzIcon="user" [nzSrc]="userService.user.avatarURL">
+          </nz-avatar>
+          <p>{{userService.user.fullname}}</p>
+          <i nz-icon nzType="edit" nzTheme="outline" (click)="edit()"></i>
+        </div>
+        <div class="user-detail">
+          <nz-table nzTemplateMode [nzShowPagination]="false" style="margin: 20px 0;">
+            <tbody>
+              <tr>
+                <td class="user-detail-title">Điện thoại:</td>
+                <td>{{userService.user.phoneNumber}}</td>
+              </tr>
+              <tr>
+                <td>Email:</td>
+                <td>{{userService.user.email}}</td>
+              </tr>
+              <tr>
+                <td>Ngày sinh:</td>
+                <td>{{userService.user.dateOfBirth | date:'dd/MM/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td>Ngày tham gia: </td>
+                <td>{{userService.user.dateJoined | date:'dd/MM/yyyy'}}</td>
+              </tr>
+              <tr *ngIf="userService.user.status == 1">
+                <td>Mật khẩu: </td>
+                <td>{{userService.user.tempPassword}}</td>
+              </tr>
+              <tr>
+                <td>Tài khoản: </td>
+                <td>{{userService.user.roleLabel}}</td>
+              </tr>
+              <tr>
+                <td>Dropbox link: </td>
+                <td>
+                  {{userService.user.dropBoxTokenDisplay}}
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </div>
+      </nz-card>
+    </nz-spin>
+  </div>
+  <div class="col-lg-8">
+    <nz-card style="min-height: 80vh;">
+      <nz-tabset>
+        <nz-tab nzTitle="Các gói tập">
+          <app-waiting></app-waiting>
+        </nz-tab>
+        <nz-tab nzTitle="Các gói tập PT">
+          <app-waiting></app-waiting>
+        </nz-tab>
+      </nz-tabset>
+    </nz-card>
+  </div>
+</div> -->

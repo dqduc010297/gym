@@ -9,6 +9,7 @@ import { NgZorroAntModule } from './ng-zorro-antd.module';
 import { MediaViewComponent } from './components/media-view/media-view.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { HasClaimDirective } from './directives/has-claim.directive';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { HasClaimDirective } from './directives/has-claim.directive';
     UserSelectComponent,
     UserMentionComponent,
     MediaViewComponent,
+    ErrorPageComponent,
   ],
   providers: [
     DatePipe
@@ -43,6 +45,7 @@ import { HasClaimDirective } from './directives/has-claim.directive';
     UserSelectComponent,
     UserMentionComponent,
     MediaViewComponent,
+    ErrorPageComponent
   ],
   entryComponents: [
   ]

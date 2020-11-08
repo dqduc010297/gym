@@ -1,5 +1,4 @@
 import { Gender } from 'src/app/core/const/gender';
-import { RoleOptions } from 'src/app/core/const/role';
 
 export class User {
   id: number;
@@ -14,10 +13,4 @@ export class User {
   email: string;
   tempPassword: string;
   roleName: string;
-
-  dropboxTokenDisplay: string;
-
-  public get roleLabel() {
-    return RoleOptions.find(p => p.value === this.roleName)?.label;
-  }
 }

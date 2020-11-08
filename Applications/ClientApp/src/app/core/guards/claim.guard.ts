@@ -13,7 +13,7 @@ export class ClaimGuard implements CanActivate {
     return true;
   }
   else {
-    this.authService.logout();
+    this.router.navigate(['error-page']);
     return false;
   }
   }

@@ -1,7 +1,7 @@
 <ul nz-menu nzTheme="light" [nzMode]="menuType"
   [ngClass]="{'d-sm-block d-md-none d-flex justify-content-around': menuType == 'horizontal'}"
   [ngStyle]="{'line-height: 48px;': menuType == 'horizontal'}">
-  <app-menu-item iconType="home" [url]="['/home']" title="Home" [isShowTitle]="menuType != 'horizontal'">
+  <!-- <app-menu-item iconType="home" [url]="['/home']" title="Home" [isShowTitle]="menuType != 'horizontal'">
   </app-menu-item>
   <li nz-submenu nzTitle="Inbody" nzIcon="form" *ngIf="menuType != 'horizontal'">
     <ul>
@@ -21,5 +21,19 @@
   </app-menu-item>
   <app-menu-item iconType="user" [url]="['/users']" title="User" [isShowTitle]="menuType != 'horizontal'"
     *ngIf="menuType != 'horizontal' && checkPermission('canViewUserMenu')">
-  </app-menu-item>
+  </app-menu-item> -->
+  <ng-container *ngFor="let menu of menuItems">
+    <ng-container *ngIf="menu.isShow">
+      <app-menu-item [iconType]="menu.icon" [url]="menu.url" [title]="menu.title"
+        [isShowTitle]="menuType != 'horizontal'" *ngIf="menu.children.length == 0">
+      </app-menu-item>
+      <li nz-submenu [nzTitle]="menu.title" [nzIcon]="menu.icon" *ngIf="menu.children.length > 0">
+        <ul>
+          <ng-container *ngFor="let submenu of menu.children">
+            <app-menu-item [iconType]="submenu.icon" [url]="submenu.url" [title]="submenu.title"></app-menu-item>
+          </ng-container>
+        </ul>
+      </li>
+    </ng-container>
+  </ng-container>
 </ul>

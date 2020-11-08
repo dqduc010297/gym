@@ -2,11 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PaginationResponse } from 'src/app/core/responses/pagination.response';
-import { User } from 'src/app/user-management/models/user';
-import { UserRequest } from 'src/app/user-managements/models/user.request';
-import { UsersRequest } from 'src/app/user-managements/models/users.request';
 import { environment } from 'src/environments/environment';
-
+import { UsersRequest } from '../models/users.request';
+import { UserRequest } from '../models/user.request';
+import { User } from '../models/user';
 @Injectable({ providedIn: 'root' })
 
 export class UserAPIService {

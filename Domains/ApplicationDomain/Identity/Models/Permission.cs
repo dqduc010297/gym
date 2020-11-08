@@ -14,6 +14,8 @@ namespace ApplicationDomain.Identity.Models
         {
             this._currentRole = currentRole;
         }
+
+        // Permission
         public bool CanCreateOrEditMealPlan { get { return PermissionChecker.CanCreateMealPlan(this._currentRole); } }
         public bool CanApproveMealPlan { get { return PermissionChecker.CanApproveMealPlan(this._currentRole); } }
         public bool CanCreateUser { get { return PermissionChecker.CanCreateUser(this._currentRole); } }
