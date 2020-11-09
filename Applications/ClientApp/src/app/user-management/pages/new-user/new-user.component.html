@@ -1,1 +1,82 @@
-<p>new-user works!</p>
+<div class="row">
+    <div class="col-lg-4">
+        <!-- <nz-spin [nzSpinning]="false" [nzTip]="userService.state"> -->
+            <nz-card>
+                <div class="user-summarize">
+                    <app-uploader style="height: 200px;" uploadStyle="upload" isAvatar="true"
+                        (uploaded)="uploaded($event)" [uploadedPath]="user.avatarURL"></app-uploader>
+                    <input nz-input placeholder="Fullname" [(ngModel)]="user.fullname" />
+                </div>
+                <div class="user-detail">
+                    <nz-table nzTemplateMode [nzShowPagination]="false" style="margin: 20px 0;">
+                        <tbody>
+                            <tr>
+                                <td class="user-detail-title">Điện thoại:</td>
+                                <td>
+                                    <input nz-input placeholder="Phone number" [(ngModel)]="user.phoneNumber" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td>
+                                    <input nz-input placeholder="Email" [(ngModel)]="user.email" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày sinh:</td>
+                                <td>
+                                    <nz-date-picker [(ngModel)]="user.dateOfBirth" nzFormat="dd/MM/yyyy">
+                                    </nz-date-picker>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày tham gia: </td>
+                                <td>
+                                    <nz-date-picker [(ngModel)]="user.dateJoined" nzFormat="dd/MM/yyyy">
+                                    </nz-date-picker>
+                                </td>
+                            </tr>
+                            <tr *ngIf="user.status == 1">
+                                <td>Mật khẩu: </td>
+                                <td>
+                                    <input nz-input disabled [(ngModel)]="user.tempPassword" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tài khoản: </td>
+                                <td>
+                                    <nz-select [(ngModel)]="user.roleName" nzAllowClear
+                                        nzPlaceHolder="Chọn loại tài khoản" style="width: 100%;">
+                                        <nz-option *ngFor="let option of roleOptions" [nzValue]="option.value"
+                                            [nzLabel]="option.label">
+                                        </nz-option>
+                                    </nz-select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dropbox link: </td>
+                                <td>
+                                    <textarea nz-input placeholder="Dropbox link" [(ngModel)]="user.dropboxToken"
+                                        [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                    <button nz-button nzType="primary" nzBlock (click)="create()">Tạo mới</button>
+                </div>
+            </nz-card>
+        <!-- </nz-spin> -->
+    </div>
+    <div class="col-lg-8">
+        <nz-card style="min-height: 80vh;">
+            <nz-tabset>
+                <nz-tab nzTitle="Các gói tập">
+                    <app-waiting></app-waiting>
+                </nz-tab>
+                <nz-tab nzTitle="Các gói tập PT">
+                    <app-waiting></app-waiting>
+                </nz-tab>
+            </nz-tabset>
+        </nz-card>
+    </div>
+</div>

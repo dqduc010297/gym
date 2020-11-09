@@ -27,6 +27,7 @@ namespace WebApplication.Controllers
             UserSearchRequest searchRequest = this.TryToParseRequest<UserSearchRequest>(request);
             return Ok(await this._userService.Search(searchRequest));
         }
+
         [HttpGet]
         [Route("mention")]
         public async Task<IActionResult> GetUserMention(string fullname)
@@ -35,32 +36,17 @@ namespace WebApplication.Controllers
         }
 
         [HttpGet]
-        [Route("overview")]
-        public async Task<IActionResult> GetUserOverview(string request)
-        {
-            try
-            {
-                var rq = JsonConvert.DeserializeObject<FilterRq>(request);
-                return Ok(await this._userService.GetUserOverviews(rq));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
-
-        [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetUserInfo(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return Ok(await this._userService.GetUserInfo(id));
+            return Ok(await this._userService.GetUser(id));
         }
 
         [HttpPut]
         [Route("")]
-        public async Task<IActionResult> UpdateUserInfo(int userId, [FromBody] UserDTO user)
+        public async Task<IActionResult> Update(int userId, [FromBody] UserDTO user)
         {
-            if (await this._userService.UpdateUserInfo(userId, user))
+            if (await this._userService.UpdateUser(userId, user))
             {
                 return Ok();
             }
@@ -69,7 +55,7 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CreateUserInfo([FromBody] UserDTO user)
+        public async Task<IActionResult> Create([FromBody] UserDTO user)
         {
             return Ok(await this._userService.CreatedUser(user));
         }

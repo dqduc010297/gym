@@ -14,10 +14,4 @@ export class User {
   email: string;
   tempPassword: string;
   roleName: string;
-
-  dropboxTokenDisplay: string;
-
-  public get roleLabel() {
-    return RoleOptions.find(p => p.value === this.roleName)?.label;
-  }
 }

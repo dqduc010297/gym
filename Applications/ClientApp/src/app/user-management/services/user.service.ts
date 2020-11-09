@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { FormState } from 'src/app/core/const/form';
 import { LoaderService } from 'src/app/core/services/loader.service';
-import { UserRequest } from 'src/app/user-managements/models/user.request';
 import { User } from '../models/user';
+import { UserRequest } from '../models/user.request';
 import { UserAPIService } from './user.api.service';
 
 @Injectable({ providedIn: 'root' })
-export class UserService {
+export class UserService implements OnDestroy {
+  private loadedUser = new BehaviorSubject(null);
   state: FormState;
-  user: User;
+  user = this.loadedUser.asObservable();
   userId: number;
   storagedUser: string;
   userRequest: UserRequest = new UserRequest();
@@ -21,6 +23,10 @@ export class UserService {
   ) {
   }
 
+  ngOnDestroy(): void {
+    this.loadedUser.unsubscribe();
+  }
+
   public get isLoading() {
     return this.loaderService.isShowLoader(this.userRequest.getLoadingKey());
   }
@@ -30,7 +36,7 @@ export class UserService {
   }
 
   navigateToUser(id: number) {
-    this.router.navigate([`users/${id}`]);
+    this.router.navigate([`users/detail/${id}`]);
   }
 
   navigateToEditUser(id: number) {
@@ -41,31 +47,41 @@ export class UserService {
     this.router.navigate(['/users']);
   }
 
-  loadUser() {
-    if (this.user?.id !== this.userId) {
-      this.userRequest.body.id = this.userId;
-      this.state = FormState.loading;
-      this.userAPIService.getUser(this.userRequest).pipe().subscribe(
-        result => {
-          this.user = result;
-          this.storagedUser = JSON.stringify(result);
-        }
-      );
-    }
+  loadUser(id: number) {
+    this.userRequest.body.id = id;
+    this.state = FormState.loading;
+    this.userAPIService.getUser(this.userRequest).pipe().subscribe(
+      result => {
+        this.storagedUser = JSON.stringify(result);
+        this.loadedUser.next(result);
+      }
+    );
   }
 
   discard() {
-    this.user = JSON.parse(this.storagedUser);
-    this.navigateToUser(this.user.id);
+    const storagedUser: User = JSON.parse(this.storagedUser);
+    this.loadedUser.next(storagedUser);
+    this.navigateToUser(storagedUser.id);
   }
 
-  save() {
+  save(savedUser: User) {
     this.state = FormState.saving;
-    this.userRequest.body = this.user;
+    this.userRequest.body = savedUser;
     this.userAPIService.updateUser(this.userRequest).subscribe(
       () => {
-        this.storagedUser = JSON.stringify(this.user);
-        this.navigateToUser(this.user.id);
+        this.storagedUser = JSON.stringify(savedUser);
+        this.loadedUser.next(savedUser);
+        this.navigateToUser(savedUser.id);
+      }
+    );
+  }
+
+  create(createdUser: User) {
+    this.state = FormState.creating;
+    this.userRequest.body = createdUser;
+    this.userAPIService.createUser(this.userRequest).subscribe(
+      result => {
+        this.navigateToUser(Number.parseInt(result));
       }
     );
   }

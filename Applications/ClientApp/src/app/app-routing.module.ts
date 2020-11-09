@@ -13,10 +13,6 @@ const routes: Routes = [
       { path: 'timesheet', loadChildren: () => import('./features/timesheet/timesheet.module').then(m => m.TimesheetModule) },
       { path: 'goal', loadChildren: () => import('./features/goal/goal.module').then(m => m.GoalModule) },
       { path: 'inbody', loadChildren: () => import('./inbody/inbody.module').then(m => m.InbodyModule) },
-      // {
-      //   path: 'user',
-      //   loadChildren: () => import('./user-managements/user/user.module').then(m => m.UserModule)
-      // },
       {
         path: 'users',
         loadChildren: () => import('./user-management/user-management.module').then(m => m.UserManagementModule)

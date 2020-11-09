@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PaginationResponse } from 'src/app/core/responses/pagination.response';
 import { User } from 'src/app/user-management/models/user';
-import { UserRequest } from 'src/app/user-managements/models/user.request';
-import { UsersRequest } from 'src/app/user-managements/models/users.request';
 import { environment } from 'src/environments/environment';
+import { UserRequest } from '../models/user.request';
+import { UsersRequest } from '../models/users.request';
 
 @Injectable({ providedIn: 'root' })
 

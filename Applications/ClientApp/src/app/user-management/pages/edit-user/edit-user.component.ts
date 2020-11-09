@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoleOptions } from 'src/app/core/const/role';
 import { LoaderService } from 'src/app/core/services/loader.service';
-import { UserRequest } from 'src/app/user-managements/models/user.request';
+import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 
 
@@ -12,30 +12,43 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
+  user: User = new User();
   roleOptions = RoleOptions;
 
   constructor(
     public loaderService: LoaderService,
-    private activateRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     public userService: UserService,
   ) { }
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe(
-      params => {
-        // tslint:disable-next-line: radix
-        this.userService.loadUser();
+    this.userService.user.subscribe(
+      user => {
+        if (user) {
+          this.user = user;
+        } else {
+          this.activatedRoute.params.subscribe(
+            params => {
+              if (params.id) {
+                // tslint:disable-next-line: radix
+                this.userService.loadUser(Number.parseInt(params.id));
+              }
+            }
+          );
+        }
       }
     );
   }
 
   save() {
-    this.userService.save();
+    this.userService.save(this.user);
   }
 
   discard() {
     this.userService.discard();
   }
 
-  uploaded(event) { }
+  uploaded(event: any) {
+    this.user.avatarURL = event.uploadedPath;
+  }
 }

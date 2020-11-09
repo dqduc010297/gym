@@ -1,13 +1,13 @@
-<!-- <div class="row">
+<div class="row">
   <div class="col-lg-4">
     <nz-spin
       [nzSpinning]="userService.isLoading"
       [nzTip]="userService.state">
       <nz-card>
         <div class="user-summarize">
-          <nz-avatar [nzSize]="92" nzIcon="user" [nzSrc]="userService.user.avatarURL">
+          <nz-avatar [nzSize]="92" nzIcon="user" [nzSrc]="user.avatarURL">
           </nz-avatar>
-          <p>{{userService.user.fullname}}</p>
+          <p>{{user.fullname}}</p>
           <i nz-icon nzType="edit" nzTheme="outline" (click)="edit()"></i>
         </div>
         <div class="user-detail">
@@ -15,32 +15,32 @@
             <tbody>
               <tr>
                 <td class="user-detail-title">Điện thoại:</td>
-                <td>{{userService.user.phoneNumber}}</td>
+                <td>{{user.phoneNumber}}</td>
               </tr>
               <tr>
                 <td>Email:</td>
-                <td>{{userService.user.email}}</td>
+                <td>{{user.email}}</td>
               </tr>
               <tr>
                 <td>Ngày sinh:</td>
-                <td>{{userService.user.dateOfBirth | date:'dd/MM/yyyy'}}</td>
+                <td>{{user.dateOfBirth | date:'dd/MM/yyyy'}}</td>
               </tr>
               <tr>
                 <td>Ngày tham gia: </td>
-                <td>{{userService.user.dateJoined | date:'dd/MM/yyyy'}}</td>
+                <td>{{user.dateJoined | date:'dd/MM/yyyy'}}</td>
               </tr>
-              <tr *ngIf="userService.user.status == 1">
+              <tr *ngIf="user.status == 1">
                 <td>Mật khẩu: </td>
-                <td>{{userService.user.tempPassword}}</td>
+                <td>{{user.tempPassword}}</td>
               </tr>
               <tr>
                 <td>Tài khoản: </td>
-                <td>{{userService.user.roleLabel}}</td>
+                <td>{{roleLabel}}</td>
               </tr>
               <tr>
                 <td>Dropbox link: </td>
                 <td>
-                  {{userService.user.dropBoxTokenDisplay}}
+                  {{dropboxTokenDisplay}}
                 </td>
               </tr>
             </tbody>
@@ -61,4 +61,4 @@
       </nz-tabset>
     </nz-card>
   </div>
-</div> -->
+</div>

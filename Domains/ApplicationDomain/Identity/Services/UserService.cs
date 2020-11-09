@@ -70,13 +70,13 @@ namespace ApplicationDomain.Identity.Services
             return await this._userRepository.GetUserOverview(request);
         }
 
-        public async Task<UserDTO> GetUserInfo(int userId)
+        public async Task<UserDTO> GetUser(int userId)
         {
             var user = await this._userRepository.GetUsers(p => p.Id == userId);
             return user.FirstOrDefault();
         }
 
-        public async Task<bool> UpdateUserInfo(int userId, UserDTO updatedUser)
+        public async Task<bool> UpdateUser(int userId, UserDTO updatedUser)
         {
             var user = await this._userManager.FindByIdAsync(userId.ToString());
             if (user == null)

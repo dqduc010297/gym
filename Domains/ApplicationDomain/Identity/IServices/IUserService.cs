@@ -13,8 +13,8 @@ namespace ApplicationDomain.Identity.IServices
         Task<IEnumerable<UserSearchResponse>> Search(UserSearchRequest request);
         Task<IEnumerable<UserMentionRs>> GetUserMention(string fullname);
         Task<IEnumerable<UserOverviewRs>> GetUserOverviews(FilterRq request);
-        Task<UserDTO> GetUserInfo(int userId);
-        Task<bool> UpdateUserInfo(int userId, UserDTO updatedUser);
+        Task<UserDTO> GetUser(int userId);
+        Task<bool> UpdateUser(int userId, UserDTO updatedUser);
         Task<int> CreatedUser(UserDTO createdUser);
         Task<PaginationResponse<UserDTO>> GetUsers(UserListRequest request);
     }

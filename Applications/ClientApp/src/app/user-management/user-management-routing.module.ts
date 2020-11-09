@@ -6,7 +6,7 @@ import { UserComponent } from './pages/user/user.component';
 import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [
-  { path: ':id', component: UserComponent },
+  { path: 'detail/:id', component: UserComponent },
   { path: 'edit/:id', component: EditUserComponent },
   { path: 'new', component: NewUserComponent },
   { path: '', component: UsersComponent },

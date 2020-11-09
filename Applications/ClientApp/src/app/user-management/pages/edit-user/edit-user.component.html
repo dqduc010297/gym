@@ -1,11 +1,11 @@
-<!-- <div class="row">
+<div class="row">
   <div class="col-lg-4">
     <nz-spin [nzSpinning]="userService.isLoading" [nzTip]="userService.state">
       <nz-card>
         <div class="user-summarize">
           <app-uploader style="height: 200px;" uploadStyle="upload" isAvatar="true" (uploaded)="uploaded($event)"
-            [uploadedPath]="userService.user.avatarURL"></app-uploader>
-          <input nz-input placeholder="Fullname" [(ngModel)]="userService.user.fullname" />
+            [uploadedPath]="user.avatarURL"></app-uploader>
+          <input nz-input placeholder="Fullname" [(ngModel)]="user.fullname" />
         </div>
         <div class="user-detail">
           <nz-table nzTemplateMode [nzShowPagination]="false" style="margin: 20px 0;">
@@ -13,39 +13,39 @@
               <tr>
                 <td class="user-detail-title">Điện thoại:</td>
                 <td>
-                  <input nz-input placeholder="Phone number" [(ngModel)]="userService.user.phoneNumber" />
+                  <input nz-input placeholder="Phone number" [(ngModel)]="user.phoneNumber" />
                 </td>
               </tr>
               <tr>
                 <td>Email:</td>
                 <td>
-                  <input nz-input placeholder="Email" [(ngModel)]="userService.user.email" />
+                  <input nz-input placeholder="Email" [(ngModel)]="user.email" />
                 </td>
               </tr>
               <tr>
                 <td>Ngày sinh:</td>
                 <td>
-                  <nz-date-picker [(ngModel)]="userService.user.dateOfBirth" nzFormat="dd/MM/yyyy">
+                  <nz-date-picker [(ngModel)]="user.dateOfBirth" nzFormat="dd/MM/yyyy">
                   </nz-date-picker>
                 </td>
               </tr>
               <tr>
                 <td>Ngày tham gia: </td>
                 <td>
-                  <nz-date-picker [(ngModel)]="userService.user.dateJoined" nzFormat="dd/MM/yyyy">
+                  <nz-date-picker [(ngModel)]="user.dateJoined" nzFormat="dd/MM/yyyy">
                   </nz-date-picker>
                 </td>
               </tr>
-              <tr *ngIf="userService.user.status == 1">
+              <tr *ngIf="user.status == 1">
                 <td>Mật khẩu: </td>
                 <td>
-                  <input nz-input disabled [(ngModel)]="userService.user.tempPassword" />
+                  <input nz-input disabled [(ngModel)]="user.tempPassword" />
                 </td>
               </tr>
               <tr>
                 <td>Tài khoản: </td>
                 <td>
-                  <nz-select [(ngModel)]="userService.user.roleName" nzAllowClear nzPlaceHolder="Chọn loại tài khoản"
+                  <nz-select [(ngModel)]="user.roleName" nzAllowClear nzPlaceHolder="Chọn loại tài khoản"
                     style="width: 100%;">
                     <nz-option *ngFor="let option of roleOptions" [nzValue]="option.value" [nzLabel]="option.label">
                     </nz-option>
@@ -55,7 +55,7 @@
               <tr>
                 <td>Dropbox link: </td>
                 <td>
-                  <textarea nz-input placeholder="Dropbox link" [(ngModel)]="userService.user.dropboxToken"
+                  <textarea nz-input placeholder="Dropbox link" [(ngModel)]="user.dropboxToken"
                     [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
                 </td>
               </tr>
@@ -85,4 +85,4 @@
       </nz-tabset>
     </nz-card>
   </div>
-</div> -->
+</div>
