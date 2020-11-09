@@ -32,19 +32,19 @@ export class UserService implements OnDestroy {
   }
 
   navigateToNewUser() {
-    this.router.navigate(['users/new']);
+    this.router.navigate(['user/new']);
   }
 
   navigateToUser(id: number) {
-    this.router.navigate([`users/detail/${id}`]);
+    this.router.navigate([`user/detail/${id}`]);
   }
 
   navigateToEditUser(id: number) {
-    this.router.navigate([`users/edit/${id}`]);
+    this.router.navigate([`user/edit/${id}`]);
   }
 
   navigateToUsers() {
-    this.router.navigate(['/users']);
+    this.router.navigate(['/user']);
   }
 
   loadUser(id: number) {
@@ -81,6 +81,7 @@ export class UserService implements OnDestroy {
     this.userRequest.body = createdUser;
     this.userAPIService.createUser(this.userRequest).subscribe(
       result => {
+        // tslint:disable-next-line: radix
         this.navigateToUser(Number.parseInt(result));
       }
     );

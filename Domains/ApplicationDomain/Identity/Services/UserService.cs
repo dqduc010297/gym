@@ -99,6 +99,7 @@ namespace ApplicationDomain.Identity.Services
             this._mapper.Map(createdUser, user);
             user.TempPassword = GeneratePassword();
             user.Status = UserStatus.DEACTIVATE;
+            user.SearchName = StringUtil.GenerateSearchString(user.Fullname);
             var result = await this._userManager.CreateAsync(user, user.TempPassword);
             if (result.Succeeded)
             {

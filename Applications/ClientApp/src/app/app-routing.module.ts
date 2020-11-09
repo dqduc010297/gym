@@ -14,7 +14,7 @@ const routes: Routes = [
       { path: 'goal', loadChildren: () => import('./features/goal/goal.module').then(m => m.GoalModule) },
       { path: 'inbody', loadChildren: () => import('./inbody/inbody.module').then(m => m.InbodyModule) },
       {
-        path: 'users',
+        path: 'user',
         loadChildren: () => import('./user-management/user-management.module').then(m => m.UserManagementModule)
       },
       {

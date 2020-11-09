@@ -24,6 +24,7 @@ export class MenuComponent implements OnInit {
     { title: 'InBody', icon: 'form', url: '/inbody', isShow: true, children: [] },
     { title: 'Goal', icon: 'aim', url: '/goal', isShow: true, children: [] },
     { title: 'Album', icon: 'appstore', url: '/album', isShow: true, children: [] },
+    { title: 'User', icon: 'user', url: '/user', isShow: true, children: [] },
   ];
   constructor(
     private authService: AuthService

@@ -5,12 +5,12 @@ import { InbodyComponent } from './pages/inbody/inbody.component';
 import { NewInbodyComponent } from './pages/new-inbody/new-inbody.component';
 
 const routes: Routes = [
-  { path: 'list', component: InbodyComponent },
+  { path: '', component: InbodyComponent },
   {
     path: 'new',
     component: NewInbodyComponent,
-    canActivate: [ClaimGuard],
-    data: { claimName: 'canCreateInBody' }
+    // canActivate: [ClaimGuard],
+    // data: { claimName: 'canCreateInBody' }
   },
 ];
 
