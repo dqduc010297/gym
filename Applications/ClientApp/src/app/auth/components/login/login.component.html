@@ -1,8 +1,11 @@
 <div class="form">
   <form nz-form [nzLayout]="'vertical'" [nzAutoTips]="true" class="login-form" (ngSubmit)="signIn()"
     (keyup.enter)="signIn()">
-    <img src="../../../../../assets/images/logo.png" style="width: 64px; margin-left: 120px; " />
-    <h2 style="text-align: center;">Login</h2>
+    <div class="row h-100 justify-content-center align-items-center">
+      <img src="../../../../../assets/images/logo.png" style="width: 60%; margin-bottom: 40px;" />
+    </div>
+   
+    <!-- <h2 style="text-align: center;">Login</h2> -->
     <nz-form-item>
       <nz-form-label>Username</nz-form-label>
       <nz-form-control nzHasFeedback nzErrorTip="Vui lòng nhập tên đăng nhập">

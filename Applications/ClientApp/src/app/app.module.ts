@@ -22,6 +22,9 @@ import { httpInterceptorProviders } from './core/interceptors';
 import { MenuItemComponent } from './shared/components/layout/components/menu-item/menu-item.component';
 import { MenuComponent } from './shared/components/layout/components/menu/menu.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 registerLocaleData(vi);
 
@@ -45,6 +48,9 @@ registerLocaleData(vi);
     NzToolTipModule,
     NzIconModule,
     NzSpinModule,
+    NzDividerModule,
+    NzBreadCrumbModule,
+    NzButtonModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
