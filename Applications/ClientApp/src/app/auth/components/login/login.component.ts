@@ -17,16 +17,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     public loaderService: LoaderService,
-    private loginMock: LoginMock,
-    private router: Router,
   ) { }
 
   ngOnInit(): void {
-    console.log(this.loginRequest);
   }
 
   signIn() {
-    console.log(123);
     this.authService.login(this.loginRequest);
   }
 }

@@ -37,7 +37,7 @@ namespace Infrastructure.Repositories.Identity
                                    Id = user.Id,
                                    PhoneNumber = user.PhoneNumber,
                                    UserRoleName = role.Name,
-                                   Avatar = user.AvatarURL ?? "",
+                                   Avatar = user.AvatarURL == null ? "" : $"{user.AvatarURL}?raw=1",
                                    Fullname = user.Fullname,
                                })
                          .Skip(request.Skip).Take(request.Take)
@@ -67,7 +67,7 @@ namespace Infrastructure.Repositories.Identity
                              DateOfBirth = user.DateOfBirth,
                              Gender = user.Gender,
                              DateJoined = user.DateJoined,
-                             AvatarURL = user.AvatarURL == null ? AppSettingCommon.GetVariable("DefaultAvatarURL") : $"{user.AvatarURL}?raw=1",
+                             AvatarURL = user.AvatarURL == null ? "" : $"{user.AvatarURL}?raw=1",
                              Status = user.Status,
                              DropboxToken = user.DropboxToken,
                              PhoneNumber = user.PhoneNumber,

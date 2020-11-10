@@ -44,7 +44,7 @@ namespace ApplicationDomain.Identity.Services
                 {
                     Label = $"{p.PhoneNumber} - {p.Fullname}",
                     Id = p.Id,
-                    AvatarURL = p.AvatarURL == null ? AppSettingCommon.GetVariable("DefaultAvatarURL") : $"{p.AvatarURL}?raw=1",
+                    AvatarURL = p.AvatarURL == null ? "" : $"{p.AvatarURL}?raw=1",
                 })
                 .ToListAsync();
 
@@ -60,7 +60,7 @@ namespace ApplicationDomain.Identity.Services
             {
                 Id = u.Id,
                 Fullname = u.Fullname,
-                AvatarURL = u.AvatarURL ?? AppSettingCommon.GetVariable("DefaultAvatarURL"),
+                AvatarURL = u.AvatarURL == null ? "" : $"{u.AvatarURL}?raw=1",
             }));
             return userMentions;
         }

@@ -91,6 +91,7 @@ namespace ApplicationDomain.Identity.Services
                 UserName = user.UserName,
             };
             List<Claim> customClaims = new List<Claim>();
+            customClaims.Add(new Claim("avatarURL", user.AvatarURL ?? ""));
             // grant permission
             Permission permission = new Permission(roles.FirstOrDefault());
 

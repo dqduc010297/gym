@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 export class LayoutComponent implements OnInit {
   isCollapsed = false;
   isLogin = false;
+  avatar: string;
 
   constructor(
     public authService: AuthService,
@@ -19,6 +20,7 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.avatar = this.authService._loginUser._avatarURL;
   }
 
   logout() {

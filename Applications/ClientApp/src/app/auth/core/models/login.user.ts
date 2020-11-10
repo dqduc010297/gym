@@ -3,11 +3,13 @@ import jwt_decode from 'jwt-decode';
 
 export class LoginUser {
   private id: number;
+  private avatarUrl: string;
   private roles: string[] = [];
   private claims: Claim[] = [];
 
   resetLoginUser() {
     this.id = -1;
+    this.avatarUrl = 'assets/images/default-avatar.png';
     this.roles = [];
     this.claims = [];
   }
@@ -17,6 +19,7 @@ export class LoginUser {
     const tokenPayload = jwt_decode(token);
     this.roles = tokenPayload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
     this.id = tokenPayload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    this.avatarUrl = tokenPayload.avatarURL;
     // tslint:disable-next-line: no-string-literal
     tokenPayload['permissions'].forEach(permission => {
       this.claims.push(JSON.parse(permission));
@@ -26,4 +29,5 @@ export class LoginUser {
   public get _id(): number { return this.id; }
   public get _roles(): string[] { return this.roles; }
   public get _claims(): Claim[] { return this.claims; }
+  public get _avatarURL(): string { return this.avatarUrl; }
 }
