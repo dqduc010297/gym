@@ -1,32 +1,29 @@
 <div class="form">
   <form nz-form [nzLayout]="'vertical'" [nzAutoTips]="true" class="login-form" (ngSubmit)="signIn()"
-    (keyup.enter)="signIn()">
+    (keyup.enter)="signIn()" [formGroup]="loginForm">
     <div class="row h-100 justify-content-center align-items-center">
       <img src="../../../../../assets/images/logo.png" style="width: 60%; margin-bottom: 40px;" />
     </div>
-   
     <!-- <h2 style="text-align: center;">Login</h2> -->
     <nz-form-item>
-      <nz-form-label>Username</nz-form-label>
-      <nz-form-control nzHasFeedback nzErrorTip="Vui lòng nhập tên đăng nhập">
+      <nz-form-label>Số điện thoại</nz-form-label>
+      <nz-form-control nzHasFeedback nzErrorTip="Vui lòng nhập số điện thoại">
         <nz-input-group>
-          <input type="text" nz-input [(ngModel)]="loginRequest.body.username" name="username" nzSize="large" required
-            [disabled]="loaderService.isShowLoader(loginRequest.getLoadingKey())" />
+          <input type="text" nz-input nzSize="large" formControlName="username" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label>Password</nz-form-label>
+      <nz-form-label>Mật khẩu</nz-form-label>
       <nz-form-control nzHasFeedback nzErrorTip="Vui lòng nhập mật khẩu">
         <nz-input-group>
-          <input type="password" [(ngModel)]="loginRequest.body.password" name="password" nz-input nzSize="large"
-            [disabled]="loaderService.isShowLoader(loginRequest.getLoadingKey())" />
+          <input type="password" nz-input nzSize="large" formControlName="password" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <div nz-row class="login-form-margin">
       <div nz-col [nzSpan]="12">
-        <label nz-checkbox [(ngModel)]="loginRequest.body.rememberMe" name="rememberMe">
+        <label nz-checkbox name="rememberMe">
           <span>Remember me</span>
         </label>
       </div>
@@ -35,6 +32,7 @@
       </div>
     </div>
     <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'"
-      [nzLoading]="loaderService.isShowLoader(loginRequest.getLoadingKey())">Log in</button>
+      [nzLoading]="loaderService.isShowLoader(loginRequest.getLoadingKey())"
+      [disabled]="!loginForm.valid">Log in</button>
   </form>
 </div>

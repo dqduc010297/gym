@@ -1,99 +1,78 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
-import { RoleOptions } from 'src/app/core/const/role';
-import { IFormState } from 'src/app/core/interfaces/iform-state.interface';
-import { IForm } from 'src/app/core/interfaces/iform.interface';
-import { APIService } from 'src/app/core/services/api.service';
-import { LoaderService } from 'src/app/core/services/loader.service';
-import { User } from 'src/app/user-management/models/user';
-import { UserService } from 'src/app/user-management/services/user.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, IForm, IFormState {
-  user: User = new User();
-  userForm: FormGroup;
+export class UserComponent {
+  validateForm: FormGroup;
 
-  roleOptions = RoleOptions;
-  roleLabel: string;
-  dropboxTokenDisplay: string;
-
-  constructor(
-    public loaderService: LoaderService,
-    private activateRouter: ActivatedRoute,
-    public userService: UserService,
-    private fb: FormBuilder,
-    private apiService: APIService
-  ) { }
-
-  isEditMode: boolean;
-  setState(): void {
-    this.activateRouter.params.subscribe(
-      params => {
-        if (params.id == 0) {
-          this.isEditMode = false;
-          this.generateForm(null);
-        } else {
-          this.isEditMode = true;
-          this.apiService.getUser(params.id).subscribe(
-            result => {
-              console.log(result);
-              this.generateForm(result);
-            }
-          );
-        }
-      }
-    );
-  }
-
-  generateForm(data: any): void {
-    this.userForm = this.fb.group({
-      id: [data?.id],
-      fullname: [data?.fullname],
-      dateOfBirth: [data?.dateOfBirth],
-      gender: [data?.gender],
-      dateJoined: [data?.dateJoined],
-      avatarURL: [data?.avatarURL],
-      status: [data?.status],
-      dropboxToken: [data?.dropboxToken],
-      phoneNumber: [data?.phoneNumber],
-      email: [data?.email],
-      tempPassword: [data?.tempPassword],
-      roleName: [data?.roleName],
-    });
-  }
-
-  resetForm(): void {
-    throw new Error('Method not implemented.');
-  }
-
-  ngOnInit(): void {
-    this.generateForm(null);
-    this.setState();
-  }
-
-  edit() {
-    this.userService.navigateToEditUser(this.user.id);
-  }
-
-  save() {
-    this.userService.save(this.user);
-  }
-
-  discard() {
-    this.userService.discard();
-  }
-
-  uploaded(event: any) {
-    this.user.avatarURL = event.uploadedPath;
-  }
-
-  submitForm(value) {
+  submitForm(value: { userName: string; email: string; password: string; confirm: string; comment: string }): void {
+    for (const key in this.validateForm.controls) {
+      this.validateForm.controls[key].markAsDirty();
+      this.validateForm.controls[key].updateValueAndValidity();
+    }
     console.log(value);
+  }
+
+  resetForm(e: MouseEvent): void {
+    e.preventDefault();
+    this.validateForm.reset();
+    for (const key in this.validateForm.controls) {
+      this.validateForm.controls[key].markAsPristine();
+      this.validateForm.controls[key].updateValueAndValidity();
+    }
+  }
+
+  validateConfirmPassword(): void {
+    setTimeout(() => this.validateForm.controls.confirm.updateValueAndValidity());
+  }
+
+  userNameAsyncValidator = (control: FormControl) =>
+    new Observable((observer: Observer<ValidationErrors | null>) => {
+      setTimeout(() => {
+        if (control.value === 'JasonWood') {
+          // you have to return `{error: true}` to mark it as an error event
+          observer.next({ error: true, duplicated: true });
+        } else {
+          observer.next(null);
+        }
+        observer.complete();
+      }, 1000);
+    })
+
+  confirmValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { error: true, required: true };
+    } else if (control.value !== this.validateForm.controls.password.value) {
+      return { confirm: true, error: true };
+    }
+    return {};
+  }
+
+  constructor(private fb: FormBuilder) {
+    this.validateForm = this.fb.group({
+      // id: number;
+      // fullname: string;
+      // dateOfBirth: Date;
+      // gender: Gender;
+      // dateJoined: Date;
+      // avatarURL: string;
+      // status: number;
+      // dropboxToken: string;
+      // phoneNumber: string;
+      // email: string;
+      // tempPassword: string;
+      // roleName: string;
+      fullname: ['', [Validators.required], [this.userNameAsyncValidator]],
+      phoneNumber: ['', [Validators.required]],
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required]],
+      confirm: ['', [this.confirmValidator]],
+      comment: ['', [Validators.required]]
+    });
   }
 }

@@ -18,7 +18,9 @@ export class AuthService {
   ) {
   }
 
-  login(loginRequest: LoginRequest) {
+  login(loginUser: { username: string, password: string, rememberMe: boolean }) {
+    const loginRequest = new LoginRequest();
+    loginRequest.body = loginUser;
     return this.authAPIService.login(loginRequest).subscribe(
       result => {
         localStorage.setItem(environment.tokenKey, result.token);
@@ -50,7 +52,9 @@ export class AuthService {
     this.router.navigate(['auth/login']);
   }
 
-  changePassword(changePasswordRequest: ChangePasswordRequest) {
+  changePassword(formValue: {currentPassword: string, newPassword: string}) {
+    const changePasswordRequest = new ChangePasswordRequest();
+    changePasswordRequest.body = formValue;
     return this.authAPIService.changePassword(changePasswordRequest).subscribe(
       result => {
         if (result) {

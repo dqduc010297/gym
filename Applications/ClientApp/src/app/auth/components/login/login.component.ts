@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { LoginRequest } from '../../core/models/login.request';
-import { LoginMock } from 'src/app/core/mocks/login.mock';
-import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginRequest: LoginRequest = new LoginRequest();
+  loginForm: FormGroup;
 
   constructor(
     private authService: AuthService,
@@ -20,9 +19,13 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+    });
   }
 
   signIn() {
-    this.authService.login(this.loginRequest);
+    this.authService.login(this.loginForm.value);
   }
 }

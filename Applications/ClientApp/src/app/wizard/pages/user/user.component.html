@@ -1,160 +1,78 @@
-<div class="row">
-  <div class="col-lg-4">
-    <nz-spin [nzSpinning]="userService.isLoading" [nzTip]="userService.state">
-      <nz-card>
-        <form nz-form [formGroup]="userForm" (ngSubmit)="submitForm(userForm.value)">
-          <div class="user-summarize">
-            <app-uploader style="height: 200px;" uploadStyle="upload" isAvatar="true" (uploaded)="uploaded($event)"
-              [uploadedPath]="user.avatarURL"></app-uploader>
-            <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-              <input nz-input formControlName="fullname" placeholder="" />
-              <ng-template #userErrorTpl let-control>
-                <ng-container *ngIf="control.hasError('required')">
-                  Please input your username!
-                </ng-container>
-                <ng-container *ngIf="control.hasError('duplicated')">
-                  The username is redundant!
-                </ng-container>
-              </ng-template>
-            </nz-form-control>
-          </div>
-          <div class="user-detail">
-            <nz-table nzTemplateMode [nzShowPagination]="false" style="margin: 20px 0;">
-              <tbody>
-                <tr>
-                  <td class="user-detail-title">Điện thoại:</td>
-                  <td>
-                    <input nz-input placeholder="Phone number" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Email:</td>
-                  <td>
-                    <input nz-input placeholder="Email" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Ngày sinh:</td>
-                  <td>
-                    <nz-date-picker nzFormat="dd/MM/yyyy">
-                    </nz-date-picker>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Ngày tham gia: </td>
-                  <td>
-                    <nz-date-picker nzFormat="dd/MM/yyyy">
-                    </nz-date-picker>
-                  </td>
-                </tr>
-                <tr *ngIf="user.status == 1">
-                  <td>Mật khẩu: </td>
-                  <td>
-                    <input nz-input disabled />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Tài khoản: </td>
-                  <td>
-                    <nz-select nzAllowClear nzPlaceHolder="Chọn loại tài khoản" style="width: 100%;">
-                      <nz-option *ngFor="let option of roleOptions" [nzValue]="option.value" [nzLabel]="option.label">
-                      </nz-option>
-                    </nz-select>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Dropbox link: </td>
-                  <td>
-                    <textarea nz-input placeholder="Dropbox link" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
-                  </td>
-                </tr>
-              </tbody>
-            </nz-table>
-            <div class="row">
-              <div class="col-6">
-                <button nz-button nzBlock (click)="discard()">Bỏ thay đổi</button>
-              </div>
-              <div class="col-6">
-                <button nz-button nzType="primary" nzBlock (click)="save()">Lưu</button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </nz-card>
-    </nz-spin>
-  </div>
-  <div class="col-lg-8">
-    <nz-card style="min-height: 80vh;">
-      <nz-tabset>
-        <nz-tab nzTitle="Các gói tập">
-          <app-waiting></app-waiting>
-        </nz-tab>
-        <nz-tab nzTitle="Các gói tập PT">
-          <app-waiting></app-waiting>
-        </nz-tab>
-      </nz-tabset>
-    </nz-card>
-  </div>
-</div>
-<!-- <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Username</nz-form-label>
-    <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
-      <input nz-input formControlName="userName" placeholder="async validate try to write JasonWood" />
-      <ng-template #userErrorTpl let-control>
-        <ng-container *ngIf="control.hasError('required')">
-          Please input your username!
-        </ng-container>
-        <ng-container *ngIf="control.hasError('duplicated')">
-          The username is redundant!
-        </ng-container>
-      </ng-template>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
-    <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="emailErrorTpl">
-      <input nz-input formControlName="email" placeholder="email" type="email" />
-      <ng-template #emailErrorTpl let-control>
-        <ng-container *ngIf="control.hasError('email')">
-          The input is not valid E-mail!
-        </ng-container>
-        <ng-container *ngIf="control.hasError('required')">
-          Please input your E-mail!
-        </ng-container>
-      </ng-template>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
-    <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your password!">
-      <input nz-input type="password" formControlName="password" (ngModelChange)="validateConfirmPassword()" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Confirm Password</nz-form-label>
-    <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="passwordErrorTpl">
-      <input nz-input type="password" formControlName="confirm" placeholder="confirm your password" />
-      <ng-template #passwordErrorTpl let-control>
-        <ng-container *ngIf="control.hasError('required')">
-          Please confirm your password!
-        </ng-container>
-        <ng-container *ngIf="control.hasError('confirm')">
-          Password is inconsistent!
-        </ng-container>
-      </ng-template>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Comment</nz-form-label>
-    <nz-form-control [nzSpan]="12" nzErrorTip="Please write something here!">
-      <textarea formControlName="comment" nz-input rows="2" placeholder="write any thing"></textarea>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control [nzOffset]="7" [nzSpan]="12">
-      <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button>
-      <button nz-button (click)="resetForm($event)">Reset</button>
-    </nz-form-control>
-  </nz-form-item>
-</form> -->
+<nz-card>
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Fullname</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="fullname" placeholder="async validate try to write JasonWood" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your username!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('duplicated')">
+            The username is redundant!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Điện thoại</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="phoneNumber" />
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your username!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('duplicated')">
+            The username is redundant!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="emailErrorTpl">
+        <input nz-input formControlName="email" placeholder="email" type="email" autocomplete="off" />
+        <ng-template #emailErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('email')">
+            The input is not valid E-mail!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your E-mail!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your password!">
+        <input nz-input type="password" formControlName="password" (ngModelChange)="validateConfirmPassword()" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Confirm Password</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="passwordErrorTpl">
+        <input nz-input type="password" formControlName="confirm" placeholder="confirm your password" />
+        <ng-template #passwordErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please confirm your password!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('confirm')">
+            Password is inconsistent!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Comment</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzErrorTip="Please write something here!">
+        <textarea formControlName="comment" nz-input rows="2" placeholder="write any thing"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzOffset]="7" [nzSpan]="12">
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button>
+        <button nz-button (click)="resetForm($event)">Reset</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-card>

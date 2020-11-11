@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ChangePasswordModel } from 'src/app/auth/core/models/change-password.model';
 import { ChangePasswordRequest } from 'src/app/auth/core/models/change-password.request';
 import { AuthService } from 'src/app/auth/core/auth.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-change-password',
@@ -11,6 +11,7 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 })
 export class ChangePasswordComponent implements OnInit {
   changePasswordRequest: ChangePasswordRequest = new ChangePasswordRequest();
+  form: FormGroup;
 
   constructor(
     private authService: AuthService,
@@ -18,9 +19,23 @@ export class ChangePasswordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.form = new FormGroup({
+      currentPassword: new FormControl('', Validators.required),
+      newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      confirmPassword: new FormControl('', this.confirmValidator),
+    });
   }
 
   changePassword() {
-    this.authService.changePassword(this.changePasswordRequest);
+    this.authService.changePassword(this.form.value);
+  }
+
+  confirmValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { error: true, required: true };
+    } else if (control.value !== this.form.controls.newPassword.value) {
+      return { error: true, required: false };
+    }
+    return {};
   }
 }
