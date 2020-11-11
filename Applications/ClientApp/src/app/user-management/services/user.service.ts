@@ -32,15 +32,15 @@ export class UserService implements OnDestroy {
   }
 
   navigateToNewUser() {
-    this.router.navigate(['user/new']);
+    this.router.navigate(['wizard/user/0']);
   }
 
   navigateToUser(id: number) {
-    this.router.navigate([`user/detail/${id}`]);
+    this.router.navigate([`wizard/user/${id}`]);
   }
 
   navigateToEditUser(id: number) {
-    this.router.navigate([`user/edit/${id}`]);
+    this.router.navigate([`wizard/user/${id}`]);
   }
 
   navigateToUsers() {

@@ -9,8 +9,8 @@ const routes: Routes = [
   {
     path: 'new',
     component: NewInbodyComponent,
-    // canActivate: [ClaimGuard],
-    // data: { claimName: 'canCreateInBody' }
+    canActivate: [ClaimGuard],
+    data: { claimName: 'canCreateInBody' }
   },
 ];
 

@@ -22,7 +22,8 @@ const routes: Routes = [
         loadChildren: () => import('./meal-plan/meal-plan.module').then(m => m.MealPlanModule),
       },
       { path: 'album', loadChildren: () => import('./album/album.module').then(m => m.AlbumModule) },
-      { path: 'error-page', component: ErrorPageComponent }
+      { path: 'error-page', component: ErrorPageComponent },
+      { path: 'wizard', loadChildren: () => import('./wizard/wizard.module').then(m => m.WizardModule) },
     ]
   },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },

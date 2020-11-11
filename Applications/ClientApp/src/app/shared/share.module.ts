@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploaderComponent } from './components/uploader/uploader.component';
 import { WaitingComponent } from './components/waiting/waiting.component';
 import { UserSelectComponent } from './components/user-select/user-select.component';
@@ -17,6 +17,7 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
     CommonModule,
     FormsModule,
     NgZorroAntModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     SafePipe,
@@ -37,6 +38,7 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
     CommonModule,
     FormsModule,
     NgZorroAntModule,
+    ReactiveFormsModule,
 
     HasClaimDirective,
 
