@@ -1,13 +1,66 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
+import { RoleOptions } from 'src/app/core/const/role';
+import { IForm } from 'src/app/core/interfaces/iform.interface';
+import { APIService } from 'src/app/core/services/api.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent {
+export class UserComponent implements OnInit, IForm {
+  form: FormGroup;
+  userForm: FormGroup;
+  roleOptions = RoleOptions;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private apiService: APIService,
+  ) {
+    this.generateForm();
+  }
+
+  generateForm(): void {
+    this.userForm = this.fb.group({
+      id: [''],
+      fullname: ['', [Validators.required], [this.userNameAsyncValidator]],
+      dateOfBirth: ['', [Validators.email, Validators.required]],
+      dateJoined: [''],
+      avatarURL: ['', [Validators.required], [this.userNameAsyncValidator]],
+      status: ['', [Validators.email, Validators.required]],
+      dropboxToken: [''],
+      phoneNumber: ['', [Validators.required], [this.userNameAsyncValidator]],
+      email: ['', [Validators.email, Validators.required]],
+      tempPassword: [''],
+      roleName: ['', [Validators.required], [this.userNameAsyncValidator]],
+      gender: ['', [Validators.required], [this.userNameAsyncValidator]],
+    });
+  }
+
+  resetForm(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(
+      params => {
+        if (Number.parseInt(params.id) > 0) {
+          this.apiService.getUser(params.id).subscribe(
+            result => {
+              this.userForm.setValue(result);
+              console.log(this.userForm);
+            }
+          );
+        }
+      });
+  }
+
+  submit() {
+
+  }
   validateForm: FormGroup;
 
   submitForm(value: { userName: string; email: string; password: string; confirm: string; comment: string }): void {
@@ -18,14 +71,6 @@ export class UserComponent {
     console.log(value);
   }
 
-  resetForm(e: MouseEvent): void {
-    e.preventDefault();
-    this.validateForm.reset();
-    for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsPristine();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
-  }
 
   validateConfirmPassword(): void {
     setTimeout(() => this.validateForm.controls.confirm.updateValueAndValidity());
@@ -42,7 +87,7 @@ export class UserComponent {
         }
         observer.complete();
       }, 1000);
-    })
+    });
 
   confirmValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
@@ -51,28 +96,9 @@ export class UserComponent {
       return { confirm: true, error: true };
     }
     return {};
-  }
+  };
 
-  constructor(private fb: FormBuilder) {
-    this.validateForm = this.fb.group({
-      // id: number;
-      // fullname: string;
-      // dateOfBirth: Date;
-      // gender: Gender;
-      // dateJoined: Date;
-      // avatarURL: string;
-      // status: number;
-      // dropboxToken: string;
-      // phoneNumber: string;
-      // email: string;
-      // tempPassword: string;
-      // roleName: string;
-      fullname: ['', [Validators.required], [this.userNameAsyncValidator]],
-      phoneNumber: ['', [Validators.required]],
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required]],
-      confirm: ['', [this.confirmValidator]],
-      comment: ['', [Validators.required]]
-    });
+  uploaded(event: any) {
+
   }
 }

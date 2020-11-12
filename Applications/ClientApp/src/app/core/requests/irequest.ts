@@ -1,5 +1,12 @@
 import { HttpParams } from '@angular/common/http';
 
-export interface IRequest {
-    createParam(): HttpParams;
-}
+export abstract class IRequest {
+    constructor() {
+
+    }
+
+    createParam(): HttpParams {
+        return new HttpParams().set('request', JSON.stringify(this));
+    }
+
+} 

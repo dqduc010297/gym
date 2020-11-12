@@ -1,4 +1,4 @@
 export interface IForm {
-    generateForm(data: any): void;
+    generateForm(): void;
     resetForm(): void;
 }

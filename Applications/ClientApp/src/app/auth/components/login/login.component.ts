@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
-import { LoginRequest } from '../../core/models/login.request';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,7 +9,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginRequest: LoginRequest = new LoginRequest();
   loginForm: FormGroup;
 
   constructor(

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ChangePasswordRequest } from 'src/app/auth/core/models/change-password.request';
 import { AuthService } from 'src/app/auth/core/auth.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,7 +9,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent implements OnInit {
-  changePasswordRequest: ChangePasswordRequest = new ChangePasswordRequest();
   form: FormGroup;
 
   constructor(

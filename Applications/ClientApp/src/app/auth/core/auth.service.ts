@@ -3,9 +3,7 @@ import { LoginUser } from './models/login.user';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { ChangePasswordRequest } from './models/change-password.request';
 import { AuthAPIService } from './auth.api.service';
-import { LoginRequest } from './models/login.request';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -19,9 +17,7 @@ export class AuthService {
   }
 
   login(loginUser: { username: string, password: string, rememberMe: boolean }) {
-    const loginRequest = new LoginRequest();
-    loginRequest.body = loginUser;
-    return this.authAPIService.login(loginRequest).subscribe(
+    return this.authAPIService.login(loginUser).subscribe(
       result => {
         localStorage.setItem(environment.tokenKey, result.token);
         localStorage.setItem('appVersion', environment.appVersion);
@@ -53,9 +49,7 @@ export class AuthService {
   }
 
   changePassword(formValue: {currentPassword: string, newPassword: string}) {
-    const changePasswordRequest = new ChangePasswordRequest();
-    changePasswordRequest.body = formValue;
-    return this.authAPIService.changePassword(changePasswordRequest).subscribe(
+    return this.authAPIService.changePassword(formValue).subscribe(
       result => {
         if (result) {
           this.router.navigate(['']);

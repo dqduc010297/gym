@@ -6,7 +6,7 @@
       <app-menu-item [iconType]="menu.icon" [url]="menu.url" [title]="menu.title"
         [isShowTitle]="menuType != 'horizontal'" *ngIf="menu.children.length == 0">
       </app-menu-item>
-      <li nz-submenu [nzTitle]="menu.title" [nzIcon]="menu.icon" *ngIf="menu.children.length > 0">
+      <li nz-submenu [nzTitle]="menu.title" [nzIcon]="menu.icon" *ngIf="menu.children.length > 0" nzMatchRouter>
         <ul>
           <ng-container *ngFor="let submenu of menu.children">
             <app-menu-item [iconType]="submenu.icon" [url]="submenu.url" [title]="submenu.title"></app-menu-item>
