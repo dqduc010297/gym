@@ -45,7 +45,7 @@ export class UserMentionComponent implements OnInit, OnChanges {
   onSearchChange({ value }: MentionOnSearchTypes): void {
     if (value === ''
       || (this.suggestions.length > 0 && value.length > 0)
-      || this.loaderService.isShowLoader(this.userMentionRequest.getLoadingKey())
+      || this.loaderService.isLoading
     ) {
       return;
     }

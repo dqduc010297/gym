@@ -4,25 +4,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LoaderService {
-  public showLoader = false;
-  loadingKey: string[] = [];
+  private showLoader = false;
+  public get isLoading(): boolean {
+    return this.showLoader;
+  }
 
   constructor() { }
-
-  addLoadingKey(key: string) {
-    this.loadingKey.push(key);
-  }
-
-  removeloadingKey(serviceName: string) {
-    const index = this.loadingKey.indexOf(serviceName);
-    if (index > -1) {
-      this.loadingKey.splice(index, 1);
-    }
-  }
-
-  isShowLoader(key: string): boolean {
-    return this.loadingKey.indexOf(key) > -1;
-  }
 
   show() {
     this.showLoader = true;

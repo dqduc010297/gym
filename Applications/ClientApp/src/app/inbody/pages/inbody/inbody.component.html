@@ -1,5 +1,5 @@
 
-<nz-spin [nzSpinning]="loaderService.isShowLoader(myInBodyRequest.getLoadingKey())" nzTip="Loading...">
+<nz-spin [nzSpinning]="'false'" nzTip="Loading...">
   <nz-result *ngIf="isEmptyData" [nzIcon]="'smile-twotone'" nzTitle="Bạn chưa có thông tin về Inbody!"
     nzSubTitle="Vui lòng liên hệ nhân viên để được đo InBody.">
   </nz-result>

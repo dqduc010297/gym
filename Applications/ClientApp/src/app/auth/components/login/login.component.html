@@ -32,7 +32,7 @@
       </div>
     </div>
     <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'"
-      [nzLoading]="loaderService.isShowLoader(loginRequest.getLoadingKey())"
+      [nzLoading]="loaderService.isLoading"
       [disabled]="!loginForm.valid">Log in</button>
   </form>
 </div>

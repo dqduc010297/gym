@@ -10,7 +10,7 @@
     <button nz-button nzType="primary" (click)="createUser()"><i nz-icon nzType="plus"></i>Thêm mới</button>
   </div>
   <nz-table nzShowSizeChanger="false" [nzData]="usersResponse.data" [nzFrontPagination]="false"
-    [nzLoading]="loaderService.isShowLoader(usersRequest.getLoadingKey())" [nzTotal]="usersResponse.totalRows"
+    [nzLoading]="loaderService.isLoading" [nzTotal]="usersResponse.totalRows"
     [nzPageSize]="usersRequest.rowsPerPage" (nzQueryParams)="onQueryParamsChange($event)">
     <thead>
       <tr>

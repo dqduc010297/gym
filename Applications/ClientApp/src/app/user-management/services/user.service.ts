@@ -28,7 +28,7 @@ export class UserService implements OnDestroy {
   }
 
   public get isLoading() {
-    return this.loaderService.isShowLoader(this.userRequest.getLoadingKey());
+    return this.loaderService.isLoading;
   }
 
   navigateToNewUser() {
