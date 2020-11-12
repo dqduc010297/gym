@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { PaginationResponse } from 'src/app/core/responses/pagination.response';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { RouterService } from 'src/app/core/services/router.service';
 import { User } from 'src/app/user-management/models/user';
 import { UsersRequest } from 'src/app/user-management/models/users.request';
 import { UserAPIService } from 'src/app/user-management/services/user.api.service';
@@ -22,6 +23,7 @@ export class UsersComponent implements OnInit {
     private userAPIService: UserAPIService,
     private userService: UserService,
     public loaderService: LoaderService,
+    private routerService: RouterService,
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +52,6 @@ export class UsersComponent implements OnInit {
   }
 
   createUser() {
-    this.userService.navigateToNewUser();
+    this.routerService.navigateToNewUser();
   }
 }

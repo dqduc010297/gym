@@ -36,7 +36,7 @@ export class UserService implements OnDestroy {
   }
 
   navigateToUser(id: number) {
-    this.router.navigate([`wizard/user/${id}`]);
+    this.router.navigate([`user/${id}`]);
   }
 
   navigateToEditUser(id: number) {
