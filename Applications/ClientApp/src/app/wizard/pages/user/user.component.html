@@ -5,33 +5,34 @@
         [uploadedPath]="userForm.value.avatarURL"></app-uploader>
       <nz-form-item>
         <nz-form-label>Họ tên</nz-form-label>
-        <nz-form-control nzHasFeedback [nzErrorTip]="userErrorTpl">
-          <input nz-input formControlName="fullname" placeholder="async validate try to write JasonWood" />
-          <ng-template #userErrorTpl let-control>
-            <ng-container *ngIf="control.hasError('required')">
-              Please input your username!
-            </ng-container>
-            <ng-container *ngIf="control.hasError('duplicated')">
-              The username is redundant!
-            </ng-container>
+        <nz-form-control nzHasFeedback [nzErrorTip]="fullnameValidation">
+          <input nz-input formControlName="fullname" />
+          <ng-template #fullnameValidation let-control>
+            <app-validation-message [control]="control" controlName="họ tên"></app-validation-message>
           </ng-template>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label>Điện thoại</nz-form-label>
-        <nz-form-control nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <nz-form-control nzHasFeedback [nzErrorTip]="phoneNumberValidation">
           <input nz-input formControlName="phoneNumber" />
+          <ng-template #phoneNumberValidation let-control>
+            <app-validation-message [control]="control" controlName="số điện thoại"></app-validation-message>
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label>Email</nz-form-label>
-        <nz-form-control nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <nz-form-control nzHasFeedback [nzErrorTip]="emailValidation">
           <input nz-input formControlName="email" />
+          <ng-template #emailValidation let-control>
+            <app-validation-message [control]="control" controlName="email"></app-validation-message>
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label>Ngày sinh</nz-form-label>
-        <nz-form-control nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <nz-form-control nzHasFeedback>
           <nz-date-picker formControlName="dateOfBirth" nzFormat="dd/MM/yyyy">
           </nz-date-picker>
         </nz-form-control>
@@ -43,7 +44,7 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-label>Tài khoản</nz-form-label>
-        <nz-form-control nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <nz-form-control nzHasFeedback>
           <nz-select formControlName="roleName" nzAllowClear nzPlaceHolder="Chọn loại tài khoản" style="width: 100%;">
             <nz-option *ngFor="let option of roleOptions" [nzValue]="option.value" [nzLabel]="option.label">
             </nz-option>
@@ -52,7 +53,7 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-label>Dropbox link</nz-form-label>
-        <nz-form-control nzHasFeedback [nzErrorTip]="userErrorTpl">
+        <nz-form-control nzHasFeedback>
           <textarea nz-input placeholder="Dropbox link" formControlName="dropboxToken"
             [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
         </nz-form-control>

@@ -10,6 +10,7 @@ import { MediaViewComponent } from './components/media-view/media-view.component
 import { SafePipe } from './pipes/safe.pipe';
 import { HasClaimDirective } from './directives/has-claim.directive';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { ValidationMessageComponent } from './components/validation-message/validation-message.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
     UserMentionComponent,
     MediaViewComponent,
     ErrorPageComponent,
+    ValidationMessageComponent,
   ],
   providers: [
     DatePipe
@@ -47,7 +49,8 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
     UserSelectComponent,
     UserMentionComponent,
     MediaViewComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    ValidationMessageComponent,
   ],
   entryComponents: [
   ]

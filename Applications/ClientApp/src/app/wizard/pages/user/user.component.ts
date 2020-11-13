@@ -5,6 +5,7 @@ import { RoleOptions } from 'src/app/core/const/role';
 import { IForm } from 'src/app/core/interfaces/iform.interface';
 import { IWizard } from 'src/app/core/interfaces/iwizard.interface';
 import { APIService } from 'src/app/core/services/api.service';
+import { ValidatePhone } from 'src/app/core/services/custom-validator.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { RouterService } from 'src/app/core/services/router.service';
 
@@ -41,8 +42,8 @@ export class UserComponent implements OnInit, IForm, IWizard {
       avatarURL: [''],
       status: [''],
       dropboxToken: [''],
-      phoneNumber: ['', [Validators.required]],
-      email: ['', [Validators.email, Validators.required]],
+      phoneNumber: ['', [Validators.required, ValidatePhone]],
+      email: ['', [Validators.email, Validators.required, Validators.minLength(10), Validators.maxLength(20)]],
       tempPassword: [''],
       roleName: ['', [Validators.required]],
       gender: [''],
@@ -50,6 +51,8 @@ export class UserComponent implements OnInit, IForm, IWizard {
   }
 
   resetForm(): void {
+    debugger;
+    console.log(this.userForm);
     this.userForm.reset();
     this.userForm.setValue(JSON.parse(this.storageUser));
     this.routerService.navigateToUser(this.userForm.value.id);
