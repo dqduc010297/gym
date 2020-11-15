@@ -1,0 +1,84 @@
+<!-- <nz-spin [nzSpinning]="userService.isLoading" [nzTip]="userService.state">
+  <nz-card>
+    <div class="user-summarize">
+      <nz-avatar [nzSize]="92" nzIcon="user" [nzSrc]="user.avatarURL">
+      </nz-avatar>
+      <p>{{user.fullname}}</p>
+      <i nz-icon nzType="edit" nzTheme="outline" (click)="edit()"></i>
+    </div>
+    <div class="user-detail">
+      <nz-table nzTemplateMode [nzShowPagination]="false" style="margin: 20px 0;">
+        <tbody>
+          <tr>
+            <td class="user-detail-title">Điện thoại:</td>
+            <td>{{user.phoneNumber | phone}}</td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td>{{user.email}}</td>
+          </tr>
+          <tr>
+            <td>Ngày sinh:</td>
+            <td>{{user.dateOfBirth | date:'dd/MM/yyyy'}}</td>
+          </tr>
+          <tr>
+            <td>Ngày tham gia: </td>
+            <td>{{user.dateJoined | date:'dd/MM/yyyy'}}</td>
+          </tr>
+          <tr *ngIf="user.status == 1">
+            <td>Mật khẩu: </td>
+            <td>{{user.tempPassword}}</td>
+          </tr>
+          <tr>
+            <td>Tài khoản: </td>
+            <td>{{roleLabel}}</td>
+          </tr>
+          <tr>
+            <td>Dropbox link: </td>
+            <td>
+              {{dropboxTokenDisplay}}
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </nz-card>
+</nz-spin> -->
+<div class="row justify-content-start align-items-center">
+  <nz-card style="width: 500px;">
+    <nz-spin [nzSpinning]="loaderService.isLoading" nzSize="large" nzTip="Loading...">
+      <form nz-form>
+        <div class="user-summarize">
+          <nz-avatar [nzSize]="92" nzIcon="user" [nzSrc]="user.avatarURL">
+          </nz-avatar>
+          <p>{{user.fullname}}</p>
+          <i nz-icon nzType="edit" nzTheme="outline" (click)="edit()"></i>
+        </div>
+        <nz-form-item>
+          <nz-form-label>Điện thoại</nz-form-label>
+          <p> {{user.phoneNumber | phone}}</p>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Email</nz-form-label>
+          <p> {{user.email}}</p>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Ngày sinh</nz-form-label>
+          <p>{{user.dateOfBirth | date:'dd/MM/yyyy'}}</p>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Ngày tham gia</nz-form-label>
+          <p> {{user.dateJoined | date:'dd/MM/yyyy'}}</p>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Tài khoản</nz-form-label>
+          <p> {{roleLabel}}</p>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Dropbox link</nz-form-label>
+          <p> {{dropboxTokenDisplay}}</p>
+        </nz-form-item>
+      </form>
+    </nz-spin>
+  </nz-card>
+</div>

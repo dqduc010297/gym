@@ -32,6 +32,9 @@ import { TestedItemComponent } from './components/tested-item/tested-item.compon
     }),
     SharedModule.forRoot(),
   ],
-  providers: []
+  providers: [],
+  exports: [
+    InbodyComponent,
+  ]
 })
 export class InbodyModule { }

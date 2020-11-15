@@ -8,5 +8,4 @@ export abstract class IRequest {
     createParam(): HttpParams {
         return new HttpParams().set('request', JSON.stringify(this));
     }
-
-} 
+}

@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
     { title: 'Home', icon: 'home', url: '/home', isShow: true, children: [] },
     {
       title: 'New', icon: 'plus', url: '', isShow: true, children: [
-        { title: 'InBody', icon: 'home', url: '/home', isShow: true, children: [] },
+        { title: 'InBody', icon: 'home', url: '/inbody/new', isShow: true, children: [] },
         { title: 'Meal plan', icon: 'home', url: '/home', isShow: true, children: [] },
         { title: 'User', icon: 'home', url: '/wizard/user/0', isShow: true, children: [] },
       ]
@@ -24,7 +24,7 @@ export class MenuComponent implements OnInit {
     { title: 'InBody', icon: 'form', url: '/inbody', isShow: true, children: [] },
     { title: 'Goal', icon: 'aim', url: '/goal', isShow: true, children: [] },
     { title: 'Album', icon: 'appstore', url: '/album', isShow: true, children: [] },
-    { title: 'User', icon: 'user', url: '/user', isShow: true, children: [] },
+    { title: 'User', icon: 'user', url: '/users', isShow: true, children: [] },
   ];
   constructor(
     private authService: AuthService

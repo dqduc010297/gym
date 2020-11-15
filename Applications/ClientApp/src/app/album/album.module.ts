@@ -5,20 +5,19 @@ import { AlbumRoutingModule } from './album-routing.module';
 import { AlbumComponent } from './pages/album/album.component';
 import { SharedModule } from 'src/app/shared/share.module';
 import { AlbumGirdComponent } from './components/album-gird/album-gird.component';
-import { NguiInViewComponent } from './components/ngui-in-view.component';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 @NgModule({
   declarations: [
     AlbumComponent,
-    AlbumGirdComponent,
-    NguiInViewComponent
+    AlbumGirdComponent
+
   ],
   imports: [
     CommonModule,
     AlbumRoutingModule,
-    
+
     LazyLoadImageModule,
     SharedModule.forRoot(),
   ]

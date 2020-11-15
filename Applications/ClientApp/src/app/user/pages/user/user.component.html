@@ -1,0 +1,28 @@
+<nz-card>
+  <nz-tabset nzLinkRouter>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: 'detail' }" queryParamsHandling="merge">
+        Thông tin cá nhân
+      </a>
+      <app-detail></app-detail>
+    </nz-tab>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: 'inbody' }" queryParamsHandling="merge">
+        Inbody
+      </a>
+      <app-inbody></app-inbody>
+    </nz-tab>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: 'three' }" queryParamsHandling="merge">
+        Meal plan
+      </a>
+      Three.
+    </nz-tab>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: 'four' }" queryParamsHandling="merge">
+        Mục tiêu
+      </a>
+      Four.
+    </nz-tab>
+  </nz-tabset>
+</nz-card>

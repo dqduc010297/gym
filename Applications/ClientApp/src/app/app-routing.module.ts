@@ -15,7 +15,11 @@ const routes: Routes = [
       { path: 'inbody', loadChildren: () => import('./inbody/inbody.module').then(m => m.InbodyModule) },
       {
         path: 'user',
-        loadChildren: () => import('./user-management/user-management.module').then(m => m.UserManagementModule)
+        loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
       },
       {
         path: 'meal-plan',

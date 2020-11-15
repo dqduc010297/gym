@@ -1,75 +1,88 @@
 <div class="row justify-content-center align-items-center">
   <nz-card style="width: 600px;">
-    <form nz-form [formGroup]="userForm">
-      <app-uploader style="height: 200px;" uploadStyle="upload" isAvatar="true" (uploaded)="uploaded($event)"
-        [uploadedPath]="userForm.value.avatarURL"></app-uploader>
-      <nz-form-item>
-        <nz-form-label>Họ tên</nz-form-label>
-        <nz-form-control nzHasFeedback [nzErrorTip]="fullnameValidation">
-          <input nz-input formControlName="fullname" />
-          <ng-template #fullnameValidation let-control>
-            <app-validation-message [control]="control" controlName="họ tên"></app-validation-message>
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label>Điện thoại</nz-form-label>
-        <nz-form-control nzHasFeedback [nzErrorTip]="phoneNumberValidation">
-          <input nz-input formControlName="phoneNumber" />
-          <ng-template #phoneNumberValidation let-control>
-            <app-validation-message [control]="control" controlName="số điện thoại"></app-validation-message>
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label>Email</nz-form-label>
-        <nz-form-control nzHasFeedback [nzErrorTip]="emailValidation">
-          <input nz-input formControlName="email" />
-          <ng-template #emailValidation let-control>
-            <app-validation-message [control]="control" controlName="email"></app-validation-message>
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label>Ngày sinh</nz-form-label>
-        <nz-form-control nzHasFeedback>
-          <nz-date-picker formControlName="dateOfBirth" nzFormat="dd/MM/yyyy">
-          </nz-date-picker>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label>Ngày tham gia</nz-form-label>
-        <nz-date-picker formControlName="dateJoined" nzFormat="dd/MM/yyyy">
-        </nz-date-picker>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label>Tài khoản</nz-form-label>
-        <nz-form-control nzHasFeedback>
-          <nz-select formControlName="roleName" nzAllowClear nzPlaceHolder="Chọn loại tài khoản" style="width: 100%;">
-            <nz-option *ngFor="let option of roleOptions" [nzValue]="option.value" [nzLabel]="option.label">
-            </nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label>Dropbox link</nz-form-label>
-        <nz-form-control nzHasFeedback>
-          <textarea nz-input placeholder="Dropbox link" formControlName="dropboxToken"
-            [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
-        </nz-form-control>
-      </nz-form-item>
-      <div style="margin-top: 20px;">
-        <button nz-button nzType="primary" nzBlock *ngIf="isCreate">Tạo mới</button>
-        <div class="row">
-          <div class="col-6">
-            <button nz-button nzBlock *ngIf="!isCreate" (click)="resetForm()">Bỏ thay đổi</button>
-          </div>
-          <div class="col-6">
-            <button nz-button nzType="primary" nzBlock *ngIf="!isCreate" [disabled]="!userForm.valid"
-              [nzLoading]="loaderService.isLoading" (click)="save()">Lưu</button>
+    <nz-spin [nzSpinning]="loaderService.isLoading" nzSize="large" [nzTip]="state">
+      <form nz-form [formGroup]="userForm">
+        <app-uploader style="height: 200px;" uploadStyle="upload" isAvatar="true" (uploaded)="uploaded($event)"
+          [uploadedPath]="userForm.value.avatarURL"></app-uploader>
+        <nz-form-item>
+          <nz-form-label>Họ tên</nz-form-label>
+          <nz-form-control nzHasFeedback [nzErrorTip]="fullnameValidation">
+            <input nz-input formControlName="fullname" />
+            <ng-template #fullnameValidation let-control>
+              <app-validation-message [control]="control" controlName="họ tên"></app-validation-message>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Điện thoại</nz-form-label>
+          <nz-form-control nzHasFeedback [nzErrorTip]="phoneNumberValidation">
+            <input nz-input formControlName="phoneNumber" type="text" appPhoneMask />
+            <ng-template #phoneNumberValidation let-control>
+              <app-validation-message [control]="control" controlName="số điện thoại"></app-validation-message>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Email</nz-form-label>
+          <nz-form-control nzHasFeedback [nzErrorTip]="emailValidation">
+            <input nz-input formControlName="email" />
+            <ng-template #emailValidation let-control>
+              <app-validation-message [control]="control" controlName="email"></app-validation-message>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Ngày sinh</nz-form-label>
+          <nz-form-control nzHasFeedback [nzErrorTip]="dateOfBirthValidation">
+            <nz-date-picker formControlName="dateOfBirth" nzFormat="dd/MM/yyyy">
+            </nz-date-picker>
+            <ng-template #dateOfBirthValidation let-control>
+              <app-validation-message [control]="control" controlName="ngày sinh"></app-validation-message>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Ngày tham gia</nz-form-label>
+          <nz-form-control nzHasFeedback [nzErrorTip]="dateJoinedValidation">
+            <nz-date-picker formControlName="dateJoined" nzFormat="dd/MM/yyyy">
+            </nz-date-picker>
+            <ng-template #dateJoinedValidation let-control>
+              <app-validation-message [control]="control" controlName="ngày gia nhập"></app-validation-message>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Tài khoản</nz-form-label>
+          <nz-form-control nzHasFeedback [nzErrorTip]="roleNameValidation">
+            <nz-select formControlName="roleName" nzAllowClear nzPlaceHolder="Chọn loại tài khoản" style="width: 100%;">
+              <nz-option *ngFor="let option of roleOptions" [nzValue]="option.value" [nzLabel]="option.label">
+              </nz-option>
+            </nz-select>
+            <ng-template #roleNameValidation let-control>
+              <app-validation-message [control]="control" controlName="tài khoản"></app-validation-message>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Dropbox link</nz-form-label>
+          <nz-form-control nzHasFeedback>
+            <textarea nz-input placeholder="Dropbox link" formControlName="dropboxToken"
+              [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+        <div style="margin-top: 20px;">
+          <button nz-button nzType="primary" nzBlock *ngIf="isCreate">Tạo mới</button>
+          <div class="row">
+            <div class="col-6">
+              <button nz-button nzBlock *ngIf="!isCreate" (click)="resetForm()">Thoát</button>
+            </div>
+            <div class="col-6">
+              <button nz-button nzType="primary" nzBlock *ngIf="!isCreate" [disabled]="!userForm.valid"
+                (click)="save()">Lưu</button>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </nz-spin>
   </nz-card>
 </div>

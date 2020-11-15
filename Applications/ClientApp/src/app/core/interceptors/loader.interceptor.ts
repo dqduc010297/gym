@@ -17,8 +17,10 @@ export class LoaderInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     const loaderService = this.injector.get(LoaderService);
+    if (req.url.includes('api/file')) {
+      return next.handle(req);
+    }
     loaderService.show();
-
     return next.handle(req).pipe(
       delay(200),
       finalize(() => {

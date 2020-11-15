@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { FormState } from 'src/app/core/const/form';
 import { RoleOptions } from 'src/app/core/const/role';
+import { IFormState } from 'src/app/core/interfaces/iform-state.interface';
 import { IForm } from 'src/app/core/interfaces/iform.interface';
 import { IWizard } from 'src/app/core/interfaces/iwizard.interface';
 import { APIService } from 'src/app/core/services/api.service';
-import { ValidatePhone } from 'src/app/core/services/custom-validator.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { RouterService } from 'src/app/core/services/router.service';
 
@@ -14,11 +16,10 @@ import { RouterService } from 'src/app/core/services/router.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, IForm, IWizard {
+export class UserComponent implements OnInit, IForm, IWizard, IFormState {
   isCreate: boolean;
-  isChanged = false;
+  state: string;
 
-  storageUser: string;
   userForm: FormGroup;
   roleOptions = RoleOptions;
 
@@ -28,6 +29,7 @@ export class UserComponent implements OnInit, IForm, IWizard {
     private apiService: APIService,
     public loaderService: LoaderService,
     private routerService: RouterService,
+    private modal: NzModalService
   ) {
     this.generateForm();
   }
@@ -38,12 +40,12 @@ export class UserComponent implements OnInit, IForm, IWizard {
       id: [''],
       fullname: ['', [Validators.required]],
       dateOfBirth: ['', [Validators.required]],
-      dateJoined: [''],
+      dateJoined: ['', [Validators.required]],
       avatarURL: [''],
       status: [''],
       dropboxToken: [''],
-      phoneNumber: ['', [Validators.required, ValidatePhone]],
-      email: ['', [Validators.email, Validators.required, Validators.minLength(10), Validators.maxLength(20)]],
+      phoneNumber: ['', [Validators.required]],
+      email: ['', [Validators.email, Validators.required]],
       tempPassword: [''],
       roleName: ['', [Validators.required]],
       gender: [''],
@@ -51,14 +53,19 @@ export class UserComponent implements OnInit, IForm, IWizard {
   }
 
   resetForm(): void {
-    debugger;
-    console.log(this.userForm);
-    this.userForm.reset();
-    this.userForm.setValue(JSON.parse(this.storageUser));
-    this.routerService.navigateToUser(this.userForm.value.id);
+    if (this.userForm.dirty) {
+      this.modal.confirm({
+        nzTitle: 'Bạn có muốn thoát?',
+        nzContent: 'Những thay đổi bạn sẽ không được lưu.',
+        nzOnOk: () => this.routerService.navigateToUser(this.userForm.value.id),
+      });
+    } else {
+      this.routerService.navigateToUser(this.userForm.value.id);
+    }
   }
 
   ngOnInit(): void {
+    this.state = FormState.loading;
     this.activatedRoute.params.subscribe(
       params => {
         // tslint:disable-next-line: radix
@@ -66,9 +73,7 @@ export class UserComponent implements OnInit, IForm, IWizard {
           this.isCreate = false;
           this.apiService.getUser(params.id).subscribe(
             result => {
-              this.storageUser = JSON.stringify(result);
               this.userForm.setValue(result);
-              console.log(this.userForm);
             }
           );
         }
@@ -77,6 +82,7 @@ export class UserComponent implements OnInit, IForm, IWizard {
   }
 
   save() {
+    this.state = FormState.saving;
     this.apiService.updateUser(this.userForm.value).subscribe(
       () => {
         this.routerService.navigateToUser(this.userForm.value.id);

@@ -11,6 +11,8 @@ import { SafePipe } from './pipes/safe.pipe';
 import { HasClaimDirective } from './directives/has-claim.directive';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { ValidationMessageComponent } from './components/validation-message/validation-message.component';
+import { PhoneDirective } from './directives/phone.directive';
+import { PhonePipe } from './pipes/phone.pipe';
 
 
 @NgModule({
@@ -22,9 +24,11 @@ import { ValidationMessageComponent } from './components/validation-message/vali
   ],
   declarations: [
     SafePipe,
+    PhonePipe,
 
     HasClaimDirective,
 
+    PhoneDirective,
     UploaderComponent,
     WaitingComponent,
     UserSelectComponent,
@@ -42,7 +46,10 @@ import { ValidationMessageComponent } from './components/validation-message/vali
     NgZorroAntModule,
     ReactiveFormsModule,
 
+    PhonePipe,
+
     HasClaimDirective,
+    PhoneDirective,
 
     UploaderComponent,
     WaitingComponent,
