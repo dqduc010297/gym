@@ -25,7 +25,7 @@ export class InbodyComponent implements OnInit {
     public loaderService: LoaderService,
     public datePipe: DatePipe,
     private deviceService: DeviceDetectorService,
-    private inBodyMPaperMapper: InBodyPaperMapper
+    private inBodyMPaperMapper: InBodyPaperMapper,
   ) { }
 
   listOfData: number[] = [1];
@@ -81,4 +81,6 @@ export class InbodyComponent implements OnInit {
     }
     return false;
   }
+
+  format = () => `${this.inBodyPaper.score.toString()}/100`;
 }

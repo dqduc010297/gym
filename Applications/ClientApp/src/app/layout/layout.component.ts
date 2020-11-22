@@ -23,7 +23,4 @@ export class LayoutComponent implements OnInit {
     this.avatar = this.authService._loginUser._avatarURL;
   }
 
-  logout() {
-    this.authService.logout();
-  }
 }

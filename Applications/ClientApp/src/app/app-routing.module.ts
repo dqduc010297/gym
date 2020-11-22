@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+import { LayoutComponent } from './layout/layout.component';
 import { ErrorPageComponent } from './shared/components/error-page/error-page.component';
-import { LayoutComponent } from './shared/components/layout/layout.component';
 import { MediaViewComponent } from './shared/components/media-view/media-view.component';
 
 const routes: Routes = [

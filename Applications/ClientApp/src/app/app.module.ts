@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
-import { vi_VN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -19,12 +18,13 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { httpInterceptorProviders } from './core/interceptors';
-import { MenuItemComponent } from './shared/components/layout/components/menu-item/menu-item.component';
-import { MenuComponent } from './shared/components/layout/components/menu/menu.component';
-import { LayoutComponent } from './shared/components/layout/layout.component';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { LayoutComponent } from './layout/layout.component';
+import { HeaderComponent } from './layout/components/header/header.component';
+import { SiderComponent } from './layout/components/sider/sider.component';
+import { NavComponent } from './layout/components/nav/nav.component';
 
 registerLocaleData(vi);
 
@@ -32,8 +32,9 @@ registerLocaleData(vi);
   declarations: [
     AppComponent,
     LayoutComponent,
-    MenuItemComponent,
-    MenuComponent,
+    HeaderComponent,
+    SiderComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
