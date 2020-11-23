@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { FormState } from 'src/app/core/const/form';
@@ -36,19 +36,19 @@ export class UserComponent implements OnInit, IForm, IWizard, IFormState {
 
   generateForm(): void {
     this.isCreate = true;
-    this.userForm = this.fb.group({
-      id: [''],
-      fullname: ['', [Validators.required]],
-      dateOfBirth: ['', [Validators.required]],
-      dateJoined: ['', [Validators.required]],
-      avatarURL: [''],
-      status: [''],
-      dropboxToken: [''],
-      phoneNumber: ['', [Validators.required]],
-      email: ['', [Validators.email, Validators.required]],
-      tempPassword: [''],
-      roleName: ['', [Validators.required]],
-      gender: [''],
+    this.userForm = new FormGroup({
+      id: new FormControl(0),
+      fullname: new FormControl('', [Validators.required]),
+      dateOfBirth: new FormControl('', [Validators.required]),
+      dateJoined: new FormControl('', [Validators.required]),
+      avatarURL: new FormControl(''),
+      status: new FormControl(''),
+      dropboxToken: new FormControl(''),
+      phoneNumber: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.email, Validators.required]),
+      tempPassword: new FormControl(''),
+      roleName: new FormControl('', [Validators.required]),
+      gender: new FormControl(''),
     });
   }
 
@@ -93,5 +93,13 @@ export class UserComponent implements OnInit, IForm, IWizard, IFormState {
   uploaded(event: any) {
     this.userForm.controls.avatarURL.setValue(event.uploadedPath);
     console.log(this.userForm);
+  }
+
+  create() {
+    this.apiService.createUser(this.userForm.value).subscribe(
+      result => {
+        console.log(result);
+      }
+    );
   }
 }

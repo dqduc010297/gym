@@ -32,6 +32,12 @@
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
+          <nz-form-label>Giới tính</nz-form-label>
+          <nz-form-control nzHasFeedback [nzErrorTip]="dateOfBirthValidation">
+            <nz-switch formControlName="gender" nzCheckedChildren="Nam" nzUnCheckedChildren="Nữ"></nz-switch>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
           <nz-form-label>Ngày sinh</nz-form-label>
           <nz-form-control nzHasFeedback [nzErrorTip]="dateOfBirthValidation">
             <nz-date-picker formControlName="dateOfBirth" nzFormat="dd/MM/yyyy">
@@ -71,7 +77,7 @@
           </nz-form-control>
         </nz-form-item>
         <div style="margin-top: 20px;">
-          <button nz-button nzType="primary" nzBlock *ngIf="isCreate">Tạo mới</button>
+          <button nz-button nzType="primary" nzBlock *ngIf="isCreate" (click)="create()">Tạo mới</button>
           <div class="row">
             <div class="col-6">
               <button nz-button nzBlock *ngIf="!isCreate" (click)="resetForm()">Thoát</button>

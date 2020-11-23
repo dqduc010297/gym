@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthAPIService } from './auth.api.service';
+import { APIService } from 'src/app/core/services/api.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -13,11 +14,12 @@ export class AuthService {
     private authAPIService: AuthAPIService,
     private router: Router,
     private modalService: NzModalService,
+    private apiService: APIService,
   ) {
   }
 
-  login(loginUser: { username: string, password: string, rememberMe: boolean }) {
-    return this.authAPIService.login(loginUser).subscribe(
+  login(loginUser: any) {
+    return this.apiService.login(loginUser).subscribe(
       result => {
         localStorage.setItem(environment.tokenKey, result.token);
         localStorage.setItem('appVersion', environment.appVersion);

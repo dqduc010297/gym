@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { LoginResponse } from 'src/app/auth/core/models/login.response';
 import { InBody } from 'src/app/inbody/core/models/inbody.model';
 import { InBodyRequest } from 'src/app/inbody/core/models/inbody.request';
 import { User } from 'src/app/user-management/models/user';
 import { UsersRequest } from 'src/app/user-management/models/users.request';
 import { environment } from 'src/environments/environment';
+import { Gender } from '../const/gender';
 import { PaginationResponse } from '../responses/pagination.response';
 
 @Injectable({ providedIn: 'root' })
@@ -13,6 +15,10 @@ export class APIService {
   constructor(
     private http: HttpClient
   ) {
+  }
+
+  login(body: any): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, body);
   }
 
   getUsers(usersRequest: UsersRequest): Observable<PaginationResponse<User>> {
@@ -28,8 +34,21 @@ export class APIService {
     return this.http.put<any>(`${environment.apiUrl}/user?userId=${updatedUser.id}`, updatedUser);
   }
 
-  createUser(createdUser: any): Observable<string> {
-    return this.http.post<string>(`${environment.apiUrl}/user`, createdUser);
+  createUser(createdUser: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/user`, {
+      id: 0,
+      fullname: createdUser.fullname,
+      dateOfBirth: createdUser.dateOfBirth,
+      gender: createdUser.gender ? Gender.MALE : Gender.FEMALE,
+      dateJoined: createdUser.dateJoined,
+      avatarURL: createdUser.avatarURL,
+      status: 0,
+      dropboxToken: createdUser.dropboxToken,
+      phoneNumber: createdUser.phoneNumber,
+      email: createdUser.email,
+      roleName: createdUser.roleName,
+      tempPassword: null,
+    });
   }
 
   getInBody(inBodyRequest: InBodyRequest): Observable<any> {

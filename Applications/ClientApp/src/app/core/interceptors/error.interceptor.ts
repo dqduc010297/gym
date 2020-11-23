@@ -2,16 +2,19 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { AuthService } from '../../auth/core/auth.service';
+import { LoaderService } from '../services/loader.service';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, private modalService: NzModalService) { }
+  constructor(private authService: AuthService, private modalService: NzModalService, private injector: Injector) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const loaderService = this.injector.get(LoaderService);
     if (req.method === 'GET') {
       return next.handle(req).pipe(
         retry(2),
         catchError((error: HttpErrorResponse) => {
+          loaderService.hide();
           switch (error.status) {
             case 401:
               this.modalService.error({
@@ -37,6 +40,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
+        loaderService.hide();
         switch (error.status) {
           case 401:
             this.modalService.error({
