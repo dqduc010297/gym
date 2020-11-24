@@ -10,5 +10,6 @@ namespace ApplicationDomain.Gym.IRepositories
     {
         IQueryable GetMyInBodyByTestedDate(int userId, DateTime? testedDate);
         IQueryable GetMyInBodyHistory(int userId);
+        IQueryable GetMyInBodySummarize(int userId);
     }
 }

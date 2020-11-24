@@ -30,8 +30,19 @@ namespace Infrastructure.Repositories.Gym
                 .Include(p => p.User)
                 .Where(p => p.UserId == userId)
                 .OrderByDescending(p => p.Id)
-                .Select(p => new { p.Weight, p.SkeletalMuscleMass, p.PercentBodyFat});
+                .Select(p => new { p.Weight, p.SkeletalMuscleMass, p.PercentBodyFat });
             return query;
         }
+
+        public IQueryable GetMyInBodySummarize(int userId)
+        {
+            var query = this.dbSet
+                .Include(p => p.User)
+                .Where(p => p.UserId == userId)
+                .OrderByDescending(p => p.Id);
+            return query;
+        }
+
+
     }
 }

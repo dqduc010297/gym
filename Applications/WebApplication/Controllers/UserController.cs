@@ -67,5 +67,13 @@ namespace WebApplication.Controllers
             UserListRequest requestData = this.TryToParseRequest<UserListRequest>(request);
             return Ok(await this._userService.GetUsers(requestData));
         }
+
+        [HttpPut]
+        [Route("homescreen")]
+        public async Task<IActionResult> UpdateHomeScreen([FromBody] HomeScreenRequest homeScreen)
+        {
+            await this._userService.UpdateHomeScreen(this.GetCurrentUserId(), homeScreen.Url);
+            return Ok();
+        }
     }
 }

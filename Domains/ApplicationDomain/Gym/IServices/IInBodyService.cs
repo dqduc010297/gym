@@ -14,5 +14,6 @@ namespace ApplicationDomain.Gym.IServices
         Task UpdateInBody(InBodyRq rq);
         Task<List<DateTime>> GetTestedDate(int userId);
         Task<IEnumerable<BodyCompositionHistory>> GetBodyCompositionHistories(int userId, MyInBodyRq rq);
+        Task<InBodySummarize> GetInBodySummarize(int userId);
     }
 }

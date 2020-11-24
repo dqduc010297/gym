@@ -8,11 +8,6 @@ using System.Text.RegularExpressions;
 
 namespace ApplicationDomain.Identity.Models
 {
-    public class UserRoleTranfer
-    {
-        public User User { set; get; }
-        public Role Role { set; get; }
-    }
     public class UserDTO
     {
         public int Id { set; get; }

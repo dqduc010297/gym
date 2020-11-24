@@ -57,5 +57,12 @@ namespace WebApplication.Controllers
             var rq = JsonConvert.DeserializeObject<MyInBodyRq>(request);
             return Ok(await this._inBodyService.GetBodyCompositionHistories(this.GetCurrentUserId(), rq));
         }
+
+        [Route("summarize")]
+        [HttpGet]
+        public async Task<IActionResult> GetSummarize(int userId)
+        {
+            return Ok(await this._inBodyService.GetInBodySummarize(this.GetCurrentUserId()));
+        }
     }
 }

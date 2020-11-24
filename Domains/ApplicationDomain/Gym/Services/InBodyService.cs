@@ -99,5 +99,12 @@ namespace ApplicationDomain.Gym.Services
                 .ToListAsync();
             return result;
         }
+
+        public async Task<InBodySummarize> GetInBodySummarize(int userId)
+        {
+            return await this._inBodyRepository.GetMyInBodySummarize(userId)
+                .MapQueryTo<InBodySummarize>(this._mapper)
+                .FirstOrDefaultAsync();
+        }
     }
 }

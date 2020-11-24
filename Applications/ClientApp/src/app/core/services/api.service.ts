@@ -21,6 +21,10 @@ export class APIService {
     return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, body);
   }
 
+  getInBodySummarize(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/inbody/summarize`);
+  }
+
   getUsers(usersRequest: UsersRequest): Observable<PaginationResponse<User>> {
     const params = usersRequest.createParam();
     return this.http.get<PaginationResponse<User>>(`${environment.apiUrl}/user`, { params });

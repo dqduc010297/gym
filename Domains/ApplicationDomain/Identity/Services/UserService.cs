@@ -107,7 +107,10 @@ namespace ApplicationDomain.Identity.Services
                 await this._uow.SaveChangesAsync();
                 return user.Id;
             }
-            return 0;
+            else
+            {
+                throw new Exception(result.Errors.FirstOrDefault().Description);
+            }
         }
 
         private string GeneratePassword(int size = 8)
@@ -139,6 +142,16 @@ namespace ApplicationDomain.Identity.Services
             result.Data = await this._userRepository.GetUsers(predicate, request.SkipCount, request.TakeCount);
 
             return result;
+        }
+
+        public async Task UpdateHomeScreen(int userId, string newUrl)
+        {
+            var user = this._userManager.Users.Where(p => p.Id == userId).FirstOrDefault();
+            if (user != null)
+            {
+                user.HomeScreen = newUrl.Replace("?raw=1", "");
+                await this._userManager.UpdateAsync(user);
+            }
         }
     }
 }

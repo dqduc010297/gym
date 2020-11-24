@@ -18,5 +18,6 @@ namespace ApplicationDomain.Identity.Entities
 		public string DropboxToken { set; get; }
 		public string TempPassword { set; get; }
 		public string SearchName { set; get; }
+		public string HomeScreen { set; get; }
 	}
 }
