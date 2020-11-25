@@ -18,5 +18,6 @@ namespace ApplicationDomain.Identity.IServices
         Task<int> CreatedUser(UserDTO createdUser);
         Task<PaginationResponse<UserDTO>> GetUsers(UserListRequest request);
         Task UpdateHomeScreen(int userId, string newUrl);
+        Task<string> GetHomeScreen(int userId);
     }
 }

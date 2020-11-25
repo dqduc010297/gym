@@ -4,7 +4,6 @@ import jwt_decode from 'jwt-decode';
 export class LoginUser {
   private id: number;
   private avatarUrl: string;
-  private homeScreen: string;
   private roles: string[] = [];
   private claims: Claim[] = [];
 
@@ -21,7 +20,6 @@ export class LoginUser {
     this.roles = tokenPayload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
     this.id = tokenPayload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
     this.avatarUrl = tokenPayload.avatarURL;
-    this.homeScreen = tokenPayload.homeScreen;
     // tslint:disable-next-line: no-string-literal
     tokenPayload['permissions'].forEach(permission => {
       this.claims.push(JSON.parse(permission));
@@ -32,5 +30,4 @@ export class LoginUser {
   public get _roles(): string[] { return this.roles; }
   public get _claims(): Claim[] { return this.claims; }
   public get _avatarURL(): string { return this.avatarUrl; }
-  public get _homeScreen(): string { return this.homeScreen; }
 }

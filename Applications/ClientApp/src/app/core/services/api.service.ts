@@ -25,6 +25,14 @@ export class APIService {
     return this.http.get<any>(`${environment.apiUrl}/inbody/summarize`);
   }
 
+  updateHomeScreen(homeScreen: { url: string }): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/user/homescreen`, homeScreen);
+  }
+
+  getHomeScreen(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/user/homescreen`);
+  }
+
   getUsers(usersRequest: UsersRequest): Observable<PaginationResponse<User>> {
     const params = usersRequest.createParam();
     return this.http.get<PaginationResponse<User>>(`${environment.apiUrl}/user`, { params });

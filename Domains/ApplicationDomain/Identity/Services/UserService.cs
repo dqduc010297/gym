@@ -153,5 +153,11 @@ namespace ApplicationDomain.Identity.Services
                 await this._userManager.UpdateAsync(user);
             }
         }
+
+        public async Task<string> GetHomeScreen(int userId)
+        {
+            var user = await this._userManager.Users.Where(p => p.Id == userId).FirstOrDefaultAsync();
+            return $"{ user.HomeScreen}?raw=1";
+        }
     }
 }

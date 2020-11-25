@@ -31,7 +31,9 @@ namespace ApplicationDomain.Identity.Models
             CreateMap<UserDTO, User>()
                 .ForMember(d => d.UserName, opt => opt.MapFrom(s => Regex.Replace(s.PhoneNumber, @"[^\d]", "")))
                 .ForMember(d => d.AvatarURL, opt => opt.MapFrom(s => s.AvatarURL.Replace("?raw=1", "")))
-                .ForMember(d => d.PhoneNumber, opt => opt.MapFrom(s => Regex.Replace(s.PhoneNumber, @"[^\d]", "")));
+                .ForMember(d => d.PhoneNumber, opt => opt.MapFrom(s => Regex.Replace(s.PhoneNumber, @"[^\d]", "")))
+                .ForMember(d => d.NormalizedUserName, opt => opt.MapFrom(s => s.PhoneNumber))
+                .ForMember(d => d.NormalizedEmail, opt => opt.MapFrom(s => s.Email.ToUpper()));
         }
     }
 }

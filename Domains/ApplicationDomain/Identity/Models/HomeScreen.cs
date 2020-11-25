@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationDomain.Identity.Models.Requests
+namespace ApplicationDomain.Identity.Models
 {
-    public class HomeScreenRequest
+    public class HomeScreen
     {
         public string Url { set; get; }
     }

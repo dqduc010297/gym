@@ -70,10 +70,17 @@ namespace WebApplication.Controllers
 
         [HttpPut]
         [Route("homescreen")]
-        public async Task<IActionResult> UpdateHomeScreen([FromBody] HomeScreenRequest homeScreen)
+        public async Task<IActionResult> UpdateHomeScreen([FromBody] HomeScreen homeScreen)
         {
             await this._userService.UpdateHomeScreen(this.GetCurrentUserId(), homeScreen.Url);
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("homescreen")]
+        public async Task<IActionResult> HomeScreen()
+        {
+            return Ok(new HomeScreen() { Url = await this._userService.GetHomeScreen(this.GetCurrentUserId()) });
         }
     }
 }
