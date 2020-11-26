@@ -23,15 +23,13 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.homeScreen = '';
     this.myId = this.authService._loginUser._id;
-    this.apiService.getInBodySummarize().subscribe(
-      result => {
-        this.inbodySummarize = result;
-      }
-    );
     this.apiService.getHomeScreen().subscribe(
       result => {
-        this.homeScreen = result.url;
+        if (result) {
+          this.homeScreen = result.url;
+        }
       }
     );
   }

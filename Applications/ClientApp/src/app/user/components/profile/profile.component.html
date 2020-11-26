@@ -1,0 +1,35 @@
+
+<div class=" justify-content-center align-items-center">
+  <nz-card style="width: 100%;">
+    <nz-spin [nzSpinning]="loaderService.isLoading" nzSize="large" nzTip="Loading...">
+      <form nz-form>
+        <div class="user-summarize">
+          <nz-avatar [nzSize]="92" nzIcon="user" [nzSrc]="user.avatarURL">
+          </nz-avatar>
+          <p>{{user.fullname}}</p>
+          <i nz-icon nzType="edit" nzTheme="outline" (click)="edit()"></i>
+        </div>
+        <nz-form-item>
+          <nz-form-label>Điện thoại</nz-form-label>
+          <p> {{user.phoneNumber | phone}}</p>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Email</nz-form-label>
+          <p> {{user.email}}</p>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Ngày sinh</nz-form-label>
+          <p>{{user.dateOfBirth | date:'dd/MM/yyyy'}}</p>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Ngày tham gia</nz-form-label>
+          <p> {{user.dateJoined | date:'dd/MM/yyyy'}}</p>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>Tài khoản</nz-form-label>
+          <p> {{roleLabel}}</p>
+        </nz-form-item>
+      </form>
+    </nz-spin>
+  </nz-card>
+</div>

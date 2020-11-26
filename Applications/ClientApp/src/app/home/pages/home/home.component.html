@@ -1,54 +1,9 @@
-<div class="row">
-  <div class="col-lg-6">
-    <div class="media-boundary">
-      <div class="container h-100">
-        <div class="row h-100 justify-content-center align-items-center">
-          <img *ngIf="!editHomeScreen && homeScreen != ''" [src]="homeScreen" />
-          <div class="action">
-            <i nz-icon nzType="edit" nzTheme="outline" (click)="editHomeScreen = !editHomeScreen"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <app-uploader *ngIf="editHomeScreen || homeScreen == ''" style="height: 400px;" uploadStyle="upload"
-      (uploaded)="uploaded($event)"></app-uploader>
-  </div>
-  <div class="col-lg-3">
-    <div class="d-block d-md-none">
-      <div class="d-flex justify-content-between overview" style="margin: 10px">
-        <div>
-          <p>Cân nặng</p>
-          <nz-progress [nzPercent]="inbodySummarize.weight" nzType="circle" [nzWidth]="80"
-            [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" [nzFormat]="format"></nz-progress>
-        </div>
-        <div>
-          <p>Cơ</p>
-          <nz-progress [nzPercent]="inbodySummarize.skeletalMuscleMass" nzType="circle" [nzWidth]="80"
-            [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" [nzFormat]="format"></nz-progress>
-        </div>
-        <div>
-          <p>Mỡ</p>
-          <nz-progress [nzPercent]="inbodySummarize.bodyFatMass" nzType="circle" [nzWidth]="80"
-            [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" [nzFormat]="format"></nz-progress>
-        </div>
-      </div>
-    </div>
-    <div class="d-none d-md-block">
-      <h5>Chỉ số cơ thể</h5>
-      <nz-table nzTemplateMode nzBordered>
-        <tbody>
-          <tr>
-            <td>Cân nặng</td>
-            <td>{{ inbodySummarize.weight }} kg</td>
-          </tr>   <tr>
-            <td>Cơ</td>
-            <td>{{ inbodySummarize.skeletalMuscleMass }} kg</td>
-          </tr>   <tr>
-            <td>Mỡ</td>
-            <td>{{ inbodySummarize.bodyFatMass }} kg</td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </div>
+<div class="container" style="height: 80vh; background-color: #ffffff; margin: auto; position: relative;"
+  *ngIf="!editHomeScreen && homeScreen != ''">
+  <div class="background" [ngStyle]="{'background-image': 'url(' + homeScreen + ')'}"></div>
+  <div class="action">
+    <i nz-icon nzType="edit" nzTheme="outline" (click)="editHomeScreen = !editHomeScreen"></i>
   </div>
 </div>
+<app-uploader *ngIf="editHomeScreen || homeScreen == ''" uploadStyle="upload" (uploaded)="uploaded($event)">
+</app-uploader>

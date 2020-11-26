@@ -8,6 +8,7 @@ namespace ApplicationDomain.Gym.Model
 {
     public class InBodySummarize
     {
+        public DateTime TestedDate { set; get; }
         public float Weight { set; get; }
         public float SkeletalMuscleMass { set; get; }
         public float BodyFatMass { set; get; }

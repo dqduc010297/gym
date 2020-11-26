@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories.Gym
             var query = this.dbSet
                 .Include(p => p.User)
                 .Where(p => p.UserId == userId)
-                .OrderByDescending(p => p.Id);
+                .OrderByDescending(p => p.TestedDate);
             return query;
         }
 

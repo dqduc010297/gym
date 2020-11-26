@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-lg-8">
+        <nz-table nzShowSizeChanger="false" [nzData]="inbodys" [nzFrontPagination]="false"
+            [nzLoading]="loaderService.isLoading" class="d-none d-md-block">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th style="text-align: right;">Cân nặng</th>
+                    <th style="text-align: right;">Skeletal Muscle (Cơ)</th>
+                    <th style="text-align: right;">Body Fat Mass (Mỡ)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of inbodys">
+                    <td>{{ data.testedDate | date: 'dd/MM/yyyy' }}</td>
+                    <td style="text-align: right;">
+                        {{ data.weight }} kg
+                        <i nz-icon nzType="arrow-up" nzTheme="outline" *ngIf="data.isIncreaseWeight"></i>
+                        <i nz-icon nzType="arrow-down" nzTheme="outline" *ngIf="!data.isIncreaseWeight"></i>
+                    </td>
+                    <td style="text-align: right;">
+                        {{ data.skeletalMuscleMass }} kg
+                        <i nz-icon nzType="arrow-up" nzTheme="outline" *ngIf="data.isIncreaseSMM"></i>
+                        <i nz-icon nzType="arrow-down" nzTheme="outline" *ngIf="!data.isIncreaseSMM"></i>
+                    </td>
+                    <td style="text-align: right;">
+                        {{ data.bodyFatMass }} kg
+                        <i nz-icon nzType="arrow-up" nzTheme="outline" *ngIf="data.isIncreaseBFM"></i>
+                        <i nz-icon nzType="arrow-down" nzTheme="outline" *ngIf="!data.isIncreaseBFM"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+
+        <nz-table nzShowSizeChanger="false" [nzData]="inbodys" [nzFrontPagination]="false"
+            [nzLoading]="loaderService.isLoading" class="d-block d-md-none">
+            <thead>
+                <tr style="text-align: center;">
+                    <th></th>
+                    <th>Cân (kg)</th>
+                    <th>Cơ (kg)</th>
+                    <th>Mỡ (kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of inbodys">
+                    <td>{{ data.testedDate | date: 'dd/MM/yyyy' }}</td>
+                    <td style="text-align: right;">{{ data.weight }}</td>
+                    <td style="text-align: right;">{{ data.skeletalMuscleMass }}</td>
+                    <td style="text-align: right;">{{ data.bodyFatMass }}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>

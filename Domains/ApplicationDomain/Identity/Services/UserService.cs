@@ -157,7 +157,7 @@ namespace ApplicationDomain.Identity.Services
         public async Task<string> GetHomeScreen(int userId)
         {
             var user = await this._userManager.Users.Where(p => p.Id == userId).FirstOrDefaultAsync();
-            return $"{ user.HomeScreen}?raw=1";
+            return user.HomeScreen == null ? "" : $"{ user.HomeScreen}?raw=1";
         }
     }
 }

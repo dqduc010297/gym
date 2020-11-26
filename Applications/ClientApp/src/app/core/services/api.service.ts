@@ -21,8 +21,8 @@ export class APIService {
     return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, body);
   }
 
-  getInBodySummarize(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/inbody/summarize`);
+  getInBodySummarize(userId: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/inbody/summarize?userId=${userId}`);
   }
 
   updateHomeScreen(homeScreen: { url: string }): Observable<any> {

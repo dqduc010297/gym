@@ -1,13 +1,17 @@
 .user-summarize {
   text-align: center;
-}
 
-.user-summarize p {
-  margin-bottom: 4px;
-  color: rgba(0, 0, 0, 0.85);
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 28px;
+  p {
+    margin-right: 12px;
+    margin-bottom: 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 32px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 [nz-icon]:hover {
@@ -30,7 +34,7 @@ nz-form-item {
     word-wrap: break-word;
     color: #5f6368;
   }
-  p{
+  p {
     margin-top: 4px;
   }
 }

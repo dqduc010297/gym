@@ -62,7 +62,7 @@ namespace WebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> GetSummarize(int userId)
         {
-            return Ok(await this._inBodyService.GetInBodySummarize(this.GetCurrentUserId()));
+            return Ok(await this._inBodyService.GetInBodySummarize(userId));
         }
     }
 }

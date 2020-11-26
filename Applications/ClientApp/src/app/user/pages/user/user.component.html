@@ -1,28 +1,23 @@
-<nz-card>
-  <nz-tabset nzLinkRouter>
-    <nz-tab>
-      <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: 'detail' }" queryParamsHandling="merge">
-        Thông tin cá nhân
-      </a>
-      <app-detail></app-detail>
-    </nz-tab>
-    <nz-tab>
-      <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: 'inbody' }" queryParamsHandling="merge">
-        Inbody
-      </a>
-      <app-inbody></app-inbody>
-    </nz-tab>
-    <nz-tab>
-      <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: 'three' }" queryParamsHandling="merge">
-        Meal plan
-      </a>
-      Three.
-    </nz-tab>
-    <nz-tab>
-      <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ tab: 'four' }" queryParamsHandling="merge">
-        Mục tiêu
-      </a>
-      Four.
-    </nz-tab>
-  </nz-tabset>
-</nz-card>
+<div class="row" >
+  <div class="col-lg-3">
+    <app-profile [user]="user"></app-profile>
+  </div>
+  <div class="col-lg-9">
+    <nz-card>
+      <nz-tabset [nzTabBarExtraContent]="extraTemplate">
+        <nz-tab nzTitle="Chỉ số cơ thể">
+         <app-inbody-summarize [inbodys]="inbodys"></app-inbody-summarize>
+        </nz-tab>
+        <nz-tab nzTitle="Meal plan">
+          Content of Tab Pane 2
+        </nz-tab>
+        <nz-tab nzTitle="Tab 3">
+          Content of Tab Pane 3
+        </nz-tab>
+      </nz-tabset>
+      <ng-template #extraTemplate>
+        <button nz-button>Extra Action</button>
+      </ng-template>
+    </nz-card>
+  </div>
+</div>

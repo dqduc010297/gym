@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoleOptions } from 'src/app/core/const/role';
 import { LoaderService } from 'src/app/core/services/loader.service';
@@ -6,12 +6,12 @@ import { User } from 'src/app/user-management/models/user';
 import { UserService } from 'src/app/user-management/services/user.service';
 
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class DetailComponent implements OnInit {
-  user: User = new User();
+export class ProfileComponent implements OnInit {
+  @Input() user: User = new User();
   roleLabel: string;
   dropboxTokenDisplay: string;
 

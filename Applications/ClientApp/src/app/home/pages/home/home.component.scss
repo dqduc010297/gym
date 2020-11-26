@@ -1,33 +1,34 @@
-.media-boundary {
-  background-color: black;
-  position: relative;
-}
+// .media-boundary {
+//   background-color: black;
+//   position: relative;
+//   height: 100% !important;
+// }
 
-img {
-  padding: 0;
-  position: relative;
-  display: block;
-  margin: 0 auto;
-  max-height: 100%;
-  max-width: 100%;
-}
+// img {
+//   padding: 0;
+//   position: relative;
+//   display: block;
+//   margin: 0 auto;
+//   max-height: 100%;
+//   max-width:100%;
+// }
 
-app-uploader {
-  padding: 0;
-  position: relative;
-  display: block;
-  margin: 0 auto;
-  max-height: 100%;
-  max-width: 100%;
-}
+// app-uploader {
+//   padding: 0;
+//   position: relative;
+//   display: block;
+//   margin: 0 auto;
+//   max-height: 100%;
+//   max-width: 100%;
+// }
 
-.overview {
-  p {
-    font-size: 16px;
-    font-weight: 500;
-    text-align: center;
-  }
-}
+// .overview {
+//   p {
+//     font-size: 16px;
+//     font-weight: 500;
+//     text-align: center;
+//   }
+// }
 
 .action {
   padding-top: 6px;
@@ -46,4 +47,15 @@ app-uploader {
   [nz-icon]:hover {
     cursor: pointer;
   }
+}
+
+
+.background {
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

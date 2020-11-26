@@ -100,11 +100,11 @@ namespace ApplicationDomain.Gym.Services
             return result;
         }
 
-        public async Task<InBodySummarize> GetInBodySummarize(int userId)
+        public async Task<IEnumerable<InBodySummarize>> GetInBodySummarize(int userId)
         {
             return await this._inBodyRepository.GetMyInBodySummarize(userId)
                 .MapQueryTo<InBodySummarize>(this._mapper)
-                .FirstOrDefaultAsync();
+                .ToListAsync();
         }
     }
 }

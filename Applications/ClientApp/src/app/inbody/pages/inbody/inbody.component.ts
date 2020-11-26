@@ -36,6 +36,7 @@ export class InbodyComponent implements OnInit {
   }
 
   loadLatestMyInBody() {
+    console.log(this.myInBodyRequest);
     this.inBodyAPIService.getInBody(this.myInBodyRequest).subscribe(
       result => {
         if (!result) {
